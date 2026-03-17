@@ -339,6 +339,70 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 .cv-name{ font-weight:800; }
 .cv-list{ margin:8px 0 10px 18px; color: rgba(233,238,247,.88); }
 
+/* ===== Light / Day theme ===== */
+[data-theme="light"]{
+  --bg:#fdf6ec;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --text:#1e1e2e;
+  --line:rgba(0,0,0,.12);
+  --accent:#e8720c;
+  --accent2:#d97706;
+  --shadow:0 10px 25px rgba(0,0,0,.10);
+}
+[data-theme="light"] .topbar{
+  background:rgba(253,246,236,.92);
+  border-bottom-color:rgba(0,0,0,.10);
+}
+[data-theme="light"] .nav-link{ color:rgba(30,30,46,.85); }
+[data-theme="light"] .nav-link:hover{ background:rgba(0,0,0,.06); }
+[data-theme="light"] .btn-ghost{ color:rgba(30,30,46,.9); }
+[data-theme="light"] .btn-ghost:hover{ background:rgba(0,0,0,.06); }
+[data-theme="light"] .btn-outline{
+  background:rgba(0,0,0,.04);
+  color:#1e1e2e;
+  border-color:rgba(0,0,0,.15);
+}
+[data-theme="light"] .btn-outline:hover{ background:rgba(0,0,0,.08); }
+[data-theme="light"] .textarea,
+[data-theme="light"] .select{
+  background:#f9f9f9;
+  border-color:rgba(0,0,0,.15);
+  color:var(--text);
+}
+[data-theme="light"] .textarea:focus{ border-color:rgba(232,114,12,.5); }
+[data-theme="light"] .select:focus{ border-color:rgba(232,114,12,.5); }
+[data-theme="light"] .recipe{ background:rgba(255,255,255,.8); }
+[data-theme="light"] .steps ol{ color:#1e1e2e; }
+[data-theme="light"] .tag{
+  background:rgba(0,0,0,.05);
+  color:#1e1e2e;
+  border-color:rgba(0,0,0,.12);
+}
+[data-theme="light"] .badge{
+  background:rgba(0,0,0,.05);
+  color:#1e1e2e;
+  border-color:rgba(0,0,0,.12);
+}
+[data-theme="light"] .empty{
+  background:rgba(0,0,0,.03);
+  border-color:rgba(0,0,0,.12);
+}
+[data-theme="light"] .sidepanel{
+  background:rgba(253,246,236,.98);
+  border-left-color:rgba(0,0,0,.12);
+}
+[data-theme="light"] .cv-card{
+  background:rgba(0,0,0,.03);
+  border-color:rgba(0,0,0,.10);
+}
+[data-theme="light"] .sidepanel-content p{ color:var(--text); }
+[data-theme="light"] .hr{ border-top-color:rgba(0,0,0,.12); }
+[data-theme="light"] .hero-text h1{ color:var(--text); text-shadow:none; }
+[data-theme="light"] .hero-text p{ color:#374151; text-shadow:none; }
+[data-theme="light"] .brand-sub{ color:#555; }
+[data-theme="light"] .muted{ color:#4b5563; }
+
 /* Responsive */
 @media (max-width: 980px){
   .hero{ grid-template-columns: 1fr; }
