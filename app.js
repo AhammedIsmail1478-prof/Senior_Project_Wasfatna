@@ -339,3 +339,75 @@ if (suggestBtn && ingredientsInput && resultsEl && resultsCount) {
     }).join("");
   });
 }
+
+// ---------- Sign out confirmation ----------
+const signOutLinks = Array.from(document.querySelectorAll('a[href="signout.php"]'));
+let logoutOverlayEl = null;
+let previousBodyOverflow = "";
+let onLogoutKeydown = null;
+
+function closeLogoutConfirm() {
+  if (!logoutOverlayEl) return;
+  if (onLogoutKeydown) {
+    document.removeEventListener("keydown", onLogoutKeydown);
+    onLogoutKeydown = null;
+  }
+  logoutOverlayEl.remove();
+  logoutOverlayEl = null;
+  document.body.style.overflow = previousBodyOverflow;
+}
+
+function openLogoutConfirm(targetHref) {
+  if (logoutOverlayEl) return;
+
+  previousBodyOverflow = document.body.style.overflow;
+  document.body.style.overflow = "hidden";
+
+  logoutOverlayEl = document.createElement("div");
+  logoutOverlayEl.className = "logout-overlay";
+  logoutOverlayEl.setAttribute("role", "dialog");
+  logoutOverlayEl.setAttribute("aria-modal", "true");
+  logoutOverlayEl.setAttribute("aria-labelledby", "logoutTitle");
+  logoutOverlayEl.innerHTML = `
+    <div class="logout-dialog">
+      <h3 id="logoutTitle" class="logout-title">You are about to log out</h3>
+      <p class="logout-text">Are you sure you want to continue?</p>
+      <div class="logout-actions">
+        <button type="button" class="btn btn-outline" data-action="cancel">Cancel</button>
+        <button type="button" class="btn btn-danger" data-action="confirm">Confirm</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(logoutOverlayEl);
+
+  const cancelBtn = logoutOverlayEl.querySelector('[data-action="cancel"]');
+  const confirmBtn = logoutOverlayEl.querySelector('[data-action="confirm"]');
+
+  if (cancelBtn) cancelBtn.addEventListener("click", closeLogoutConfirm);
+  if (confirmBtn) {
+    confirmBtn.addEventListener("click", () => {
+      window.location.href = targetHref;
+    });
+  }
+
+  logoutOverlayEl.addEventListener("click", (e) => {
+    if (e.target === logoutOverlayEl) closeLogoutConfirm();
+  });
+
+  onLogoutKeydown = (e) => {
+    if (e.key === "Escape") closeLogoutConfirm();
+  };
+  document.addEventListener("keydown", onLogoutKeydown);
+
+  if (cancelBtn) cancelBtn.focus();
+}
+
+if (signOutLinks.length) {
+  signOutLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openLogoutConfirm(link.getAttribute("href") || "signout.php");
+    });
+  });
+}
