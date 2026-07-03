@@ -245,7 +245,7 @@ VALUES
 ('Chicken'),
 ('Lamb'),
 ('Fish'),
-('Basmati Rice'),
+('Rice'),
 ('Onion'),
 ('Tomato'),
 ('Garlic'),
@@ -254,6 +254,12 @@ VALUES
 ('Salt'),
 ('Black Pepper'),
 ('Oil');
+('Sugar'),
+('Date Syrup'),
+('Cardamom'),
+('Saffron'),
+('Salt'),
+('Butter');
 
 INSERT INTO recipe_ingredients
 (recipe_id, ingredient_id, quantity)
@@ -326,3 +332,23 @@ VALUES
 (3,5,'Cook fish lightly in the spice mixture.'),
 (3,6,'Add rice and water, then cook until done.'),
 (3,7,'Serve hot with lemon and salad.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(4,4,'3 cups'),     -- Rice
+(4,2,'3 tbsp'),     -- Sugar
+(4,3,'2 tbsp'),     -- Date Syrup
+(4,5,'1 tsp'),      -- Cardamom
+(4,6,'1 pinch'),    -- Saffron
+(4,7,'1 tsp'),      -- Salt
+(4,8,'2 tbsp');     -- Butter
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(4,1,'Wash the rice thoroughly.'),
+(4,2,'Soak saffron in warm water.'),
+(4,3,'Cook rice with sugar and salt.'),
+(4,4,'Add cardamom and saffron mixture.'),
+(4,5,'Mix in date syrup for sweetness.'),
+(4,6,'Add butter for rich flavor.'),
+(4,7,'Cook until rice is soft and fragrant.');
