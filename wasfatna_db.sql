@@ -260,24 +260,24 @@ VALUES
 ('Cloves'),
 ('Saffron'),
 ('Salt'),
-('Butter');
+('Butter'),
+('Wheat'),
+('Water');
 
-INSERT INTO recipe_ingredients
-(recipe_id, ingredient_id, quantity)
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(1,1,'1 kg'),
-(1,2,'3 cups'),
-(1,3,'2 medium'),
-(1,4,'2 medium'),
-(1,5,'4 cloves'),
-(1,6,'1 tbsp'),
-(1,7,'2 tbsp'),
-(1,8,'1 tsp'),
-(1,9,'1/2 tsp'),
-(1,10,'3 tbsp');
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
-INSERT INTO recipe_steps
-(recipe_id, step_number, instruction)
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
 (1,1,'Wash and season the chicken with spices.'),
 (1,2,'Fry the onions until golden brown.'),
@@ -288,20 +288,19 @@ VALUES
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(2,2,'1 kg'),  
-(2,4,'3 cups'),
-(2,5,'2'),
-(2,6,'2'),
-(2,7,'4 cloves'),
-(2,8,'1 tbsp'),
-(2,9,'2 tbsp'),
-(2,10,'1 tsp'),
-(2,11,'1/2 tsp'),
-(2,12,'3 tbsp');
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1 kg'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
 
-INSERT INTO recipe_steps
-(recipe_id, step_number, instruction)
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
 (2,1,'Wash the lamb pieces thoroughly.'),
 (2,2,'Cook lamb with spices until tender.'),
@@ -312,19 +311,18 @@ VALUES
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(3,3,'1 kg'),   -- Fish
-(3,4,'3 cups'), -- Rice
-(3,5,'2'),
-(3,6,'2'),
-(3,7,'4 cloves'),
-(3,8,'1 tbsp'),
-(3,9,'2 tbsp'),
-(3,10,'1 tsp'),
-(3,11,'1/2 tsp'),
-(3,12,'3 tbsp');
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
-INSERT INTO recipe_steps
-(recipe_id, step_number, instruction)
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
 (3,1,'Clean and prepare the fish properly.'),
 (3,2,'Season fish with salt and spices.'),
@@ -336,13 +334,13 @@ VALUES
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(4,4,'3 cups'),     -- Rice
-(4,2,'3 tbsp'),     -- Sugar
-(4,3,'2 tbsp'),     -- Date Syrup
-(4,5,'1 tsp'),      -- Cardamom
-(4,6,'1 pinch'),    -- Saffron
-(4,7,'1 tsp'),      -- Salt
-(4,8,'2 tbsp');     -- Butter
+(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'3 tbsp'),
+(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Date Syrup'),'2 tbsp'),
+(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
@@ -356,18 +354,18 @@ VALUES
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(5,2,'1.5 kg'),   -- Lamb
-(5,4,'3 cups'),   -- Rice
-(5,5,'2 medium'), -- Onion
-(5,6,'2 medium'), -- Tomato
-(5,7,'4 cloves'), -- Garlic
-(5,8,'1 tbsp'),   -- Ginger
-(5,14,'4 pods'),  -- Cardamom
-(5,15,'1 tsp'),   -- Cinnamon
-(5,16,'3 cloves'), -- Cloves
-(5,18,'1 tsp'),   -- Salt
-(5,10,'1/2 tsp'), -- Black Pepper
-(5,11,'3 tbsp');  -- Oil
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1.5 kg'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cinnamon'),'1 tsp'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cloves'),'3 pieces'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
@@ -380,4 +378,21 @@ VALUES
 (5,7,'Slow cook until rice is fully done.'),
 (5,8,'Serve hot with salad or yogurt.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Wheat'),'2 cups'),
+(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'500 g'),
+(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'6 cups'),
+(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(6,1,'Wash the wheat thoroughly and soak it overnight.'),
+(6,2,'Add meat (lamb or chicken) to a pot with water.'),
+(6,3,'Cook on low heat until meat becomes soft.'),
+(6,4,'Add soaked wheat to the pot.'),
+(6,5,'Stir continuously to avoid lumps.'),
+(6,6,'Cook slowly until mixture becomes creamy.'),
+(6,7,'Add salt and butter for flavor.'),
+(6,8,'Serve hot with cinnamon on top.');
