@@ -251,12 +251,13 @@ VALUES
 ('Garlic'),
 ('Ginger'),
 ('Machboos Spice'),
-('Salt'),
 ('Black Pepper'),
-('Oil');
+('Oil'),
 ('Sugar'),
 ('Date Syrup'),
 ('Cardamom'),
+('Cinnamon'),
+('Cloves'),
 ('Saffron'),
 ('Salt'),
 ('Butter');
@@ -352,3 +353,29 @@ VALUES
 (4,5,'Mix in date syrup for sweetness.'),
 (4,6,'Add butter for rich flavor.'),
 (4,7,'Cook until rice is soft and fragrant.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(5,2,'1.5 kg'),   -- Lamb
+(5,4,'3 cups'),   -- Rice
+(5,5,'2 medium'), -- Onion
+(5,6,'2 medium'), -- Tomato
+(5,7,'4 cloves'), -- Garlic
+(5,8,'1 tbsp'),   -- Ginger
+(5,14,'4 pods'),  -- Cardamom
+(5,15,'1 tsp'),   -- Cinnamon
+(5,16,'3 cloves'), -- Cloves
+(5,18,'1 tsp'),   -- Salt
+(5,10,'1/2 tsp'), -- Black Pepper
+(5,11,'3 tbsp');  -- Oil
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(5,1,'Wash and clean the lamb pieces.'),
+(5,2,'Cook lamb with spices until tender.'),
+(5,3,'Fry onions until golden brown.'),
+(5,4,'Add garlic, ginger, and tomatoes.'),
+(5,5,'Add cardamom, cinnamon, and cloves.'),
+(5,6,'Add rice and water, then mix well.'),
+(5,7,'Slow cook until rice is fully done.'),
+(5,8,'Serve hot with salad or yogurt.');
