@@ -239,3 +239,77 @@ VALUES
 (8,'Date MilkShake','Creamy milkshake blended with fresh dates and milk.',10,0,2,'Easy',320,'date_milkshake.png'),
 
 (8,'Saffron Milk','Warm milk infused with saffron, cardamom, and a touch of sugar.',5,10,2,'Easy',170,'saffron_milk.png');
+
+INSERT INTO ingredients (ingredient_name)
+VALUES
+('Chicken'),
+('Basmati Rice'),
+('Onion'),
+('Tomato'),
+('Garlic'),
+('Ginger'),
+('Machboos Spice'),
+('Salt'),
+('Black Pepper'),
+('Oil');
+
+INSERT INTO recipe_ingredients
+(recipe_id, ingredient_id, quantity)
+VALUES
+(1,1,'1 kg'),
+(1,2,'3 cups'),
+(1,3,'2 medium'),
+(1,4,'2 medium'),
+(1,5,'4 cloves'),
+(1,6,'1 tbsp'),
+(1,7,'2 tbsp'),
+(1,8,'1 tsp'),
+(1,9,'1/2 tsp'),
+(1,10,'3 tbsp');
+
+INSERT INTO recipe_steps
+(recipe_id, step_number, instruction)
+VALUES
+(1,1,'Wash and season the chicken with spices.'),
+(1,2,'Fry the onions until golden brown.'),
+(1,3,'Add garlic, ginger, and tomatoes, then cook well.'),
+(1,4,'Add the chicken and cook until tender.'),
+(1,5,'Add the rice and enough water.'),
+(1,6,'Cook until the rice is tender and serve hot.');
+
+INSERT INTO ingredients (ingredient_name)
+VALUES
+('Lamb'),
+('Basmati Rice'),
+('Onion'),
+('Tomato'),
+('Garlic'),
+('Ginger'),
+('Machboos Spice'),
+('Salt'),
+('Black Pepper'),
+('Oil');
+
+INSERT INTO recipe_ingredients
+(recipe_id, ingredient_id, quantity)
+VALUES
+(2,1,'1 kg'),
+(2,2,'3 cups'),
+(2,3,'2 medium'),
+(2,4,'2 medium'),
+(2,5,'4 cloves'),
+(2,6,'1 tbsp'),
+(2,7,'2 tbsp'),
+(2,8,'1 tsp'),
+(2,9,'1/2 tsp'),
+(2,10,'3 tbsp');
+
+INSERT INTO recipe_steps
+(recipe_id, step_number, instruction)
+VALUES
+(2,1,'Wash the lamb pieces thoroughly.'),
+(2,2,'Cook lamb with spices until tender.'),
+(2,3,'Fry onions until golden brown.'),
+(2,4,'Add garlic, ginger, and tomatoes.'),
+(2,5,'Mix lamb with rice and water.'),
+(2,6,'Cook until rice is fully done and serve hot.');
