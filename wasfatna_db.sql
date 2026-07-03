@@ -243,6 +243,8 @@ VALUES
 INSERT INTO ingredients (ingredient_name)
 VALUES
 ('Chicken'),
+('Lamb'),
+('Fish'),
 ('Basmati Rice'),
 ('Onion'),
 ('Tomato'),
@@ -277,32 +279,18 @@ VALUES
 (1,5,'Add the rice and enough water.'),
 (1,6,'Cook until the rice is tender and serve hot.');
 
-INSERT INTO ingredients (ingredient_name)
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-('Lamb'),
-('Basmati Rice'),
-('Onion'),
-('Tomato'),
-('Garlic'),
-('Ginger'),
-('Machboos Spice'),
-('Salt'),
-('Black Pepper'),
-('Oil');
-
-INSERT INTO recipe_ingredients
-(recipe_id, ingredient_id, quantity)
-VALUES
-(2,1,'1 kg'),
-(2,2,'3 cups'),
-(2,3,'2 medium'),
-(2,4,'2 medium'),
-(2,5,'4 cloves'),
-(2,6,'1 tbsp'),
-(2,7,'2 tbsp'),
-(2,8,'1 tsp'),
-(2,9,'1/2 tsp'),
-(2,10,'3 tbsp');
+(2,2,'1 kg'),  
+(2,4,'3 cups'),
+(2,5,'2'),
+(2,6,'2'),
+(2,7,'4 cloves'),
+(2,8,'1 tbsp'),
+(2,9,'2 tbsp'),
+(2,10,'1 tsp'),
+(2,11,'1/2 tsp'),
+(2,12,'3 tbsp');
 
 
 INSERT INTO recipe_steps
@@ -314,3 +302,27 @@ VALUES
 (2,4,'Add garlic, ginger, and tomatoes.'),
 (2,5,'Mix lamb with rice and water.'),
 (2,6,'Cook until rice is fully done and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(3,3,'1 kg'),   -- Fish
+(3,4,'3 cups'), -- Rice
+(3,5,'2'),
+(3,6,'2'),
+(3,7,'4 cloves'),
+(3,8,'1 tbsp'),
+(3,9,'2 tbsp'),
+(3,10,'1 tsp'),
+(3,11,'1/2 tsp'),
+(3,12,'3 tbsp');
+
+INSERT INTO recipe_steps
+(recipe_id, step_number, instruction)
+VALUES
+(3,1,'Clean and prepare the fish properly.'),
+(3,2,'Season fish with salt and spices.'),
+(3,3,'Fry onions until golden brown.'),
+(3,4,'Add garlic, ginger, and tomatoes.'),
+(3,5,'Cook fish lightly in the spice mixture.'),
+(3,6,'Add rice and water, then cook until done.'),
+(3,7,'Serve hot with lemon and salad.');
