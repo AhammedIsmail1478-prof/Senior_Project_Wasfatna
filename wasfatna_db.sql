@@ -379,3 +379,5 @@ VALUES
 (5,6,'Add rice and water, then mix well.'),
 (5,7,'Slow cook until rice is fully done.'),
 (5,8,'Serve hot with salad or yogurt.');
+
+
