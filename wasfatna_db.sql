@@ -197,3 +197,45 @@ VALUES
 (6,'Sweet Vermicelli','Sweet roasted vermicelli cooked with sugar, butter, and nuts.',15,20,4,'Easy',330,'sweet_vermicelli.png'),
 
 (6,'Coconut Cake','Soft coconut sponge cake topped with shredded coconut.',20,40,8,'Medium',390,'coconut_cake.png');
+
+INSERT INTO recipes
+(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, calories, image)
+
+VALUES
+
+(7,'Samosa','Crispy pastry filled with spiced vegetables and herbs.',20,15,4,'Easy',280,'samosa.png'),
+
+(7,'Cheese Samosa','Golden fried samosas stuffed with melted cheese.',20,15,4,'Easy',320,'cheese_samosa.png'),
+
+(7,'Meat Samosa','Crispy pastry filled with seasoned minced meat.',25,15,4,'Medium',350,'meat_samosa.png'),
+
+(7,'Potato Cutlets','Crispy potato patties seasoned with herbs and spices.',20,15,4,'Easy',250,'potato_cutlets.png'),
+
+(7,'Bahraini Kebab','Traditional Bahraini kebabs made with minced meat and aromatic spices.',25,20,4,'Medium',390,'bahraini_kebab.png'),
+
+(7,'Meat Rolls','Crunchy rolls filled with seasoned minced meat.',25,15,4,'Medium',340,'meat_rolls.png'),
+
+(7,'Stuffed Grape Leaves','Tender grape leaves stuffed with seasoned rice and herbs.',30,40,6,'Medium',220,'stuffed_grape_leaves.png'),
+
+(7,'Spinach Fatayer','Baked pastries filled with seasoned spinach and onions.',25,20,6,'Medium',270,'spinach_fatayer.png');
+
+INSERT INTO recipes
+(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, calories, image)
+
+VALUES
+
+(8,'Karak Tea','Traditional spiced milk tea brewed with black tea, cardamom, and sugar.',5,10,2,'Easy',150,'karak_tea.png'),
+
+(8,'Arabic Coffee','Traditional Arabic coffee flavored with cardamom and served with dates.',5,15,4,'Easy',25,'arabic_coffee.png'),
+
+(8,'Lemon Mint Juice','Refreshing juice made with fresh lemons, mint leaves, and ice.',10,0,2,'Easy',120,'lemon_mint_juice.png'),
+
+(8,'Tamarind Juice','Sweet and tangy tamarind drink served chilled.',15,10,4,'Easy',140,'tamarind_juice.png'),
+
+(8,'Vimto Drink','Refreshing mixed fruit drink served cold, especially during Ramadan.',5,0,2,'Easy',180,'vimto_drink.png'),
+
+(8,'Rose Milk','Chilled milk flavored with rose syrup and served over ice.',5,0,2,'Easy',190,'rose_milk.png'),
+
+(8,'Date MilkShake','Creamy milkshake blended with fresh dates and milk.',10,0,2,'Easy',320,'date_milkshake.png'),
+
+(8,'Saffron Milk','Warm milk infused with saffron, cardamom, and a touch of sugar.',5,10,2,'Easy',170,'saffron_milk.png');
