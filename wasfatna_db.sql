@@ -154,3 +154,46 @@ VALUES
 
 (4,'Chebab','Traditional Bahraini pancakes flavored with saffron and cardamom.',15,20,4,'Easy',310,'chebab.png');
 
+INSERT INTO recipes
+(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, calories, image)
+
+VALUES
+
+(5,'Balaleet','Traditional Bahraini sweet vermicelli topped with a savory omelet.',15,20,4,'Easy',420,'balaleet.png'),
+
+(5,'Beyd wa Tamat','Classic Bahraini breakfast of eggs cooked with tomatoes and spices.',10,15,2,'Easy',280,'beyd_wa_tamat.png'),
+
+(5,'Bahraini Falafel','Crispy homemade falafel served with fresh vegetables and tahini.',20,15,4,'Medium',340,'bahraini_falafel.png'),
+
+(5,'Labneh Plate','Creamy labneh served with olive oil, olives, and fresh bread.',10,0,2,'Easy',260,'labneh_plate.png'),
+
+(5,'Foul Medames','Slow-cooked fava beans seasoned with garlic, lemon, and olive oil.',15,30,4,'Easy',310,'foul_medames.png'),
+
+(5,'Cheese Regag','Thin Bahraini regag bread filled with melted cheese.',10,10,2,'Easy',350,'cheese_regag.png'),
+
+(5,'Egg Regag','Traditional regag bread topped with freshly cooked eggs.',10,10,2,'Easy',330,'egg_regag.png');
+
+INSERT INTO recipes
+(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, calories, image)
+
+VALUES
+
+(6,'Luqaimat','Traditional Bahraini sweet dumplings drizzled with date syrup.',20,20,6,'Easy',380,'luqaimat.png'),
+
+(6,'Khafaroosh','Sweet Bahraini fried cakes flavored with saffron and cardamom.',20,20,6,'Medium',420,'khafaroosh.png'),
+
+(6,'Bahraini Halwa','Classic Bahraini halwa made with saffron, rose water, and nuts.',25,60,8,'Hard',450,'bahraini_halwa.png'),
+
+(6,'Sago','Traditional sago pudding flavored with saffron and cardamom.',15,30,4,'Easy',290,'sago.png'),
+
+(6,'Aseeda','Traditional sweet wheat pudding served warm with butter.',15,25,4,'Easy',340,'aseeda.png'),
+
+(6,'Date Cake','Soft and moist cake made with sweet Bahraini dates.',20,45,8,'Medium',360,'date_cake.png'),
+
+(6,'Umm Ali','Rich Middle Eastern bread pudding topped with nuts and raisins.',20,35,6,'Medium',410,'umm_ali.png'),
+
+(6,'Rice Pudding','Creamy rice pudding flavored with cinnamon and cardamom.',15,40,4,'Easy',300,'rice_pudding.png'),
+
+(6,'Sweet Vermicelli','Sweet roasted vermicelli cooked with sugar, butter, and nuts.',15,20,4,'Easy',330,'sweet_vermicelli.png'),
+
+(6,'Coconut Cake','Soft coconut sponge cake topped with shredded coconut.',20,40,8,'Medium',390,'coconut_cake.png');
