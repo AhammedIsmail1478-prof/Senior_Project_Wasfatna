@@ -295,7 +295,13 @@ VALUES
 ('Safi Fish'),
 ('Chili Flakes'),
 ('Red Lentils'),
-('Chicken Stock');
+('Chicken Stock'),
+('Peas'),
+('Celery'),
+('Ground Cinnamon'),
+('Fish Stock'),
+('Parsley'),
+('Yeast');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1068,3 +1074,95 @@ VALUES
 (32,7,'Simmer for 30 minutes until the chicken is tender.'),
 (32,8,'Serve hot with fresh bread.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1 cup'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Celery'),'2 stalks'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(33,1,'Wash and chop all the vegetables into small pieces.'),
+(33,2,'Heat the oil and sauté the onion until soft.'),
+(33,3,'Add the garlic and ginger, then cook for 2 minutes.'),
+(33,4,'Add the tomatoes, carrots, potatoes, peas, and celery.'),
+(33,5,'Season with salt and black pepper.'),
+(33,6,'Pour in the water and bring to a boil.'),
+(33,7,'Simmer for 25 to 30 minutes until the vegetables are tender.'),
+(33,8,'Serve hot with fresh bread or crackers.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Wheat'),'1 cup'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'5 cups'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ground Cinnamon'),'1/2 tsp'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(34,1,'Wash the wheat and soak it for at least 2 hours.'),
+(34,2,'Cook the chicken until tender, then shred it into small pieces.'),
+(34,3,'Heat butter and sauté the onion, garlic, and ginger.'),
+(34,4,'Add the soaked wheat and chicken stock.'),
+(34,5,'Add the shredded chicken, salt, black pepper, and ground cinnamon.'),
+(34,6,'Simmer on low heat until the wheat becomes very soft.'),
+(34,7,'Stir continuously until the soup reaches a smooth and creamy consistency.'),
+(34,8,'Serve hot with a sprinkle of cinnamon if desired.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'500 g'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish Stock'),'4 cups'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(35,1,'Clean and prepare the mixed seafood.'),
+(35,2,'Heat the oil and sauté the onion until soft.'),
+(35,3,'Add the garlic, ginger, and tomatoes, then cook until softened.'),
+(35,4,'Pour in the fish stock and bring it to a boil.'),
+(35,5,'Add the mixed seafood and cook for 8 to 10 minutes.'),
+(35,6,'Season with salt and black pepper.'),
+(35,7,'Stir in the chopped parsley and simmer for 2 minutes.'),
+(35,8,'Serve hot with lemon wedges and fresh bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(36,1,'Mix the flour, yeast, and salt in a large bowl.'),
+(36,2,'Gradually add the water and knead into a smooth dough.'),
+(36,3,'Add the oil and continue kneading until the dough is soft.'),
+(36,4,'Cover the dough and let it rise for 1 hour.'),
+(36,5,'Divide the dough into equal portions and flatten into round breads.'),
+(36,6,'Bake in a preheated oven until golden brown.'),
+(36,7,'Remove from the oven and brush lightly with oil if desired.'),
+(36,8,'Serve warm with curries, soups, or breakfast dishes.');
