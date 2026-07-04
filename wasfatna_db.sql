@@ -262,7 +262,13 @@ VALUES
 ('Salt'),
 ('Butter'),
 ('Wheat'),
-('Water');
+('Water'),
+('Arabic Bread'),
+('Turmeric'),
+('Lemon Juice'),
+('Cumin'),
+('Raisins'),
+('Almonds');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -396,3 +402,146 @@ VALUES
 (6,6,'Cook slowly until mixture becomes creamy.'),
 (6,7,'Add salt and butter for flavor.'),
 (6,8,'Serve hot with cinnamon on top.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1 kg'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp'),
+(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Arabic Bread'),'4 pieces');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'2 cups'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(8,1,'Wash and cut the chicken into medium pieces.'),
+(8,2,'Heat oil and sauté the onion until golden.'),
+(8,3,'Add garlic, ginger, and turmeric, then cook for 2 minutes.'),
+(8,4,'Add the chicken and cook until lightly browned.'),
+(8,5,'Add the rice and enough water to cover the ingredients.'),
+(8,6,'Cook until the chicken and rice are very tender.'),
+(8,7,'Mash and stir the mixture until it becomes creamy.'),
+(8,8,'Serve hot with melted butter if desired.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'2 cups'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(9,1,'Clean and cut the fish into medium-sized pieces.'),
+(9,2,'Heat oil and sauté the onion until soft.'),
+(9,3,'Add garlic, ginger, and turmeric, then cook for 2 minutes.'),
+(9,4,'Add the fish and cook gently for a few minutes.'),
+(9,5,'Add the rice and enough water to cover the ingredients.'),
+(9,6,'Cook until the fish and rice are very soft.'),
+(9,7,'Stir and mash the mixture until it becomes creamy.'),
+(9,8,'Serve hot with melted butter if desired.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 whole'),
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(10,1,'Clean and wash the fish thoroughly.'),
+(10,2,'Mix garlic, ginger, lemon juice, cumin, salt, and black pepper to make a marinade.'),
+(10,3,'Coat the fish evenly with the marinade.'),
+(10,4,'Let the fish marinate for 30 minutes.'),
+(10,5,'Brush the fish lightly with oil.'),
+(10,6,'Grill the fish over medium heat until cooked on both sides.'),
+(10,7,'Serve hot with rice, salad, and lemon wedges.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cinnamon'),'1 stick'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cloves'),'4 pieces'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Raisins'),'1/4 cup'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Almonds'),'1/4 cup'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(11,1,'Wash and season the chicken with salt and spices.'),
+(11,2,'Cook the chicken until tender and set aside.'),
+(11,3,'Fry the onions until golden, then add garlic and ginger.'),
+(11,4,'Add cardamom, cinnamon, and cloves and cook briefly.'),
+(11,5,'Add the rice and pour in enough water or chicken stock.'),
+(11,6,'Cook until the rice is almost done.'),
+(11,7,'Top with cooked chicken, raisins, and almonds.'),
+(11,8,'Cover and cook on low heat until the rice is fully cooked.'),
+(11,9,'Serve hot.');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
