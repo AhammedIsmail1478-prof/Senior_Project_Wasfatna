@@ -283,7 +283,19 @@ VALUES
 ('Green Chilli'),
 ('Hammour Fish'),
 ('Paprika'),
-('Shrimp');
+('Shrimp'),
+('Kingfish'),
+('Curry Powder),
+('Coconut Milk'),
+('Flour'),
+('Cornstarch'),
+('Breadcrumbs'),
+('Mixed Seafood),
+('Prawns'),
+('Safi Fish'),
+('Chili Flakes'),
+('Red Lentils'),
+('Chicken Stock');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -765,32 +777,294 @@ VALUES
 (20,7,'Cook until the rice is tender and the liquid is absorbed.'),
 (20,8,'Serve hot with salad and lemon wedges.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Kingfish'),'1 whole'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(21,1,'Clean and wash the kingfish thoroughly.'),
+(21,2,'Prepare a marinade using garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper.'),
+(21,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
+(21,4,'Brush the fish lightly with oil.'),
+(21,5,'Grill the fish over medium heat for 6–8 minutes on each side until fully cooked.'),
+(21,6,'Serve hot with rice, grilled vegetables, or salad.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(22,1,'Clean and devein the shrimp thoroughly.'),
+(22,2,'Heat the oil and sauté the onion until soft.'),
+(22,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(22,4,'Add the tomatoes and curry powder, then cook until the tomatoes soften.'),
+(22,5,'Pour in the coconut milk and stir well.'),
+(22,6,'Add the shrimp and cook for 5–7 minutes until pink and fully cooked.'),
+(22,7,'Season with salt and black pepper.'),
+(22,8,'Serve hot with steamed rice.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'1 cup'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'1/2 cup'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'500 ml');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(23,1,'Clean and devein the shrimp thoroughly.'),
+(23,2,'Season the shrimp with salt and black pepper.'),
+(23,3,'Coat each shrimp with flour.'),
+(23,4,'Dip the shrimp into the beaten eggs.'),
+(23,5,'Cover the shrimp evenly with breadcrumbs.'),
+(23,6,'Heat the oil in a deep frying pan.'),
+(23,7,'Fry the shrimp until golden brown and crispy.'),
+(23,8,'Drain on paper towels and serve hot with dipping sauce.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(24,1,'Clean and cut the fish into medium-sized pieces.'),
+(24,2,'Heat the oil and sauté the onion until soft.'),
+(24,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(24,4,'Add tomatoes and curry powder, then cook until the tomatoes soften.'),
+(24,5,'Pour in the coconut milk and stir well.'),
+(24,6,'Add the fish and simmer gently for 10–12 minutes until cooked.'),
+(24,7,'Season with salt and black pepper.'),
+(24,8,'Serve hot with steamed rice or bread.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(25,1,'Clean and cut the fish into medium-sized pieces.'),
+(25,2,'Heat the oil and sauté the onion until soft.'),
+(25,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(25,4,'Add tomatoes and curry powder and cook until the tomatoes soften.'),
+(25,5,'Pour in the coconut milk and stir well.'),
+(25,6,'Add the fish and simmer gently for 10 to 12 minutes until fully cooked.'),
+(25,7,'Season with salt and black pepper to taste.'),
+(25,8,'Serve hot with steamed rice or Arabic bread.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'1 kg'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(26,1,'Clean and prepare the mixed seafood.'),
+(26,2,'Heat the oil and sauté the onions until soft.'),
+(26,3,'Add garlic and ginger, then cook for 2 minutes.'),
+(26,4,'Add tomatoes and tomato paste, then cook until softened.'),
+(26,5,'Add potato, carrot, and bell pepper.'),
+(26,6,'Season with cumin, coriander, salt, and black pepper.'),
+(26,7,'Add the mixed seafood and enough water, then simmer until the vegetables are tender and the seafood is cooked.'),
+(26,8,'Serve hot with rice or Arabic bread.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Prawns'),'500 g'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(27,1,'Clean and devein the prawns thoroughly.'),
+(27,2,'Heat the oil and fry the onions until golden brown.'),
+(27,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(27,4,'Add turmeric, salt, and black pepper, then mix well.'),
+(27,5,'Add the prawns and cook for 3 to 4 minutes.'),
+(27,6,'Add the rice and enough water, then stir well.'),
+(27,7,'Cook until the rice is tender and the liquid is absorbed.'),
+(27,8,'Serve hot with salad and lemon wedges.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Safi Fish'),'1 whole'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(28,1,'Clean and wash the Safi fish thoroughly.'),
+(28,2,'Prepare a marinade using garlic, ginger, turmeric, paprika, lemon juice, salt, and black pepper.'),
+(28,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
+(28,4,'Heat the oil in a frying pan.'),
+(28,5,'Fry the fish on both sides until golden brown and fully cooked.'),
+(28,6,'Drain excess oil and serve hot with rice, salad, and lemon wedges.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1 tbsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(29,1,'Clean and cut the fish into medium-sized pieces.'),
+(29,2,'Heat the oil and sauté the onions until soft.'),
+(29,3,'Add garlic, ginger, tomatoes, and tomato paste, then cook well.'),
+(29,4,'Add the potato and carrot and stir for a few minutes.'),
+(29,5,'Season with cumin, coriander, salt, and black pepper.'),
+(29,6,'Add enough water and simmer until the vegetables are almost tender.'),
+(29,7,'Add the fish and cook gently until fully cooked.'),
+(29,8,'Serve hot with rice or fresh bread.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'5 cloves'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'2'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1 tsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(30,1,'Clean and devein the shrimp thoroughly.'),
+(30,2,'Season the shrimp with salt, black pepper, paprika, and lemon juice.'),
+(30,3,'Heat the oil in a frying pan.'),
+(30,4,'Sauté the garlic, ginger, and green chili until fragrant.'),
+(30,5,'Add the shrimp and cook for 3 to 5 minutes.'),
+(30,6,'Sprinkle the chili flakes and stir well.'),
+(30,7,'Cook until the shrimp are fully cooked and coated with the spices.'),
+(30,8,'Serve hot with rice, bread, or a fresh salad.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Red Lentils'),'2 cups'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(31,1,'Wash the red lentils thoroughly.'),
+(31,2,'Heat the oil and sauté the onion until soft.'),
+(31,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(31,4,'Add the red lentils, cumin, turmeric, salt, and black pepper.'),
+(31,5,'Pour in the water and bring to a boil.'),
+(31,6,'Reduce the heat and simmer until the lentils are tender.'),
+(31,7,'Blend the soup until smooth if desired.'),
+(31,8,'Serve hot with lemon wedges or fresh bread.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'4 cups'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bay Leaf'),'1'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
 
-
-
-
-
-
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(32,1,'Cut the chicken into small pieces.'),
+(32,2,'Heat the oil and sauté the onion until soft.'),
+(32,3,'Add the garlic and ginger, then cook for 2 minutes.'),
+(32,4,'Add the chicken and cook until lightly browned.'),
+(32,5,'Add the carrot, chicken stock, and bay leaf.'),
+(32,6,'Season with salt and black pepper.'),
+(32,7,'Simmer for 30 minutes until the chicken is tender.'),
+(32,8,'Serve hot with fresh bread.');
 
