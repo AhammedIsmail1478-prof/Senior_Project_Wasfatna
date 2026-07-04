@@ -3,13 +3,13 @@ USE wasfatna_db;
 
 CREATE TABLE categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(50) NOT NULL
+    category_name VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE recipes (
     recipe_id INT AUTO_INCREMENT PRIMARY KEY,
     category_id INT NOT NULL,
-    recipe_name VARCHAR(100) NOT NULL,
+    recipe_name VARCHAR(100) NOT NULL UNIQUE,
     description TEXT,
     prep_time INT,
     cook_time INT,
@@ -25,7 +25,7 @@ CREATE TABLE recipes (
 
 CREATE TABLE ingredients (
     ingredient_id INT AUTO_INCREMENT PRIMARY KEY,
-    ingredient_name VARCHAR(100) NOT NULL
+    ingredient_name VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE recipe_ingredients (
@@ -34,11 +34,10 @@ CREATE TABLE recipe_ingredients (
     ingredient_id INT NOT NULL,
     quantity VARCHAR(50),
 
-    FOREIGN KEY(recipe_id)
-    REFERENCES recipes(recipe_id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
 
-    FOREIGN KEY(ingredient_id)
-    REFERENCES ingredients(ingredient_id)
+    UNIQUE (recipe_id, ingredient_id)
 );
 
 CREATE TABLE recipe_steps (
@@ -47,8 +46,9 @@ CREATE TABLE recipe_steps (
     step_number INT,
     instruction TEXT,
 
-    FOREIGN KEY(recipe_id)
-    REFERENCES recipes(recipe_id)
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
+
+    UNIQUE (recipe_id, step_number)
 );
 
 INSERT INTO categories(category_name)
@@ -275,7 +275,11 @@ VALUES
 ('Potato'),
 ('Carrot'),
 ('Bell Pepper'),
-('Tomato Paste');
+('Tomato Paste'),
+('Shark Meat'),
+('Vermicelli'),
+('Egg'),
+('Rose Water');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -606,6 +610,81 @@ VALUES
 (14,7,'Season with cumin, coriander, salt, and black pepper.'),
 (14,8,'Add water and simmer until the lamb becomes tender.'),
 (14,9,'Serve hot with rice or fresh bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(15,1,'Wash and chop all the vegetables into medium-sized pieces.'),
+(15,2,'Heat oil and fry the onions until soft.'),
+(15,3,'Add garlic and ginger, then cook for 2 minutes.'),
+(15,4,'Add tomatoes and tomato paste and cook until softened.'),
+(15,5,'Add potato, carrot, and bell pepper.'),
+(15,6,'Season with cumin, coriander, salt, and black pepper.'),
+(15,7,'Add enough water and simmer until the vegetables are tender.'),
+(15,8,'Serve hot with rice or fresh bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shark Meat'),'1 kg'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(16,1,'Wash the shark meat thoroughly and cut it into medium-sized pieces.'),
+(16,2,'Boil the shark meat until cooked, then drain and shred it.'),
+(16,3,'Heat oil and sauté the onion until golden brown.'),
+(16,4,'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(16,5,'Add turmeric, cumin, coriander, salt, and black pepper.'),
+(16,6,'Mix in the shredded shark meat and cook for 10–15 minutes.'),
+(16,7,'Stir well until the flavors are combined.'),
+(16,8,'Serve hot with Bahraini rice or Arabic bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'300 g'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'4'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(32,1,'Boil the vermicelli until tender, then drain.'),
+(32,2,'Melt the butter in a pan and stir in the sugar.'),
+(32,3,'Add saffron, cardamom, and rose water, then mix well.'),
+(32,4,'Add the cooked vermicelli and stir until evenly coated.'),
+(32,5,'Beat the eggs with a pinch of salt.'),
+(32,6,'Cook the eggs into a thin omelet.'),
+(32,7,'Place the omelet over the sweet vermicelli.'),
+(32,8,'Serve warm.');
+
+
 
 
 
