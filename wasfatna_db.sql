@@ -268,7 +268,14 @@ VALUES
 ('Lemon Juice'),
 ('Cumin'),
 ('Raisins'),
-('Almonds');
+('Almonds'),
+('Yogurt'),
+('Bay Leaf'),
+('Coriander'),
+('Potato'),
+('Carrot'),
+('Bell Pepper'),
+('Tomato Paste');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -509,6 +516,96 @@ VALUES
 (11,7,'Top with cooked chicken, raisins, and almonds.'),
 (11,8,'Cover and cook on low heat until the rice is fully cooked.'),
 (11,9,'Serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yogurt'),'1 cup'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cinnamon'),'1 stick'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cloves'),'4 pieces'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bay Leaf'),'2 leaves'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp'),
+(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(12,1,'Wash and marinate the chicken with yogurt, turmeric, salt, and black pepper for 30 minutes.'),
+(12,2,'Heat oil and fry the onions until golden brown.'),
+(12,3,'Add garlic, ginger, tomatoes, and whole spices, then cook well.'),
+(12,4,'Add the marinated chicken and cook until tender.'),
+(12,5,'Cook the rice until it is partially done.'),
+(12,6,'Layer the rice over the chicken mixture.'),
+(12,7,'Sprinkle saffron water and chopped coriander over the rice.'),
+(12,8,'Cover and cook on low heat until the rice is fully cooked.'),
+(12,9,'Serve hot with salad or yogurt.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(13,1,'Cut the chicken into medium-sized pieces and wash thoroughly.'),
+(13,2,'Heat oil and fry the onions until soft.'),
+(13,3,'Add garlic and ginger, then cook for 2 minutes.'),
+(13,4,'Add tomatoes and tomato paste, then cook until combined.'),
+(13,5,'Add the chicken and cook until lightly browned.'),
+(13,6,'Add potato, carrot, and bell pepper.'),
+(13,7,'Season with cumin, coriander, salt, and black pepper.'),
+(13,8,'Add water and simmer until the chicken and vegetables are tender.'),
+(13,9,'Serve hot with rice or fresh bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1 kg'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(14,1,'Wash and cut the lamb into medium-sized pieces.'),
+(14,2,'Heat oil and fry the onions until golden.'),
+(14,3,'Add garlic and ginger, then cook for 2 minutes.'),
+(14,4,'Add tomatoes and tomato paste and cook until soft.'),
+(14,5,'Add the lamb and cook until browned.'),
+(14,6,'Add potato, carrot, and bell pepper.'),
+(14,7,'Season with cumin, coriander, salt, and black pepper.'),
+(14,8,'Add water and simmer until the lamb becomes tender.'),
+(14,9,'Serve hot with rice or fresh bread.');
 
 
 
