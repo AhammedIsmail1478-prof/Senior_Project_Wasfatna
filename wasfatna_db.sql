@@ -279,7 +279,11 @@ VALUES
 ('Shark Meat'),
 ('Vermicelli'),
 ('Egg'),
-('Rose Water');
+('Rose Water'),
+('Green Chilli'),
+('Hammour Fish'),
+('Paprika'),
+('Shrimp');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -425,6 +429,17 @@ VALUES
 (7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
 (7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp'),
 (7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Arabic Bread'),'4 pieces');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(7,1,'Cut the lamb into medium-sized pieces and wash thoroughly.'),
+(7,2,'Cook the lamb until tender.'),
+(7,3,'Fry the onion until golden, then add garlic and ginger.'),
+(7,4,'Add tomatoes and cook until soft.'),
+(7,5,'Return the lamb to the pot and season with salt and black pepper.'),
+(7,6,'Simmer until the stew thickens.'),
+(7,7,'Place pieces of Arabic bread in a serving dish and pour the stew over the bread.'),
+(7,8,'Serve hot.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -665,32 +680,90 @@ VALUES
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'300 g'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'4'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp');
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'300 g'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'4'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(32,1,'Boil the vermicelli until tender, then drain.'),
-(32,2,'Melt the butter in a pan and stir in the sugar.'),
-(32,3,'Add saffron, cardamom, and rose water, then mix well.'),
-(32,4,'Add the cooked vermicelli and stir until evenly coated.'),
-(32,5,'Beat the eggs with a pinch of salt.'),
-(32,6,'Cook the eggs into a thin omelet.'),
-(32,7,'Place the omelet over the sweet vermicelli.'),
-(32,8,'Serve warm.');
+(17,1,'Boil the vermicelli until tender, then drain.'),
+(17,2,'Melt the butter in a pan and stir in the sugar.'),
+(17,3,'Add saffron, cardamom, and rose water, then mix well.'),
+(17,4,'Add the cooked vermicelli and stir until evenly coated.'),
+(17,5,'Beat the eggs with a pinch of salt.'),
+(17,6,'Cook the eggs into a thin omelet.'),
+(17,7,'Place the omelet over the sweet vermicelli.'),
+(17,8,'Serve warm.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'4'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(18,1,'Heat the oil in a frying pan.'),
+(18,2,'Sauté the chopped onion until soft.'),
+(18,3,'Add the chopped tomatoes and green chili, then cook until softened.'),
+(18,4,'Beat the eggs with salt and black pepper.'),
+(18,5,'Pour the eggs over the tomato mixture.'),
+(18,6,'Cook on low heat until the eggs are fully set.'),
+(18,7,'Serve hot with Arabic bread.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Hammour Fish'),'1 whole'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(19,1,'Clean and wash the hammour fish thoroughly.'),
+(19,2,'Mix garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper into a marinade.'),
+(19,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
+(19,4,'Brush the fish lightly with oil.'),
+(19,5,'Grill the fish over medium heat until fully cooked, turning once.'),
+(19,6,'Serve hot with rice, salad, and lemon wedges.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'1 kg'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
-
-
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(20,1,'Clean and devein the shrimp thoroughly.'),
+(20,2,'Heat oil and fry the onions until golden brown.'),
+(20,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(20,4,'Add Machboos spice, turmeric, salt, and black pepper.'),
+(20,5,'Add the shrimp and cook for 3–5 minutes.'),
+(20,6,'Add the rice and enough water or stock.'),
+(20,7,'Cook until the rice is tender and the liquid is absorbed.'),
+(20,8,'Serve hot with salad and lemon wedges.');
 
 
 
