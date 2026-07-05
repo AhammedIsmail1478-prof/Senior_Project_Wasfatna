@@ -315,7 +315,11 @@ VALUES
 ('Nutmeg'),
 ('Corn Flour'),
 ('Rose Essence'),
-('Mixed Nuts');
+('Mixed Nuts'),
+('Sago Pearls'),
+('Whole Wheat Flour'),
+('Dates'),
+('Vanilla Extract');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1472,6 +1476,66 @@ VALUES
 (50,7,'Pour the halwa into a serving dish and garnish with the remaining nuts.'),
 (50,8,'Allow it to cool slightly before serving.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sago Pearls'),'1 cup'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(51,1,'Wash the sago pearls thoroughly.'),
+(51,2,'Boil the water and add the sago pearls.'),
+(51,3,'Cook until the sago becomes soft and translucent.'),
+(51,4,'Add the sugar and stir until completely dissolved.'),
+(51,5,'Mix in the cardamom, saffron, and rose water.'),
+(51,6,'Stir in the butter until melted.'),
+(51,7,'Cook for another 5 minutes until slightly thickened.'),
+(51,8,'Serve warm or chilled as desired.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Whole Wheat Flour'),'2 cups'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
 
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(52,1,'Bring the water to a boil in a large pot.'),
+(52,2,'Gradually add the whole wheat flour while stirring continuously.'),
+(52,3,'Cook over low heat until the mixture becomes thick and smooth.'),
+(52,4,'Add the sugar, butter, cardamom, saffron, and salt.'),
+(52,5,'Continue stirring until all the ingredients are well combined.'),
+(52,6,'Cook for another 5 to 10 minutes until creamy.'),
+(52,7,'Transfer to a serving dish.'),
+(52,8,'Serve warm with extra melted butter if desired.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'2 cups'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1/2 cup'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'2 tsp'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(53,1,'Preheat the oven to 180°C.'),
+(53,2,'Blend the dates with the milk until smooth.'),
+(53,3,'Mix the flour and baking powder in a bowl.'),
+(53,4,'Add the eggs, butter, sugar, vanilla extract, and date mixture.'),
+(53,5,'Mix until a smooth batter forms.'),
+(53,6,'Pour the batter into a greased cake tin.'),
+(53,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
+(53,8,'Allow the cake to cool before slicing and serving.');
