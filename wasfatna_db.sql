@@ -301,7 +301,15 @@ VALUES
 ('Ground Cinnamon'),
 ('Fish Stock'),
 ('Parsley'),
-('Yeast');
+('Yeast'),
+('Milk'),
+('Chickpeas'),
+('Baking Power'),
+('Labneh'),
+('Olives'),
+('Olive Oil'),
+('Mint Leaves'),
+('Fava Beans');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1166,3 +1174,190 @@ VALUES
 (36,6,'Bake in a preheated oven until golden brown.'),
 (36,7,'Remove from the oven and brush lightly with oil if desired.'),
 (36,8,'Serve warm with curries, soups, or breakfast dishes.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(37,1,'Mix the flour, yeast, and salt in a large bowl.'),
+(37,2,'Gradually add water and knead until a smooth dough forms.'),
+(37,3,'Add the oil and continue kneading for 8 to 10 minutes.'),
+(37,4,'Cover the dough and let it rise for about 1 hour.'),
+(37,5,'Divide the dough into equal portions and flatten each into a round shape.'),
+(37,6,'Bake in a hot tannour oven until the bread is golden and slightly crisp.'),
+(37,7,'Remove the bread carefully and allow it to cool slightly.'),
+(37,8,'Serve warm with curries, grilled meat, or traditional Bahraini dishes.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp'),
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(38,1,'Mix the flour, water, salt, and oil into a smooth batter.'),
+(38,2,'Heat a flat griddle over medium heat.'),
+(38,3,'Pour a thin layer of batter onto the hot griddle.'),
+(38,4,'Spread the batter evenly into a thin round shape.'),
+(38,5,'Cook until the edges become crisp and the bread is fully cooked.'),
+(38,6,'Carefully remove the bread from the griddle.'),
+(38,7,'Repeat with the remaining batter.'),
+(38,8,'Serve warm with cheese, honey, or traditional Bahraini dishes.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(39,1,'Mix the flour, yeast, sugar, and salt in a large bowl.'),
+(39,2,'Add the warm milk, butter, cardamom, and saffron, then knead into a soft dough.'),
+(39,3,'Cover the dough and let it rise for about 1 hour.'),
+(39,4,'Divide the dough into equal portions and shape into small round breads.'),
+(39,5,'Place the dough on a baking tray and let it rest for 15 minutes.'),
+(39,6,'Bake in a preheated oven until golden brown.'),
+(39,7,'Brush with melted butter after baking for a soft texture.'),
+(39,8,'Serve warm with tea or as a breakfast bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(40,1,'Mix the flour, yeast, sugar, and salt in a bowl.'),
+(40,2,'Add the milk, egg, cardamom, and saffron, then whisk into a smooth batter.'),
+(40,3,'Cover the batter and let it rest for about 1 hour.'),
+(40,4,'Heat a lightly buttered non-stick pan over medium heat.'),
+(40,5,'Pour a ladle of batter onto the pan to form a round pancake.'),
+(40,6,'Cook until bubbles appear, then flip and cook the other side until golden brown.'),
+(40,7,'Repeat with the remaining batter.'),
+(40,8,'Serve warm with honey, date syrup, or cream.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/4 cup'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(41,1,'Cook the vermicelli until tender and drain well.'),
+(41,2,'Melt the butter in a pan and stir in the sugar.'),
+(41,3,'Add the vermicelli along with cardamom, saffron, and rose water.'),
+(41,4,'Cook for a few minutes until the flavors are well combined.'),
+(41,5,'Beat the eggs with a pinch of salt.'),
+(41,6,'Cook the eggs into a thin omelet in a separate pan.'),
+(41,7,'Place the omelet over the sweet vermicelli.'),
+(41,8,'Serve warm for breakfast.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp'),
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp'),
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(42,1,'Heat the oil in a frying pan over medium heat.'),
+(42,2,'Add the chopped tomatoes and green chili, then cook until softened.'),
+(42,3,'Season with salt and black pepper.'),
+(42,4,'Beat the eggs in a bowl.'),
+(42,5,'Pour the eggs over the tomato mixture.'),
+(42,6,'Cook gently until the eggs are set.'),
+(42,7,'Fold the mixture lightly and cook for another minute.'),
+(42,8,'Serve hot with fresh Khubz or Regag bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chickpeas'),'2 cups'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/2 cup'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1/4 cup'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(43,1,'Soak the chickpeas overnight and drain well.'),
+(43,2,'Blend the chickpeas with onion, garlic, parsley, and coriander.'),
+(43,3,'Add cumin, salt, black pepper, and baking powder, then mix well.'),
+(43,4,'Shape the mixture into small balls or patties.'),
+(43,5,'Heat the oil in a deep pan.'),
+(43,6,'Fry the falafel until golden brown and crispy.'),
+(43,7,'Drain on paper towels to remove excess oil.'),
+(43,8,'Serve hot with tahini sauce, salad, and Khubz bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Labneh'),'250 g'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'8 pieces'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(44,1,'Spread the labneh evenly on a serving plate.'),
+(44,2,'Drizzle the olive oil over the labneh.'),
+(44,3,'Arrange the olives around the labneh.'),
+(44,4,'Garnish with fresh mint leaves.'),
+(44,5,'Chill for a few minutes before serving if desired.'),
+(44,6,'Serve with warm Khubz or Regag bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fava Beans'),'2 cups'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(45,1,'Cook the fava beans until they are soft.'),
+(45,2,'Mash the beans lightly with a spoon or fork.'),
+(45,3,'Add the garlic, cumin, salt, and black pepper.'),
+(45,4,'Stir in the lemon juice and olive oil.'),
+(45,5,'Cook for 5 minutes over low heat while stirring.'),
+(45,6,'Transfer the foul to a serving bowl.'),
+(45,7,'Garnish with chopped parsley and a drizzle of olive oil.'),
+(45,8,'Serve hot with Khubz or Regag bread.');
+
