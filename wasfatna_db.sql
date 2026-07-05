@@ -309,7 +309,13 @@ VALUES
 ('Olives'),
 ('Olive Oil'),
 ('Mint Leaves'),
-('Fava Beans');
+('Fava Beans'),
+('Regag Bread'),
+('Cheddar Cheese'),
+('Nutmeg'),
+('Corn Flour'),
+('Rose Essence'),
+('Mixed Nuts');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1360,4 +1366,112 @@ VALUES
 (45,6,'Transfer the foul to a serving bowl.'),
 (45,7,'Garnish with chopped parsley and a drizzle of olive oil.'),
 (45,8,'Serve hot with Khubz or Regag bread.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'100 g'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(46,1,'Heat a flat pan over medium heat.'),
+(46,2,'Place the Regag bread on the pan.'),
+(46,3,'Spread the butter evenly over the bread.'),
+(46,4,'Sprinkle the cheddar cheese evenly on top.'),
+(46,5,'Fold the bread in half.'),
+(46,6,'Cook until the cheese melts completely.'),
+(46,7,'Remove from the pan and cut into pieces if desired.'),
+(46,8,'Serve hot as a traditional Bahraini breakfast.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(47,1,'Heat a flat pan over medium heat.'),
+(47,2,'Place the Regag bread on the pan and spread the butter evenly.'),
+(47,3,'Crack the eggs directly onto the bread.'),
+(47,4,'Season with salt and black pepper.'),
+(47,5,'Spread the eggs evenly over the bread.'),
+(47,6,'Cook until the eggs are fully set.'),
+(47,7,'Fold the bread if desired and cook for another minute.'),
+(47,8,'Serve hot as a traditional Bahraini breakfast.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'2 tbsp'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Date Syrup'),'1/2 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(48,1,'Mix the flour, cornstarch, yeast, baking powder, and sugar in a bowl.'),
+(48,2,'Gradually add the water and mix into a smooth batter.'),
+(48,3,'Cover the batter and let it rest for 1 hour.'),
+(48,4,'Heat the oil in a deep frying pan.'),
+(48,5,'Drop small portions of the batter into the hot oil.'),
+(48,6,'Fry until the luqaimat are golden brown and crispy.'),
+(48,7,'Drain on paper towels to remove excess oil.'),
+(48,8,'Drizzle generously with date syrup and serve warm.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Nutmeg'),'1/4 tsp'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(49,1,'Mix the flour, sugar, baking powder, and nutmeg in a bowl.'),
+(49,2,'Add the eggs, melted butter, rose water, cardamom, and saffron.'),
+(49,3,'Mix until a smooth batter is formed.'),
+(49,4,'Heat the oil in a deep frying pan.'),
+(49,5,'Drop spoonfuls of the batter into the hot oil.'),
+(49,6,'Fry until golden brown on both sides.'),
+(49,7,'Drain on paper towels to remove excess oil.'),
+(49,8,'Serve warm with tea or coffee.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Corn Flour'),'1 cup'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 cups'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'2 tbsp'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Essence'),'1 tsp'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/2 cup'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(50,1,'Mix the corn flour with water until smooth.'),
+(50,2,'Heat the mixture over medium heat while stirring continuously.'),
+(50,3,'Add the sugar and continue stirring until dissolved.'),
+(50,4,'Mix in the butter, saffron, cardamom, rose water, and rose essence.'),
+(50,5,'Cook until the mixture becomes thick and glossy.'),
+(50,6,'Stir in half of the mixed nuts.'),
+(50,7,'Pour the halwa into a serving dish and garnish with the remaining nuts.'),
+(50,8,'Allow it to cool slightly before serving.');
+
+
+
 
