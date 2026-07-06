@@ -280,7 +280,7 @@ VALUES
 ('Vermicelli'),
 ('Egg'),
 ('Rose Water'),
-('Green Chilli'),
+('Green Chili'),
 ('Hammour Fish'),
 ('Paprika'),
 ('Shrimp'),
@@ -338,7 +338,8 @@ VALUES
 ('Lemon'),
 ('Ice Cubes'),
 ('Tamarind'),
-('Vimto Syrup');
+('Vimto Syrup'),
+('Rose Syrup');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1908,3 +1909,48 @@ VALUES
 (70,6,'Garnish with a lemon slice if preferred.'),
 (70,7,'Serve immediately while cold.'),
 (70,8,'Enjoy chilled.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Syrup'),'3 tbsp'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(71,1,'Pour the chilled milk into a serving glass.'),
+(71,2,'Add the rose syrup and sugar.'),
+(71,3,'Stir well until everything is fully mixed.'),
+(71,4,'Add the ice cubes.'),
+(71,5,'Serve immediately while chilled.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'8 pieces'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(72,1,'Remove the seeds from the dates.'),
+(72,2,'Add the dates, milk, and sugar into a blender.'),
+(72,3,'Blend until smooth and creamy.'),
+(72,4,'Add the ice cubes and blend for a few more seconds.'),
+(72,5,'Pour into serving glasses and serve chilled.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(73,1,'Pour the milk into a saucepan and heat over medium heat.'),
+(73,2,'Add the saffron and crushed cardamom to the milk.'),
+(73,3,'Stir in the sugar until it dissolves completely.'),
+(73,4,'Simmer gently for 5 to 10 minutes to infuse the flavors.'),
+(73,5,'Serve warm, or chill before serving if desired.');
