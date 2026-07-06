@@ -285,12 +285,12 @@ VALUES
 ('Paprika'),
 ('Shrimp'),
 ('Kingfish'),
-('Curry Powder),
+('Curry Powder'),
 ('Coconut Milk'),
 ('Flour'),
 ('Cornstarch'),
 ('Breadcrumbs'),
-('Mixed Seafood),
+('Mixed Seafood'),
 ('Prawns'),
 ('Safi Fish'),
 ('Chili Flakes'),
@@ -304,7 +304,7 @@ VALUES
 ('Yeast'),
 ('Milk'),
 ('Chickpeas'),
-('Baking Power'),
+('Baking Powder'),
 ('Labneh'),
 ('Olives'),
 ('Olive Oil'),
@@ -319,7 +319,24 @@ VALUES
 ('Sago Pearls'),
 ('Whole Wheat Flour'),
 ('Dates'),
-('Vanilla Extract');
+('Vanilla Extract'),
+('Puff Pastry'),
+('Cream'),
+('Pistachios'),
+('Coconut'),
+('Samosa Sheets'),
+('Mozzarella Cheese'),
+('Minced Beef'),
+('Minced Lamb'),
+('Spring Roll Sheets'),
+('Grape Leaves'),
+('Spinach'),
+('Pastry Dough'),
+('Black Tea'),
+('Evaporated Milk'),
+('Arabic Coffee'),
+('Lemon'),
+('Ice Cubes');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1539,3 +1556,319 @@ VALUES
 (53,6,'Pour the batter into a greased cake tin.'),
 (53,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
 (53,8,'Allow the cake to cool before slicing and serving.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Puff Pastry'),'250 g'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cream'),'1 cup'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Raisins'),'1/4 cup'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Almonds'),'1/4 cup'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pistachios'),'1/4 cup'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(54,1,'Preheat the oven to 180°C.'),
+(54,2,'Break the baked puff pastry into small pieces and place them in a baking dish.'),
+(54,3,'Sprinkle the raisins, almonds, and pistachios over the pastry.'),
+(54,4,'Heat the milk, cream, sugar, butter, and vanilla extract until the sugar dissolves.'),
+(54,5,'Pour the warm milk mixture evenly over the pastry.'),
+(54,6,'Bake for 20 to 25 minutes until the top is golden brown.'),
+(54,7,'Allow it to cool slightly before serving.'),
+(54,8,'Serve warm, garnished with extra nuts if desired.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'4 cups'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(55,1,'Wash the rice thoroughly.'),
+(55,2,'Cook the rice with the milk over medium heat.'),
+(55,3,'Stir frequently until the rice becomes soft and creamy.'),
+(55,4,'Add the sugar, cardamom, saffron, and vanilla extract.'),
+(55,5,'Mix well and continue cooking for 5 to 10 minutes.'),
+(55,6,'Stir in the butter until melted.'),
+(55,7,'Transfer the pudding to serving bowls.'),
+(55,8,'Serve warm or chilled, garnished with cinnamon or chopped nuts if desired.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/4 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(56,1,'Melt the butter in a pan over medium heat.'),
+(56,2,'Add the vermicelli and roast until golden brown.'),
+(56,3,'Pour in the water and cook until the vermicelli softens.'),
+(56,4,'Add the sugar and stir until dissolved.'),
+(56,5,'Mix in the cardamom and saffron.'),
+(56,6,'Cook until the liquid is absorbed.'),
+(56,7,'Garnish with the mixed nuts.'),
+(56,8,'Serve warm as a traditional Bahraini dessert.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut'),'1 cup'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1/2 cup'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'2 tsp'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(57,1,'Preheat the oven to 180°C.'),
+(57,2,'Mix the flour, baking powder, and shredded coconut in a bowl.'),
+(57,3,'In another bowl, beat the butter and sugar until creamy.'),
+(57,4,'Add the eggs, milk, and vanilla extract, then mix well.'),
+(57,5,'Gradually add the dry ingredients and stir until smooth.'),
+(57,6,'Pour the batter into a greased cake tin.'),
+(57,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
+(57,8,'Allow the cake to cool before slicing and serving.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'3 medium'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1/2 cup'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(58,1,'Boil and mash the potatoes.'),
+(58,2,'Cook the onion, peas, cumin, turmeric, salt, and black pepper in a little oil.'),
+(58,3,'Mix the mashed potatoes with the cooked vegetables.'),
+(58,4,'Fill each samosa sheet with the potato mixture.'),
+(58,5,'Fold and seal the samosas securely.'),
+(58,6,'Heat the oil in a deep pan.'),
+(58,7,'Fry the samosas until golden brown and crispy.'),
+(58,8,'Serve hot with chutney or your favorite dipping sauce.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'1 cup'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'1 cup'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(59,1,'Mix the cheddar and mozzarella cheese together.'),
+(59,2,'Place a spoonful of the cheese mixture onto each samosa sheet.'),
+(59,3,'Fold the sheets into triangle shapes and seal the edges.'),
+(59,4,'Heat the oil in a deep frying pan.'),
+(59,5,'Carefully place the samosas into the hot oil.'),
+(59,6,'Fry until golden brown and crispy.'),
+(59,7,'Drain on paper towels to remove excess oil.'),
+(59,8,'Serve hot with ketchup or chili sauce.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(60,1,'Heat the oil in a pan and sauté the onion until soft.'),
+(60,2,'Add the garlic and cook for 1 minute.'),
+(60,3,'Add the minced beef and cook until browned.'),
+(60,4,'Season with salt and black pepper, then let the filling cool.'),
+(60,5,'Place a spoonful of filling onto each samosa sheet.'),
+(60,6,'Fold the sheets into triangles and seal the edges.'),
+(60,7,'Deep-fry until golden brown and crispy.'),
+(60,8,'Serve hot with your favorite dipping sauce.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'4 medium'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(61,1,'Boil the potatoes until tender, then mash them.'),
+(61,2,'Mix the potatoes with the egg, parsley, salt, and black pepper.'),
+(61,3,'Shape the mixture into small patties.'),
+(61,4,'Coat each patty with breadcrumbs.'),
+(61,5,'Heat the oil in a frying pan.'),
+(61,6,'Fry the cutlets until golden brown on both sides.'),
+(61,7,'Drain on paper towels to remove excess oil.'),
+(61,8,'Serve hot with ketchup or your favorite dipping sauce.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'500 g'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(62,1,'Combine the minced lamb, onion, garlic, parsley, cumin, salt, and black pepper in a bowl.'),
+(62,2,'Mix well until all ingredients are evenly combined.'),
+(62,3,'Shape the mixture into kebab logs or patties.'),
+(62,4,'Lightly brush the kebabs with oil.'),
+(62,5,'Preheat a grill or grill pan over medium-high heat.'),
+(62,6,'Grill the kebabs for 10–12 minutes, turning occasionally.'),
+(62,7,'Cook until browned and fully cooked through.'),
+(62,8,'Serve hot with Arabic bread, salad, and yogurt sauce.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spring Roll Sheets'),'10 sheets'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(63,1,'Heat a little oil in a pan and cook the onion until soft.'),
+(63,2,'Add the garlic and minced beef, then cook until browned.'),
+(63,3,'Season with salt and black pepper and allow the filling to cool.'),
+(63,4,'Place a spoonful of the filling onto each spring roll sheet.'),
+(63,5,'Roll tightly and seal the edges.'),
+(63,6,'Heat oil in a deep frying pan.'),
+(63,7,'Fry the rolls until golden brown and crispy.'),
+(63,8,'Serve hot with ketchup or chili sauce.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Grape Leaves'),'30 leaves'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'250 g'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'1 medium'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(64,1,'Rinse the grape leaves and blanch them in hot water if needed.'),
+(64,2,'Mix the rice, minced lamb, onion, tomato, parsley, salt, and black pepper.'),
+(64,3,'Place a small amount of filling onto each grape leaf.'),
+(64,4,'Roll the leaves tightly and fold in the sides.'),
+(64,5,'Arrange the rolls in a pot.'),
+(64,6,'Drizzle with oil and lemon juice, then add enough water to cover.'),
+(64,7,'Simmer over low heat for about 45 minutes until cooked.'),
+(64,8,'Serve warm with yogurt or lemon wedges.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pastry Dough'),'500 g'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spinach'),'300 g'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(65,1,'Preheat the oven to 180°C.'),
+(65,2,'Cook the onion in a little oil until soft.'),
+(65,3,'Add the spinach and cook until wilted.'),
+(65,4,'Mix in the lemon juice, salt, and black pepper, then let the filling cool.'),
+(65,5,'Cut the pastry dough into small circles and add the spinach filling.'),
+(65,6,'Fold into triangles and seal the edges firmly.'),
+(65,7,'Place on a baking tray and bake for 20 to 25 minutes until golden brown.'),
+(65,8,'Serve warm as an appetizer or snack.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Tea'),'2 tsp'),
+(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Evaporated Milk'),'1 cup'),
+(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
+(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(66,1,'Boil the water in a saucepan.'),
+(66,2,'Add the black tea and crushed cardamom.'),
+(66,3,'Simmer for 3 to 5 minutes.'),
+(66,4,'Add the evaporated milk and sugar.'),
+(66,5,'Stir well and bring to a gentle boil.'),
+(66,6,'Simmer for another 2 to 3 minutes.'),
+(66,7,'Strain the tea into serving cups.'),
+(66,8,'Serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Arabic Coffee'),'4 tbsp'),
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'6 pieces');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(67,1,'Boil the water in a coffee pot.'),
+(67,2,'Add the Arabic coffee and simmer for 10 minutes.'),
+(67,3,'Add the crushed cardamom and saffron.'),
+(67,4,'Simmer for another 2 to 3 minutes.'),
+(67,5,'Remove from the heat and let the coffee settle briefly.'),
+(67,6,'Strain the coffee into a traditional dallah.'),
+(67,7,'Serve in small cups.'),
+(67,8,'Enjoy with fresh dates.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon'),'2'),
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'10 leaves'),
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(68,1,'Wash the lemons and mint leaves.'),
+(68,2,'Squeeze the lemons and remove the seeds.'),
+(68,3,'Add the lemon juice, mint leaves, sugar, and water to a blender.'),
+(68,4,'Blend until smooth.'),
+(68,5,'Add the ice cubes and blend briefly.'),
+(68,6,'Strain the juice if desired.'),
+(68,7,'Pour into serving glasses.'),
+(68,8,'Serve chilled.');
+
