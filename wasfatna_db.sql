@@ -60,7 +60,8 @@ VALUES
 ('Breakfast'),
 ('Desserts'),
 ('Snacks'),
-('Drinks');
+('Drinks'),
+('Salad');
 
 INSERT INTO recipes
 (category_id,recipe_name,description,prep_time,cook_time,servings,difficulty,calories,image)
@@ -240,6 +241,21 @@ VALUES
 
 (8,'Saffron Milk','Warm milk infused with saffron, cardamom, and a touch of sugar.',5,10,2,'Easy',170,'saffron_milk.png');
 
+INSERT INTO recipes
+(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, calories, image)
+
+VALUES
+
+(9,'Salata Hara','Traditional Bahraini spicy salad made with tomatoes, cucumbers, onions, green chilies, fresh herbs, and lemon juice.',15,0,4,'Easy',120,'salata_hara.png'),
+
+(9,'Salatat Khiyar wa Tamatim','Refreshing salad prepared with fresh cucumbers, tomatoes, onions, lemon juice, and herbs.',10,0,4,'Easy',90,'cucumber_tomato_salad.png'),
+
+(9,'Tabbouleh','Fresh parsley salad with bulgur, tomatoes, mint, onions, olive oil, and lemon juice.',20,0,4,'Easy',180,'tabbouleh.png'),
+
+(9,'Fattoush','Traditional Arabic mixed vegetable salad with crispy toasted pita bread and tangy dressing.',20,0,4,'Easy',210,'fattoush.png'),
+
+(9,'Green Salad','Classic mixed green salad with lettuce, cucumbers, tomatoes, carrots, and lemon olive oil dressing.',10,0,4,'Easy',85,'green_salad.png');
+
 INSERT INTO ingredients (ingredient_name)
 VALUES
 ('Chicken'),
@@ -339,7 +355,13 @@ VALUES
 ('Ice Cubes'),
 ('Tamarind'),
 ('Vimto Syrup'),
-('Rose Syrup');
+('Rose Syrup'),
+('Cucumber'),
+('Bulgur'),
+('Lettuce'),
+('Radish'),
+('Sumac'),
+('Pita Bread');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1954,3 +1976,107 @@ VALUES
 (73,3,'Stir in the sugar until it dissolves completely.'),
 (73,4,'Simmer gently for 5 to 10 minutes to infuse the flavors.'),
 (73,5,'Serve warm, or chill before serving if desired.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'3 medium'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(74,1,'Wash and finely chop the tomatoes, onion, and parsley.'),
+(74,2,'Place all the chopped ingredients in a mixing bowl.'),
+(74,3,'Add the lemon juice and olive oil.'),
+(74,4,'Season with salt and black pepper.'),
+(74,5,'Mix well until all ingredients are evenly combined.'),
+(74,6,'Serve fresh as a side dish.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'2 medium'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(75,1,'Wash the cucumber and tomatoes thoroughly.'),
+(75,2,'Dice the cucumber and tomatoes into small pieces.'),
+(75,3,'Place them in a mixing bowl.'),
+(75,4,'Add the lemon juice and olive oil.'),
+(75,5,'Season with salt and black pepper, then toss well.'),
+(75,'Serve fresh and chilled.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 cups'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bulgur'),'1/2 cup'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(76,1,'Soak the bulgur in water for 15 minutes, then drain well.'),
+(76,2,'Finely chop the parsley, mint leaves, tomatoes, cucumber, and onion.'),
+(76,3,'Place all the ingredients in a large mixing bowl.'),
+(76,4,'Add the soaked bulgur, lemon juice, and olive oil.'),
+(76,5,'Season with salt and black pepper.'),
+(76,6,'Mix well until all the ingredients are evenly combined.'),
+(76,7,'Chill for 15 minutes before serving.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Radish'),'4'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pita Bread'),'1 piece'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sumac'),'1 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(77,1,'Wash and chop the lettuce, tomatoes, cucumber, and radishes into bite-sized pieces.'),
+(77,2,'Toast or fry the pita bread until crispy, then break it into small pieces.'),
+(77,3,'Place the vegetables and mint leaves in a large bowl.'),
+(77,4,'Add the toasted pita bread.'),
+(77,5,'Mix the lemon juice, olive oil, sumac, and salt to prepare the dressing.'),
+(77,6,'Pour the dressing over the salad and toss gently.'),
+(77,7,'Serve immediately to keep the bread crispy.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(78,1,'Wash the lettuce, cucumber, tomatoes, and onion thoroughly.'),
+(78,2,'Chop the vegetables into bite-sized pieces.'),
+(78,3,'Place all the vegetables in a large salad bowl.'),
+(78,4,'Mix the lemon juice, olive oil, salt, and black pepper to prepare the dressing.'),
+(78,5,'Pour the dressing over the salad and toss gently until evenly coated.'),
+(78,6,'Serve immediately while fresh.');
+
