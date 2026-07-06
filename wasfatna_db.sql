@@ -336,7 +336,9 @@ VALUES
 ('Evaporated Milk'),
 ('Arabic Coffee'),
 ('Lemon'),
-('Ice Cubes');
+('Ice Cubes'),
+('Tamarind'),
+('Vimto Syrup');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1872,3 +1874,37 @@ VALUES
 (68,7,'Pour into serving glasses.'),
 (68,8,'Serve chilled.');
 
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tamarind'),'200 g'),
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(69,1,'Soak the tamarind in warm water for 30 minutes.'),
+(69,2,'Mash the tamarind to extract the juice.'),
+(69,3,'Strain the mixture to remove seeds and fibers.'),
+(69,4,'Add the sugar and stir until dissolved.'),
+(69,5,'Add the remaining water and mix well.'),
+(69,6,'Chill the juice in the refrigerator.'),
+(69,7,'Pour into glasses filled with ice cubes.'),
+(69,8,'Serve cold.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vimto Syrup'),'1/2 cup'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(70,1,'Fill a serving glass with ice cubes.'),
+(70,2,'Pour the Vimto syrup into the glass.'),
+(70,3,'Add the chilled water.'),
+(70,4,'Stir well until combined.'),
+(70,5,'Taste and adjust the syrup if desired.'),
+(70,6,'Garnish with a lemon slice if preferred.'),
+(70,7,'Serve immediately while cold.'),
+(70,8,'Enjoy chilled.');
