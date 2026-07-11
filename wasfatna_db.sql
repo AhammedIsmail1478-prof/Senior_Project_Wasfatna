@@ -753,185 +753,197 @@ VALUES
 (16,7,'Stir well until the flavors are combined.'),
 (16,8,'Serve hot with Bahraini rice or Arabic bread.');
 
+
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'300 g'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'4'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp');
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Kingfish'),'1 whole'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(17,1,'Boil the vermicelli until tender, then drain.'),
-(17,2,'Melt the butter in a pan and stir in the sugar.'),
-(17,3,'Add saffron, cardamom, and rose water, then mix well.'),
-(17,4,'Add the cooked vermicelli and stir until evenly coated.'),
-(17,5,'Beat the eggs with a pinch of salt.'),
-(17,6,'Cook the eggs into a thin omelet.'),
-(17,7,'Place the omelet over the sweet vermicelli.'),
-(17,8,'Serve warm.');
+(17,1,'Clean and wash the kingfish thoroughly.'),
+(17,2,'Prepare a marinade using garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper.'),
+(17,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
+(17,4,'Brush the fish lightly with oil.'),
+(17,5,'Grill the fish over medium heat for 6–8 minutes on each side until fully cooked.'),
+(17,6,'Serve hot with rice, grilled vegetables, or salad.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'4'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
 (18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
 (18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
+(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
 (18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
 (18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(18,1,'Heat the oil in a frying pan.'),
-(18,2,'Sauté the chopped onion until soft.'),
-(18,3,'Add the chopped tomatoes and green chili, then cook until softened.'),
-(18,4,'Beat the eggs with salt and black pepper.'),
-(18,5,'Pour the eggs over the tomato mixture.'),
-(18,6,'Cook on low heat until the eggs are fully set.'),
-(18,7,'Serve hot with Arabic bread.');
+(18,1,'Clean and devein the shrimp thoroughly.'),
+(18,2,'Heat the oil and sauté the onion until soft.'),
+(18,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(18,4,'Add the tomatoes and curry powder, then cook until the tomatoes soften.'),
+(18,5,'Pour in the coconut milk and stir well.'),
+(18,6,'Add the shrimp and cook for 5–7 minutes until pink and fully cooked.'),
+(18,7,'Season with salt and black pepper.'),
+(18,8,'Serve hot with steamed rice.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Hammour Fish'),'1 whole'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'1 cup'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'1/2 cup'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
 (19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'500 ml');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(19,1,'Clean and wash the hammour fish thoroughly.'),
-(19,2,'Mix garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper into a marinade.'),
-(19,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
-(19,4,'Brush the fish lightly with oil.'),
-(19,5,'Grill the fish over medium heat until fully cooked, turning once.'),
-(19,6,'Serve hot with rice, salad, and lemon wedges.');
+(19,1,'Clean and devein the shrimp thoroughly.'),
+(19,2,'Season the shrimp with salt and black pepper.'),
+(19,3,'Coat each shrimp with flour.'),
+(19,4,'Dip the shrimp into the beaten eggs.'),
+(19,5,'Cover the shrimp evenly with breadcrumbs.'),
+(19,6,'Heat the oil in a deep frying pan.'),
+(19,7,'Fry the shrimp until golden brown and crispy.'),
+(19,8,'Drain on paper towels and serve hot with dipping sauce.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'1 kg'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
 (20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
 (20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
 (20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
 (20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
 (20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(20,1,'Clean and devein the shrimp thoroughly.'),
-(20,2,'Heat oil and fry the onions until golden brown.'),
-(20,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
-(20,4,'Add Machboos spice, turmeric, salt, and black pepper.'),
-(20,5,'Add the shrimp and cook for 3–5 minutes.'),
-(20,6,'Add the rice and enough water or stock.'),
-(20,7,'Cook until the rice is tender and the liquid is absorbed.'),
-(20,8,'Serve hot with salad and lemon wedges.');
+(20,1,'Clean and cut the fish into medium-sized pieces.'),
+(20,2,'Heat the oil and sauté the onion until soft.'),
+(20,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(20,4,'Add tomatoes and curry powder, then cook until the tomatoes soften.'),
+(20,5,'Pour in the coconut milk and stir well.'),
+(20,6,'Add the fish and simmer gently for 10–12 minutes until cooked.'),
+(20,7,'Season with salt and black pepper.'),
+(20,8,'Serve hot with steamed rice or bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Kingfish'),'1 whole'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
 (21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
 (21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
+(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
 (21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
 (21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(21,1,'Clean and wash the kingfish thoroughly.'),
-(21,2,'Prepare a marinade using garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper.'),
-(21,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
-(21,4,'Brush the fish lightly with oil.'),
-(21,5,'Grill the fish over medium heat for 6–8 minutes on each side until fully cooked.'),
-(21,6,'Serve hot with rice, grilled vegetables, or salad.');
+(21,1,'Clean and cut the fish into medium-sized pieces.'),
+(21,2,'Heat the oil and sauté the onion until soft.'),
+(21,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(21,4,'Add tomatoes and curry powder and cook until the tomatoes soften.'),
+(21,5,'Pour in the coconut milk and stir well.'),
+(21,6,'Add the fish and simmer gently for 10 to 12 minutes until fully cooked.'),
+(21,7,'Season with salt and black pepper to taste.'),
+(21,8,'Serve hot with steamed rice or Arabic bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'1 kg'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
 (22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
 (22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
 (22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(22,1,'Clean and devein the shrimp thoroughly.'),
-(22,2,'Heat the oil and sauté the onion until soft.'),
-(22,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
-(22,4,'Add the tomatoes and curry powder, then cook until the tomatoes soften.'),
-(22,5,'Pour in the coconut milk and stir well.'),
-(22,6,'Add the shrimp and cook for 5–7 minutes until pink and fully cooked.'),
-(22,7,'Season with salt and black pepper.'),
-(22,8,'Serve hot with steamed rice.');
+(22,1,'Clean and prepare the mixed seafood.'),
+(22,2,'Heat the oil and sauté the onions until soft.'),
+(22,3,'Add garlic and ginger, then cook for 2 minutes.'),
+(22,4,'Add tomatoes and tomato paste, then cook until softened.'),
+(22,5,'Add potato, carrot, and bell pepper.'),
+(22,6,'Season with cumin, coriander, salt, and black pepper.'),
+(22,7,'Add the mixed seafood and enough water, then simmer until the vegetables are tender and the seafood is cooked.'),
+(22,8,'Serve hot with rice or Arabic bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'1 cup'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'1/2 cup'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Prawns'),'500 g'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
 (23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'500 ml');
+(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(23,1,'Clean and devein the shrimp thoroughly.'),
-(23,2,'Season the shrimp with salt and black pepper.'),
-(23,3,'Coat each shrimp with flour.'),
-(23,4,'Dip the shrimp into the beaten eggs.'),
-(23,5,'Cover the shrimp evenly with breadcrumbs.'),
-(23,6,'Heat the oil in a deep frying pan.'),
-(23,7,'Fry the shrimp until golden brown and crispy.'),
-(23,8,'Drain on paper towels and serve hot with dipping sauce.');
+(23,1,'Clean and devein the prawns thoroughly.'),
+(23,2,'Heat the oil and fry the onions until golden brown.'),
+(23,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(23,4,'Add turmeric, salt, and black pepper, then mix well.'),
+(23,5,'Add the prawns and cook for 3 to 4 minutes.'),
+(23,6,'Add the rice and enough water, then stir well.'),
+(23,7,'Cook until the rice is tender and the liquid is absorbed.'),
+(23,8,'Serve hot with salad and lemon wedges.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Safi Fish'),'1 whole'),
 (24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
 (24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
 (24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(24,1,'Clean and cut the fish into medium-sized pieces.'),
-(24,2,'Heat the oil and sauté the onion until soft.'),
-(24,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
-(24,4,'Add tomatoes and curry powder, then cook until the tomatoes soften.'),
-(24,5,'Pour in the coconut milk and stir well.'),
-(24,6,'Add the fish and simmer gently for 10–12 minutes until cooked.'),
-(24,7,'Season with salt and black pepper.'),
-(24,8,'Serve hot with steamed rice or bread.');
+(24,1,'Clean and wash the Safi fish thoroughly.'),
+(24,2,'Prepare a marinade using garlic, ginger, turmeric, paprika, lemon juice, salt, and black pepper.'),
+(24,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
+(24,4,'Heat the oil in a frying pan.'),
+(24,5,'Fry the fish on both sides until golden brown and fully cooked.'),
+(24,6,'Drain excess oil and serve hot with rice, salad, and lemon wedges.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -940,1045 +952,1031 @@ VALUES
 (25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
 (25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
 (25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1 tbsp'),
 (25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
 (25,1,'Clean and cut the fish into medium-sized pieces.'),
-(25,2,'Heat the oil and sauté the onion until soft.'),
-(25,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
-(25,4,'Add tomatoes and curry powder and cook until the tomatoes soften.'),
-(25,5,'Pour in the coconut milk and stir well.'),
-(25,6,'Add the fish and simmer gently for 10 to 12 minutes until fully cooked.'),
-(25,7,'Season with salt and black pepper to taste.'),
-(25,8,'Serve hot with steamed rice or Arabic bread.');
+(25,2,'Heat the oil and sauté the onions until soft.'),
+(25,3,'Add garlic, ginger, tomatoes, and tomato paste, then cook well.'),
+(25,4,'Add the potato and carrot and stir for a few minutes.'),
+(25,5,'Season with cumin, coriander, salt, and black pepper.'),
+(25,6,'Add enough water and simmer until the vegetables are almost tender.'),
+(25,7,'Add the fish and cook gently until fully cooked.'),
+(25,8,'Serve hot with rice or fresh bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'1 kg'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'5 cloves'),
 (26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'2'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1 tsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
 (26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(26,1,'Clean and prepare the mixed seafood.'),
-(26,2,'Heat the oil and sauté the onions until soft.'),
-(26,3,'Add garlic and ginger, then cook for 2 minutes.'),
-(26,4,'Add tomatoes and tomato paste, then cook until softened.'),
-(26,5,'Add potato, carrot, and bell pepper.'),
-(26,6,'Season with cumin, coriander, salt, and black pepper.'),
-(26,7,'Add the mixed seafood and enough water, then simmer until the vegetables are tender and the seafood is cooked.'),
-(26,8,'Serve hot with rice or Arabic bread.');
+(26,1,'Clean and devein the shrimp thoroughly.'),
+(26,2,'Season the shrimp with salt, black pepper, paprika, and lemon juice.'),
+(26,3,'Heat the oil in a frying pan.'),
+(26,4,'Sauté the garlic, ginger, and green chili until fragrant.'),
+(26,5,'Add the shrimp and cook for 3 to 5 minutes.'),
+(26,6,'Sprinkle the chili flakes and stir well.'),
+(26,7,'Cook until the shrimp are fully cooked and coated with the spices.'),
+(26,8,'Serve hot with rice, bread, or a fresh salad.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Prawns'),'500 g'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Red Lentils'),'2 cups'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
 (27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
 (27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
 (27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(27,1,'Clean and devein the prawns thoroughly.'),
-(27,2,'Heat the oil and fry the onions until golden brown.'),
+(27,1,'Wash the red lentils thoroughly.'),
+(27,2,'Heat the oil and sauté the onion until soft.'),
 (27,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
-(27,4,'Add turmeric, salt, and black pepper, then mix well.'),
-(27,5,'Add the prawns and cook for 3 to 4 minutes.'),
-(27,6,'Add the rice and enough water, then stir well.'),
-(27,7,'Cook until the rice is tender and the liquid is absorbed.'),
-(27,8,'Serve hot with salad and lemon wedges.');
+(27,4,'Add the red lentils, cumin, turmeric, salt, and black pepper.'),
+(27,5,'Pour in the water and bring to a boil.'),
+(27,6,'Reduce the heat and simmer until the lentils are tender.'),
+(27,7,'Blend the soup until smooth if desired.'),
+(27,8,'Serve hot with lemon wedges or fresh bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Safi Fish'),'1 whole'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
 (28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'4 cups'),
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bay Leaf'),'1'),
 (28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(28,1,'Clean and wash the Safi fish thoroughly.'),
-(28,2,'Prepare a marinade using garlic, ginger, turmeric, paprika, lemon juice, salt, and black pepper.'),
-(28,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
-(28,4,'Heat the oil in a frying pan.'),
-(28,5,'Fry the fish on both sides until golden brown and fully cooked.'),
-(28,6,'Drain excess oil and serve hot with rice, salad, and lemon wedges.');
+(28,1,'Cut the chicken into small pieces.'),
+(28,2,'Heat the oil and sauté the onion until soft.'),
+(28,3,'Add the garlic and ginger, then cook for 2 minutes.'),
+(28,4,'Add the chicken and cook until lightly browned.'),
+(28,5,'Add the carrot, chicken stock, and bay leaf.'),
+(28,6,'Season with salt and black pepper.'),
+(28,7,'Simmer for 30 minutes until the chicken is tender.'),
+(28,8,'Serve hot with fresh bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
 (29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1 tbsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1 cup'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Celery'),'2 stalks'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
 (29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(29,1,'Clean and cut the fish into medium-sized pieces.'),
-(29,2,'Heat the oil and sauté the onions until soft.'),
-(29,3,'Add garlic, ginger, tomatoes, and tomato paste, then cook well.'),
-(29,4,'Add the potato and carrot and stir for a few minutes.'),
-(29,5,'Season with cumin, coriander, salt, and black pepper.'),
-(29,6,'Add enough water and simmer until the vegetables are almost tender.'),
-(29,7,'Add the fish and cook gently until fully cooked.'),
-(29,8,'Serve hot with rice or fresh bread.');
+(29,1,'Wash and chop all the vegetables into small pieces.'),
+(29,2,'Heat the oil and sauté the onion until soft.'),
+(29,3,'Add the garlic and ginger, then cook for 2 minutes.'),
+(29,4,'Add the tomatoes, carrots, potatoes, peas, and celery.'),
+(29,5,'Season with salt and black pepper.'),
+(29,6,'Pour in the water and bring to a boil.'),
+(29,7,'Simmer for 25 to 30 minutes until the vegetables are tender.'),
+(29,8,'Serve hot with fresh bread or crackers.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'5 cloves'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Wheat'),'1 cup'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
 (30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'2'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1 tsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'5 cups'),
 (30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ground Cinnamon'),'1/2 tsp'),
+(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(30,1,'Clean and devein the shrimp thoroughly.'),
-(30,2,'Season the shrimp with salt, black pepper, paprika, and lemon juice.'),
-(30,3,'Heat the oil in a frying pan.'),
-(30,4,'Sauté the garlic, ginger, and green chili until fragrant.'),
-(30,5,'Add the shrimp and cook for 3 to 5 minutes.'),
-(30,6,'Sprinkle the chili flakes and stir well.'),
-(30,7,'Cook until the shrimp are fully cooked and coated with the spices.'),
-(30,8,'Serve hot with rice, bread, or a fresh salad.');
+(30,1,'Wash the wheat and soak it for at least 2 hours.'),
+(30,2,'Cook the chicken until tender, then shred it into small pieces.'),
+(30,3,'Heat butter and sauté the onion, garlic, and ginger.'),
+(30,4,'Add the soaked wheat and chicken stock.'),
+(30,5,'Add the shredded chicken, salt, black pepper, and ground cinnamon.'),
+(30,6,'Simmer on low heat until the wheat becomes very soft.'),
+(30,7,'Stir continuously until the soup reaches a smooth and creamy consistency.'),
+(30,8,'Serve hot with a sprinkle of cinnamon if desired.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Red Lentils'),'2 cups'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'500 g'),
 (31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
 (31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
 (31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
 (31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish Stock'),'4 cups'),
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
 (31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
+(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(31,1,'Wash the red lentils thoroughly.'),
+(31,1,'Clean and prepare the mixed seafood.'),
 (31,2,'Heat the oil and sauté the onion until soft.'),
-(31,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
-(31,4,'Add the red lentils, cumin, turmeric, salt, and black pepper.'),
-(31,5,'Pour in the water and bring to a boil.'),
-(31,6,'Reduce the heat and simmer until the lentils are tender.'),
-(31,7,'Blend the soup until smooth if desired.'),
-(31,8,'Serve hot with lemon wedges or fresh bread.');
+(31,3,'Add the garlic, ginger, and tomatoes, then cook until softened.'),
+(31,4,'Pour in the fish stock and bring it to a boil.'),
+(31,5,'Add the mixed seafood and cook for 8 to 10 minutes.'),
+(31,6,'Season with salt and black pepper.'),
+(31,7,'Stir in the chopped parsley and simmer for 2 minutes.'),
+(31,8,'Serve hot with lemon wedges and fresh bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'4 cups'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bay Leaf'),'1'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
 (32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
+(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(32,1,'Cut the chicken into small pieces.'),
-(32,2,'Heat the oil and sauté the onion until soft.'),
-(32,3,'Add the garlic and ginger, then cook for 2 minutes.'),
-(32,4,'Add the chicken and cook until lightly browned.'),
-(32,5,'Add the carrot, chicken stock, and bay leaf.'),
-(32,6,'Season with salt and black pepper.'),
-(32,7,'Simmer for 30 minutes until the chicken is tender.'),
-(32,8,'Serve hot with fresh bread.');
+(32,1,'Mix the flour, yeast, and salt in a large bowl.'),
+(32,2,'Gradually add the water and knead into a smooth dough.'),
+(32,3,'Add the oil and continue kneading until the dough is soft.'),
+(32,4,'Cover the dough and let it rise for 1 hour.'),
+(32,5,'Divide the dough into equal portions and flatten into round breads.'),
+(32,6,'Bake in a preheated oven until golden brown.'),
+(32,7,'Remove from the oven and brush lightly with oil if desired.'),
+(32,8,'Serve warm with curries, soups, or breakfast dishes.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1 cup'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Celery'),'2 stalks'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
 (33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
+(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(33,1,'Wash and chop all the vegetables into small pieces.'),
-(33,2,'Heat the oil and sauté the onion until soft.'),
-(33,3,'Add the garlic and ginger, then cook for 2 minutes.'),
-(33,4,'Add the tomatoes, carrots, potatoes, peas, and celery.'),
-(33,5,'Season with salt and black pepper.'),
-(33,6,'Pour in the water and bring to a boil.'),
-(33,7,'Simmer for 25 to 30 minutes until the vegetables are tender.'),
-(33,8,'Serve hot with fresh bread or crackers.');
+(33,1,'Mix the flour, yeast, and salt in a large bowl.'),
+(33,2,'Gradually add water and knead until a smooth dough forms.'),
+(33,3,'Add the oil and continue kneading for 8 to 10 minutes.'),
+(33,4,'Cover the dough and let it rise for about 1 hour.'),
+(33,5,'Divide the dough into equal portions and flatten each into a round shape.'),
+(33,6,'Bake in a hot tannour oven until the bread is golden and slightly crisp.'),
+(33,7,'Remove the bread carefully and allow it to cool slightly.'),
+(33,8,'Serve warm with curries, grilled meat, or traditional Bahraini dishes.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Wheat'),'1 cup'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'5 cups'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ground Cinnamon'),'1/2 tsp'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp'),
+(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(34,1,'Wash the wheat and soak it for at least 2 hours.'),
-(34,2,'Cook the chicken until tender, then shred it into small pieces.'),
-(34,3,'Heat butter and sauté the onion, garlic, and ginger.'),
-(34,4,'Add the soaked wheat and chicken stock.'),
-(34,5,'Add the shredded chicken, salt, black pepper, and ground cinnamon.'),
-(34,6,'Simmer on low heat until the wheat becomes very soft.'),
-(34,7,'Stir continuously until the soup reaches a smooth and creamy consistency.'),
-(34,8,'Serve hot with a sprinkle of cinnamon if desired.');
+(34,1,'Mix the flour, water, salt, and oil into a smooth batter.'),
+(34,2,'Heat a flat griddle over medium heat.'),
+(34,3,'Pour a thin layer of batter onto the hot griddle.'),
+(34,4,'Spread the batter evenly into a thin round shape.'),
+(34,5,'Cook until the edges become crisp and the bread is fully cooked.'),
+(34,6,'Carefully remove the bread from the griddle.'),
+(34,7,'Repeat with the remaining batter.'),
+(34,8,'Serve warm with cheese, honey, or traditional Bahraini dishes.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'500 g'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish Stock'),'4 cups'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(35,1,'Clean and prepare the mixed seafood.'),
-(35,2,'Heat the oil and sauté the onion until soft.'),
-(35,3,'Add the garlic, ginger, and tomatoes, then cook until softened.'),
-(35,4,'Pour in the fish stock and bring it to a boil.'),
-(35,5,'Add the mixed seafood and cook for 8 to 10 minutes.'),
-(35,6,'Season with salt and black pepper.'),
-(35,7,'Stir in the chopped parsley and simmer for 2 minutes.'),
-(35,8,'Serve hot with lemon wedges and fresh bread.');
+(35,1,'Mix the flour, yeast, sugar, and salt in a large bowl.'),
+(35,2,'Add the warm milk, butter, cardamom, and saffron, then knead into a soft dough.'),
+(35,3,'Cover the dough and let it rise for about 1 hour.'),
+(35,4,'Divide the dough into equal portions and shape into small round breads.'),
+(35,5,'Place the dough on a baking tray and let it rest for 15 minutes.'),
+(35,6,'Bake in a preheated oven until golden brown.'),
+(35,7,'Brush with melted butter after baking for a soft texture.'),
+(35,8,'Serve warm with tea or as a breakfast bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(36,1,'Mix the flour, yeast, and salt in a large bowl.'),
-(36,2,'Gradually add the water and knead into a smooth dough.'),
-(36,3,'Add the oil and continue kneading until the dough is soft.'),
-(36,4,'Cover the dough and let it rise for 1 hour.'),
-(36,5,'Divide the dough into equal portions and flatten into round breads.'),
-(36,6,'Bake in a preheated oven until golden brown.'),
-(36,7,'Remove from the oven and brush lightly with oil if desired.'),
-(36,8,'Serve warm with curries, soups, or breakfast dishes.');
+(36,1,'Mix the flour, yeast, sugar, and salt in a bowl.'),
+(36,2,'Add the milk, egg, cardamom, and saffron, then whisk into a smooth batter.'),
+(36,3,'Cover the batter and let it rest for about 1 hour.'),
+(36,4,'Heat a lightly buttered non-stick pan over medium heat.'),
+(36,5,'Pour a ladle of batter onto the pan to form a round pancake.'),
+(36,6,'Cook until bubbles appear, then flip and cook the other side until golden brown.'),
+(36,7,'Repeat with the remaining batter.'),
+(36,8,'Serve warm with honey, date syrup, or cream.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/4 cup'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tsp'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
+(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(37,1,'Mix the flour, yeast, and salt in a large bowl.'),
-(37,2,'Gradually add water and knead until a smooth dough forms.'),
-(37,3,'Add the oil and continue kneading for 8 to 10 minutes.'),
-(37,4,'Cover the dough and let it rise for about 1 hour.'),
-(37,5,'Divide the dough into equal portions and flatten each into a round shape.'),
-(37,6,'Bake in a hot tannour oven until the bread is golden and slightly crisp.'),
-(37,7,'Remove the bread carefully and allow it to cool slightly.'),
-(37,8,'Serve warm with curries, grilled meat, or traditional Bahraini dishes.');
+(37,1,'Cook the vermicelli until tender and drain well.'),
+(37,2,'Melt the butter in a pan and stir in the sugar.'),
+(37,3,'Add the vermicelli along with cardamom, saffron, and rose water.'),
+(37,4,'Cook for a few minutes until the flavors are well combined.'),
+(37,5,'Beat the eggs with a pinch of salt.'),
+(37,6,'Cook the eggs into a thin omelet in a separate pan.'),
+(37,7,'Place the omelet over the sweet vermicelli.'),
+(37,8,'Serve warm for breakfast.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
 (38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp'),
+(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp'),
 (38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(38,1,'Mix the flour, water, salt, and oil into a smooth batter.'),
-(38,2,'Heat a flat griddle over medium heat.'),
-(38,3,'Pour a thin layer of batter onto the hot griddle.'),
-(38,4,'Spread the batter evenly into a thin round shape.'),
-(38,5,'Cook until the edges become crisp and the bread is fully cooked.'),
-(38,6,'Carefully remove the bread from the griddle.'),
-(38,7,'Repeat with the remaining batter.'),
-(38,8,'Serve warm with cheese, honey, or traditional Bahraini dishes.');
+(38,1,'Heat the oil in a frying pan over medium heat.'),
+(38,2,'Add the chopped tomatoes and green chili, then cook until softened.'),
+(38,3,'Season with salt and black pepper.'),
+(38,4,'Beat the eggs in a bowl.'),
+(38,5,'Pour the eggs over the tomato mixture.'),
+(38,6,'Cook gently until the eggs are set.'),
+(38,7,'Fold the mixture lightly and cook for another minute.'),
+(38,8,'Serve hot with fresh Khubz or Regag bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chickpeas'),'2 cups'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/2 cup'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1/4 cup'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
+(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(39,1,'Mix the flour, yeast, sugar, and salt in a large bowl.'),
-(39,2,'Add the warm milk, butter, cardamom, and saffron, then knead into a soft dough.'),
-(39,3,'Cover the dough and let it rise for about 1 hour.'),
-(39,4,'Divide the dough into equal portions and shape into small round breads.'),
-(39,5,'Place the dough on a baking tray and let it rest for 15 minutes.'),
-(39,6,'Bake in a preheated oven until golden brown.'),
-(39,7,'Brush with melted butter after baking for a soft texture.'),
-(39,8,'Serve warm with tea or as a breakfast bread.');
+(39,1,'Soak the chickpeas overnight and drain well.'),
+(39,2,'Blend the chickpeas with onion, garlic, parsley, and coriander.'),
+(39,3,'Add cumin, salt, black pepper, and baking powder, then mix well.'),
+(39,4,'Shape the mixture into small balls or patties.'),
+(39,5,'Heat the oil in a deep pan.'),
+(39,6,'Fry the falafel until golden brown and crispy.'),
+(39,7,'Drain on paper towels to remove excess oil.'),
+(39,8,'Serve hot with tahini sauce, salad, and Khubz bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Labneh'),'250 g'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'8 pieces'),
+(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(40,1,'Mix the flour, yeast, sugar, and salt in a bowl.'),
-(40,2,'Add the milk, egg, cardamom, and saffron, then whisk into a smooth batter.'),
-(40,3,'Cover the batter and let it rest for about 1 hour.'),
-(40,4,'Heat a lightly buttered non-stick pan over medium heat.'),
-(40,5,'Pour a ladle of batter onto the pan to form a round pancake.'),
-(40,6,'Cook until bubbles appear, then flip and cook the other side until golden brown.'),
-(40,7,'Repeat with the remaining batter.'),
-(40,8,'Serve warm with honey, date syrup, or cream.');
+(40,1,'Spread the labneh evenly on a serving plate.'),
+(40,2,'Drizzle the olive oil over the labneh.'),
+(40,3,'Arrange the olives around the labneh.'),
+(40,4,'Garnish with fresh mint leaves.'),
+(40,5,'Chill for a few minutes before serving if desired.'),
+(40,6,'Serve with warm Khubz or Regag bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/4 cup'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fava Beans'),'2 cups'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(41,1,'Cook the vermicelli until tender and drain well.'),
-(41,2,'Melt the butter in a pan and stir in the sugar.'),
-(41,3,'Add the vermicelli along with cardamom, saffron, and rose water.'),
-(41,4,'Cook for a few minutes until the flavors are well combined.'),
-(41,5,'Beat the eggs with a pinch of salt.'),
-(41,6,'Cook the eggs into a thin omelet in a separate pan.'),
-(41,7,'Place the omelet over the sweet vermicelli.'),
-(41,8,'Serve warm for breakfast.');
+(41,1,'Cook the fava beans until they are soft.'),
+(41,2,'Mash the beans lightly with a spoon or fork.'),
+(41,3,'Add the garlic, cumin, salt, and black pepper.'),
+(41,4,'Stir in the lemon juice and olive oil.'),
+(41,5,'Cook for 5 minutes over low heat while stirring.'),
+(41,6,'Transfer the foul to a serving bowl.'),
+(41,7,'Garnish with chopped parsley and a drizzle of olive oil.'),
+(41,8,'Serve hot with Khubz or Regag bread.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp'),
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp'),
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'100 g'),
+(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(42,1,'Heat the oil in a frying pan over medium heat.'),
-(42,2,'Add the chopped tomatoes and green chili, then cook until softened.'),
-(42,3,'Season with salt and black pepper.'),
-(42,4,'Beat the eggs in a bowl.'),
-(42,5,'Pour the eggs over the tomato mixture.'),
-(42,6,'Cook gently until the eggs are set.'),
-(42,7,'Fold the mixture lightly and cook for another minute.'),
-(42,8,'Serve hot with fresh Khubz or Regag bread.');
+(42,1,'Heat a flat pan over medium heat.'),
+(42,2,'Place the Regag bread on the pan.'),
+(42,3,'Spread the butter evenly over the bread.'),
+(42,4,'Sprinkle the cheddar cheese evenly on top.'),
+(42,5,'Fold the bread in half.'),
+(42,6,'Cook until the cheese melts completely.'),
+(42,7,'Remove from the pan and cut into pieces if desired.'),
+(42,8,'Serve hot as a traditional Bahraini breakfast.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chickpeas'),'2 cups'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/2 cup'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1/4 cup'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp'),
+(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(43,1,'Soak the chickpeas overnight and drain well.'),
-(43,2,'Blend the chickpeas with onion, garlic, parsley, and coriander.'),
-(43,3,'Add cumin, salt, black pepper, and baking powder, then mix well.'),
-(43,4,'Shape the mixture into small balls or patties.'),
-(43,5,'Heat the oil in a deep pan.'),
-(43,6,'Fry the falafel until golden brown and crispy.'),
-(43,7,'Drain on paper towels to remove excess oil.'),
-(43,8,'Serve hot with tahini sauce, salad, and Khubz bread.');
+(43,1,'Heat a flat pan over medium heat.'),
+(43,2,'Place the Regag bread on the pan and spread the butter evenly.'),
+(43,3,'Crack the eggs directly onto the bread.'),
+(43,4,'Season with salt and black pepper.'),
+(43,5,'Spread the eggs evenly over the bread.'),
+(43,6,'Cook until the eggs are fully set.'),
+(43,7,'Fold the bread if desired and cook for another minute.'),
+(43,8,'Serve hot as a traditional Bahraini breakfast.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Labneh'),'250 g'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'8 pieces'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1 tbsp');
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'2 tbsp'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying'),
+(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Date Syrup'),'1/2 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(44,1,'Spread the labneh evenly on a serving plate.'),
-(44,2,'Drizzle the olive oil over the labneh.'),
-(44,3,'Arrange the olives around the labneh.'),
-(44,4,'Garnish with fresh mint leaves.'),
-(44,5,'Chill for a few minutes before serving if desired.'),
-(44,6,'Serve with warm Khubz or Regag bread.');
+(44,1,'Mix the flour, cornstarch, yeast, baking powder, and sugar in a bowl.'),
+(44,2,'Gradually add the water and mix into a smooth batter.'),
+(44,3,'Cover the batter and let it rest for 1 hour.'),
+(44,4,'Heat the oil in a deep frying pan.'),
+(44,5,'Drop small portions of the batter into the hot oil.'),
+(44,6,'Fry until the luqaimat are golden brown and crispy.'),
+(44,7,'Drain on paper towels to remove excess oil.'),
+(44,8,'Drizzle generously with date syrup and serve warm.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fava Beans'),'2 cups'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Nutmeg'),'1/4 tsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(45,1,'Cook the fava beans until they are soft.'),
-(45,2,'Mash the beans lightly with a spoon or fork.'),
-(45,3,'Add the garlic, cumin, salt, and black pepper.'),
-(45,4,'Stir in the lemon juice and olive oil.'),
-(45,5,'Cook for 5 minutes over low heat while stirring.'),
-(45,6,'Transfer the foul to a serving bowl.'),
-(45,7,'Garnish with chopped parsley and a drizzle of olive oil.'),
-(45,8,'Serve hot with Khubz or Regag bread.');
+(45,1,'Mix the flour, sugar, baking powder, and nutmeg in a bowl.'),
+(45,2,'Add the eggs, melted butter, rose water, cardamom, and saffron.'),
+(45,3,'Mix until a smooth batter is formed.'),
+(45,4,'Heat the oil in a deep frying pan.'),
+(45,5,'Drop spoonfuls of the batter into the hot oil.'),
+(45,6,'Fry until golden brown on both sides.'),
+(45,7,'Drain on paper towels to remove excess oil.'),
+(45,8,'Serve warm with tea or coffee.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'100 g'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Corn Flour'),'1 cup'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 cups'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'2 tbsp'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Essence'),'1 tsp'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
+(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/2 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(46,1,'Heat a flat pan over medium heat.'),
-(46,2,'Place the Regag bread on the pan.'),
-(46,3,'Spread the butter evenly over the bread.'),
-(46,4,'Sprinkle the cheddar cheese evenly on top.'),
-(46,5,'Fold the bread in half.'),
-(46,6,'Cook until the cheese melts completely.'),
-(46,7,'Remove from the pan and cut into pieces if desired.'),
-(46,8,'Serve hot as a traditional Bahraini breakfast.');
+(46,1,'Mix the corn flour with water until smooth.'),
+(46,2,'Heat the mixture over medium heat while stirring continuously.'),
+(46,3,'Add the sugar and continue stirring until dissolved.'),
+(46,4,'Mix in the butter, saffron, cardamom, rose water, and rose essence.'),
+(46,5,'Cook until the mixture becomes thick and glossy.'),
+(46,6,'Stir in half of the mixed nuts.'),
+(46,7,'Pour the halwa into a serving dish and garnish with the remaining nuts.'),
+(46,8,'Allow it to cool slightly before serving.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp');
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sago Pearls'),'1 cup'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
+(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(47,1,'Heat a flat pan over medium heat.'),
-(47,2,'Place the Regag bread on the pan and spread the butter evenly.'),
-(47,3,'Crack the eggs directly onto the bread.'),
-(47,4,'Season with salt and black pepper.'),
-(47,5,'Spread the eggs evenly over the bread.'),
-(47,6,'Cook until the eggs are fully set.'),
-(47,7,'Fold the bread if desired and cook for another minute.'),
-(47,8,'Serve hot as a traditional Bahraini breakfast.');
+(47,1,'Wash the sago pearls thoroughly.'),
+(47,2,'Boil the water and add the sago pearls.'),
+(47,3,'Cook until the sago becomes soft and translucent.'),
+(47,4,'Add the sugar and stir until completely dissolved.'),
+(47,5,'Mix in the cardamom, saffron, and rose water.'),
+(47,6,'Stir in the butter until melted.'),
+(47,7,'Cook for another 5 minutes until slightly thickened.'),
+(47,8,'Serve warm or chilled as desired.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'2 tbsp'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Date Syrup'),'1/2 cup');
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Whole Wheat Flour'),'2 cups'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(48,1,'Mix the flour, cornstarch, yeast, baking powder, and sugar in a bowl.'),
-(48,2,'Gradually add the water and mix into a smooth batter.'),
-(48,3,'Cover the batter and let it rest for 1 hour.'),
-(48,4,'Heat the oil in a deep frying pan.'),
-(48,5,'Drop small portions of the batter into the hot oil.'),
-(48,6,'Fry until the luqaimat are golden brown and crispy.'),
-(48,7,'Drain on paper towels to remove excess oil.'),
-(48,8,'Drizzle generously with date syrup and serve warm.');
+(48,1,'Bring the water to a boil in a large pot.'),
+(48,2,'Gradually add the whole wheat flour while stirring continuously.'),
+(48,3,'Cook over low heat until the mixture becomes thick and smooth.'),
+(48,4,'Add the sugar, butter, cardamom, saffron, and salt.'),
+(48,5,'Continue stirring until all the ingredients are well combined.'),
+(48,6,'Cook for another 5 to 10 minutes until creamy.'),
+(48,7,'Transfer to a serving dish.'),
+(48,8,'Serve warm with extra melted butter if desired.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'2 cups'),
 (49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
 (49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1/2 cup'),
 (49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Nutmeg'),'1/4 tsp'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'2 tsp'),
+(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(49,1,'Mix the flour, sugar, baking powder, and nutmeg in a bowl.'),
-(49,2,'Add the eggs, melted butter, rose water, cardamom, and saffron.'),
-(49,3,'Mix until a smooth batter is formed.'),
-(49,4,'Heat the oil in a deep frying pan.'),
-(49,5,'Drop spoonfuls of the batter into the hot oil.'),
-(49,6,'Fry until golden brown on both sides.'),
-(49,7,'Drain on paper towels to remove excess oil.'),
-(49,8,'Serve warm with tea or coffee.');
+(49,1,'Preheat the oven to 180°C.'),
+(49,2,'Blend the dates with the milk until smooth.'),
+(49,3,'Mix the flour and baking powder in a bowl.'),
+(49,4,'Add the eggs, butter, sugar, vanilla extract, and date mixture.'),
+(49,5,'Mix until a smooth batter forms.'),
+(49,6,'Pour the batter into a greased cake tin.'),
+(49,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
+(49,8,'Allow the cake to cool before slicing and serving.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Corn Flour'),'1 cup'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 cups'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Puff Pastry'),'250 g'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cream'),'1 cup'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
 (50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'2 tbsp'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Essence'),'1 tsp'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/2 cup'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups');
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Raisins'),'1/4 cup'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Almonds'),'1/4 cup'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pistachios'),'1/4 cup'),
+(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(50,1,'Mix the corn flour with water until smooth.'),
-(50,2,'Heat the mixture over medium heat while stirring continuously.'),
-(50,3,'Add the sugar and continue stirring until dissolved.'),
-(50,4,'Mix in the butter, saffron, cardamom, rose water, and rose essence.'),
-(50,5,'Cook until the mixture becomes thick and glossy.'),
-(50,6,'Stir in half of the mixed nuts.'),
-(50,7,'Pour the halwa into a serving dish and garnish with the remaining nuts.'),
-(50,8,'Allow it to cool slightly before serving.');
+(50,1,'Preheat the oven to 180°C.'),
+(50,2,'Break the baked puff pastry into small pieces and place them in a baking dish.'),
+(50,3,'Sprinkle the raisins, almonds, and pistachios over the pastry.'),
+(50,4,'Heat the milk, cream, sugar, butter, and vanilla extract until the sugar dissolves.'),
+(50,5,'Pour the warm milk mixture evenly over the pastry.'),
+(50,6,'Bake for 20 to 25 minutes until the top is golden brown.'),
+(50,7,'Allow it to cool slightly before serving.'),
+(50,8,'Serve warm, garnished with extra nuts if desired.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sago Pearls'),'1 cup'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'4 cups'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
 (51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
 (51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
+(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp'),
 (51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(51,1,'Wash the sago pearls thoroughly.'),
-(51,2,'Boil the water and add the sago pearls.'),
-(51,3,'Cook until the sago becomes soft and translucent.'),
-(51,4,'Add the sugar and stir until completely dissolved.'),
-(51,5,'Mix in the cardamom, saffron, and rose water.'),
+(51,1,'Wash the rice thoroughly.'),
+(51,2,'Cook the rice with the milk over medium heat.'),
+(51,3,'Stir frequently until the rice becomes soft and creamy.'),
+(51,4,'Add the sugar, cardamom, saffron, and vanilla extract.'),
+(51,5,'Mix well and continue cooking for 5 to 10 minutes.'),
 (51,6,'Stir in the butter until melted.'),
-(51,7,'Cook for another 5 minutes until slightly thickened.'),
-(51,8,'Serve warm or chilled as desired.');
+(51,7,'Transfer the pudding to serving bowls.'),
+(51,8,'Serve warm or chilled, garnished with cinnamon or chopped nuts if desired.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Whole Wheat Flour'),'2 cups'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
 (52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
 (52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
 (52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/4 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(52,1,'Bring the water to a boil in a large pot.'),
-(52,2,'Gradually add the whole wheat flour while stirring continuously.'),
-(52,3,'Cook over low heat until the mixture becomes thick and smooth.'),
-(52,4,'Add the sugar, butter, cardamom, saffron, and salt.'),
-(52,5,'Continue stirring until all the ingredients are well combined.'),
-(52,6,'Cook for another 5 to 10 minutes until creamy.'),
-(52,7,'Transfer to a serving dish.'),
-(52,8,'Serve warm with extra melted butter if desired.');
+(52,1,'Melt the butter in a pan over medium heat.'),
+(52,2,'Add the vermicelli and roast until golden brown.'),
+(52,3,'Pour in the water and cook until the vermicelli softens.'),
+(52,4,'Add the sugar and stir until dissolved.'),
+(52,5,'Mix in the cardamom and saffron.'),
+(52,6,'Cook until the liquid is absorbed.'),
+(52,7,'Garnish with the mixed nuts.'),
+(52,8,'Serve warm as a traditional Bahraini dessert.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'2 cups'),
 (53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut'),'1 cup'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
 (53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1/2 cup'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
 (53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
+(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
 (53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'2 tsp'),
 (53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
 (53,1,'Preheat the oven to 180°C.'),
-(53,2,'Blend the dates with the milk until smooth.'),
-(53,3,'Mix the flour and baking powder in a bowl.'),
-(53,4,'Add the eggs, butter, sugar, vanilla extract, and date mixture.'),
-(53,5,'Mix until a smooth batter forms.'),
+(53,2,'Mix the flour, baking powder, and shredded coconut in a bowl.'),
+(53,3,'In another bowl, beat the butter and sugar until creamy.'),
+(53,4,'Add the eggs, milk, and vanilla extract, then mix well.'),
+(53,5,'Gradually add the dry ingredients and stir until smooth.'),
 (53,6,'Pour the batter into a greased cake tin.'),
 (53,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
 (53,8,'Allow the cake to cool before slicing and serving.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Puff Pastry'),'250 g'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cream'),'1 cup'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Raisins'),'1/4 cup'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Almonds'),'1/4 cup'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pistachios'),'1/4 cup'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'3 medium'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1/2 cup'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(54,1,'Preheat the oven to 180°C.'),
-(54,2,'Break the baked puff pastry into small pieces and place them in a baking dish.'),
-(54,3,'Sprinkle the raisins, almonds, and pistachios over the pastry.'),
-(54,4,'Heat the milk, cream, sugar, butter, and vanilla extract until the sugar dissolves.'),
-(54,5,'Pour the warm milk mixture evenly over the pastry.'),
-(54,6,'Bake for 20 to 25 minutes until the top is golden brown.'),
-(54,7,'Allow it to cool slightly before serving.'),
-(54,8,'Serve warm, garnished with extra nuts if desired.');
+(54,1,'Boil and mash the potatoes.'),
+(54,2,'Cook the onion, peas, cumin, turmeric, salt, and black pepper in a little oil.'),
+(54,3,'Mix the mashed potatoes with the cooked vegetables.'),
+(54,4,'Fill each samosa sheet with the potato mixture.'),
+(54,5,'Fold and seal the samosas securely.'),
+(54,6,'Heat the oil in a deep pan.'),
+(54,7,'Fry the samosas until golden brown and crispy.'),
+(54,8,'Serve hot with chutney or your favorite dipping sauce.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'4 cups'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'1 cup'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'1 cup'),
+(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(55,1,'Wash the rice thoroughly.'),
-(55,2,'Cook the rice with the milk over medium heat.'),
-(55,3,'Stir frequently until the rice becomes soft and creamy.'),
-(55,4,'Add the sugar, cardamom, saffron, and vanilla extract.'),
-(55,5,'Mix well and continue cooking for 5 to 10 minutes.'),
-(55,6,'Stir in the butter until melted.'),
-(55,7,'Transfer the pudding to serving bowls.'),
-(55,8,'Serve warm or chilled, garnished with cinnamon or chopped nuts if desired.');
+(55,1,'Mix the cheddar and mozzarella cheese together.'),
+(55,2,'Place a spoonful of the cheese mixture onto each samosa sheet.'),
+(55,3,'Fold the sheets into triangle shapes and seal the edges.'),
+(55,4,'Heat the oil in a deep frying pan.'),
+(55,5,'Carefully place the samosas into the hot oil.'),
+(55,6,'Fry until golden brown and crispy.'),
+(55,7,'Drain on paper towels to remove excess oil.'),
+(55,8,'Serve hot with ketchup or chili sauce.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/4 cup');
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(56,1,'Melt the butter in a pan over medium heat.'),
-(56,2,'Add the vermicelli and roast until golden brown.'),
-(56,3,'Pour in the water and cook until the vermicelli softens.'),
-(56,4,'Add the sugar and stir until dissolved.'),
-(56,5,'Mix in the cardamom and saffron.'),
-(56,6,'Cook until the liquid is absorbed.'),
-(56,7,'Garnish with the mixed nuts.'),
-(56,8,'Serve warm as a traditional Bahraini dessert.');
+(56,1,'Heat the oil in a pan and sauté the onion until soft.'),
+(56,2,'Add the garlic and cook for 1 minute.'),
+(56,3,'Add the minced beef and cook until browned.'),
+(56,4,'Season with salt and black pepper, then let the filling cool.'),
+(56,5,'Place a spoonful of filling onto each samosa sheet.'),
+(56,6,'Fold the sheets into triangles and seal the edges.'),
+(56,7,'Deep-fry until golden brown and crispy.'),
+(56,8,'Serve hot with your favorite dipping sauce.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut'),'1 cup'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1/2 cup'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'2 tsp'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'4 medium'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
+(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(57,1,'Preheat the oven to 180°C.'),
-(57,2,'Mix the flour, baking powder, and shredded coconut in a bowl.'),
-(57,3,'In another bowl, beat the butter and sugar until creamy.'),
-(57,4,'Add the eggs, milk, and vanilla extract, then mix well.'),
-(57,5,'Gradually add the dry ingredients and stir until smooth.'),
-(57,6,'Pour the batter into a greased cake tin.'),
-(57,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
-(57,8,'Allow the cake to cool before slicing and serving.');
+(57,1,'Boil the potatoes until tender, then mash them.'),
+(57,2,'Mix the potatoes with the egg, parsley, salt, and black pepper.'),
+(57,3,'Shape the mixture into small patties.'),
+(57,4,'Coat each patty with breadcrumbs.'),
+(57,5,'Heat the oil in a frying pan.'),
+(57,6,'Fry the cutlets until golden brown on both sides.'),
+(57,7,'Drain on paper towels to remove excess oil.'),
+(57,8,'Serve hot with ketchup or your favorite dipping sauce.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'3 medium'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1/2 cup'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'500 g'),
 (58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
 (58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
 (58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(58,1,'Boil and mash the potatoes.'),
-(58,2,'Cook the onion, peas, cumin, turmeric, salt, and black pepper in a little oil.'),
-(58,3,'Mix the mashed potatoes with the cooked vegetables.'),
-(58,4,'Fill each samosa sheet with the potato mixture.'),
-(58,5,'Fold and seal the samosas securely.'),
-(58,6,'Heat the oil in a deep pan.'),
-(58,7,'Fry the samosas until golden brown and crispy.'),
-(58,8,'Serve hot with chutney or your favorite dipping sauce.');
+(58,1,'Combine the minced lamb, onion, garlic, parsley, cumin, salt, and black pepper in a bowl.'),
+(58,2,'Mix well until all ingredients are evenly combined.'),
+(58,3,'Shape the mixture into kebab logs or patties.'),
+(58,4,'Lightly brush the kebabs with oil.'),
+(58,5,'Preheat a grill or grill pan over medium-high heat.'),
+(58,6,'Grill the kebabs for 10–12 minutes, turning occasionally.'),
+(58,7,'Cook until browned and fully cooked through.'),
+(58,8,'Serve hot with Arabic bread, salad, and yogurt sauce.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'1 cup'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'1 cup'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spring Roll Sheets'),'10 sheets'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
 (59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(59,1,'Mix the cheddar and mozzarella cheese together.'),
-(59,2,'Place a spoonful of the cheese mixture onto each samosa sheet.'),
-(59,3,'Fold the sheets into triangle shapes and seal the edges.'),
-(59,4,'Heat the oil in a deep frying pan.'),
-(59,5,'Carefully place the samosas into the hot oil.'),
-(59,6,'Fry until golden brown and crispy.'),
-(59,7,'Drain on paper towels to remove excess oil.'),
+(59,1,'Heat a little oil in a pan and cook the onion until soft.'),
+(59,2,'Add the garlic and minced beef, then cook until browned.'),
+(59,3,'Season with salt and black pepper and allow the filling to cool.'),
+(59,4,'Place a spoonful of the filling onto each spring roll sheet.'),
+(59,5,'Roll tightly and seal the edges.'),
+(59,6,'Heat oil in a deep frying pan.'),
+(59,7,'Fry the rolls until golden brown and crispy.'),
 (59,8,'Serve hot with ketchup or chili sauce.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Grape Leaves'),'30 leaves'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'250 g'),
 (60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'1 medium'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
+(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
 (60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
 (60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(60,1,'Heat the oil in a pan and sauté the onion until soft.'),
-(60,2,'Add the garlic and cook for 1 minute.'),
-(60,3,'Add the minced beef and cook until browned.'),
-(60,4,'Season with salt and black pepper, then let the filling cool.'),
-(60,5,'Place a spoonful of filling onto each samosa sheet.'),
-(60,6,'Fold the sheets into triangles and seal the edges.'),
-(60,7,'Deep-fry until golden brown and crispy.'),
-(60,8,'Serve hot with your favorite dipping sauce.');
+(60,1,'Rinse the grape leaves and blanch them in hot water if needed.'),
+(60,2,'Mix the rice, minced lamb, onion, tomato, parsley, salt, and black pepper.'),
+(60,3,'Place a small amount of filling onto each grape leaf.'),
+(60,4,'Roll the leaves tightly and fold in the sides.'),
+(60,5,'Arrange the rolls in a pot.'),
+(60,6,'Drizzle with oil and lemon juice, then add enough water to cover.'),
+(60,7,'Simmer over low heat for about 45 minutes until cooked.'),
+(60,8,'Serve warm with yogurt or lemon wedges.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'4 medium'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pastry Dough'),'500 g'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spinach'),'300 g'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
 (61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
 (61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(61,1,'Boil the potatoes until tender, then mash them.'),
-(61,2,'Mix the potatoes with the egg, parsley, salt, and black pepper.'),
-(61,3,'Shape the mixture into small patties.'),
-(61,4,'Coat each patty with breadcrumbs.'),
-(61,5,'Heat the oil in a frying pan.'),
-(61,6,'Fry the cutlets until golden brown on both sides.'),
-(61,7,'Drain on paper towels to remove excess oil.'),
-(61,8,'Serve hot with ketchup or your favorite dipping sauce.');
+(61,1,'Preheat the oven to 180°C.'),
+(61,2,'Cook the onion in a little oil until soft.'),
+(61,3,'Add the spinach and cook until wilted.'),
+(61,4,'Mix in the lemon juice, salt, and black pepper, then let the filling cool.'),
+(61,5,'Cut the pastry dough into small circles and add the spinach filling.'),
+(61,6,'Fold into triangles and seal the edges firmly.'),
+(61,7,'Place on a baking tray and bake for 20 to 25 minutes until golden brown.'),
+(61,8,'Serve warm as an appetizer or snack.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'500 g'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Tea'),'2 tsp'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Evaporated Milk'),'1 cup'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
+(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(62,1,'Combine the minced lamb, onion, garlic, parsley, cumin, salt, and black pepper in a bowl.'),
-(62,2,'Mix well until all ingredients are evenly combined.'),
-(62,3,'Shape the mixture into kebab logs or patties.'),
-(62,4,'Lightly brush the kebabs with oil.'),
-(62,5,'Preheat a grill or grill pan over medium-high heat.'),
-(62,6,'Grill the kebabs for 10–12 minutes, turning occasionally.'),
-(62,7,'Cook until browned and fully cooked through.'),
-(62,8,'Serve hot with Arabic bread, salad, and yogurt sauce.');
+(62,1,'Boil the water in a saucepan.'),
+(62,2,'Add the black tea and crushed cardamom.'),
+(62,3,'Simmer for 3 to 5 minutes.'),
+(62,4,'Add the evaporated milk and sugar.'),
+(62,5,'Stir well and bring to a gentle boil.'),
+(62,6,'Simmer for another 2 to 3 minutes.'),
+(62,7,'Strain the tea into serving cups.'),
+(62,8,'Serve hot.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spring Roll Sheets'),'10 sheets'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Arabic Coffee'),'4 tbsp'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'6 pieces');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(63,1,'Heat a little oil in a pan and cook the onion until soft.'),
-(63,2,'Add the garlic and minced beef, then cook until browned.'),
-(63,3,'Season with salt and black pepper and allow the filling to cool.'),
-(63,4,'Place a spoonful of the filling onto each spring roll sheet.'),
-(63,5,'Roll tightly and seal the edges.'),
-(63,6,'Heat oil in a deep frying pan.'),
-(63,7,'Fry the rolls until golden brown and crispy.'),
-(63,8,'Serve hot with ketchup or chili sauce.');
+(63,1,'Boil the water in a coffee pot.'),
+(63,2,'Add the Arabic coffee and simmer for 10 minutes.'),
+(63,3,'Add the crushed cardamom and saffron.'),
+(63,4,'Simmer for another 2 to 3 minutes.'),
+(63,5,'Remove from the heat and let the coffee settle briefly.'),
+(63,6,'Strain the coffee into a traditional dallah.'),
+(63,7,'Serve in small cups.'),
+(63,8,'Enjoy with fresh dates.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Grape Leaves'),'30 leaves'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'250 g'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'1 medium'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon'),'2'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'10 leaves'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(64,1,'Rinse the grape leaves and blanch them in hot water if needed.'),
-(64,2,'Mix the rice, minced lamb, onion, tomato, parsley, salt, and black pepper.'),
-(64,3,'Place a small amount of filling onto each grape leaf.'),
-(64,4,'Roll the leaves tightly and fold in the sides.'),
-(64,5,'Arrange the rolls in a pot.'),
-(64,6,'Drizzle with oil and lemon juice, then add enough water to cover.'),
-(64,7,'Simmer over low heat for about 45 minutes until cooked.'),
-(64,8,'Serve warm with yogurt or lemon wedges.');
+(64,1,'Wash the lemons and mint leaves.'),
+(64,2,'Squeeze the lemons and remove the seeds.'),
+(64,3,'Add the lemon juice, mint leaves, sugar, and water to a blender.'),
+(64,4,'Blend until smooth.'),
+(64,5,'Add the ice cubes and blend briefly.'),
+(64,6,'Strain the juice if desired.'),
+(64,7,'Pour into serving glasses.'),
+(64,8,'Serve chilled.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pastry Dough'),'500 g'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spinach'),'300 g'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tamarind'),'200 g'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
+(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(65,1,'Preheat the oven to 180°C.'),
-(65,2,'Cook the onion in a little oil until soft.'),
-(65,3,'Add the spinach and cook until wilted.'),
-(65,4,'Mix in the lemon juice, salt, and black pepper, then let the filling cool.'),
-(65,5,'Cut the pastry dough into small circles and add the spinach filling.'),
-(65,6,'Fold into triangles and seal the edges firmly.'),
-(65,7,'Place on a baking tray and bake for 20 to 25 minutes until golden brown.'),
-(65,8,'Serve warm as an appetizer or snack.');
+(65,1,'Soak the tamarind in warm water for 30 minutes.'),
+(65,2,'Mash the tamarind to extract the juice.'),
+(65,3,'Strain the mixture to remove seeds and fibers.'),
+(65,4,'Add the sugar and stir until dissolved.'),
+(65,5,'Add the remaining water and mix well.'),
+(65,6,'Chill the juice in the refrigerator.'),
+(65,7,'Pour into glasses filled with ice cubes.'),
+(65,8,'Serve cold.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
+(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vimto Syrup'),'1/2 cup'),
 (66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
-(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Tea'),'2 tsp'),
-(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Evaporated Milk'),'1 cup'),
-(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
-(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods');
+(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(66,1,'Boil the water in a saucepan.'),
-(66,2,'Add the black tea and crushed cardamom.'),
-(66,3,'Simmer for 3 to 5 minutes.'),
-(66,4,'Add the evaporated milk and sugar.'),
-(66,5,'Stir well and bring to a gentle boil.'),
-(66,6,'Simmer for another 2 to 3 minutes.'),
-(66,7,'Strain the tea into serving cups.'),
-(66,8,'Serve hot.');
+(66,1,'Fill a serving glass with ice cubes.'),
+(66,2,'Pour the Vimto syrup into the glass.'),
+(66,3,'Add the chilled water.'),
+(66,4,'Stir well until combined.'),
+(66,5,'Taste and adjust the syrup if desired.'),
+(66,6,'Garnish with a lemon slice if preferred.'),
+(66,7,'Serve immediately while cold.'),
+(66,8,'Enjoy chilled.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Arabic Coffee'),'4 tbsp'),
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'6 pieces');
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Syrup'),'3 tbsp'),
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
+(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(67,1,'Boil the water in a coffee pot.'),
-(67,2,'Add the Arabic coffee and simmer for 10 minutes.'),
-(67,3,'Add the crushed cardamom and saffron.'),
-(67,4,'Simmer for another 2 to 3 minutes.'),
-(67,5,'Remove from the heat and let the coffee settle briefly.'),
-(67,6,'Strain the coffee into a traditional dallah.'),
-(67,7,'Serve in small cups.'),
-(67,8,'Enjoy with fresh dates.');
+(67,1,'Pour the chilled milk into a serving glass.'),
+(67,2,'Add the rose syrup and sugar.'),
+(67,3,'Stir well until everything is fully mixed.'),
+(67,4,'Add the ice cubes.'),
+(67,5,'Serve immediately while chilled.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon'),'2'),
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'10 leaves'),
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'8 pieces'),
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
 (68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(68,1,'Wash the lemons and mint leaves.'),
-(68,2,'Squeeze the lemons and remove the seeds.'),
-(68,3,'Add the lemon juice, mint leaves, sugar, and water to a blender.'),
-(68,4,'Blend until smooth.'),
-(68,5,'Add the ice cubes and blend briefly.'),
-(68,6,'Strain the juice if desired.'),
-(68,7,'Pour into serving glasses.'),
-(68,8,'Serve chilled.');
+(68,1,'Remove the seeds from the dates.'),
+(68,2,'Add the dates, milk, and sugar into a blender.'),
+(68,3,'Blend until smooth and creamy.'),
+(68,4,'Add the ice cubes and blend for a few more seconds.'),
+(68,5,'Pour into serving glasses and serve chilled.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tamarind'),'200 g'),
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods'),
+(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(69,1,'Soak the tamarind in warm water for 30 minutes.'),
-(69,2,'Mash the tamarind to extract the juice.'),
-(69,3,'Strain the mixture to remove seeds and fibers.'),
-(69,4,'Add the sugar and stir until dissolved.'),
-(69,5,'Add the remaining water and mix well.'),
-(69,6,'Chill the juice in the refrigerator.'),
-(69,7,'Pour into glasses filled with ice cubes.'),
-(69,8,'Serve cold.');
+(69,1,'Pour the milk into a saucepan and heat over medium heat.'),
+(69,2,'Add the saffron and crushed cardamom to the milk.'),
+(69,3,'Stir in the sugar until it dissolves completely.'),
+(69,4,'Simmer gently for 5 to 10 minutes to infuse the flavors.'),
+(69,5,'Serve warm, or chill before serving if desired.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vimto Syrup'),'1/2 cup'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'3 medium'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(70,1,'Fill a serving glass with ice cubes.'),
-(70,2,'Pour the Vimto syrup into the glass.'),
-(70,3,'Add the chilled water.'),
-(70,4,'Stir well until combined.'),
-(70,5,'Taste and adjust the syrup if desired.'),
-(70,6,'Garnish with a lemon slice if preferred.'),
-(70,7,'Serve immediately while cold.'),
-(70,8,'Enjoy chilled.');
+(70,1,'Wash and finely chop the tomatoes, onion, and parsley.'),
+(70,2,'Place all the chopped ingredients in a mixing bowl.'),
+(70,3,'Add the lemon juice and olive oil.'),
+(70,4,'Season with salt and black pepper.'),
+(70,5,'Mix well until all ingredients are evenly combined.'),
+(70,6,'Serve fresh as a side dish.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Syrup'),'3 tbsp'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'2 medium'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(71,1,'Pour the chilled milk into a serving glass.'),
-(71,2,'Add the rose syrup and sugar.'),
-(71,3,'Stir well until everything is fully mixed.'),
-(71,4,'Add the ice cubes.'),
-(71,5,'Serve immediately while chilled.');
+(71,1,'Wash the cucumber and tomatoes thoroughly.'),
+(71,2,'Dice the cucumber and tomatoes into small pieces.'),
+(71,3,'Place them in a mixing bowl.'),
+(71,4,'Add the lemon juice and olive oil.'),
+(71,5,'Season with salt and black pepper, then toss well.'),
+(71,'Serve fresh and chilled.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'8 pieces'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 cups'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bulgur'),'1/2 cup'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(72,1,'Remove the seeds from the dates.'),
-(72,2,'Add the dates, milk, and sugar into a blender.'),
-(72,3,'Blend until smooth and creamy.'),
-(72,4,'Add the ice cubes and blend for a few more seconds.'),
-(72,5,'Pour into serving glasses and serve chilled.');
+(72,1,'Soak the bulgur in water for 15 minutes, then drain well.'),
+(72,2,'Finely chop the parsley, mint leaves, tomatoes, cucumber, and onion.'),
+(72,3,'Place all the ingredients in a large mixing bowl.'),
+(72,4,'Add the soaked bulgur, lemon juice, and olive oil.'),
+(72,5,'Season with salt and black pepper.'),
+(72,6,'Mix well until all the ingredients are evenly combined.'),
+(72,7,'Chill for 15 minutes before serving.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp');
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Radish'),'4'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pita Bread'),'1 piece'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sumac'),'1 tsp'),
+(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp');
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(73,1,'Pour the milk into a saucepan and heat over medium heat.'),
-(73,2,'Add the saffron and crushed cardamom to the milk.'),
-(73,3,'Stir in the sugar until it dissolves completely.'),
-(73,4,'Simmer gently for 5 to 10 minutes to infuse the flavors.'),
-(73,5,'Serve warm, or chill before serving if desired.');
+(73,1,'Wash and chop the lettuce, tomatoes, cucumber, and radishes into bite-sized pieces.'),
+(73,2,'Toast or fry the pita bread until crispy, then break it into small pieces.'),
+(73,3,'Place the vegetables and mint leaves in a large bowl.'),
+(73,4,'Add the toasted pita bread.'),
+(73,5,'Mix the lemon juice, olive oil, sumac, and salt to prepare the dressing.'),
+(73,6,'Pour the dressing over the salad and toss gently.'),
+(73,7,'Serve immediately to keep the bread crispy.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'3 medium'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
 (74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
 (74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
 (74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
@@ -1986,94 +1984,10 @@ VALUES
 
 INSERT INTO recipe_steps (recipe_id, step_number, instruction)
 VALUES
-(74,1,'Wash and finely chop the tomatoes, onion, and parsley.'),
-(74,2,'Place all the chopped ingredients in a mixing bowl.'),
-(74,3,'Add the lemon juice and olive oil.'),
-(74,4,'Season with salt and black pepper.'),
-(74,5,'Mix well until all ingredients are evenly combined.'),
-(74,6,'Serve fresh as a side dish.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'2 medium'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(75,1,'Wash the cucumber and tomatoes thoroughly.'),
-(75,2,'Dice the cucumber and tomatoes into small pieces.'),
-(75,3,'Place them in a mixing bowl.'),
-(75,4,'Add the lemon juice and olive oil.'),
-(75,5,'Season with salt and black pepper, then toss well.'),
-(75,'Serve fresh and chilled.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 cups'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bulgur'),'1/2 cup'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(76,1,'Soak the bulgur in water for 15 minutes, then drain well.'),
-(76,2,'Finely chop the parsley, mint leaves, tomatoes, cucumber, and onion.'),
-(76,3,'Place all the ingredients in a large mixing bowl.'),
-(76,4,'Add the soaked bulgur, lemon juice, and olive oil.'),
-(76,5,'Season with salt and black pepper.'),
-(76,6,'Mix well until all the ingredients are evenly combined.'),
-(76,7,'Chill for 15 minutes before serving.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Radish'),'4'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pita Bread'),'1 piece'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sumac'),'1 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(77,1,'Wash and chop the lettuce, tomatoes, cucumber, and radishes into bite-sized pieces.'),
-(77,2,'Toast or fry the pita bread until crispy, then break it into small pieces.'),
-(77,3,'Place the vegetables and mint leaves in a large bowl.'),
-(77,4,'Add the toasted pita bread.'),
-(77,5,'Mix the lemon juice, olive oil, sumac, and salt to prepare the dressing.'),
-(77,6,'Pour the dressing over the salad and toss gently.'),
-(77,7,'Serve immediately to keep the bread crispy.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(78,1,'Wash the lettuce, cucumber, tomatoes, and onion thoroughly.'),
-(78,2,'Chop the vegetables into bite-sized pieces.'),
-(78,3,'Place all the vegetables in a large salad bowl.'),
-(78,4,'Mix the lemon juice, olive oil, salt, and black pepper to prepare the dressing.'),
-(78,5,'Pour the dressing over the salad and toss gently until evenly coated.'),
-(78,6,'Serve immediately while fresh.');
+(74,1,'Wash the lettuce, cucumber, tomatoes, and onion thoroughly.'),
+(74,2,'Chop the vegetables into bite-sized pieces.'),
+(74,3,'Place all the vegetables in a large salad bowl.'),
+(74,4,'Mix the lemon juice, olive oil, salt, and black pepper to prepare the dressing.'),
+(74,5,'Pour the dressing over the salad and toss gently until evenly coated.'),
+(74,6,'Serve immediately while fresh.');
 
