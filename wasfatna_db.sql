@@ -1923,7 +1923,7 @@ VALUES
 (71,3,'Place them in a mixing bowl.'),
 (71,4,'Add the lemon juice and olive oil.'),
 (71,5,'Season with salt and black pepper, then toss well.'),
-(71,'Serve fresh and chilled.');
+(71,6,'Serve fresh and chilled.');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
