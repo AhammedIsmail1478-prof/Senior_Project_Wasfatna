@@ -1,6 +1,3 @@
-CREATE DATABASE wasfatna_db;
-USE wasfatna_db;
-
 CREATE TABLE categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     category_name VARCHAR(50) NOT NULL UNIQUE
