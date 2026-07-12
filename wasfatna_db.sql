@@ -58,7 +58,8 @@ VALUES
 ('Desserts'),
 ('Snacks'),
 ('Drinks'),
-('Salad');
+('Salad'),
+('Pizza');
 
 INSERT INTO recipes
 (category_id,recipe_name,description,prep_time,cook_time,servings,difficulty,calories,image)
@@ -253,6 +254,31 @@ VALUES
 
 (9,'Green Salad','Classic mixed green salad with lettuce, cucumbers, tomatoes, carrots, and lemon olive oil dressing.',10,0,4,'Easy',85,'green_salad.png');
 
+INSERT INTO recipes
+(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, calories, image)
+
+VALUES
+
+(10,'Margherita Pizza','Classic pizza topped with tomato sauce, mozzarella cheese, and fresh basil.',20,15,4,'Easy',280,'margherita_pizza.png'),
+
+(10,'Pepperoni Pizza','Pizza topped with tomato sauce, mozzarella cheese, and pepperoni slices.',20,15,4,'Easy',350,'pepperoni_pizza.png'),
+
+(10,'Chicken Tikka Pizza','Pizza topped with spicy chicken tikka, onions, bell peppers, and mozzarella cheese.',25,15,4,'Medium',380,'chicken_tikka_pizza.png'),
+
+(10,'BBQ Chicken Pizza','Pizza topped with grilled chicken, BBQ sauce, onions, and mozzarella cheese.',20,15,4,'Medium',370,'bbq_chicken_pizza.png'),
+
+(10,'Meat Lovers Pizza','Loaded pizza with beef, chicken, pepperoni, and mozzarella cheese.',25,18,4,'Medium',450,'meat_lovers_pizza.png'),
+
+(10,'Seafood Pizza','Pizza topped with shrimp, calamari, mixed seafood, mozzarella cheese, and herbs.',25,18,4,'Medium',360,'seafood_pizza.png'),
+
+(10,'Vegetable Pizza','Pizza topped with mushrooms, onions, bell peppers, olives, tomatoes, and mozzarella cheese.',20,15,4,'Easy',290,'vegetable_pizza.png'),
+
+(10,'Four Cheese Pizza','Pizza topped with mozzarella, cheddar, parmesan, and blue cheese.',20,15,4,'Easy',400,'four_cheese_pizza.png'),
+
+(10,'Supreme Pizza','Pizza topped with chicken, beef, mushrooms, onions, bell peppers, olives, and mozzarella cheese.',25,18,4,'Medium',420,'supreme_pizza.png'),
+
+(10,'Mexican Pizza','Spicy pizza topped with seasoned beef, jalapeños, sweet corn, onions, and mozzarella cheese.',25,18,4,'Medium',390,'mexican_pizza.png');
+
 INSERT INTO ingredients (ingredient_name)
 VALUES
 ('Chicken'),
@@ -358,7 +384,17 @@ VALUES
 ('Lettuce'),
 ('Radish'),
 ('Sumac'),
-('Pita Bread');
+('Pita Bread'),
+('Basil'),
+('Pepperoni'),
+('BBQ Sauce'),
+('Pizza Dough'),
+('Cheese Blend'),
+('Parmesan Cheese'),
+('Blue Cheese'),
+('Jalapeños'),
+('Sweet Corn'),
+('Mushrooms');
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES
@@ -1990,4 +2026,254 @@ VALUES
 (74,4,'Mix the lemon juice, olive oil, salt, and black pepper to prepare the dressing.'),
 (74,5,'Pour the dressing over the salad and toss gently until evenly coated.'),
 (74,6,'Serve immediately while fresh.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(75,1,'Prepare the pizza dough and let it rise.'),
+(75,2,'Roll out the dough into a pizza base.'),
+(75,3,'Spread tomato sauce evenly over the base.'),
+(75,4,'Top with mozzarella cheese and fresh basil leaves.'),
+(75,5,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(75,6,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pepperoni'),'150 g');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(76,1,'Prepare the pizza dough and let it rise.'),
+(76,2,'Roll out the dough into a pizza base.'),
+(76,3,'Spread tomato sauce evenly over the base.'),
+(76,4,'Sprinkle mozzarella cheese over the sauce.'),
+(76,5,'Arrange the pepperoni slices evenly on top.'),
+(76,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(76,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'250 g'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yogurt'),'2 tbsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1/2 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tsp'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(77,1,'Mix the yogurt and spices, then marinate the chicken for 30 minutes.'),
+(77,2,'Cook the marinated chicken until nearly done.'),
+(77,3,'Prepare the pizza dough and roll it into a base.'),
+(77,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
+(77,5,'Top with the cooked chicken, onion, and bell pepper.'),
+(77,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(77,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='BBQ Sauce'),'4 tbsp'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'250 g'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(78,1,'Prepare the pizza dough and let it rise.'),
+(78,2,'Cook the chicken until fully done and slice it into small pieces.'),
+(78,3,'Roll out the dough into a pizza base.'),
+(78,4,'Spread BBQ sauce evenly over the base.'),
+(78,5,'Top with mozzarella cheese, chicken, onion, and bell pepper.'),
+(78,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(78,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'150 g'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'150 g'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pepperoni'),'100 g'),
+(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(79,1,'Prepare the pizza dough and let it rise.'),
+(79,2,'Cook the chicken and minced beef until fully done.'),
+(79,3,'Roll out the dough into a pizza base.'),
+(79,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
+(79,5,'Top with the chicken, minced beef, pepperoni, and onion.'),
+(79,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(79,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'200 g'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'100 g'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(80,1,'Prepare the pizza dough and let it rise.'),
+(80,2,'Cook the mixed seafood and shrimp until just done.'),
+(80,3,'Roll out the dough into a pizza base.'),
+(80,4,'Spread tomato sauce over the base and sprinkle mozzarella cheese.'),
+(80,5,'Top with the seafood, shrimp, onion, and bell pepper.'),
+(80,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(80,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mushrooms'),'100 g'),
+(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'50 g');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(81,1,'Prepare the pizza dough and let it rise.'),
+(81,2,'Slice the vegetables into thin pieces.'),
+(81,3,'Roll out the dough into a pizza base.'),
+(81,4,'Spread tomato sauce over the base and sprinkle mozzarella cheese.'),
+(81,5,'Top with the onion, bell pepper, mushrooms, and olives.'),
+(81,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(81,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'1 cup'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'1 cup'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parmesan Cheese'),'1/2 cup'),
+(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Blue Cheese'),'1/2 cup');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(82,1,'Prepare the pizza dough and let it rise.'),
+(82,2,'Roll out the dough into a pizza base.'),
+(82,3,'Spread tomato sauce evenly over the base.'),
+(82,4,'Top with mozzarella, cheddar, parmesan, and blue cheese.'),
+(82,5,'Bake in a preheated oven until the crust is golden and the cheeses have melted.'),
+(82,6,'Allow to cool for 2 minutes.'),
+(82,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'100 g'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'100 g'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mushrooms'),'100 g'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'50 g');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(83,1,'Prepare the pizza dough and let it rise.'),
+(83,2,'Cook the chicken and minced beef until fully done.'),
+(83,3,'Roll out the dough into a pizza base.'),
+(83,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
+(83,5,'Top with chicken, minced beef, mushrooms, onion, bell pepper, and olives.'),
+(83,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(83,7,'Slice and serve hot.');
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'200 g'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Jalapenos'),'50 g'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sweet Corn'),'50 g'),
+(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1/2 tsp');
+
+INSERT INTO recipe_steps (recipe_id, step_number, instruction)
+VALUES
+(84,1,'Prepare the pizza dough and let it rise.'),
+(84,2,'Cook the minced beef with spices until fully done.'),
+(84,3,'Roll out the dough into a pizza base.'),
+(84,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
+(84,5,'Top with seasoned beef, onion, bell pepper, jalapenos, and sweet corn.'),
+(84,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(84,7,'Slice and serve hot.');
+
+
 
