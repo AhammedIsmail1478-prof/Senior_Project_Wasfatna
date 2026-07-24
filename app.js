@@ -346,8 +346,8 @@ if (
                 </h4>
 
                 <div class="tags">
-                  <span class="tag">
-                    ${matchPercentage}% match
+                  <span class="tag match-tag">
+                  ${matchPercentage}% match
                   </span>
 
                   <span class="tag">
