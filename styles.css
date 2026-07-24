@@ -252,10 +252,29 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   background: rgba(255,255,255,.04);
   color: rgba(233,238,247,.88);
 }
-.match-tag{
-  background: rgba(255,165,0,.18);
-  color: #ff9800;
-  border: 1px solid rgba(255,165,0,.4);
+.match-low{
+  background: rgba(239,68,68,.18) !important;
+  color:#ef4444 !important;
+  border:1px solid rgba(239,68,68,.45) !important;
+}
+
+.match-medium{
+  background: rgba(249,115,22,.18) !important;
+  color:#f97316 !important;
+  border:1px solid rgba(249,115,22,.45) !important;
+}
+
+.match-good{
+  background: rgba(34,197,94,.18) !important;
+  color:#22c55e !important;
+  border:1px solid rgba(34,197,94,.45) !important;
+}
+
+.match-perfect{
+  background: rgba(124,92,255,.22) !important;
+  color:#7c5cff !important;
+  border:1px solid rgba(124,92,255,.6) !important;
+  font-weight:700;
 }
 
 .recipe .small{ color: var(--muted); font-size:12px; margin-top:8px; line-height:1.4; }
