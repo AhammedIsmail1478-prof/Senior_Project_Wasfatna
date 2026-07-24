@@ -103,11 +103,14 @@ try {
     }
 
     if ($diet !== '' && $diet !== 'none' && $diet !== 'any') {
-        $whereConditions[] =
-            "LOWER(TRIM(r.diet)) = :diet";
+    $whereConditions[] =
+        "FIND_IN_SET(
+            :diet,
+            REPLACE(LOWER(r.diet), ' ', '')
+        ) > 0";
 
-        $params[':diet'] = $diet;
-    }
+    $params[':diet'] = str_replace(' ', '', $diet);
+}
 
     if ($goal !== '' && $goal !== 'any' && $goal !== 'none') {
         $whereConditions[] =
