@@ -15,7 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 try {
     $input = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
     $entered = $input['ingredients'] ?? [];
-
+    $spice = mb_strtolower(trim((string)($input['spice'] ?? 'any')));
+    $goal = mb_strtolower(trim((string)($input['goal'] ?? 'any')));
+    $diet = mb_strtolower(trim((string)($input['diet'] ?? 'none')));
+    
     if (!is_array($entered)) {
         respond(['success' => false, 'message' => 'Ingredients must be sent as a list.'], 400);
     }
