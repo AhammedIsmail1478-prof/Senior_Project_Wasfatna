@@ -337,14 +337,14 @@ if (
 
           const totalIngredients =
             Number(recipe.total_ingredients) || 0;
-          const matchClass =
+         const matchClass =
   matchPercentage === 100
     ? "match-perfect"
-    : matchPercentage >= 70
+    : matchPercentage >= 75
+    ? "match-excellent"
+    : matchPercentage >= 50
     ? "match-good"
-    : matchPercentage >= 40
-    ? "match-medium"
-    : "match-low";
+    : "match-partial";
 
           return `
             <article class="recipe">
