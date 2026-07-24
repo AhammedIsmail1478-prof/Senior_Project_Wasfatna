@@ -337,6 +337,14 @@ if (
 
           const totalIngredients =
             Number(recipe.total_ingredients) || 0;
+          const matchClass =
+  matchPercentage === 100
+    ? "match-perfect"
+    : matchPercentage >= 70
+    ? "match-good"
+    : matchPercentage >= 40
+    ? "match-medium"
+    : "match-low";
 
           return `
             <article class="recipe">
@@ -346,15 +354,14 @@ if (
                 </h4>
 
                 <div class="tags">
-                  <span class="tag match-tag">
-                  ${matchPercentage}% match
-                  </span>
+                   <span class="tag ${matchClass}">
+        ${matchPercentage}% match
+    </span>
 
-                  <span class="tag">
-                    ${matchedCount}/${totalIngredients}
-                    ingredients
-                  </span>
-                </div>
+    <span class="tag">
+        ${matchedCount}/${totalIngredients} ingredients
+    </span>
+</div>
               </div>
 
               <div class="small">
