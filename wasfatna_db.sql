@@ -71,15 +71,15 @@ INSERT INTO recipes
 
 VALUES
 
-(1,'Chicken Machboos','Traditional Bahraini spiced chicken rice.',20,60,6,'Medium','medium','non-vegetarian','high-protein',680,'chicken_machboos.png'),
+(1,'Chicken Machboos','Traditional Bahraini spiced chicken rice.',20,60,6,'Medium','medium','gluten-free','high-protein',680,'chicken_machboos.png'),
 
-(1,'Lamb Machboos','Traditional Bahraini lamb rice.',25,90,6,'Medium','medium','non-vegetarian','high-protein',780,'lamb_machboos.png'),
+(1,'Lamb Machboos','Traditional Bahraini lamb rice.',25,90,6,'Medium','medium','gluten-free','high-protein',780,'lamb_machboos.png'),
 
-(1,'Fish Machboos','Spiced rice served with local fish.',20,45,5,'Medium','medium','non-vegetarian','high-protein',610,'fish_machboos.png'),
+(1,'Fish Machboos','Spiced rice served with local fish.',20,45,5,'Medium','medium','gluten-free','high-protein',610,'fish_machboos.png'),
 
-(1,'Muhammar','Sweet saffron rice served with fish.',20,40,5,'Easy','mild','vegetarian','any',520,'muhammar.png'),
+(1,'Muhammar','Sweet saffron rice served with fish.',20,40,5,'Easy','mild','gluten-free','any',520,'muhammar.png'),
 
-(1,'Ghoozi','Slow cooked lamb with fragrant rice.',30,120,8,'Hard','medium','non-vegetarian','high-protein',890,'ghoozi.png'),
+(1,'Ghoozi','Slow cooked lamb with fragrant rice.',30,120,8,'Hard','medium','gluten-free','high-protein',890,'ghoozi.png'),
 
 (1,'Harees','Slow cooked wheat and meat.',20,180,6,'Medium','medium','non-vegetarian','high-protein',470,'harees.png'),
 
@@ -89,55 +89,55 @@ VALUES
 
 (1,'Fish Madrouba','Creamy fish rice dish.',20,60,5,'Medium','mild','non-vegetarian','high-protein',590,'fish_madrouba.png'),
 
-(1,'Samak Mashwi','Traditional grilled Bahraini fish.',15,30,4,'Easy','mild','non-vegetarian','healthier',390,'samak_mashwi.png'),
+(1,'Samak Mashwi','Traditional grilled Bahraini fish.',15,30,4,'Easy','mild','gluten-free','healthier',390,'samak_mashwi.png'),
 
 (1,'Qabooli Rice','Spiced rice with raisins and nuts.',20,55,6,'Medium','medium','non-vegetarian','high-protein',610,'qabooli_rice.png'),
 
 (1,'Bahraini Style Biryani','Bahraini version of biryani.',30,75,6,'Medium','medium','non-vegetarian','high-protein',720,'bahraini_biryani.png'),
 
-(1,'Chicken Saloona','Chicken cooked in vegetable gravy.',20,50,5,'Easy','medium','non-vegetarian','high-protein',460,'chicken_saloona.png'),
+(1,'Chicken Saloona','Chicken cooked in vegetable gravy.',20,50,5,'Easy','medium','gluten-free','high-protein',460,'chicken_saloona.png'),
 
-(1,'Lamb Saloona','Lamb stew with vegetables.',25,90,6,'Medium','medium','non-vegetarian','high-protein',620,'lamb_saloona.png'),
+(1,'Lamb Saloona','Lamb stew with vegetables.',25,90,6,'Medium','medium','gluten-free','high-protein',620,'lamb_saloona.png'),
 
-(1,'Vegetable Saloona','Mixed vegetable curry.',15,40,5,'Easy','medium','vegetarian','healthier',310,'vegetable_saloona.png'),
+(1,'Vegetable Saloona','Mixed vegetable curry.',15,40,5,'Easy','medium','gluten-free','healthier',310,'vegetable_saloona.png'),
 
-(1,'Jasheed','Traditional shark meat curry.',20,60,5,'Medium','medium','non-vegetarian','high-protein',480,'jasheed.png');
+(1,'Jasheed','Traditional shark meat curry.',20,60,5,'Medium','medium','gluten-free','high-protein',480,'jasheed.png');
 
 INSERT INTO recipes
 (category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
 
 VALUES
 
-(2,'Fried Hammour','Crispy deep-fried hammour fish served with lemon and rice.',20,25,4,'Easy','mild','non-vegetarian','high-protein',520,'fried_hammour.png'),
+(2,'Fried Hammour','Crispy deep-fried hammour fish served with lemon and rice.',20,25,4,'Easy','mild','gluten-free','high-protein',520,'fried_hammour.png'),
 
-(2,'Grilled Kingfish','Charcoal grilled kingfish seasoned with Bahraini spices.',20,30,4,'Easy','medium','non-vegetarian','high-protein',430,'grilled_kingfish.png'),
+(2,'Grilled Kingfish','Charcoal grilled kingfish seasoned with Bahraini spices.',20,30,4,'Easy','medium','gluten-free','high-protein',430,'grilled_kingfish.png'),
 
-(2,'Shrimp Curry','Fresh shrimp cooked in a rich spicy curry sauce.',20,35,5,'Medium','spicy','non-vegetarian','high-protein',480,'shrimp_curry.png'),
+(2,'Shrimp Curry','Fresh shrimp cooked in a rich spicy curry sauce.',20,35,5,'Medium','spicy','gluten-free','high-protein',480,'shrimp_curry.png'),
 
 (2,'Fried Shrimp','Golden crispy fried shrimp served with dipping sauce.',15,20,4,'Easy','mild','non-vegetarian','high-protein',450,'fried_shrimp.png'),
 
-(2,'Fish Curry','Tender fish cooked in aromatic curry gravy.',20,40,5,'Medium','medium','non-vegetarian','high-protein',510,'fish_curry.png'),
+(2,'Fish Curry','Tender fish cooked in aromatic curry gravy.',20,40,5,'Medium','medium','gluten-free','high-protein',510,'fish_curry.png'),
 
-(2,'Seafood Saloona','Traditional Bahraini seafood stew with mixed vegetables.',25,45,6,'Medium','medium','non-vegetarian','high-protein',470,'seafood_saloona.png'),
+(2,'Seafood Saloona','Traditional Bahraini seafood stew with mixed vegetables.',25,45,6,'Medium','medium','gluten-free','high-protein',470,'seafood_saloona.png'),
 
-(2,'Prawn Rice','Fragrant spiced rice cooked with juicy prawns.',25,45,5,'Medium','medium','non-vegetarian','high-protein',620,'prawn_rice.png'),
+(2,'Prawn Rice','Fragrant spiced rice cooked with juicy prawns.',25,45,5,'Medium','medium','gluten-free','high-protein',620,'prawn_rice.png'),
 
 (2,'Fried Safi Fish','Traditional Bahraini fried safi fish with spices.',15,25,4,'Easy','mild','non-vegetarian','high-protein',410,'fried_safi_fish.png'),
 
-(2,'Fish Stew','Slow-cooked fish stew with tomatoes and herbs.',20,40,5,'Medium','mild','non-vegetarian','healthier',460,'fish_stew.png'),
+(2,'Fish Stew','Slow-cooked fish stew with tomatoes and herbs.',20,40,5,'Medium','mild','gluten-free','healthier',460,'fish_stew.png'),
 
-(2,'Spicy Shrimp','Spicy sautéed shrimp with garlic and chili.',15,20,4,'Medium','spicy','non-vegetarian','high-protein',390,'spicy_shrimp.png');
+(2,'Spicy Shrimp','Spicy sautéed shrimp with garlic and chili.',15,20,4,'Medium','spicy','gluten-free','high-protein',390,'spicy_shrimp.png');
 
 INSERT INTO recipes
 (category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
 
 VALUES
 
-(3,'Lentil Soup','Traditional lentil soup made with red lentils, vegetables, and aromatic spices.',15,35,4,'Easy','mild','vegetarian','healthier',280,'lentil_soup.png'),
+(3,'Lentil Soup','Traditional lentil soup made with red lentils, vegetables, and aromatic spices.',15,35,4,'Easy','mild','gluten-free','low-cal',280,'lentil_soup.png'),
 
-(3,'Chicken Soup','Comforting chicken soup with vegetables and flavorful herbs.',15,40,4,'Easy','mild','non-vegetarian','healthier',320,'chicken_soup.png'),
+(3,'Chicken Soup','Comforting chicken soup with vegetables and flavorful herbs.',15,40,4,'Easy','mild','gluten-free','healthier',320,'chicken_soup.png'),
 
-(3,'Vegetable Soup','Healthy mixed vegetable soup prepared with fresh seasonal vegetables.',15,30,4,'Easy','mild','vegetarian','healthier',210,'vegetable_soup.png'),
+(3,'Vegetable Soup','Healthy mixed vegetable soup prepared with fresh seasonal vegetables.',15,30,4,'Easy','mild','gluten-free','low-cal',210,'vegetable_soup.png'),
 
 (3,'Harees Soup','Creamy wheat and meat soup inspired by traditional Bahraini harees.',20,90,5,'Medium','mild','non-vegetarian','high-protein',390,'harees_soup.png'),
 
@@ -148,11 +148,11 @@ INSERT INTO recipes
 
 VALUES
 
-(4,'Khubz','Traditional Bahraini flatbread baked until soft and golden.',15,10,6,'Easy','mild','vegetarian','any',220,'khubz.png'),
+(4,'Khubz','Traditional Bahraini flatbread baked until soft and golden.',15,10,6,'Easy','mild','vegetarian','low-cal',220,'khubz.png'),
 
-(4,'Khubz Tannour','Traditional tannour oven bread with a crispy crust and soft interior.',20,15,6,'Medium','mild','vegetarian','any',240,'khubz_tannour.png'),
+(4,'Khubz Tannour','Traditional tannour oven bread with a crispy crust and soft interior.',20,15,6,'Medium','mild','vegetarian','low-cal',240,'khubz_tannour.png'),
 
-(4,'Regag Bread','Thin crispy Bahraini bread commonly served with curries and cheese.',15,10,4,'Easy','mild','vegetarian','any',180,'regag_bread.png'),
+(4,'Regag Bread','Thin crispy Bahraini bread commonly served with curries and cheese.',15,10,4,'Easy','mild','vegetarian','low-cal',180,'regag_bread.png'),
 
 (4,'Muhalla Bread','Soft sweet Bahraini bread flavored with saffron and cardamom.',20,20,6,'Medium','mild','vegetarian','any',290,'muhalla_bread.png'),
 
@@ -165,11 +165,11 @@ VALUES
 
 (5,'Balaleet','Traditional Bahraini sweet vermicelli topped with a savory omelet.',15,20,4,'Easy','mild','vegetarian','any',420,'balaleet.png'),
 
-(5,'Beyd wa Tamat','Classic Bahraini breakfast of eggs cooked with tomatoes and spices.',10,15,2,'Easy','mild','vegetarian','high-protein',280,'beyd_wa_tamat.png'),
+(5,'Beyd wa Tamat','Classic Bahraini breakfast of eggs cooked with tomatoes and spices.',10,15,2,'Easy','mild','vegetarian','low-cal',280,'beyd_wa_tamat.png'),
 
 (5,'Bahraini Falafel','Crispy homemade falafel served with fresh vegetables and tahini.',20,15,4,'Medium','medium','vegetarian','high-protein',340,'bahraini_falafel.png'),
 
-(5,'Labneh Plate','Creamy labneh served with olive oil, olives, and fresh bread.',10,0,2,'Easy','mild','vegetarian','healthier',260,'labneh_plate.png'),
+(5,'Labneh Plate','Creamy labneh served with olive oil, olives, and fresh bread.',10,0,2,'Easy','mild','vegetarian','low-cal',260,'labneh_plate.png'),
 
 (5,'Foul Medames','Slow-cooked fava beans seasoned with garlic, lemon, and olive oil.',15,30,4,'Easy','mild','vegetarian','high-protein',310,'foul_medames.png'),
 
@@ -219,9 +219,9 @@ VALUES
 
 (7,'Meat Rolls','Crunchy rolls filled with seasoned minced meat.',25,15,4,'Medium','medium','non-vegetarian','high-protein',340,'meat_rolls.png'),
 
-(7,'Stuffed Grape Leaves','Tender grape leaves stuffed with seasoned rice and herbs.',30,40,6,'Medium','mild','vegetarian','healthier',220,'stuffed_grape_leaves.png'),
+(7,'Stuffed Grape Leaves','Tender grape leaves stuffed with seasoned rice and herbs.',30,40,6,'Medium','mild','vegetarian','low-cal',220,'stuffed_grape_leaves.png'),
 
-(7,'Spinach Fatayer','Baked pastries filled with seasoned spinach and onions.',25,20,6,'Medium','mild','vegetarian','healthier',270,'spinach_fatayer.png');
+(7,'Spinach Fatayer','Baked pastries filled with seasoned spinach and onions.',25,20,6,'Medium','mild','vegetarian','low-cal',270,'spinach_fatayer.png');
 
 INSERT INTO recipes
 (category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
@@ -230,9 +230,9 @@ VALUES
 
 (8,'Karak Tea','Traditional spiced milk tea brewed with black tea, cardamom, and sugar.',5,10,2,'Easy','mild','vegetarian','any',150,'karak_tea.png'),
 
-(8,'Arabic Coffee','Traditional Arabic coffee flavored with cardamom and served with dates.',5,15,4,'Easy','mild','vegetarian','any',25,'arabic_coffee.png'),
+(8,'Arabic Coffee','Traditional Arabic coffee flavored with cardamom and served with dates.',5,15,4,'Easy','mild','gluten-free','low-cal',25,'arabic_coffee.png'),
 
-(8,'Lemon Mint Juice','Refreshing juice made with fresh lemons, mint leaves, and ice.',10,0,2,'Easy','mild','vegetarian','healthier',120,'lemon_mint_juice.png'),
+(8,'Lemon Mint Juice','Refreshing juice made with fresh lemons, mint leaves, and ice.',10,0,2,'Easy','mild','gluten-free','low-cal',120,'lemon_mint_juice.png'),
 
 (8,'Tamarind Juice','Sweet and tangy tamarind drink served chilled.',15,10,4,'Easy','mild','vegetarian','any',140,'tamarind_juice.png'),
 
@@ -240,24 +240,24 @@ VALUES
 
 (8,'Rose Milk','Chilled milk flavored with rose syrup and served over ice.',5,0,2,'Easy','mild','vegetarian','any',190,'rose_milk.png'),
 
-(8,'Date MilkShake','Creamy milkshake blended with fresh dates and milk.',10,0,2,'Easy','mild','vegetarian','high-protein',320,'date_milkshake.png'),
+(8,'Date MilkShake','Creamy milkshake blended with fresh dates and milk.',10,0,2,'Easy','mild','gluten-free','high-protein',320,'date_milkshake.png'),
 
-(8,'Saffron Milk','Warm milk infused with saffron, cardamom, and a touch of sugar.',5,10,2,'Easy','mild','vegetarian','healthier',170,'saffron_milk.png');
+(8,'Saffron Milk','Warm milk infused with saffron, cardamom, and a touch of sugar.',5,10,2,'Easy','mild','gluten-free','low-cal',170,'saffron_milk.png');
 
 INSERT INTO recipes
 (category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
 
 VALUES
 
-(9,'Salata Hara','Traditional Bahraini spicy salad made with tomatoes, cucumbers, onions, green chilies, fresh herbs, and lemon juice.',15,0,4,'Easy','spicy','vegetarian','healthier',120,'salata_hara.png'),
+(9,'Salata Hara','Traditional Bahraini spicy salad made with tomatoes, cucumbers, onions, green chilies, fresh herbs, and lemon juice.',15,0,4,'Easy','spicy','gluten-free','low-cal',120,'salata_hara.png'),
 
-(9,'Salatat Khiyar wa Tamatim','Refreshing salad prepared with fresh cucumbers, tomatoes, onions, lemon juice, and herbs.',10,0,4,'Easy','mild','vegetarian','healthier',90,'cucumber_tomato_salad.png'),
+(9,'Salatat Khiyar wa Tamatim','Refreshing salad prepared with fresh cucumbers, tomatoes, onions, lemon juice, and herbs.',10,0,4,'Easy','mild','gluten-free','low-cal',90,'cucumber_tomato_salad.png'),
 
-(9,'Tabbouleh','Fresh parsley salad with bulgur, tomatoes, mint, onions, olive oil, and lemon juice.',20,0,4,'Easy','mild','vegetarian','healthier',180,'tabbouleh.png'),
+(9,'Tabbouleh','Fresh parsley salad with bulgur, tomatoes, mint, onions, olive oil, and lemon juice.',20,0,4,'Easy','mild','vegetarian','low-cal',180,'tabbouleh.png'),
 
-(9,'Fattoush','Traditional Arabic mixed vegetable salad with crispy toasted pita bread and tangy dressing.',20,0,4,'Easy','mild','vegetarian','healthier',210,'fattoush.png'),
+(9,'Fattoush','Traditional Arabic mixed vegetable salad with crispy toasted pita bread and tangy dressing.',20,0,4,'Easy','mild','vegetarian','low-cal',210,'fattoush.png'),
 
-(9,'Green Salad','Classic mixed green salad with lettuce, cucumbers, tomatoes, carrots, and lemon olive oil dressing.',10,0,4,'Easy','mild','vegetarian','healthier',85,'green_salad.png');
+(9,'Green Salad','Classic mixed green salad with lettuce, cucumbers, tomatoes, carrots, and lemon olive oil dressing.',10,0,4,'Easy','mild','vegetarian','low-cal',85,'green_salad.png');
 
 INSERT INTO recipes
 (category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
