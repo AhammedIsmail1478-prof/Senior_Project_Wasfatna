@@ -92,6 +92,7 @@ require 'auth.php';
               <select id="diet" class="select">
                 <option value="none">None</option>
                 <option value="vegetarian">Vegetarian</option>
+                <option value="non-vegetarian">Non-Vegetarian</option>
                 <option value="gluten-free">Gluten-Free</option>
                 <option value="lactose-free">Lactose-Free</option>
               </select>
