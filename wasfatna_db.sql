@@ -148,7 +148,7 @@ INSERT INTO recipes
 
 VALUES
 
-((4,'Khubz','Traditional Bahraini flatbread baked until soft and golden.',15,10,6,'Easy','mild','vegetarian,lactose-free','low-cal',220,'khubz.png'),
+(4,'Khubz','Traditional Bahraini flatbread baked until soft and golden.',15,10,6,'Easy','mild','vegetarian,lactose-free','low-cal',220,'khubz.png'),
 
 (4,'Khubz Tannour','Traditional tannour oven bread with a crispy crust and soft interior.',20,15,6,'Medium','mild','vegetarian,lactose-free','low-cal',240,'khubz_tannour.png'),
 
