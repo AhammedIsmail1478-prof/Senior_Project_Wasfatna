@@ -85,6 +85,9 @@ const resultsEl =
 const resultsCount =
   document.getElementById("resultsCount");
 
+const recipeSearch =
+  document.getElementById("recipeSearch");
+
 // Preference fields.
 const spiceEl =
   document.getElementById("spice");
@@ -154,6 +157,10 @@ if (
   clearBtn.addEventListener("click", () => {
     ingredientsInput.value = "";
 
+if (recipeSearch) {
+  recipeSearch.value = "";
+}
+    
     resultsEl.innerHTML = `
       <div class="empty">
         No results yet — enter ingredients and click
@@ -173,6 +180,9 @@ if (
   resultsCount
 ) {
   suggestBtn.addEventListener("click", async () => {
+    if (recipeSearch) {
+  recipeSearch.value = "";
+}
     const ingredients = uniq(
       parseIngredients(ingredientsInput.value)
     );
@@ -354,7 +364,10 @@ if (
     : "match-partial";
 
           return `
-  <article class="recipe">
+  <article
+  class="recipe"
+  data-recipe-name="${escapeHtml(recipeName.toLowerCase())}"
+>
     <div class="recipe-summary">
 
       <img
@@ -423,6 +436,60 @@ if (
     } finally {
       suggestBtn.disabled = false;
       suggestBtn.textContent = "Suggest Recipes";
+    }
+  });
+}
+
+// ---------- Filter displayed recipe results ----------
+if (recipeSearch && resultsEl && resultsCount) {
+  recipeSearch.addEventListener("input", () => {
+    const searchValue =
+      recipeSearch.value.trim().toLowerCase();
+
+    const recipeCards = Array.from(
+      resultsEl.querySelectorAll(".recipe")
+    );
+
+    let visibleCount = 0;
+
+    recipeCards.forEach((card) => {
+      const recipeName =
+        card.dataset.recipeName || "";
+
+      const shouldShow =
+        recipeName.includes(searchValue);
+
+      card.hidden = !shouldShow;
+
+      if (shouldShow) {
+        visibleCount++;
+      }
+    });
+
+    resultsCount.textContent =
+      String(visibleCount);
+
+    const oldMessage =
+      resultsEl.querySelector(
+        ".filter-empty-message"
+      );
+
+    if (oldMessage) {
+      oldMessage.remove();
+    }
+
+    if (
+      recipeCards.length > 0 &&
+      visibleCount === 0
+    ) {
+      resultsEl.insertAdjacentHTML(
+        "beforeend",
+        `
+          <div class="empty filter-empty-message">
+            No recipe name matches your search.
+          </div>
+        `
+      );
     }
   });
 }
