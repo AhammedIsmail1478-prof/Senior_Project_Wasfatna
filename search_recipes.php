@@ -12,7 +12,7 @@ function respond(array $payload, int $status = 200): void
     );
 
     exit;
-}
+} 
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond([
@@ -270,6 +270,9 @@ try {
 
     foreach ($recipes as &$recipe) {
         $id = (int)$recipe['recipe_id'];
+
+        $recipe['image'] =
+        $recipe['image'] ?? '';
 
         $allIngredients =
             $ingredientsByRecipe[$id] ?? [];
