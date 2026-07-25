@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=10" />
+  <link rel="stylesheet" href="styles.css?v=11" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -81,7 +81,7 @@ require 'auth.php';
               <label class="label">Goal</label>
               <select id="goal" class="select">
                 <option value="any">Any</option>
-                <option value="healthy">Healthier</option>
+                <option value="healthier">Healthier</option>
                 <option value="high-protein">High Protein</option>
                 <option value="low-cal">Lower Calories</option>
               </select>
