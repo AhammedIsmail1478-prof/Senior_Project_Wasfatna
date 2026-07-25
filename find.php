@@ -106,6 +106,15 @@ require 'auth.php';
             <h3>Results</h3>
             <span id="resultsCount" class="badge">0</span>
           </div>
+          <div class="result-search">
+  <input
+    type="search"
+    id="recipeSearch"
+    class="recipe-search-input"
+    placeholder="Search results by recipe name..."
+    autocomplete="off"
+  />
+</div>
 
           <div id="results" class="results">
             <div class="empty">
