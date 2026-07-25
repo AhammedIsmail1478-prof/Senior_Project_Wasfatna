@@ -312,7 +312,18 @@ try {
     }
 
     unset($recipe);
+usort($recipes, function ($a, $b) {
+    if ($a['match_percentage'] !== $b['match_percentage']) {
+        return $b['match_percentage'] <=> $a['match_percentage'];
+    }
 
+    if ($a['matched_count'] !== $b['matched_count']) {
+        return $b['matched_count'] <=> $a['matched_count'];
+    }
+
+    return $a['total_ingredients'] <=> $b['total_ingredients'];
+});
+    
     respond([
         'success' => true,
         'recipes' => $recipes
