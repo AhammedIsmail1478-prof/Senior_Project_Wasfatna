@@ -88,6 +88,9 @@ const resultsCount =
 const recipeSearch =
   document.getElementById("recipeSearch");
 
+const recipeSort =
+  document.getElementById("recipeSort");
+
 // Preference fields.
 const spiceEl =
   document.getElementById("spice");
@@ -157,10 +160,14 @@ if (
   clearBtn.addEventListener("click", () => {
     ingredientsInput.value = "";
 
-if (recipeSearch) {
-  recipeSearch.value = "";
-}
-    
+    if (recipeSearch) {
+      recipeSearch.value = "";
+    }
+
+    if (recipeSort) {
+      recipeSort.value = "best-match";
+    }
+
     resultsEl.innerHTML = `
       <div class="empty">
         No results yet — enter ingredients and click
@@ -181,8 +188,13 @@ if (
 ) {
   suggestBtn.addEventListener("click", async () => {
     if (recipeSearch) {
-  recipeSearch.value = "";
-}
+      recipeSearch.value = "";
+    }
+
+    if (recipeSort) {
+      recipeSort.value = "best-match";
+    }
+
     const ingredients = uniq(
       parseIngredients(ingredientsInput.value)
     );
@@ -326,6 +338,7 @@ if (
                         `<li>${escapeHtml(step)}</li>`
                     )
                     .join("")}
+                    
                 </ol>
               `
               : `
@@ -354,6 +367,23 @@ if (
 
           const totalIngredients =
             Number(recipe.total_ingredients) || 0;
+
+const searchableIngredients = [
+  ...matchedIngredients,
+  ...missingIngredients
+]
+  .map((ingredient) =>
+    String(ingredient.name || "").trim()
+  )
+  .join(" ");
+
+const filterText = [
+  recipeName,
+  searchableIngredients
+]
+  .join(" ")
+  .toLowerCase();
+          
          const matchClass =
   matchPercentage === 100
     ? "match-perfect"
@@ -364,10 +394,15 @@ if (
     : "match-partial";
 
           return `
-  <article
+
+<article
   class="recipe"
   data-recipe-name="${escapeHtml(recipeName.toLowerCase())}"
+  data-filter-text="${escapeHtml(filterText)}"
+  data-match-percentage="${matchPercentage}"
+  data-matched-count="${matchedCount}"
 >
+ 
     <div class="recipe-summary">
 
       <img
@@ -420,6 +455,7 @@ if (
 `;
         })
         .join("");
+      updateDisplayedRecipes();
     } catch (error) {
       console.error(error);
 
@@ -440,61 +476,171 @@ if (
   });
 }
 
-// ---------- Filter displayed recipe results ----------
-if (recipeSearch && resultsEl && resultsCount) {
-  recipeSearch.addEventListener("input", () => {
-    const searchValue =
-      recipeSearch.value.trim().toLowerCase();
+// ---------- Filter and sort displayed recipes ----------
+function updateDisplayedRecipes() {
+  if (!resultsEl || !resultsCount) {
+    return;
+  }
 
-    const recipeCards = Array.from(
-      resultsEl.querySelectorAll(".recipe")
+  const searchValue = recipeSearch
+    ? recipeSearch.value.trim().toLowerCase()
+    : "";
+
+  const sortValue = recipeSort
+    ? recipeSort.value
+    : "best-match";
+
+  const oldMessage =
+    resultsEl.querySelector(
+      ".filter-empty-message"
     );
 
-    let visibleCount = 0;
+  if (oldMessage) {
+    oldMessage.remove();
+  }
 
-    recipeCards.forEach((card) => {
-      const recipeName =
-        card.dataset.recipeName || "";
+  const recipeCards = Array.from(
+    resultsEl.querySelectorAll(".recipe")
+  );
 
-      const shouldShow =
-        recipeName.includes(searchValue);
+  recipeCards.sort((firstCard, secondCard) => {
+    const firstName =
+      firstCard.dataset.recipeName || "";
 
-      card.hidden = !shouldShow;
+    const secondName =
+      secondCard.dataset.recipeName || "";
 
-      if (shouldShow) {
-        visibleCount++;
+    const firstPercentage =
+      Number(
+        firstCard.dataset.matchPercentage
+      ) || 0;
+
+    const secondPercentage =
+      Number(
+        secondCard.dataset.matchPercentage
+      ) || 0;
+
+    const firstMatched =
+      Number(
+        firstCard.dataset.matchedCount
+      ) || 0;
+
+    const secondMatched =
+      Number(
+        secondCard.dataset.matchedCount
+      ) || 0;
+
+    if (sortValue === "name-asc") {
+      return firstName.localeCompare(
+        secondName
+      );
+    }
+
+    if (sortValue === "name-desc") {
+      return secondName.localeCompare(
+        firstName
+      );
+    }
+
+    if (sortValue === "most-matched") {
+      if (firstMatched !== secondMatched) {
+        return secondMatched - firstMatched;
       }
-    });
 
-    resultsCount.textContent =
-      String(visibleCount);
-
-    const oldMessage =
-      resultsEl.querySelector(
-        ".filter-empty-message"
+      return (
+        secondPercentage -
+        firstPercentage
       );
-
-    if (oldMessage) {
-      oldMessage.remove();
     }
 
+    if (sortValue === "lowest-match") {
+      if (
+        firstPercentage !==
+        secondPercentage
+      ) {
+        return (
+          firstPercentage -
+          secondPercentage
+        );
+      }
+
+      return firstName.localeCompare(
+        secondName
+      );
+    }
+
+    // Best Match
     if (
-      recipeCards.length > 0 &&
-      visibleCount === 0
+      firstPercentage !==
+      secondPercentage
     ) {
-      resultsEl.insertAdjacentHTML(
-        "beforeend",
-        `
-          <div class="empty filter-empty-message">
-            No recipe name matches your search.
-          </div>
-        `
+      return (
+        secondPercentage -
+        firstPercentage
       );
     }
+
+    if (firstMatched !== secondMatched) {
+      return secondMatched - firstMatched;
+    }
+
+    return firstName.localeCompare(
+      secondName
+    );
   });
+
+  let visibleCount = 0;
+
+  recipeCards.forEach((card) => {
+    const filterText =
+      card.dataset.filterText || "";
+
+    const shouldShow =
+      filterText.includes(searchValue);
+
+    card.hidden = !shouldShow;
+
+    if (shouldShow) {
+      visibleCount++;
+    }
+
+    // Reinsert cards in the selected order.
+    resultsEl.appendChild(card);
+  });
+
+  resultsCount.textContent =
+    String(visibleCount);
+
+  if (
+    recipeCards.length > 0 &&
+    visibleCount === 0
+  ) {
+    resultsEl.insertAdjacentHTML(
+      "beforeend",
+      `
+        <div class="empty filter-empty-message">
+          No recipe or ingredient matches your search.
+        </div>
+      `
+    );
+  }
 }
 
-// Allow the Enter key to start the search.
+if (recipeSearch) {
+  recipeSearch.addEventListener(
+    "input",
+    updateDisplayedRecipes
+  );
+}
+
+if (recipeSort) {
+  recipeSort.addEventListener(
+    "change",
+    updateDisplayedRecipes
+  );
+}
+
+// Allow the Enter key to start the recipe search.
 if (ingredientsInput && suggestBtn) {
   ingredientsInput.addEventListener(
     "keydown",
