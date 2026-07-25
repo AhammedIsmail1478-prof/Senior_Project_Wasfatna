@@ -143,6 +143,6 @@ require 'auth.php';
   </aside>
 
   <div id="backdrop" class="backdrop" hidden></div>
-  <script src="app.js?v=10"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
