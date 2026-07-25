@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=12" />
+  <link rel="stylesheet" href="styles.css?v=13" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -106,14 +106,40 @@ require 'auth.php';
             <h3>Results</h3>
             <span id="resultsCount" class="badge">0</span>
           </div>
-          <div class="result-search">
+          <div class="results-tools">
   <input
     type="search"
     id="recipeSearch"
     class="recipe-search-input"
-    placeholder="Search results by recipe name..."
+    placeholder="Search by recipe or ingredient..."
     autocomplete="off"
   />
+
+  <select
+    id="recipeSort"
+    class="recipe-sort-input"
+    aria-label="Sort recipe results"
+  >
+    <option value="best-match">
+      Best Match
+    </option>
+
+    <option value="name-asc">
+      Name: A–Z
+    </option>
+
+    <option value="name-desc">
+      Name: Z–A
+    </option>
+
+    <option value="most-matched">
+      Most Ingredients Matched
+    </option>
+
+    <option value="lowest-match">
+      Lowest Match First
+    </option>
+  </select>
 </div>
 
           <div id="results" class="results">
@@ -152,6 +178,6 @@ require 'auth.php';
   </aside>
 
   <div id="backdrop" class="backdrop" hidden></div>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
