@@ -328,6 +328,13 @@ if (
             recipe.recipe_name ??
             recipe.name ??
             "Recipe";
+            const imageFile =
+    String(recipe.image || "").trim();
+
+    const imagePath =
+    imageFile !== ""
+      ? `images/${encodeURIComponent(imageFile)}`
+      : "images/default_recipe.png";
 
           const matchPercentage =
             Number(recipe.match_percentage) || 0;
@@ -347,42 +354,57 @@ if (
     : "match-partial";
 
           return `
-            <article class="recipe">
-              <div class="recipe-top">
-                <h4>
-                  ${escapeHtml(recipeName)}
-                </h4>
+  <article class="recipe">
+    <div class="recipe-summary">
 
-                <div class="tags">
-                   <span class="tag ${matchClass}">
-        ${matchPercentage}% match
-    </span>
+      <img
+        src="${imagePath}"
+        alt="${escapeHtml(recipeName)}"
+        class="recipe-image"
+        loading="lazy"
+        onerror="this.onerror=null; this.src='images/default_recipe.png';"
+      >
 
-    <span class="tag">
-        ${matchedCount}/${totalIngredients} ingredients
-    </span>
-</div>
-              </div>
+      <div class="recipe-information">
 
-              <div class="small">
-                <strong>You have:</strong>
-                ${matchedHtml}
-              </div>
+        <div class="recipe-top">
+          <h4>
+            ${escapeHtml(recipeName)}
+          </h4>
 
-              <div class="small">
-                <strong>Still needed:</strong>
-                ${missingHtml}
-              </div>
+          <div class="tags">
+            <span class="tag ${matchClass}">
+              ${matchPercentage}% match
+            </span>
 
-              <div class="steps">
-                <div class="small">
-                  <strong>Steps</strong>
-                </div>
+            <span class="tag">
+              ${matchedCount}/${totalIngredients} ingredients
+            </span>
+          </div>
+        </div>
 
-                ${stepsHtml}
-              </div>
-            </article>
-          `;
+        <div class="small">
+          <strong>You have:</strong>
+          ${matchedHtml}
+        </div>
+
+        <div class="small">
+          <strong>Still needed:</strong>
+          ${missingHtml}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="small">
+        <strong>Steps</strong>
+      </div>
+
+      ${stepsHtml}
+    </div>
+  </article>
+`;
         })
         .join("");
     } catch (error) {

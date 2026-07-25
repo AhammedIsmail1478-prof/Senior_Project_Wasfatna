@@ -132,11 +132,12 @@ try {
      */
     $sql = "
         SELECT
-            r.recipe_id,
-            r.recipe_name,
-            r.spice_level,
-            r.diet,
-            r.goal,
+        r.recipe_id,
+        r.recipe_name,
+        r.image,
+        r.spice_level,
+        r.diet,
+        r.goal,
 
             COUNT(
                 DISTINCT CASE
@@ -158,11 +159,12 @@ try {
         $whereSql
 
         GROUP BY
-            r.recipe_id,
-            r.recipe_name,
-            r.spice_level,
-            r.diet,
-            r.goal
+        r.recipe_id,
+        r.recipe_name,
+        r.image,
+        r.spice_level,
+        r.diet,
+        r.goal
 
         HAVING matched_count > 0
 
