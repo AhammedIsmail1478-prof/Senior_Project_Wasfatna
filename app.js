@@ -70,6 +70,38 @@ function ingredientText(item) {
 }
 
 // ---------- DOM elements ----------
+
+function updateRecipeSuggestions(recipes) {
+  if (!recipeSuggestions) {
+    return;
+  }
+
+  const recipeNames = [
+    ...new Set(
+      recipes
+        .map((recipe) => {
+          return (
+            recipe.recipe_name ??
+            recipe.name ??
+            ""
+          );
+        })
+        .filter(Boolean)
+    )
+  ];
+
+  recipeSuggestions.innerHTML =
+    recipeNames
+      .sort((firstName, secondName) =>
+        firstName.localeCompare(secondName)
+      )
+      .map(
+        (name) =>
+          `<option value="${escapeHtml(name)}"></option>`
+      )
+      .join("");
+}
+
 const ingredientsInput =
   document.getElementById("ingredientsInput");
 
@@ -87,6 +119,9 @@ const resultsCount =
 
 const recipeSearch =
   document.getElementById("recipeSearch");
+
+const recipeSuggestions =
+  document.getElementById("recipeSuggestions");
 
 const recipeSort =
   document.getElementById("recipeSort");
@@ -164,6 +199,10 @@ if (
       recipeSearch.value = "";
     }
 
+if (recipeSuggestions) {
+  recipeSuggestions.innerHTML = "";
+}
+    
     if (recipeSort) {
       recipeSort.value = "best-match";
     }
@@ -281,6 +320,8 @@ if (
       const recipes = Array.isArray(data.recipes)
         ? data.recipes
         : [];
+
+      updateRecipeSuggestions(recipes);
 
       resultsCount.textContent =
         String(recipes.length);
