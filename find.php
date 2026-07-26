@@ -50,6 +50,56 @@ require 'auth.php';
 
         <!-- User Input Panel -->
         <div class="panel">
+
+<div class="stats-grid">
+
+  <div class="stat-card">
+    <div class="stat-icon">🍽</div>
+
+    <div class="stat-title">
+      Recipes Found
+    </div>
+
+    <div
+      class="stat-number"
+      id="statsRecipes"
+    >
+      0
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">❤️</div>
+
+    <div class="stat-title">
+      Favorites
+    </div>
+
+    <div
+      class="stat-number"
+      id="statsFavorites"
+    >
+      0
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">🥬</div>
+
+    <div class="stat-title">
+      Ingredients Entered
+    </div>
+
+    <div
+      class="stat-number"
+      id="statsIngredients"
+    >
+      0
+    </div>
+  </div>
+
+</div>
+          
           <h3>Your Ingredients</h3>
 
           <label class="label">Ingredients (comma separated)</label>
