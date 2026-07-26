@@ -473,6 +473,27 @@ const filterText = [
           ${missingHtml}
         </div>
 
+        <div class="recipe-details">
+  <div class="small">
+    <strong>Serves:</strong>
+    ${escapeHtml(recipe.servings || "Not specified")}
+  </div>
+
+  <div class="small">
+    <strong>Difficulty:</strong>
+
+    <span class="difficulty difficulty-${String(
+      recipe.difficulty || ""
+    ).toLowerCase()}">
+      <span class="difficulty-dot"></span>
+
+      ${escapeHtml(
+        recipe.difficulty || "Unknown"
+      )}
+    </span>
+  </div>
+</div>
+
       </div>
     </div>
 
