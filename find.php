@@ -25,6 +25,9 @@ require 'auth.php';
     <nav class="nav">
       <a href="profile.php" class="nav-link">Profile</a>
       <?php if (is_logged_in()): ?>
+  <a class="nav-link" href="favorites.php">
+    My Favorites
+</a>
         <a href="signout.php" class="nav-link">Sign out</a>
       <?php else: ?>
         <a href="signin.php" class="nav-link">Sign in</a>
