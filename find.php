@@ -115,8 +115,11 @@ require 'auth.php';
     id="recipeSearch"
     class="recipe-search-input"
     placeholder="Search by recipe or ingredient..."
+    list="recipeSuggestions"
     autocomplete="off"
   />
+
+  <datalist id="recipeSuggestions"></datalist>
 
   <select
     id="recipeSort"
@@ -181,6 +184,6 @@ require 'auth.php';
   </aside>
 
   <div id="backdrop" class="backdrop" hidden></div>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
