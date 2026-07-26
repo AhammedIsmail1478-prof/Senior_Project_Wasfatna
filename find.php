@@ -206,6 +206,11 @@ require 'auth.php';
   </aside>
 
   <div id="backdrop" class="backdrop" hidden></div>
+<div id="toast" class="toast">
+    <span id="toastIcon">❤️</span>
+    <span id="toastMessage"></span>
+</div>
+  
   <script src="app.js?v=7"></script>
 </body>
 </html>
