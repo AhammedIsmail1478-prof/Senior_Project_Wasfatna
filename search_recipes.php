@@ -140,6 +140,8 @@ try {
         r.spice_level,
         r.diet,
         r.goal,
+        r.servings,
+        r.difficulty,
 
             COUNT(
                 DISTINCT CASE
@@ -166,7 +168,9 @@ try {
         r.image,
         r.spice_level,
         r.diet,
-        r.goal
+        r.goal,
+        r.servings,
+        r.difficulty
 
         HAVING matched_count > 0
 
