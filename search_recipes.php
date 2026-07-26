@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/config.php';
 
@@ -198,6 +200,42 @@ try {
         ',',
         array_fill(0, count($recipeIds), '?')
     );
+    /*
+ * Load the logged-in user's favorite recipes.
+ */
+$userId = isset($_SESSION['user_id'])
+    ? (int)$_SESSION['user_id']
+    : 0;
+
+$favoriteSet = [];
+
+if ($userId > 0) {
+    $favoriteStmt = $pdo->prepare("
+        SELECT recipe_id
+        FROM favorites
+        WHERE user_id = ?
+        AND recipe_id IN ($idMarks)
+    ");
+
+    $favoriteParams = array_merge(
+        [$userId],
+        $recipeIds
+    );
+
+    $favoriteStmt->execute($favoriteParams);
+
+    $favoriteRecipeIds = array_map(
+        'intval',
+        $favoriteStmt->fetchAll(
+            PDO::FETCH_COLUMN
+        )
+    );
+
+    $favoriteSet = array_fill_keys(
+        $favoriteRecipeIds,
+        true
+    );
+}
 
     /*
      * Load all ingredients for the matching recipes.
@@ -270,6 +308,10 @@ try {
 
     foreach ($recipes as &$recipe) {
         $id = (int)$recipe['recipe_id'];
+
+     $recipe['is_favorite'] =
+            isset($favoriteSet[$id]);
+        
 
         $recipe['image'] =
         $recipe['image'] ?? '';
