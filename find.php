@@ -50,55 +50,6 @@ require 'auth.php';
 
         <!-- User Input Panel -->
         <div class="panel">
-
-<div class="stats-grid">
-
-  <div class="stat-card">
-    <div class="stat-icon">🍽</div>
-
-    <div class="stat-title">
-      Recipes Found
-    </div>
-
-    <div
-      class="stat-number"
-      id="statsRecipes"
-    >
-      0
-    </div>
-  </div>
-
-  <div class="stat-card">
-    <div class="stat-icon">❤️</div>
-
-    <div class="stat-title">
-      Favorites
-    </div>
-
-    <div
-      class="stat-number"
-      id="statsFavorites"
-    >
-      0
-    </div>
-  </div>
-
-  <div class="stat-card">
-    <div class="stat-icon">🥬</div>
-
-    <div class="stat-title">
-      Ingredients Entered
-    </div>
-
-    <div
-      class="stat-number"
-      id="statsIngredients"
-    >
-      0
-    </div>
-  </div>
-
-</div>
           
           <h3>Your Ingredients</h3>
 
@@ -155,6 +106,27 @@ require 'auth.php';
 
         <!-- Results Panel -->
         <div class="panel">
+          <div class="stats-grid">
+
+  <div class="stat-card">
+    <div class="stat-icon">🍽</div>
+    <div class="stat-title">Recipes Found</div>
+    <div class="stat-number" id="statsRecipes">0</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">❤️</div>
+    <div class="stat-title">Favorites</div>
+    <div class="stat-number" id="statsFavorites">0</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">🥬</div>
+    <div class="stat-title">Ingredients Entered</div>
+    <div class="stat-number" id="statsIngredients">0</div>
+  </div>
+
+</div>
           <div class="results-header">
             <h3>Results</h3>
             <span id="resultsCount" class="badge">0</span>
