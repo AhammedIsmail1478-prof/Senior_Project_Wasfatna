@@ -117,6 +117,15 @@ const resultsEl =
 const resultsCount =
   document.getElementById("resultsCount");
 
+const statsRecipes =
+  document.getElementById("statsRecipes");
+
+const statsFavorites =
+  document.getElementById("statsFavorites");
+
+const statsIngredients =
+  document.getElementById("statsIngredients");
+
 const recipeSearch =
   document.getElementById("recipeSearch");
 
@@ -325,6 +334,20 @@ if (
 
       resultsCount.textContent =
         String(recipes.length);
+
+if (statsRecipes) {
+  statsRecipes.textContent = recipes.length;
+}
+
+if (statsIngredients) {
+  statsIngredients.textContent = ingredients.length;
+}
+
+if (statsFavorites) {
+  statsFavorites.textContent =
+    recipes.filter(recipe => recipe.is_favorite).length;
+}
+      
 
       if (!recipes.length) {
         resultsEl.innerHTML = `
@@ -554,6 +577,18 @@ const filterText = [
       console.error(error);
 
       resultsCount.textContent = "0";
+
+      if (statsRecipes) {
+  statsRecipes.textContent = "0";
+}
+
+if (statsFavorites) {
+  statsFavorites.textContent = "0";
+}
+
+if (statsIngredients) {
+  statsIngredients.textContent = "0";
+}
 
       resultsEl.innerHTML = `
         <div class="empty">
