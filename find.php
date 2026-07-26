@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=14" />
+  <link rel="stylesheet" href="styles.css?v=15" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
