@@ -351,6 +351,14 @@ if (
             recipe.recipe_name ??
             recipe.name ??
             "Recipe";
+
+    const recipeId =
+      Number(recipe.recipe_id) || 0;
+
+    const isFavorite =
+      recipe.is_favorite === true ||
+      Number(recipe.is_favorite) === 1;
+          
             const imageFile =
     String(recipe.image || "").trim();
 
@@ -416,11 +424,35 @@ const filterText = [
       <div class="recipe-information">
 
         <div class="recipe-top">
-          <h4>
-            ${escapeHtml(recipeName)}
-          </h4>
 
-          <div class="tags">
+  <div class="recipe-title-row">
+    <h4>
+      ${escapeHtml(recipeName)}
+    </h4>
+
+    <button
+      type="button"
+      class="favorite-btn ${
+        isFavorite ? "is-favorite" : ""
+      }"
+      data-recipe-id="${recipeId}"
+      aria-pressed="${isFavorite}"
+      aria-label="${
+        isFavorite
+          ? "Remove from favorites"
+          : "Add to favorites"
+      }"
+      title="${
+        isFavorite
+          ? "Remove from favorites"
+          : "Add to favorites"
+      }"
+    >
+      ${isFavorite ? "❤️" : "🤍"}
+    </button>
+  </div>
+
+  <div class="tags">
             <span class="tag ${matchClass}">
               ${matchPercentage}% match
             </span>
@@ -474,6 +506,117 @@ const filterText = [
       suggestBtn.textContent = "Suggest Recipes";
     }
   });
+}
+
+// ---------- Favorite recipe button ----------
+if (resultsEl) {
+  resultsEl.addEventListener(
+    "click",
+    async (event) => {
+      const favoriteBtn =
+        event.target.closest(".favorite-btn");
+
+      if (
+        !favoriteBtn ||
+        !resultsEl.contains(favoriteBtn)
+      ) {
+        return;
+      }
+
+      const recipeId =
+        Number(
+          favoriteBtn.dataset.recipeId
+        ) || 0;
+
+      if (recipeId <= 0) {
+        return;
+      }
+
+      favoriteBtn.disabled = true;
+
+      try {
+        const response = await fetch(
+          "toggle_favorite.php",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              recipe_id: recipeId
+            })
+          }
+        );
+
+        const responseText =
+          await response.text();
+
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (jsonError) {
+          console.error(
+            "Invalid favorite response:",
+            responseText
+          );
+
+          throw new Error(
+            "toggle_favorite.php did not return valid JSON."
+          );
+        }
+
+        if (
+          !response.ok ||
+          data.success !== true
+        ) {
+          throw new Error(
+            data.message ||
+            "Unable to update favorites."
+          );
+        }
+
+        const isFavorite =
+          data.is_favorite === true;
+
+        favoriteBtn.textContent =
+          isFavorite ? "❤️" : "🤍";
+
+        favoriteBtn.classList.toggle(
+          "is-favorite",
+          isFavorite
+        );
+
+        favoriteBtn.setAttribute(
+          "aria-pressed",
+          String(isFavorite)
+        );
+
+        const buttonText = isFavorite
+          ? "Remove from favorites"
+          : "Add to favorites";
+
+        favoriteBtn.setAttribute(
+          "aria-label",
+          buttonText
+        );
+
+        favoriteBtn.title = buttonText;
+      } catch (error) {
+        console.error(error);
+
+        alert(
+          error.message ||
+          "Unable to update favorites."
+        );
+      } finally {
+        favoriteBtn.disabled = false;
+      }
+    }
+  );
 }
 
 // ---------- Filter and sort displayed recipes ----------
