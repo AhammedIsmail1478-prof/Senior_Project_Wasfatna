@@ -54,6 +54,33 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+// ---------- Toast notification ----------
+function showToast(message, icon = "❤️") {
+  const toast =
+    document.getElementById("toast");
+
+  const toastMessage =
+    document.getElementById("toastMessage");
+
+  const toastIcon =
+    document.getElementById("toastIcon");
+
+  if (!toast || !toastMessage || !toastIcon) {
+    return;
+  }
+
+  toastMessage.textContent = message;
+  toastIcon.textContent = icon;
+
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
+}
+
 // Display the ingredient name together with its quantity.
 function ingredientText(item) {
   if (!item) {
