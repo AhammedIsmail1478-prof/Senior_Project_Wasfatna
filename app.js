@@ -702,14 +702,27 @@ if (resultsEl) {
         );
 
         favoriteBtn.title = buttonText;
-      } catch (error) {
-        console.error(error);
 
-        alert(
-          error.message ||
-          "Unable to update favorites."
-        );
-      } finally {
+        if (isFavorite) {
+  showToast(
+    "Added to Favorites",
+    "❤️"
+  );
+} else {
+  showToast(
+    "Removed from Favorites",
+    "🤍"
+  );
+}
+      } catch (error) {
+  console.error(error);
+
+  showToast(
+    error.message ||
+    "Unable to update favorites.",
+    "⚠️"
+  );
+} finally {
         favoriteBtn.disabled = false;
       }
     }
