@@ -35,6 +35,7 @@ CREATE TABLE recipe_ingredients (
     recipe_id INT NOT NULL,
     ingredient_id INT NOT NULL,
     quantity VARCHAR(50),
+    is_core TINYINT(1) NOT NULL DEFAULT 0,
 
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
