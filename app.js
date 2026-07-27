@@ -400,6 +400,20 @@ if (statsFavorites) {
               ? recipe.missing_ingredients
               : [];
 
+          const missingCoreIngredients =
+  Array.isArray(recipe.missing_core_ingredients)
+    ? recipe.missing_core_ingredients
+    : [];
+
+const missingOptionalIngredients =
+  Array.isArray(recipe.missing_optional_ingredients)
+    ? recipe.missing_optional_ingredients
+    : [];
+
+const hasAllCoreIngredients =
+  recipe.has_all_core_ingredients === true ||
+  Number(recipe.has_all_core_ingredients) === 1;
+
           const steps =
             Array.isArray(recipe.steps)
               ? recipe.steps
@@ -418,6 +432,23 @@ if (statsFavorites) {
                   .map(ingredientText)
                   .join(", ")
               : "None — you have all ingredients ✅";
+
+          const coreIngredientsHtml =
+  hasAllCoreIngredients
+    ? `
+      <div class="small core-success">
+        <strong>Core ingredients:</strong>
+        All required core ingredients are available ✅
+      </div>
+    `
+    : `
+      <div class="small core-warning">
+        <strong>Missing core ingredients:</strong>
+        ${missingCoreIngredients
+          .map(ingredientText)
+          .join(", ")}
+      </div>
+    `;
 
           const stepsHtml =
             steps.length
@@ -560,11 +591,14 @@ const filterText = [
         </div>
 
         <div class="small">
-          <strong>Still needed:</strong>
-          ${missingHtml}
-        </div>
+  <strong>Still needed:</strong>
+  ${missingHtml}
+</div>
 
-        <div class="recipe-details">
+${coreIngredientsHtml}
+
+<div class="recipe-details">
+
   <div class="small">
     <strong>Serves:</strong>
     ${escapeHtml(recipe.servings || "Not specified")}
