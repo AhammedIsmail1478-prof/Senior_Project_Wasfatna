@@ -248,7 +248,8 @@ if ($userId > 0) {
         SELECT
             ri.recipe_id,
             i.ingredient_name,
-            ri.quantity
+            ri.quantity,
+            ri.is_core
 
         FROM recipe_ingredients ri
 
@@ -270,9 +271,10 @@ if ($userId > 0) {
         $recipeId = (int)$row['recipe_id'];
 
         $ingredientsByRecipe[$recipeId][] = [
-            'name' => $row['ingredient_name'],
-            'quantity' => $row['quantity']
-        ];
+    'name' => $row['ingredient_name'],
+    'quantity' => $row['quantity'],
+    'is_core' => (bool)$row['is_core']
+];
     }
 
     /*
@@ -325,6 +327,8 @@ if ($userId > 0) {
 
         $matchedIngredients = [];
         $missingIngredients = [];
+        $missingCoreIngredients = [];
+        $missingOptionalIngredients = [];
 
         foreach ($allIngredients as $ingredient) {
             $normalizedName = mb_strtolower(
@@ -332,10 +336,16 @@ if ($userId > 0) {
             );
 
             if (isset($enteredSet[$normalizedName])) {
-                $matchedIngredients[] = $ingredient;
-            } else {
-                $missingIngredients[] = $ingredient;
-            }
+    $matchedIngredients[] = $ingredient;
+} else {
+    $missingIngredients[] = $ingredient;
+
+    if ($ingredient['is_core']) {
+        $missingCoreIngredients[] = $ingredient;
+    } else {
+        $missingOptionalIngredients[] = $ingredient;
+    }
+}
         }
 
         $totalIngredients = count($allIngredients);
@@ -357,6 +367,15 @@ if ($userId > 0) {
 
         $recipe['missing_ingredients'] =
             $missingIngredients;
+        
+        $recipe['missing_core_ingredients'] =
+            $missingCoreIngredients;
+
+        $recipe['missing_optional_ingredients'] =
+            $missingOptionalIngredients;
+
+        $recipe['has_all_core_ingredients'] =
+            count($missingCoreIngredients) === 0;
 
         $recipe['steps'] =
             $stepsByRecipe[$id] ?? [];
