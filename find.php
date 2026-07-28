@@ -170,11 +170,37 @@ require 'auth.php';
   </select>
 </div>
 
-          <div id="results" class="results">
-            <div class="empty">
-              Enter ingredients and click "Suggest Recipes".
-            </div>
           </div>
+
+<div
+  class="recipe-navigation"
+  id="recipeNavigation"
+  style="display: none;"
+>
+  <button
+    type="button"
+    id="prevRecipeBtn"
+    class="btn btn-outline"
+  >
+    ← Previous
+  </button>
+
+  <span id="recipePageInfo"></span>
+
+  <button
+    type="button"
+    id="nextRecipeBtn"
+    class="btn btn-primary"
+  >
+    Next →
+  </button>
+</div>
+
+<div id="results" class="results">
+  <div class="empty">
+    Enter ingredients and click "Suggest Recipes".
+  </div>
+</div>
         </div>
 
       </div>
