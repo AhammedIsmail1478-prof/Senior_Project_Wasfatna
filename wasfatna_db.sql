@@ -1012,7 +1012,6 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (787, 21, 11, '2 tbsp', 0);
 
 
-
 CREATE TABLE `recipe_steps` (
   `step_id` int(11) NOT NULL,
   `recipe_id` int(11) NOT NULL,
