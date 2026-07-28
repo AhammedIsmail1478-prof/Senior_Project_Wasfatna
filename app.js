@@ -162,6 +162,21 @@ const recipeSuggestions =
 const recipeSort =
   document.getElementById("recipeSort");
 
+const recipeNavigation =
+  document.getElementById("recipeNavigation");
+
+const prevRecipeBtn =
+  document.getElementById("prevRecipeBtn");
+
+const nextRecipeBtn =
+  document.getElementById("nextRecipeBtn");
+
+const recipePageInfo =
+  document.getElementById("recipePageInfo");
+
+// Current displayed recipe position.
+let currentRecipeIndex = 0;
+
 // Preference fields.
 const spiceEl =
   document.getElementById("spice");
@@ -251,6 +266,24 @@ if (recipeSuggestions) {
     `;
 
     resultsCount.textContent = "0";
+
+    currentRecipeIndex = 0;
+
+if (recipeNavigation) {
+  recipeNavigation.style.display = "none";
+}
+
+if (recipePageInfo) {
+  recipePageInfo.textContent = "";
+}
+
+if (statsRecipes) {
+  statsRecipes.textContent = "0";
+}
+
+if (statsIngredients) {
+  statsIngredients.textContent = "0";
+}
   });
 }
 
@@ -262,6 +295,13 @@ if (
   resultsCount
 ) {
   suggestBtn.addEventListener("click", async () => {
+
+currentRecipeIndex = 0;
+
+if (recipeNavigation) {
+  recipeNavigation.style.display = "none";
+}
+    
     if (recipeSearch) {
       recipeSearch.value = "";
     }
@@ -377,16 +417,27 @@ if (statsFavorites) {
       
 
       if (!recipes.length) {
-        resultsEl.innerHTML = `
-          <div class="empty">
-            No matching recipes were found.
-            Check the ingredient spelling and separate
-            ingredients using commas.
-          </div>
-        `;
 
-        return;
-      }
+  currentRecipeIndex = 0;
+
+  if (recipeNavigation) {
+    recipeNavigation.style.display = "none";
+  }
+
+  if (recipePageInfo) {
+    recipePageInfo.textContent = "";
+  }
+
+  resultsEl.innerHTML = `
+    <div class="empty">
+      No matching recipes were found.
+      Check the ingredient spelling and separate
+      ingredients using commas.
+    </div>
+  `;
+
+  return;
+}
 
       resultsEl.innerHTML = recipes
         .map((recipe) => {
@@ -790,7 +841,6 @@ if (resultsEl) {
   );
 }
 
-// ---------- Filter and sort displayed recipes ----------
 function updateDisplayedRecipes() {
   if (!resultsEl || !resultsCount) {
     return;
@@ -804,6 +854,7 @@ function updateDisplayedRecipes() {
     ? recipeSort.value
     : "best-match";
 
+  // Remove the previous no-results message.
   const oldMessage =
     resultsEl.querySelector(
       ".filter-empty-message"
@@ -817,6 +868,7 @@ function updateDisplayedRecipes() {
     resultsEl.querySelectorAll(".recipe")
   );
 
+  // Sort the recipe cards.
   recipeCards.sort((firstCard, secondCard) => {
     const firstName =
       firstCard.dataset.recipeName || "";
@@ -883,7 +935,7 @@ function updateDisplayedRecipes() {
       );
     }
 
-    // Best Match
+    // Best Match.
     if (
       firstPercentage !==
       secondPercentage
@@ -903,54 +955,144 @@ function updateDisplayedRecipes() {
     );
   });
 
-  let visibleCount = 0;
-
+  // Reinsert the cards in the selected order.
   recipeCards.forEach((card) => {
-    const filterText =
-      card.dataset.filterText || "";
-
-    const shouldShow =
-      filterText.includes(searchValue);
-
-    card.hidden = !shouldShow;
-
-    if (shouldShow) {
-      visibleCount++;
-    }
-
-    // Reinsert cards in the selected order.
     resultsEl.appendChild(card);
   });
+
+  // Find recipes that match the search box.
+  const filteredCards =
+    recipeCards.filter((card) => {
+      const filterText =
+        card.dataset.filterText || "";
+
+      return filterText.includes(searchValue);
+    });
+
+  // Hide every card first.
+  recipeCards.forEach((card) => {
+    card.hidden = true;
+  });
+
+  const visibleCount = filteredCards.length;
 
   resultsCount.textContent =
     String(visibleCount);
 
-  if (
-    recipeCards.length > 0 &&
-    visibleCount === 0
-  ) {
-    resultsEl.insertAdjacentHTML(
-      "beforeend",
-      `
-        <div class="empty filter-empty-message">
-          No recipe or ingredient matches your search.
-        </div>
-      `
-    );
+  // No matching recipes.
+  if (visibleCount === 0) {
+    currentRecipeIndex = 0;
+
+    if (recipeNavigation) {
+      recipeNavigation.style.display = "none";
+    }
+
+    if (recipePageInfo) {
+      recipePageInfo.textContent = "";
+    }
+
+    if (recipeCards.length > 0) {
+      resultsEl.insertAdjacentHTML(
+        "beforeend",
+        `
+          <div class="empty filter-empty-message">
+            No recipe or ingredient matches your search.
+          </div>
+        `
+      );
+    }
+
+    return;
+  }
+
+  // Prevent the index from going outside the array.
+  if (currentRecipeIndex >= visibleCount) {
+    currentRecipeIndex = visibleCount - 1;
+  }
+
+  if (currentRecipeIndex < 0) {
+    currentRecipeIndex = 0;
+  }
+
+  // Display only the selected recipe.
+  filteredCards[currentRecipeIndex].hidden =
+    false;
+
+  // Show the navigation.
+  if (recipeNavigation) {
+    recipeNavigation.style.display =
+      visibleCount > 1 ? "flex" : "none";
+  }
+
+  // Show dynamic page information.
+  if (recipePageInfo) {
+    recipePageInfo.textContent =
+      `${currentRecipeIndex + 1} of ${visibleCount}`;
+  }
+
+  // Disable Previous on the first recipe.
+  if (prevRecipeBtn) {
+    prevRecipeBtn.disabled =
+      currentRecipeIndex === 0;
+  }
+
+  // Disable Next on the final recipe.
+  if (nextRecipeBtn) {
+    nextRecipeBtn.disabled =
+      currentRecipeIndex === visibleCount - 1;
   }
 }
 
 if (recipeSearch) {
   recipeSearch.addEventListener(
     "input",
-    updateDisplayedRecipes
+    () => {
+      currentRecipeIndex = 0;
+      updateDisplayedRecipes();
+    }
   );
 }
 
 if (recipeSort) {
   recipeSort.addEventListener(
     "change",
-    updateDisplayedRecipes
+    () => {
+      currentRecipeIndex = 0;
+      updateDisplayedRecipes();
+    }
+  );
+}
+
+if (prevRecipeBtn) {
+  prevRecipeBtn.addEventListener(
+    "click",
+    () => {
+      if (currentRecipeIndex > 0) {
+        currentRecipeIndex--;
+        updateDisplayedRecipes();
+      }
+    }
+  );
+}
+
+if (nextRecipeBtn) {
+  nextRecipeBtn.addEventListener(
+    "click",
+    () => {
+      const visibleRecipes =
+        resultsEl.querySelectorAll(
+          ".recipe:not([hidden])"
+        );
+
+      if (
+        currentRecipeIndex <
+        resultsEl.querySelectorAll(".recipe").length - 1
+      ) {
+        currentRecipeIndex++;
+      }
+
+      updateDisplayedRecipes();
+    }
   );
 }
 
