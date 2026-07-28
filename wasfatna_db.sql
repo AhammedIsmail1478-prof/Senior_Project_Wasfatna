@@ -1,2285 +1,1924 @@
-CREATE TABLE categories (
-    category_id INT AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(50) NOT NULL UNIQUE
-);
-
-CREATE TABLE recipes (
-    recipe_id INT AUTO_INCREMENT PRIMARY KEY,
-    category_id INT NOT NULL,
-    recipe_name VARCHAR(100) NOT NULL UNIQUE,
-    description TEXT,
-    prep_time INT,
-    cook_time INT,
-    servings INT,
-    difficulty ENUM('Easy','Medium','Hard'),
-
-    spice_level VARCHAR(20) NOT NULL DEFAULT 'mild',
-    diet VARCHAR(30) NOT NULL DEFAULT 'none',
-    goal VARCHAR(30) NOT NULL DEFAULT 'any',
-
-    calories INT,
-    image VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (category_id)
-    REFERENCES categories(category_id)
-);
-
-CREATE TABLE ingredients (
-    ingredient_id INT AUTO_INCREMENT PRIMARY KEY,
-    ingredient_name VARCHAR(100) NOT NULL UNIQUE
-);
-
-CREATE TABLE recipe_ingredients (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    recipe_id INT NOT NULL,
-    ingredient_id INT NOT NULL,
-    quantity VARCHAR(50),
-    is_core TINYINT(1) NOT NULL DEFAULT 0,
-
-    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-    FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
-
-    UNIQUE (recipe_id, ingredient_id)
-);
-
-CREATE TABLE recipe_steps (
-    step_id INT AUTO_INCREMENT PRIMARY KEY,
-    recipe_id INT NOT NULL,
-    step_number INT,
-    instruction TEXT,
-
-    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
-
-    UNIQUE (recipe_id, step_number)
-);
-
-INSERT INTO categories(category_name)
-VALUES
-('Main Course'),
-('SeaFood'), 
-('Soups'),
-('Bread'),
-('Breakfast'),
-('Desserts'),
-('Snacks'),
-('Drinks'),
-('Salad'),
-('Pizza');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet,goal, calories, image)
-
-VALUES
-
-(1,'Chicken Machboos','Traditional Bahraini spiced chicken rice.',20,60,6,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',680,'chicken_machboos.png'),
-
-(1,'Lamb Machboos','Traditional Bahraini lamb rice.',25,90,6,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',780,'lamb_machboos.png'),
-
-(1,'Fish Machboos','Spiced rice served with local fish.',20,45,5,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',610,'fish_machboos.png'),
-
-(1,'Muhammar','Sweet saffron rice served with fish.',20,40,5,'Easy','mild','non-vegetarian,gluten-free,lactose-free','any',520,'muhammar.png'),
-
-(1,'Ghoozi','Slow cooked lamb with fragrant rice.',30,120,8,'Hard','medium','non-vegetarian,gluten-free,lactose-free','high-protein',890,'ghoozi.png'),
-
-(1,'Harees','Slow cooked wheat and meat.',20,180,6,'Medium','medium','non-vegetarian','high-protein',470,'harees.png'),
-
-(1,'Thareed','Bread soaked in flavorful stew.',20,60,5,'Medium','medium','non-vegetarian','high-protein',520,'thareed.png'),
-
-(1,'Chicken Madrouba','Creamy rice with shredded chicken.',20,70,6,'Medium','mild','non-vegetarian,gluten-free','high-protein',640,'chicken_madrouba.png'),
-
-(1,'Fish Madrouba','Creamy fish rice dish.',20,60,5,'Medium','mild','non-vegetarian,gluten-free','high-protein',590,'fish_madrouba.png'),
-
-(1,'Samak Mashwi','Traditional grilled Bahraini fish.',15,30,4,'Easy','mild','non-vegetarian,gluten-free,lactose-free','healthier',390,'samak_mashwi.png'),
-
-(1,'Qabooli Rice','Spiced rice with raisins and nuts.',20,55,6,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',610,'qabooli_rice.png'),
-
-(1,'Bahraini Style Biryani','Bahraini version of biryani.',30,75,6,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',720,'bahraini_biryani.png'),
-
-(1,'Chicken Saloona','Chicken cooked in vegetable gravy.',20,50,5,'Easy','medium','non-vegetarian,gluten-free,lactose-free','high-protein',460,'chicken_saloona.png'),
-
-(1,'Lamb Saloona','Lamb stew with vegetables.',25,90,6,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',620,'lamb_saloona.png'),
-
-(1,'Vegetable Saloona','Mixed vegetable curry.',15,40,5,'Easy','medium','non-vegetarian,gluten-free,lactose-free','healthier',310,'vegetable_saloona.png'),
-
-(1,'Jasheed','Traditional shark meat curry.',20,60,5,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',480,'jasheed.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(2,'Fried Hammour','Crispy deep-fried hammour fish served with lemon and rice.',20,25,4,'Easy','mild','non-vegetarian,gluten-free,lactose-free','high-protein',520,'fried_hammour.png'),
-
-(2,'Grilled Kingfish','Charcoal grilled kingfish seasoned with Bahraini spices.',20,30,4,'Easy','medium','non-vegetarian,gluten-free,lactose-free','high-protein',430,'grilled_kingfish.png'),
-
-(2,'Shrimp Curry','Fresh shrimp cooked in a rich spicy curry sauce.',20,35,5,'Medium','spicy','non-vegetarian,gluten-free,lactose-free','high-protein',480,'shrimp_curry.png'),
-
-(2,'Fried Shrimp','Golden crispy fried shrimp served with dipping sauce.',15,20,4,'Easy','mild','non-vegetarian','high-protein',450,'fried_shrimp.png'),
-
-(2,'Fish Curry','Tender fish cooked in aromatic curry gravy.',20,40,5,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',510,'fish_curry.png'),
-
-(2,'Seafood Saloona','Traditional Bahraini seafood stew with mixed vegetables.',25,45,6,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',470,'seafood_saloona.png'),
-
-(2,'Prawn Rice','Fragrant spiced rice cooked with juicy prawns.',25,45,5,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',620,'prawn_rice.png'),
-
-(2,'Fried Safi Fish','Traditional Bahraini fried safi fish with spices.',15,25,4,'Easy','mild','non-vegetarian','high-protein',410,'fried_safi_fish.png'),
-
-(2,'Fish Stew','Slow-cooked fish stew with tomatoes and herbs.',20,40,5,'Medium','mild','non-vegetarian,gluten-free,lactose-free','healthier',460,'fish_stew.png'),
-
-(2,'Spicy Shrimp','Spicy sautéed shrimp with garlic and chili.',15,20,4,'Medium','spicy','non-vegetarian,gluten-free,lactose-free','high-protein',390,'spicy_shrimp.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(3,'Lentil Soup','Traditional lentil soup made with red lentils, vegetables, and aromatic spices.',15,35,4,'Easy','mild','vegetarian,gluten-free,lactose-free','low-cal',280,'lentil_soup.png'),
-
-(3,'Chicken Soup','Comforting chicken soup with vegetables and flavorful herbs.',15,40,4,'Easy','mild','non-vegetarian,gluten-free,lactose-free','healthier',320,'chicken_soup.png'),
-
-(3,'Vegetable Soup','Healthy mixed vegetable soup prepared with fresh seasonal vegetables.',15,30,4,'Easy','mild','vegetarian,gluten-free,lactose-free','low-cal',210,'vegetable_soup.png'),
-
-(3,'Harees Soup','Creamy wheat and meat soup inspired by traditional Bahraini harees.',20,90,5,'Medium','mild','non-vegetarian','high-protein',390,'harees_soup.png'),
-
-(3,'Seafood Soup','Rich seafood soup made with fish, shrimp, and aromatic herbs.',20,45,5,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',350,'seafood_soup.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(4,'Khubz','Traditional Bahraini flatbread baked until soft and golden.',15,10,6,'Easy','mild','vegetarian,lactose-free','low-cal',220,'khubz.png'),
-
-(4,'Khubz Tannour','Traditional tannour oven bread with a crispy crust and soft interior.',20,15,6,'Medium','mild','vegetarian,lactose-free','low-cal',240,'khubz_tannour.png'),
-
-(4,'Regag Bread','Thin crispy Bahraini bread commonly served with curries and cheese.',15,10,4,'Easy','mild','vegetarian,lactose-free','low-cal',180,'regag_bread.png'),
-
-(4,'Muhalla Bread','Soft sweet Bahraini bread flavored with saffron and cardamom.',20,20,6,'Medium','mild','vegetarian','any',290,'muhalla_bread.png'),
-
-(4,'Chebab','Traditional Bahraini pancakes flavored with saffron and cardamom.',15,20,4,'Easy','mild','vegetarian','any',310,'chebab.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(5,'Balaleet','Traditional Bahraini sweet vermicelli topped with a savory omelet.',15,20,4,'Easy','mild','vegetarian','any',420,'balaleet.png'),
-
-(5,'Beyd wa Tamat','Classic Bahraini breakfast of eggs cooked with tomatoes and spices.',10,15,2,'Easy','mild','vegetarian,gluten-free,lactose-free','low-cal',280,'beyd_wa_tamat.png'),
-
-(5,'Bahraini Falafel','Crispy homemade falafel served with fresh vegetables and tahini.',20,15,4,'Medium','medium','vegetarian,lactose-free','high-protein',340,'bahraini_falafel.png'),
-
-(5,'Labneh Plate','Creamy labneh served with olive oil, olives, and fresh bread.',10,0,2,'Easy','mild','vegetarian','low-cal',260,'labneh_plate.png'),
-
-(5,'Foul Medames','Slow-cooked fava beans seasoned with garlic, lemon, and olive oil.',15,30,4,'Easy','mild','vegetarian,gluten-free,lactose-free','high-protein',310,'foul_medames.png'),
-
-(5,'Cheese Regag','Thin Bahraini regag bread filled with melted cheese.',10,10,2,'Easy','mild','vegetarian','any',350,'cheese_regag.png'),
-
-(5,'Egg Regag','Traditional regag bread topped with freshly cooked eggs.',10,10,2,'Easy','mild','vegetarian','high-protein',330,'egg_regag.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(6,'Luqaimat','Traditional Bahraini sweet dumplings drizzled with date syrup.',20,20,6,'Easy','mild','vegetarian,lactose-free','any',380,'luqaimat.png'),
-
-(6,'Khafaroosh','Sweet Bahraini fried cakes flavored with saffron and cardamom.',20,20,6,'Medium','mild','vegetarian','any',420,'khafaroosh.png'),
-
-(6,'Bahraini Halwa','Classic Bahraini halwa made with saffron, rose water, and nuts.',25,60,8,'Hard','mild','vegetarian,gluten-free,lactose-free','any',450,'bahraini_halwa.png'),
-
-(6,'Sago','Traditional sago pudding flavored with saffron and cardamom.',15,30,4,'Easy','mild','vegetarian,gluten-free,lactose-free','any',290,'sago.png'),
-
-(6,'Aseeda','Traditional sweet wheat pudding served warm with butter.',15,25,4,'Easy','mild','vegetarian','any',340,'aseeda.png'),
-
-(6,'Date Cake','Soft and moist cake made with sweet Bahraini dates.',20,45,8,'Medium','mild','vegetarian','any',360,'date_cake.png'),
-
-(6,'Umm Ali','Rich Middle Eastern bread pudding topped with nuts and raisins.',20,35,6,'Medium','mild','vegetarian','any',410,'umm_ali.png'),
-
-(6,'Rice Pudding','Creamy rice pudding flavored with cinnamon and cardamom.',15,40,4,'Easy','mild','vegetarian,gluten-free','any',300,'rice_pudding.png'),
-
-(6,'Sweet Vermicelli','Sweet roasted vermicelli cooked with sugar, butter, and nuts.',15,20,4,'Easy','mild','vegetarian','any',330,'sweet_vermicelli.png'),
-
-(6,'Coconut Cake','Soft coconut sponge cake topped with shredded coconut.',20,40,8,'Medium','mild','vegetarian','any',390,'coconut_cake.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(7,'Samosa','Crispy pastry filled with spiced vegetables and herbs.',20,15,4,'Easy','medium','vegetarian','any',280,'samosa.png'),
-
-(7,'Cheese Samosa','Golden fried samosas stuffed with melted cheese.',20,15,4,'Easy','mild','vegetarian','any',320,'cheese_samosa.png'),
-
-(7,'Meat Samosa','Crispy pastry filled with seasoned minced meat.',25,15,4,'Medium','medium','non-vegetarian','high-protein',350,'meat_samosa.png'),
-
-(7,'Potato Cutlets','Crispy potato patties seasoned with herbs and spices.',20,15,4,'Easy','medium','vegetarian,lactose-free','any',250,'potato_cutlets.png'),
-
-(7,'Bahraini Kebab','Traditional Bahraini kebabs made with minced meat and aromatic spices.',25,20,4,'Medium','medium','non-vegetarian,gluten-free,lactose-free','high-protein',390,'bahraini_kebab.png'),
-
-(7,'Meat Rolls','Crunchy rolls filled with seasoned minced meat.',25,15,4,'Medium','medium','non-vegetarian','high-protein',340,'meat_rolls.png'),
-
-(7,'Stuffed Grape Leaves','Tender grape leaves stuffed with seasoned rice and herbs.',30,40,6,'Medium','mild','vegetarian,gluten-free,lactose-free','low-cal',220,'stuffed_grape_leaves.png'),
-
-(7,'Spinach Fatayer','Baked pastries filled with seasoned spinach and onions.',25,20,6,'Medium','mild','vegetarian,lactose-free','low-cal',270,'spinach_fatayer.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(8,'Karak Tea','Traditional spiced milk tea brewed with black tea, cardamom, and sugar.',5,10,2,'Easy','mild','vegetarian','any',150,'karak_tea.png'),
-
-(8,'Arabic Coffee','Traditional Arabic coffee flavored with cardamom and served with dates.',5,15,4,'Easy','mild','vegetarian,gluten-free,lactose-free','low-cal',25,'arabic_coffee.png'),
-
-(8,'Lemon Mint Juice','Refreshing juice made with fresh lemons, mint leaves, and ice.',10,0,2,'Easy','mild','vegetarian,gluten-free,lactose-free','low-cal',120,'lemon_mint_juice.png'),
-
-(8,'Tamarind Juice','Sweet and tangy tamarind drink served chilled.',15,10,4,'Easy','mild','vegetarian,gluten-free,lactose-free','any',140,'tamarind_juice.png'),
-
-(8,'Vimto Drink','Refreshing mixed fruit drink served cold, especially during Ramadan.',5,0,2,'Easy','mild','vegetarian,gluten-free,lactose-free','any',180,'vimto_drink.png'),
-
-(8,'Rose Milk','Chilled milk flavored with rose syrup and served over ice.',5,0,2,'Easy','mild','vegetarian,gluten-free','any',190,'rose_milk.png'),
-
-(8,'Date MilkShake','Creamy milkshake blended with fresh dates and milk.',10,0,2,'Easy','mild','vegetarian,gluten-free','high-protein',320,'date_milkshake.png'),
-
-(8,'Saffron Milk','Warm milk infused with saffron, cardamom, and a touch of sugar.',5,10,2,'Easy','mild','vegetarian,gluten-free','low-cal',170,'saffron_milk.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(9,'Salata Hara','Traditional Bahraini spicy salad made with tomatoes, cucumbers, onions, green chilies, fresh herbs, and lemon juice.',15,0,4,'Easy','spicy','vegetarian,gluten-free,lactose-free','low-cal',120,'salata_hara.png'),
-
-(9,'Salatat Khiyar wa Tamatim','Refreshing salad prepared with fresh cucumbers, tomatoes, onions, lemon juice, and herbs.',10,0,4,'Easy','mild','vegetarian,gluten-free,lactose-free','low-cal',90,'cucumber_tomato_salad.png'),
-
-(9,'Tabbouleh','Fresh parsley salad with bulgur, tomatoes, mint, onions, olive oil, and lemon juice.',20,0,4,'Easy','mild','vegetarian,lactose-free','low-cal',180,'tabbouleh.png'),
-
-(9,'Fattoush','Traditional Arabic mixed vegetable salad with crispy toasted pita bread and tangy dressing.',20,0,4,'Easy','mild','vegetarian,lactose-free','low-cal',210,'fattoush.png'),
-
-(9,'Green Salad','Classic mixed green salad with lettuce, cucumbers, tomatoes, carrots, and lemon olive oil dressing.',10,0,4,'Easy','mild','vegetarian,gluten-free,lactose-free','low-cal',85,'green_salad.png');
-
-INSERT INTO recipes
-(category_id, recipe_name, description, prep_time, cook_time, servings, difficulty, spice_level, diet, goal, calories, image)
-
-VALUES
-
-(10,'Margherita Pizza','Classic pizza topped with tomato sauce, mozzarella cheese, and fresh basil.',20,15,4,'Easy','mild','vegetarian','any',280,'margherita_pizza.png'),
-
-(10,'Pepperoni Pizza','Pizza topped with tomato sauce, mozzarella cheese, and pepperoni slices.',20,15,4,'Easy','medium','non-vegetarian','high-protein',350,'pepperoni_pizza.png'),
-
-(10,'Chicken Tikka Pizza','Pizza topped with spicy chicken tikka, onions, bell peppers, and mozzarella cheese.',25,15,4,'Medium','spicy','non-vegetarian','high-protein',380,'chicken_tikka_pizza.png'),
-
-(10,'BBQ Chicken Pizza','Pizza topped with grilled chicken, BBQ sauce, onions, and mozzarella cheese.',20,15,4,'Medium','medium','non-vegetarian','high-protein',370,'bbq_chicken_pizza.png'),
-
-(10,'Meat Lovers Pizza','Loaded pizza with beef, chicken, pepperoni, and mozzarella cheese.',25,18,4,'Medium','medium','non-vegetarian','high-protein',450,'meat_lovers_pizza.png'),
-
-(10,'Seafood Pizza','Pizza topped with shrimp, calamari, mixed seafood, mozzarella cheese, and herbs.',25,18,4,'Medium','medium','non-vegetarian','high-protein',360,'seafood_pizza.png'),
-
-(10,'Vegetable Pizza','Pizza topped with mushrooms, onions, bell peppers, olives, tomatoes, and mozzarella cheese.',20,15,4,'Easy','mild','vegetarian','healthier',290,'vegetable_pizza.png'),
-
-(10,'Four Cheese Pizza','Pizza topped with mozzarella, cheddar, parmesan, and blue cheese.',20,15,4,'Easy','mild','vegetarian','any',400,'four_cheese_pizza.png'),
-
-(10,'Supreme Pizza','Pizza topped with chicken, beef, mushrooms, onions, bell peppers, olives, and mozzarella cheese.',25,18,4,'Medium','medium','non-vegetarian','high-protein',420,'supreme_pizza.png'),
-
-(10,'Mexican Pizza','Spicy pizza topped with seasoned beef, jalapeños, sweet corn, onions, and mozzarella cheese.',25,18,4,'Medium','spicy','non-vegetarian','high-protein',390,'mexican_pizza.png');
-
-INSERT INTO ingredients (ingredient_name)
-VALUES
-('Chicken'),
-('Lamb'),
-('Fish'),
-('Rice'),
-('Onion'),
-('Tomato'),
-('Garlic'),
-('Ginger'),
-('Machboos Spice'),
-('Black Pepper'),
-('Oil'),
-('Sugar'),
-('Date Syrup'),
-('Cardamom'),
-('Cinnamon'),
-('Cloves'),
-('Saffron'),
-('Salt'),
-('Butter'),
-('Wheat'),
-('Water'),
-('Arabic Bread'),
-('Turmeric'),
-('Lemon Juice'),
-('Cumin'),
-('Raisins'),
-('Almonds'),
-('Yogurt'),
-('Bay Leaf'),
-('Coriander'),
-('Potato'),
-('Carrot'),
-('Bell Pepper'),
-('Tomato Paste'),
-('Shark Meat'),
-('Vermicelli'),
-('Egg'),
-('Rose Water'),
-('Green Chili'),
-('Hammour Fish'),
-('Paprika'),
-('Shrimp'),
-('Kingfish'),
-('Curry Powder'),
-('Coconut Milk'),
-('Flour'),
-('Cornstarch'),
-('Breadcrumbs'),
-('Mixed Seafood'),
-('Prawns'),
-('Safi Fish'),
-('Chili Flakes'),
-('Red Lentils'),
-('Chicken Stock'),
-('Peas'),
-('Celery'),
-('Ground Cinnamon'),
-('Fish Stock'),
-('Parsley'),
-('Yeast'),
-('Milk'),
-('Chickpeas'),
-('Baking Powder'),
-('Labneh'),
-('Olives'),
-('Olive Oil'),
-('Mint Leaves'),
-('Fava Beans'),
-('Regag Bread'),
-('Cheddar Cheese'),
-('Nutmeg'),
-('Corn Flour'),
-('Rose Essence'),
-('Mixed Nuts'),
-('Sago Pearls'),
-('Whole Wheat Flour'),
-('Dates'),
-('Vanilla Extract'),
-('Puff Pastry'),
-('Cream'),
-('Pistachios'),
-('Coconut'),
-('Samosa Sheets'),
-('Mozzarella Cheese'),
-('Minced Beef'),
-('Minced Lamb'),
-('Spring Roll Sheets'),
-('Grape Leaves'),
-('Spinach'),
-('Pastry Dough'),
-('Black Tea'),
-('Evaporated Milk'),
-('Arabic Coffee'),
-('Lemon'),
-('Ice Cubes'),
-('Tamarind'),
-('Vimto Syrup'),
-('Rose Syrup'),
-('Cucumber'),
-('Bulgur'),
-('Lettuce'),
-('Radish'),
-('Sumac'),
-('Pita Bread'),
-('Basil'),
-('Pepperoni'),
-('BBQ Sauce'),
-('Pizza Dough'),
-('Cheese Blend'),
-('Parmesan Cheese'),
-('Blue Cheese'),
-('Jalapeños'),
-('Sweet Corn'),
-('Mushrooms');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(1,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(1,1,'Wash and season the chicken with spices.'),
-(1,2,'Fry the onions until golden brown.'),
-(1,3,'Add garlic, ginger, and tomatoes, then cook well.'),
-(1,4,'Add the chicken and cook until tender.'),
-(1,5,'Add the rice and enough water.'),
-(1,6,'Cook until the rice is tender and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1 kg'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(2,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(2,1,'Wash the lamb pieces thoroughly.'),
-(2,2,'Cook lamb with spices until tender.'),
-(2,3,'Fry onions until golden brown.'),
-(2,4,'Add garlic, ginger, and tomatoes.'),
-(2,5,'Mix lamb with rice and water.'),
-(2,6,'Cook until rice is fully done and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Machboos Spice'),'2 tbsp'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(3,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(3,1,'Clean and prepare the fish properly.'),
-(3,2,'Season fish with salt and spices.'),
-(3,3,'Fry onions until golden brown.'),
-(3,4,'Add garlic, ginger, and tomatoes.'),
-(3,5,'Cook fish lightly in the spice mixture.'),
-(3,6,'Add rice and water, then cook until done.'),
-(3,7,'Serve hot with lemon and salad.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'3 tbsp'),
-(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Date Syrup'),'2 tbsp'),
-(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(4,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(4,1,'Wash the rice thoroughly.'),
-(4,2,'Soak saffron in warm water.'),
-(4,3,'Cook rice with sugar and salt.'),
-(4,4,'Add cardamom and saffron mixture.'),
-(4,5,'Mix in date syrup for sweetness.'),
-(4,6,'Add butter for rich flavor.'),
-(4,7,'Cook until rice is soft and fragrant.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1.5 kg'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cinnamon'),'1 tsp'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cloves'),'3 pieces'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(5,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(5,1,'Wash and clean the lamb pieces.'),
-(5,2,'Cook lamb with spices until tender.'),
-(5,3,'Fry onions until golden brown.'),
-(5,4,'Add garlic, ginger, and tomatoes.'),
-(5,5,'Add cardamom, cinnamon, and cloves.'),
-(5,6,'Add rice and water, then mix well.'),
-(5,7,'Slow cook until rice is fully done.'),
-(5,8,'Serve hot with salad or yogurt.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Wheat'),'2 cups'),
-(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'500 g'),
-(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'6 cups'),
-(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(6,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(6,1,'Wash the wheat thoroughly and soak it overnight.'),
-(6,2,'Add meat (lamb or chicken) to a pot with water.'),
-(6,3,'Cook on low heat until meat becomes soft.'),
-(6,4,'Add soaked wheat to the pot.'),
-(6,5,'Stir continuously to avoid lumps.'),
-(6,6,'Cook slowly until mixture becomes creamy.'),
-(6,7,'Add salt and butter for flavor.'),
-(6,8,'Serve hot with cinnamon on top.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1 kg'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp'),
-(7,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Arabic Bread'),'4 pieces');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(7,1,'Cut the lamb into medium-sized pieces and wash thoroughly.'),
-(7,2,'Cook the lamb until tender.'),
-(7,3,'Fry the onion until golden, then add garlic and ginger.'),
-(7,4,'Add tomatoes and cook until soft.'),
-(7,5,'Return the lamb to the pot and season with salt and black pepper.'),
-(7,6,'Simmer until the stew thickens.'),
-(7,7,'Place pieces of Arabic bread in a serving dish and pour the stew over the bread.'),
-(7,8,'Serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'2 cups'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(8,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(8,1,'Wash and cut the chicken into medium pieces.'),
-(8,2,'Heat oil and sauté the onion until golden.'),
-(8,3,'Add garlic, ginger, and turmeric, then cook for 2 minutes.'),
-(8,4,'Add the chicken and cook until lightly browned.'),
-(8,5,'Add the rice and enough water to cover the ingredients.'),
-(8,6,'Cook until the chicken and rice are very tender.'),
-(8,7,'Mash and stir the mixture until it becomes creamy.'),
-(8,8,'Serve hot with melted butter if desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'2 cups'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(9,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(9,1,'Clean and cut the fish into medium-sized pieces.'),
-(9,2,'Heat oil and sauté the onion until soft.'),
-(9,3,'Add garlic, ginger, and turmeric, then cook for 2 minutes.'),
-(9,4,'Add the fish and cook gently for a few minutes.'),
-(9,5,'Add the rice and enough water to cover the ingredients.'),
-(9,6,'Cook until the fish and rice are very soft.'),
-(9,7,'Stir and mash the mixture until it becomes creamy.'),
-(9,8,'Serve hot with melted butter if desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 whole'),
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(10,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(10,1,'Clean and wash the fish thoroughly.'),
-(10,2,'Mix garlic, ginger, lemon juice, cumin, salt, and black pepper to make a marinade.'),
-(10,3,'Coat the fish evenly with the marinade.'),
-(10,4,'Let the fish marinate for 30 minutes.'),
-(10,5,'Brush the fish lightly with oil.'),
-(10,6,'Grill the fish over medium heat until cooked on both sides.'),
-(10,7,'Serve hot with rice, salad, and lemon wedges.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cinnamon'),'1 stick'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cloves'),'4 pieces'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Raisins'),'1/4 cup'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Almonds'),'1/4 cup'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(11,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(11,1,'Wash and season the chicken with salt and spices.'),
-(11,2,'Cook the chicken until tender and set aside.'),
-(11,3,'Fry the onions until golden, then add garlic and ginger.'),
-(11,4,'Add cardamom, cinnamon, and cloves and cook briefly.'),
-(11,5,'Add the rice and pour in enough water or chicken stock.'),
-(11,6,'Cook until the rice is almost done.'),
-(11,7,'Top with cooked chicken, raisins, and almonds.'),
-(11,8,'Cover and cook on low heat until the rice is fully cooked.'),
-(11,9,'Serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yogurt'),'1 cup'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cinnamon'),'1 stick'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cloves'),'4 pieces'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bay Leaf'),'2 leaves'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp'),
-(12,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(12,1,'Wash and marinate the chicken with yogurt, turmeric, salt, and black pepper for 30 minutes.'),
-(12,2,'Heat oil and fry the onions until golden brown.'),
-(12,3,'Add garlic, ginger, tomatoes, and whole spices, then cook well.'),
-(12,4,'Add the marinated chicken and cook until tender.'),
-(12,5,'Cook the rice until it is partially done.'),
-(12,6,'Layer the rice over the chicken mixture.'),
-(12,7,'Sprinkle saffron water and chopped coriander over the rice.'),
-(12,8,'Cover and cook on low heat until the rice is fully cooked.'),
-(12,9,'Serve hot with salad or yogurt.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'1 kg'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(13,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(13,1,'Cut the chicken into medium-sized pieces and wash thoroughly.'),
-(13,2,'Heat oil and fry the onions until soft.'),
-(13,3,'Add garlic and ginger, then cook for 2 minutes.'),
-(13,4,'Add tomatoes and tomato paste, then cook until combined.'),
-(13,5,'Add the chicken and cook until lightly browned.'),
-(13,6,'Add potato, carrot, and bell pepper.'),
-(13,7,'Season with cumin, coriander, salt, and black pepper.'),
-(13,8,'Add water and simmer until the chicken and vegetables are tender.'),
-(13,9,'Serve hot with rice or fresh bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lamb'),'1 kg'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(14,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(14,1,'Wash and cut the lamb into medium-sized pieces.'),
-(14,2,'Heat oil and fry the onions until golden.'),
-(14,3,'Add garlic and ginger, then cook for 2 minutes.'),
-(14,4,'Add tomatoes and tomato paste and cook until soft.'),
-(14,5,'Add the lamb and cook until browned.'),
-(14,6,'Add potato, carrot, and bell pepper.'),
-(14,7,'Season with cumin, coriander, salt, and black pepper.'),
-(14,8,'Add water and simmer until the lamb becomes tender.'),
-(14,9,'Serve hot with rice or fresh bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(15,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(15,1,'Wash and chop all the vegetables into medium-sized pieces.'),
-(15,2,'Heat oil and fry the onions until soft.'),
-(15,3,'Add garlic and ginger, then cook for 2 minutes.'),
-(15,4,'Add tomatoes and tomato paste and cook until softened.'),
-(15,5,'Add potato, carrot, and bell pepper.'),
-(15,6,'Season with cumin, coriander, salt, and black pepper.'),
-(15,7,'Add enough water and simmer until the vegetables are tender.'),
-(15,8,'Serve hot with rice or fresh bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shark Meat'),'1 kg'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(16,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(16,1,'Wash the shark meat thoroughly and cut it into medium-sized pieces.'),
-(16,2,'Boil the shark meat until cooked, then drain and shred it.'),
-(16,3,'Heat oil and sauté the onion until golden brown.'),
-(16,4,'Add garlic, ginger, and tomatoes, then cook until softened.'),
-(16,5,'Add turmeric, cumin, coriander, salt, and black pepper.'),
-(16,6,'Mix in the shredded shark meat and cook for 10–15 minutes.'),
-(16,7,'Stir well until the flavors are combined.'),
-(16,8,'Serve hot with Bahraini rice or Arabic bread.');
-
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Kingfish'),'1 whole'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(17,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(17,1,'Clean and wash the kingfish thoroughly.'),
-(17,2,'Prepare a marinade using garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper.'),
-(17,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
-(17,4,'Brush the fish lightly with oil.'),
-(17,5,'Grill the fish over medium heat for 6–8 minutes on each side until fully cooked.'),
-(17,6,'Serve hot with rice, grilled vegetables, or salad.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(18,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(18,1,'Clean and devein the shrimp thoroughly.'),
-(18,2,'Heat the oil and sauté the onion until soft.'),
-(18,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
-(18,4,'Add the tomatoes and curry powder, then cook until the tomatoes soften.'),
-(18,5,'Pour in the coconut milk and stir well.'),
-(18,6,'Add the shrimp and cook for 5–7 minutes until pink and fully cooked.'),
-(18,7,'Season with salt and black pepper.'),
-(18,8,'Serve hot with steamed rice.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'1 cup'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'1/2 cup'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(19,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'500 ml');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(19,1,'Clean and devein the shrimp thoroughly.'),
-(19,2,'Season the shrimp with salt and black pepper.'),
-(19,3,'Coat each shrimp with flour.'),
-(19,4,'Dip the shrimp into the beaten eggs.'),
-(19,5,'Cover the shrimp evenly with breadcrumbs.'),
-(19,6,'Heat the oil in a deep frying pan.'),
-(19,7,'Fry the shrimp until golden brown and crispy.'),
-(19,8,'Drain on paper towels and serve hot with dipping sauce.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(20,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(20,1,'Clean and cut the fish into medium-sized pieces.'),
-(20,2,'Heat the oil and sauté the onion until soft.'),
-(20,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
-(20,4,'Add tomatoes and curry powder, then cook until the tomatoes soften.'),
-(20,5,'Pour in the coconut milk and stir well.'),
-(20,6,'Add the fish and simmer gently for 10–12 minutes until cooked.'),
-(20,7,'Season with salt and black pepper.'),
-(20,8,'Serve hot with steamed rice or bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Curry Powder'),'2 tbsp'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut Milk'),'1 cup'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(21,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(21,1,'Clean and cut the fish into medium-sized pieces.'),
-(21,2,'Heat the oil and sauté the onion until soft.'),
-(21,3,'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
-(21,4,'Add tomatoes and curry powder and cook until the tomatoes soften.'),
-(21,5,'Pour in the coconut milk and stir well.'),
-(21,6,'Add the fish and simmer gently for 10 to 12 minutes until fully cooked.'),
-(21,7,'Season with salt and black pepper to taste.'),
-(21,8,'Serve hot with steamed rice or Arabic bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'1 kg'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'2 tbsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(22,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(22,1,'Clean and prepare the mixed seafood.'),
-(22,2,'Heat the oil and sauté the onions until soft.'),
-(22,3,'Add garlic and ginger, then cook for 2 minutes.'),
-(22,4,'Add tomatoes and tomato paste, then cook until softened.'),
-(22,5,'Add potato, carrot, and bell pepper.'),
-(22,6,'Season with cumin, coriander, salt, and black pepper.'),
-(22,7,'Add the mixed seafood and enough water, then simmer until the vegetables are tender and the seafood is cooked.'),
-(22,8,'Serve hot with rice or Arabic bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Prawns'),'500 g'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'3 cups'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(23,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(23,1,'Clean and devein the prawns thoroughly.'),
-(23,2,'Heat the oil and fry the onions until golden brown.'),
-(23,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
-(23,4,'Add turmeric, salt, and black pepper, then mix well.'),
-(23,5,'Add the prawns and cook for 3 to 4 minutes.'),
-(23,6,'Add the rice and enough water, then stir well.'),
-(23,7,'Cook until the rice is tender and the liquid is absorbed.'),
-(23,8,'Serve hot with salad and lemon wedges.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Safi Fish'),'1 whole'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1 tsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(24,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(24,1,'Clean and wash the Safi fish thoroughly.'),
-(24,2,'Prepare a marinade using garlic, ginger, turmeric, paprika, lemon juice, salt, and black pepper.'),
-(24,3,'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
-(24,4,'Heat the oil in a frying pan.'),
-(24,5,'Fry the fish on both sides until golden brown and fully cooked.'),
-(24,6,'Drain excess oil and serve hot with rice, salad, and lemon wedges.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish'),'1 kg'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'2 medium'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'4 cloves'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato Paste'),'2 tbsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1 tbsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(25,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'3 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(25,1,'Clean and cut the fish into medium-sized pieces.'),
-(25,2,'Heat the oil and sauté the onions until soft.'),
-(25,3,'Add garlic, ginger, tomatoes, and tomato paste, then cook well.'),
-(25,4,'Add the potato and carrot and stir for a few minutes.'),
-(25,5,'Season with cumin, coriander, salt, and black pepper.'),
-(25,6,'Add enough water and simmer until the vegetables are almost tender.'),
-(25,7,'Add the fish and cook gently until fully cooked.'),
-(25,8,'Serve hot with rice or fresh bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'500 g'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'5 cloves'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'2'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1 tsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(26,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(26,1,'Clean and devein the shrimp thoroughly.'),
-(26,2,'Season the shrimp with salt, black pepper, paprika, and lemon juice.'),
-(26,3,'Heat the oil in a frying pan.'),
-(26,4,'Sauté the garlic, ginger, and green chili until fragrant.'),
-(26,5,'Add the shrimp and cook for 3 to 5 minutes.'),
-(26,6,'Sprinkle the chili flakes and stir well.'),
-(26,7,'Cook until the shrimp are fully cooked and coated with the spices.'),
-(26,8,'Serve hot with rice, bread, or a fresh salad.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Red Lentils'),'2 cups'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(27,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(27,1,'Wash the red lentils thoroughly.'),
-(27,2,'Heat the oil and sauté the onion until soft.'),
-(27,3,'Add garlic, ginger, and tomatoes, then cook until softened.'),
-(27,4,'Add the red lentils, cumin, turmeric, salt, and black pepper.'),
-(27,5,'Pour in the water and bring to a boil.'),
-(27,6,'Reduce the heat and simmer until the lentils are tender.'),
-(27,7,'Blend the soup until smooth if desired.'),
-(27,8,'Serve hot with lemon wedges or fresh bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'1 medium'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'4 cups'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bay Leaf'),'1'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(28,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(28,1,'Cut the chicken into small pieces.'),
-(28,2,'Heat the oil and sauté the onion until soft.'),
-(28,3,'Add the garlic and ginger, then cook for 2 minutes.'),
-(28,4,'Add the chicken and cook until lightly browned.'),
-(28,5,'Add the carrot, chicken stock, and bay leaf.'),
-(28,6,'Season with salt and black pepper.'),
-(28,7,'Simmer for 30 minutes until the chicken is tender.'),
-(28,8,'Serve hot with fresh bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Carrot'),'2 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'2 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1 cup'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Celery'),'2 stalks'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(29,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'5 cups');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(29,1,'Wash and chop all the vegetables into small pieces.'),
-(29,2,'Heat the oil and sauté the onion until soft.'),
-(29,3,'Add the garlic and ginger, then cook for 2 minutes.'),
-(29,4,'Add the tomatoes, carrots, potatoes, peas, and celery.'),
-(29,5,'Season with salt and black pepper.'),
-(29,6,'Pour in the water and bring to a boil.'),
-(29,7,'Simmer for 25 to 30 minutes until the vegetables are tender.'),
-(29,8,'Serve hot with fresh bread or crackers.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'500 g'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Wheat'),'1 cup'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken Stock'),'5 cups'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ground Cinnamon'),'1/2 tsp'),
-(30,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(30,1,'Wash the wheat and soak it for at least 2 hours.'),
-(30,2,'Cook the chicken until tender, then shred it into small pieces.'),
-(30,3,'Heat butter and sauté the onion, garlic, and ginger.'),
-(30,4,'Add the soaked wheat and chicken stock.'),
-(30,5,'Add the shredded chicken, salt, black pepper, and ground cinnamon.'),
-(30,6,'Simmer on low heat until the wheat becomes very soft.'),
-(30,7,'Stir continuously until the soup reaches a smooth and creamy consistency.'),
-(30,8,'Serve hot with a sprinkle of cinnamon if desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'500 g'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tbsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fish Stock'),'4 cups'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(31,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(31,1,'Clean and prepare the mixed seafood.'),
-(31,2,'Heat the oil and sauté the onion until soft.'),
-(31,3,'Add the garlic, ginger, and tomatoes, then cook until softened.'),
-(31,4,'Pour in the fish stock and bring it to a boil.'),
-(31,5,'Add the mixed seafood and cook for 8 to 10 minutes.'),
-(31,6,'Season with salt and black pepper.'),
-(31,7,'Stir in the chopped parsley and simmer for 2 minutes.'),
-(31,8,'Serve hot with lemon wedges and fresh bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
-(32,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(32,1,'Mix the flour, yeast, and salt in a large bowl.'),
-(32,2,'Gradually add the water and knead into a smooth dough.'),
-(32,3,'Add the oil and continue kneading until the dough is soft.'),
-(32,4,'Cover the dough and let it rise for 1 hour.'),
-(32,5,'Divide the dough into equal portions and flatten into round breads.'),
-(32,6,'Bake in a preheated oven until golden brown.'),
-(32,7,'Remove from the oven and brush lightly with oil if desired.'),
-(32,8,'Serve warm with curries, soups, or breakfast dishes.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
-(33,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(33,1,'Mix the flour, yeast, and salt in a large bowl.'),
-(33,2,'Gradually add water and knead until a smooth dough forms.'),
-(33,3,'Add the oil and continue kneading for 8 to 10 minutes.'),
-(33,4,'Cover the dough and let it rise for about 1 hour.'),
-(33,5,'Divide the dough into equal portions and flatten each into a round shape.'),
-(33,6,'Bake in a hot tannour oven until the bread is golden and slightly crisp.'),
-(33,7,'Remove the bread carefully and allow it to cool slightly.'),
-(33,8,'Serve warm with curries, grilled meat, or traditional Bahraini dishes.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp'),
-(34,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(34,1,'Mix the flour, water, salt, and oil into a smooth batter.'),
-(34,2,'Heat a flat griddle over medium heat.'),
-(34,3,'Pour a thin layer of batter onto the hot griddle.'),
-(34,4,'Spread the batter evenly into a thin round shape.'),
-(34,5,'Cook until the edges become crisp and the bread is fully cooked.'),
-(34,6,'Carefully remove the bread from the griddle.'),
-(34,7,'Repeat with the remaining batter.'),
-(34,8,'Serve warm with cheese, honey, or traditional Bahraini dishes.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'4 cups'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tbsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(35,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(35,1,'Mix the flour, yeast, sugar, and salt in a large bowl.'),
-(35,2,'Add the warm milk, butter, cardamom, and saffron, then knead into a soft dough.'),
-(35,3,'Cover the dough and let it rise for about 1 hour.'),
-(35,4,'Divide the dough into equal portions and shape into small round breads.'),
-(35,5,'Place the dough on a baking tray and let it rest for 15 minutes.'),
-(35,6,'Bake in a preheated oven until golden brown.'),
-(35,7,'Brush with melted butter after baking for a soft texture.'),
-(35,8,'Serve warm with tea or as a breakfast bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(36,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(36,1,'Mix the flour, yeast, sugar, and salt in a bowl.'),
-(36,2,'Add the milk, egg, cardamom, and saffron, then whisk into a smooth batter.'),
-(36,3,'Cover the batter and let it rest for about 1 hour.'),
-(36,4,'Heat a lightly buttered non-stick pan over medium heat.'),
-(36,5,'Pour a ladle of batter onto the pan to form a round pancake.'),
-(36,6,'Cook until bubbles appear, then flip and cook the other side until golden brown.'),
-(36,7,'Repeat with the remaining batter.'),
-(36,8,'Serve warm with honey, date syrup, or cream.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/4 cup'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tsp'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
-(37,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(37,1,'Cook the vermicelli until tender and drain well.'),
-(37,2,'Melt the butter in a pan and stir in the sugar.'),
-(37,3,'Add the vermicelli along with cardamom, saffron, and rose water.'),
-(37,4,'Cook for a few minutes until the flavors are well combined.'),
-(37,5,'Beat the eggs with a pinch of salt.'),
-(37,6,'Cook the eggs into a thin omelet in a separate pan.'),
-(37,7,'Place the omelet over the sweet vermicelli.'),
-(37,8,'Serve warm for breakfast.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'3'),
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Green Chili'),'1'),
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/2 tsp'),
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp'),
-(38,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(38,1,'Heat the oil in a frying pan over medium heat.'),
-(38,2,'Add the chopped tomatoes and green chili, then cook until softened.'),
-(38,3,'Season with salt and black pepper.'),
-(38,4,'Beat the eggs in a bowl.'),
-(38,5,'Pour the eggs over the tomato mixture.'),
-(38,6,'Cook gently until the eggs are set.'),
-(38,7,'Fold the mixture lightly and cook for another minute.'),
-(38,8,'Serve hot with fresh Khubz or Regag bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chickpeas'),'2 cups'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/2 cup'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coriander'),'1/4 cup'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
-(39,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(39,1,'Soak the chickpeas overnight and drain well.'),
-(39,2,'Blend the chickpeas with onion, garlic, parsley, and coriander.'),
-(39,3,'Add cumin, salt, black pepper, and baking powder, then mix well.'),
-(39,4,'Shape the mixture into small balls or patties.'),
-(39,5,'Heat the oil in a deep pan.'),
-(39,6,'Fry the falafel until golden brown and crispy.'),
-(39,7,'Drain on paper towels to remove excess oil.'),
-(39,8,'Serve hot with tahini sauce, salad, and Khubz bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Labneh'),'250 g'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'8 pieces'),
-(40,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(40,1,'Spread the labneh evenly on a serving plate.'),
-(40,2,'Drizzle the olive oil over the labneh.'),
-(40,3,'Arrange the olives around the labneh.'),
-(40,4,'Garnish with fresh mint leaves.'),
-(40,5,'Chill for a few minutes before serving if desired.'),
-(40,6,'Serve with warm Khubz or Regag bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Fava Beans'),'2 cups'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(41,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(41,1,'Cook the fava beans until they are soft.'),
-(41,2,'Mash the beans lightly with a spoon or fork.'),
-(41,3,'Add the garlic, cumin, salt, and black pepper.'),
-(41,4,'Stir in the lemon juice and olive oil.'),
-(41,5,'Cook for 5 minutes over low heat while stirring.'),
-(41,6,'Transfer the foul to a serving bowl.'),
-(41,7,'Garnish with chopped parsley and a drizzle of olive oil.'),
-(41,8,'Serve hot with Khubz or Regag bread.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'100 g'),
-(42,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(42,1,'Heat a flat pan over medium heat.'),
-(42,2,'Place the Regag bread on the pan.'),
-(42,3,'Spread the butter evenly over the bread.'),
-(42,4,'Sprinkle the cheddar cheese evenly on top.'),
-(42,5,'Fold the bread in half.'),
-(42,6,'Cook until the cheese melts completely.'),
-(42,7,'Remove from the pan and cut into pieces if desired.'),
-(42,8,'Serve hot as a traditional Bahraini breakfast.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Regag Bread'),'1 piece'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp'),
-(43,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/4 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(43,1,'Heat a flat pan over medium heat.'),
-(43,2,'Place the Regag bread on the pan and spread the butter evenly.'),
-(43,3,'Crack the eggs directly onto the bread.'),
-(43,4,'Season with salt and black pepper.'),
-(43,5,'Spread the eggs evenly over the bread.'),
-(43,6,'Cook until the eggs are fully set.'),
-(43,7,'Fold the bread if desired and cook for another minute.'),
-(43,8,'Serve hot as a traditional Bahraini breakfast.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cornstarch'),'2 tbsp'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'1 tsp'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1½ cups'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying'),
-(44,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Date Syrup'),'1/2 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(44,1,'Mix the flour, cornstarch, yeast, baking powder, and sugar in a bowl.'),
-(44,2,'Gradually add the water and mix into a smooth batter.'),
-(44,3,'Cover the batter and let it rest for 1 hour.'),
-(44,4,'Heat the oil in a deep frying pan.'),
-(44,5,'Drop small portions of the batter into the hot oil.'),
-(44,6,'Fry until the luqaimat are golden brown and crispy.'),
-(44,7,'Drain on paper towels to remove excess oil.'),
-(44,8,'Drizzle generously with date syrup and serve warm.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Nutmeg'),'1/4 tsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'1 tsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(45,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(45,1,'Mix the flour, sugar, baking powder, and nutmeg in a bowl.'),
-(45,2,'Add the eggs, melted butter, rose water, cardamom, and saffron.'),
-(45,3,'Mix until a smooth batter is formed.'),
-(45,4,'Heat the oil in a deep frying pan.'),
-(45,5,'Drop spoonfuls of the batter into the hot oil.'),
-(45,6,'Fry until golden brown on both sides.'),
-(45,7,'Drain on paper towels to remove excess oil.'),
-(45,8,'Serve warm with tea or coffee.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Corn Flour'),'1 cup'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 cups'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'2 tbsp'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Essence'),'1 tsp'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(46,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/2 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(46,1,'Mix the corn flour with water until smooth.'),
-(46,2,'Heat the mixture over medium heat while stirring continuously.'),
-(46,3,'Add the sugar and continue stirring until dissolved.'),
-(46,4,'Mix in the butter, saffron, cardamom, rose water, and rose essence.'),
-(46,5,'Cook until the mixture becomes thick and glossy.'),
-(46,6,'Stir in half of the mixed nuts.'),
-(46,7,'Pour the halwa into a serving dish and garnish with the remaining nuts.'),
-(46,8,'Allow it to cool slightly before serving.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sago Pearls'),'1 cup'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Water'),'1 tbsp'),
-(47,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(47,1,'Wash the sago pearls thoroughly.'),
-(47,2,'Boil the water and add the sago pearls.'),
-(47,3,'Cook until the sago becomes soft and translucent.'),
-(47,4,'Add the sugar and stir until completely dissolved.'),
-(47,5,'Mix in the cardamom, saffron, and rose water.'),
-(47,6,'Stir in the butter until melted.'),
-(47,7,'Cook for another 5 minutes until slightly thickened.'),
-(47,8,'Serve warm or chilled as desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Whole Wheat Flour'),'2 cups'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'3 tbsp'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(48,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1/4 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(48,1,'Bring the water to a boil in a large pot.'),
-(48,2,'Gradually add the whole wheat flour while stirring continuously.'),
-(48,3,'Cook over low heat until the mixture becomes thick and smooth.'),
-(48,4,'Add the sugar, butter, cardamom, saffron, and salt.'),
-(48,5,'Continue stirring until all the ingredients are well combined.'),
-(48,6,'Cook for another 5 to 10 minutes until creamy.'),
-(48,7,'Transfer to a serving dish.'),
-(48,8,'Serve warm with extra melted butter if desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'2 cups'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1/2 cup'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'2 tsp'),
-(49,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(49,1,'Preheat the oven to 180°C.'),
-(49,2,'Blend the dates with the milk until smooth.'),
-(49,3,'Mix the flour and baking powder in a bowl.'),
-(49,4,'Add the eggs, butter, sugar, vanilla extract, and date mixture.'),
-(49,5,'Mix until a smooth batter forms.'),
-(49,6,'Pour the batter into a greased cake tin.'),
-(49,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
-(49,8,'Allow the cake to cool before slicing and serving.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Puff Pastry'),'250 g'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cream'),'1 cup'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Raisins'),'1/4 cup'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Almonds'),'1/4 cup'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pistachios'),'1/4 cup'),
-(50,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(50,1,'Preheat the oven to 180°C.'),
-(50,2,'Break the baked puff pastry into small pieces and place them in a baking dish.'),
-(50,3,'Sprinkle the raisins, almonds, and pistachios over the pastry.'),
-(50,4,'Heat the milk, cream, sugar, butter, and vanilla extract until the sugar dissolves.'),
-(50,5,'Pour the warm milk mixture evenly over the pastry.'),
-(50,6,'Bake for 20 to 25 minutes until the top is golden brown.'),
-(50,7,'Allow it to cool slightly before serving.'),
-(50,8,'Serve warm, garnished with extra nuts if desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'4 cups'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp'),
-(51,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(51,1,'Wash the rice thoroughly.'),
-(51,2,'Cook the rice with the milk over medium heat.'),
-(51,3,'Stir frequently until the rice becomes soft and creamy.'),
-(51,4,'Add the sugar, cardamom, saffron, and vanilla extract.'),
-(51,5,'Mix well and continue cooking for 5 to 10 minutes.'),
-(51,6,'Stir in the butter until melted.'),
-(51,7,'Transfer the pudding to serving bowls.'),
-(51,8,'Serve warm or chilled, garnished with cinnamon or chopped nuts if desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vermicelli'),'250 g'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'2 tbsp'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'1 tsp'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(52,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Nuts'),'1/4 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(52,1,'Melt the butter in a pan over medium heat.'),
-(52,2,'Add the vermicelli and roast until golden brown.'),
-(52,3,'Pour in the water and cook until the vermicelli softens.'),
-(52,4,'Add the sugar and stir until dissolved.'),
-(52,5,'Mix in the cardamom and saffron.'),
-(52,6,'Cook until the liquid is absorbed.'),
-(52,7,'Garnish with the mixed nuts.'),
-(52,8,'Serve warm as a traditional Bahraini dessert.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'2 cups'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Coconut'),'1 cup'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 cup'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Butter'),'1/2 cup'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'1 cup'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'2'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Baking Powder'),'2 tsp'),
-(53,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vanilla Extract'),'1 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(53,1,'Preheat the oven to 180°C.'),
-(53,2,'Mix the flour, baking powder, and shredded coconut in a bowl.'),
-(53,3,'In another bowl, beat the butter and sugar until creamy.'),
-(53,4,'Add the eggs, milk, and vanilla extract, then mix well.'),
-(53,5,'Gradually add the dry ingredients and stir until smooth.'),
-(53,6,'Pour the batter into a greased cake tin.'),
-(53,7,'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
-(53,8,'Allow the cake to cool before slicing and serving.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'3 medium'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Peas'),'1/2 cup'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(54,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(54,1,'Boil and mash the potatoes.'),
-(54,2,'Cook the onion, peas, cumin, turmeric, salt, and black pepper in a little oil.'),
-(54,3,'Mix the mashed potatoes with the cooked vegetables.'),
-(54,4,'Fill each samosa sheet with the potato mixture.'),
-(54,5,'Fold and seal the samosas securely.'),
-(54,6,'Heat the oil in a deep pan.'),
-(54,7,'Fry the samosas until golden brown and crispy.'),
-(54,8,'Serve hot with chutney or your favorite dipping sauce.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'1 cup'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'1 cup'),
-(55,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(55,1,'Mix the cheddar and mozzarella cheese together.'),
-(55,2,'Place a spoonful of the cheese mixture onto each samosa sheet.'),
-(55,3,'Fold the sheets into triangle shapes and seal the edges.'),
-(55,4,'Heat the oil in a deep frying pan.'),
-(55,5,'Carefully place the samosas into the hot oil.'),
-(55,6,'Fry until golden brown and crispy.'),
-(55,7,'Drain on paper towels to remove excess oil.'),
-(55,8,'Serve hot with ketchup or chili sauce.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Samosa Sheets'),'10 sheets'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(56,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(56,1,'Heat the oil in a pan and sauté the onion until soft.'),
-(56,2,'Add the garlic and cook for 1 minute.'),
-(56,3,'Add the minced beef and cook until browned.'),
-(56,4,'Season with salt and black pepper, then let the filling cool.'),
-(56,5,'Place a spoonful of filling onto each samosa sheet.'),
-(56,6,'Fold the sheets into triangles and seal the edges.'),
-(56,7,'Deep-fry until golden brown and crispy.'),
-(56,8,'Serve hot with your favorite dipping sauce.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Potato'),'4 medium'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Egg'),'1'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Breadcrumbs'),'1 cup'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(57,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(57,1,'Boil the potatoes until tender, then mash them.'),
-(57,2,'Mix the potatoes with the egg, parsley, salt, and black pepper.'),
-(57,3,'Shape the mixture into small patties.'),
-(57,4,'Coat each patty with breadcrumbs.'),
-(57,5,'Heat the oil in a frying pan.'),
-(57,6,'Fry the cutlets until golden brown on both sides.'),
-(57,7,'Drain on paper towels to remove excess oil.'),
-(57,8,'Serve hot with ketchup or your favorite dipping sauce.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'500 g'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'3 cloves'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 tbsp'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(58,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(58,1,'Combine the minced lamb, onion, garlic, parsley, cumin, salt, and black pepper in a bowl.'),
-(58,2,'Mix well until all ingredients are evenly combined.'),
-(58,3,'Shape the mixture into kebab logs or patties.'),
-(58,4,'Lightly brush the kebabs with oil.'),
-(58,5,'Preheat a grill or grill pan over medium-high heat.'),
-(58,6,'Grill the kebabs for 10–12 minutes, turning occasionally.'),
-(58,7,'Cook until browned and fully cooked through.'),
-(58,8,'Serve hot with Arabic bread, salad, and yogurt sauce.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spring Roll Sheets'),'10 sheets'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'500 g'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(59,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'As needed for frying');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(59,1,'Heat a little oil in a pan and cook the onion until soft.'),
-(59,2,'Add the garlic and minced beef, then cook until browned.'),
-(59,3,'Season with salt and black pepper and allow the filling to cool.'),
-(59,4,'Place a spoonful of the filling onto each spring roll sheet.'),
-(59,5,'Roll tightly and seal the edges.'),
-(59,6,'Heat oil in a deep frying pan.'),
-(59,7,'Fry the rolls until golden brown and crispy.'),
-(59,8,'Serve hot with ketchup or chili sauce.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Grape Leaves'),'30 leaves'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rice'),'1 cup'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Lamb'),'250 g'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'1 medium'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(60,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(60,1,'Rinse the grape leaves and blanch them in hot water if needed.'),
-(60,2,'Mix the rice, minced lamb, onion, tomato, parsley, salt, and black pepper.'),
-(60,3,'Place a small amount of filling onto each grape leaf.'),
-(60,4,'Roll the leaves tightly and fold in the sides.'),
-(60,5,'Arrange the rolls in a pot.'),
-(60,6,'Drizzle with oil and lemon juice, then add enough water to cover.'),
-(60,7,'Simmer over low heat for about 45 minutes until cooked.'),
-(60,8,'Serve warm with yogurt or lemon wedges.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pastry Dough'),'500 g'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Spinach'),'300 g'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp'),
-(61,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'1 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(61,1,'Preheat the oven to 180°C.'),
-(61,2,'Cook the onion in a little oil until soft.'),
-(61,3,'Add the spinach and cook until wilted.'),
-(61,4,'Mix in the lemon juice, salt, and black pepper, then let the filling cool.'),
-(61,5,'Cut the pastry dough into small circles and add the spinach filling.'),
-(61,6,'Fold into triangles and seal the edges firmly.'),
-(61,7,'Place on a baking tray and bake for 20 to 25 minutes until golden brown.'),
-(61,8,'Serve warm as an appetizer or snack.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Tea'),'2 tsp'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Evaporated Milk'),'1 cup'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
-(62,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(62,1,'Boil the water in a saucepan.'),
-(62,2,'Add the black tea and crushed cardamom.'),
-(62,3,'Simmer for 3 to 5 minutes.'),
-(62,4,'Add the evaporated milk and sugar.'),
-(62,5,'Stir well and bring to a gentle boil.'),
-(62,6,'Simmer for another 2 to 3 minutes.'),
-(62,7,'Strain the tea into serving cups.'),
-(62,8,'Serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Arabic Coffee'),'4 tbsp'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'4 pods'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(63,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'6 pieces');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(63,1,'Boil the water in a coffee pot.'),
-(63,2,'Add the Arabic coffee and simmer for 10 minutes.'),
-(63,3,'Add the crushed cardamom and saffron.'),
-(63,4,'Simmer for another 2 to 3 minutes.'),
-(63,5,'Remove from the heat and let the coffee settle briefly.'),
-(63,6,'Strain the coffee into a traditional dallah.'),
-(63,7,'Serve in small cups.'),
-(63,8,'Enjoy with fresh dates.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon'),'2'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'10 leaves'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
-(64,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(64,1,'Wash the lemons and mint leaves.'),
-(64,2,'Squeeze the lemons and remove the seeds.'),
-(64,3,'Add the lemon juice, mint leaves, sugar, and water to a blender.'),
-(64,4,'Blend until smooth.'),
-(64,5,'Add the ice cubes and blend briefly.'),
-(64,6,'Strain the juice if desired.'),
-(64,7,'Pour into serving glasses.'),
-(64,8,'Serve chilled.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tamarind'),'200 g'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'4 cups'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1/2 cup'),
-(65,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(65,1,'Soak the tamarind in warm water for 30 minutes.'),
-(65,2,'Mash the tamarind to extract the juice.'),
-(65,3,'Strain the mixture to remove seeds and fibers.'),
-(65,4,'Add the sugar and stir until dissolved.'),
-(65,5,'Add the remaining water and mix well.'),
-(65,6,'Chill the juice in the refrigerator.'),
-(65,7,'Pour into glasses filled with ice cubes.'),
-(65,8,'Serve cold.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Vimto Syrup'),'1/2 cup'),
-(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'2 cups'),
-(66,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(66,1,'Fill a serving glass with ice cubes.'),
-(66,2,'Pour the Vimto syrup into the glass.'),
-(66,3,'Add the chilled water.'),
-(66,4,'Stir well until combined.'),
-(66,5,'Taste and adjust the syrup if desired.'),
-(66,6,'Garnish with a lemon slice if preferred.'),
-(66,7,'Serve immediately while cold.'),
-(66,8,'Enjoy chilled.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Rose Syrup'),'3 tbsp'),
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(67,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(67,1,'Pour the chilled milk into a serving glass.'),
-(67,2,'Add the rose syrup and sugar.'),
-(67,3,'Stir well until everything is fully mixed.'),
-(67,4,'Add the ice cubes.'),
-(67,5,'Serve immediately while chilled.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Dates'),'8 pieces'),
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tbsp'),
-(68,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ice Cubes'),'1 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(68,1,'Remove the seeds from the dates.'),
-(68,2,'Add the dates, milk, and sugar into a blender.'),
-(68,3,'Blend until smooth and creamy.'),
-(68,4,'Add the ice cubes and blend for a few more seconds.'),
-(68,5,'Pour into serving glasses and serve chilled.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Milk'),'2 cups'),
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Saffron'),'1 pinch'),
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cardamom'),'2 pods'),
-(69,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'2 tbsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(69,1,'Pour the milk into a saucepan and heat over medium heat.'),
-(69,2,'Add the saffron and crushed cardamom to the milk.'),
-(69,3,'Stir in the sugar until it dissolves completely.'),
-(69,4,'Simmer gently for 5 to 10 minutes to infuse the flavors.'),
-(69,5,'Serve warm, or chill before serving if desired.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'3 medium'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'1/4 cup'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(70,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(70,1,'Wash and finely chop the tomatoes, onion, and parsley.'),
-(70,2,'Place all the chopped ingredients in a mixing bowl.'),
-(70,3,'Add the lemon juice and olive oil.'),
-(70,4,'Season with salt and black pepper.'),
-(70,5,'Mix well until all ingredients are evenly combined.'),
-(70,6,'Serve fresh as a side dish.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'2 medium'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(71,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(71,1,'Wash the cucumber and tomatoes thoroughly.'),
-(71,2,'Dice the cucumber and tomatoes into small pieces.'),
-(71,3,'Place them in a mixing bowl.'),
-(71,4,'Add the lemon juice and olive oil.'),
-(71,5,'Season with salt and black pepper, then toss well.'),
-(71,6,'Serve fresh and chilled.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parsley'),'2 cups'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bulgur'),'1/2 cup'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(72,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(72,1,'Soak the bulgur in water for 15 minutes, then drain well.'),
-(72,2,'Finely chop the parsley, mint leaves, tomatoes, cucumber, and onion.'),
-(72,3,'Place all the ingredients in a large mixing bowl.'),
-(72,4,'Add the soaked bulgur, lemon juice, and olive oil.'),
-(72,5,'Season with salt and black pepper.'),
-(72,6,'Mix well until all the ingredients are evenly combined.'),
-(72,7,'Chill for 15 minutes before serving.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Radish'),'4'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mint Leaves'),'1/4 cup'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pita Bread'),'1 piece'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'3 tbsp'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sumac'),'1 tsp'),
-(73,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(73,1,'Wash and chop the lettuce, tomatoes, cucumber, and radishes into bite-sized pieces.'),
-(73,2,'Toast or fry the pita bread until crispy, then break it into small pieces.'),
-(73,3,'Place the vegetables and mint leaves in a large bowl.'),
-(73,4,'Add the toasted pita bread.'),
-(73,5,'Mix the lemon juice, olive oil, sumac, and salt to prepare the dressing.'),
-(73,6,'Pour the dressing over the salad and toss gently.'),
-(73,7,'Serve immediately to keep the bread crispy.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lettuce'),'2 cups'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cucumber'),'1 medium'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 small'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Lemon Juice'),'2 tbsp'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olive Oil'),'2 tbsp'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(74,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Black Pepper'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(74,1,'Wash the lettuce, cucumber, tomatoes, and onion thoroughly.'),
-(74,2,'Chop the vegetables into bite-sized pieces.'),
-(74,3,'Place all the vegetables in a large salad bowl.'),
-(74,4,'Mix the lemon juice, olive oil, salt, and black pepper to prepare the dressing.'),
-(74,5,'Pour the dressing over the salad and toss gently until evenly coated.'),
-(74,6,'Serve immediately while fresh.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(75,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(75,1,'Prepare the pizza dough and let it rise.'),
-(75,2,'Roll out the dough into a pizza base.'),
-(75,3,'Spread tomato sauce evenly over the base.'),
-(75,4,'Top with mozzarella cheese and fresh basil leaves.'),
-(75,5,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(75,6,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(76,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pepperoni'),'150 g');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(76,1,'Prepare the pizza dough and let it rise.'),
-(76,2,'Roll out the dough into a pizza base.'),
-(76,3,'Spread tomato sauce evenly over the base.'),
-(76,4,'Sprinkle mozzarella cheese over the sauce.'),
-(76,5,'Arrange the pepperoni slices evenly on top.'),
-(76,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(76,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'250 g'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yogurt'),'2 tbsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Paprika'),'1 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Turmeric'),'1/2 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cumin'),'1 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1/2 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Garlic'),'2 cloves'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Ginger'),'1 tsp'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(77,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(77,1,'Mix the yogurt and spices, then marinate the chicken for 30 minutes.'),
-(77,2,'Cook the marinated chicken until nearly done.'),
-(77,3,'Prepare the pizza dough and roll it into a base.'),
-(77,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
-(77,5,'Top with the cooked chicken, onion, and bell pepper.'),
-(77,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(77,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='BBQ Sauce'),'4 tbsp'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'250 g'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(78,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(78,1,'Prepare the pizza dough and let it rise.'),
-(78,2,'Cook the chicken until fully done and slice it into small pieces.'),
-(78,3,'Roll out the dough into a pizza base.'),
-(78,4,'Spread BBQ sauce evenly over the base.'),
-(78,5,'Top with mozzarella cheese, chicken, onion, and bell pepper.'),
-(78,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(78,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'150 g'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'150 g'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Pepperoni'),'100 g'),
-(79,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(79,1,'Prepare the pizza dough and let it rise.'),
-(79,2,'Cook the chicken and minced beef until fully done.'),
-(79,3,'Roll out the dough into a pizza base.'),
-(79,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
-(79,5,'Top with the chicken, minced beef, pepperoni, and onion.'),
-(79,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(79,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mixed Seafood'),'200 g'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Shrimp'),'100 g'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(80,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(80,1,'Prepare the pizza dough and let it rise.'),
-(80,2,'Cook the mixed seafood and shrimp until just done.'),
-(80,3,'Roll out the dough into a pizza base.'),
-(80,4,'Spread tomato sauce over the base and sprinkle mozzarella cheese.'),
-(80,5,'Top with the seafood, shrimp, onion, and bell pepper.'),
-(80,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(80,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mushrooms'),'100 g'),
-(81,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'50 g');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(81,1,'Prepare the pizza dough and let it rise.'),
-(81,2,'Slice the vegetables into thin pieces.'),
-(81,3,'Roll out the dough into a pizza base.'),
-(81,4,'Spread tomato sauce over the base and sprinkle mozzarella cheese.'),
-(81,5,'Top with the onion, bell pepper, mushrooms, and olives.'),
-(81,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(81,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'1 cup'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Cheddar Cheese'),'1 cup'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Parmesan Cheese'),'1/2 cup'),
-(82,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Blue Cheese'),'1/2 cup');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(82,1,'Prepare the pizza dough and let it rise.'),
-(82,2,'Roll out the dough into a pizza base.'),
-(82,3,'Spread tomato sauce evenly over the base.'),
-(82,4,'Top with mozzarella, cheddar, parmesan, and blue cheese.'),
-(82,5,'Bake in a preheated oven until the crust is golden and the cheeses have melted.'),
-(82,6,'Allow to cool for 2 minutes.'),
-(82,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chicken'),'100 g'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'100 g'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mushrooms'),'100 g'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(83,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Olives'),'50 g');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(83,1,'Prepare the pizza dough and let it rise.'),
-(83,2,'Cook the chicken and minced beef until fully done.'),
-(83,3,'Roll out the dough into a pizza base.'),
-(83,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
-(83,5,'Top with chicken, minced beef, mushrooms, onion, bell pepper, and olives.'),
-(83,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(83,7,'Slice and serve hot.');
-
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Flour'),'3 cups'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Water'),'1 cup'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Yeast'),'2 tsp'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sugar'),'1 tsp'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Salt'),'1 tsp'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Oil'),'2 tbsp'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Tomato'),'2 medium'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Mozzarella Cheese'),'2 cups'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Minced Beef'),'200 g'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Onion'),'1 medium'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Bell Pepper'),'1 medium'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Jalapenos'),'50 g'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Sweet Corn'),'50 g'),
-(84,(SELECT ingredient_id FROM ingredients WHERE ingredient_name='Chili Flakes'),'1/2 tsp');
-
-INSERT INTO recipe_steps (recipe_id, step_number, instruction)
-VALUES
-(84,1,'Prepare the pizza dough and let it rise.'),
-(84,2,'Cook the minced beef with spices until fully done.'),
-(84,3,'Roll out the dough into a pizza base.'),
-(84,4,'Spread tomato sauce over the base and add mozzarella cheese.'),
-(84,5,'Top with seasoned beef, onion, bell pepper, jalapenos, and sweet corn.'),
-(84,6,'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
-(84,7,'Slice and serve hot.');
-
-
-
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 28, 2026 at 01:31 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `wasfatna`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category_name`) VALUES
+(4, 'Bread'),
+(5, 'Breakfast'),
+(6, 'Desserts'),
+(8, 'Drinks'),
+(1, 'Main Course'),
+(10, 'Pizza'),
+(9, 'Salad'),
+(2, 'SeaFood'),
+(7, 'Snacks'),
+(3, 'Soups');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `favorite_id` int(11) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `recipe_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`favorite_id`, `user_id`, `recipe_id`, `created_at`) VALUES
+(18, 1, 4, '2026-07-26 18:38:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ingredients`
+--
+
+CREATE TABLE `ingredients` (
+  `ingredient_id` int(11) NOT NULL,
+  `ingredient_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ingredients`
+--
+
+INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`) VALUES
+(27, 'Almonds'),
+(22, 'Arabic Bread'),
+(93, 'Arabic Coffee'),
+(63, 'Baking Powder'),
+(105, 'Basil'),
+(29, 'Bay Leaf'),
+(107, 'BBQ Sauce'),
+(33, 'Bell Pepper'),
+(10, 'Black Pepper'),
+(91, 'Black Tea'),
+(111, 'Blue Cheese'),
+(48, 'Breadcrumbs'),
+(100, 'Bulgur'),
+(19, 'Butter'),
+(14, 'Cardamom'),
+(32, 'Carrot'),
+(56, 'Celery'),
+(70, 'Cheddar Cheese'),
+(109, 'Cheese Blend'),
+(1, 'Chicken'),
+(54, 'Chicken Stock'),
+(62, 'Chickpeas'),
+(52, 'Chili Flakes'),
+(15, 'Cinnamon'),
+(16, 'Cloves'),
+(82, 'Coconut'),
+(45, 'Coconut Milk'),
+(30, 'Coriander'),
+(72, 'Corn Flour'),
+(47, 'Cornstarch'),
+(80, 'Cream'),
+(99, 'Cucumber'),
+(25, 'Cumin'),
+(44, 'Curry Powder'),
+(13, 'Date Syrup'),
+(77, 'Dates'),
+(37, 'Egg'),
+(92, 'Evaporated Milk'),
+(68, 'Fava Beans'),
+(3, 'Fish'),
+(58, 'Fish Stock'),
+(46, 'Flour'),
+(7, 'Garlic'),
+(8, 'Ginger'),
+(88, 'Grape Leaves'),
+(39, 'Green Chili'),
+(57, 'Ground Cinnamon'),
+(40, 'Hammour Fish'),
+(95, 'Ice Cubes'),
+(112, 'Jalapeños'),
+(43, 'Kingfish'),
+(64, 'Labneh'),
+(2, 'Lamb'),
+(94, 'Lemon'),
+(24, 'Lemon Juice'),
+(101, 'Lettuce'),
+(9, 'Machboos Spice'),
+(61, 'Milk'),
+(85, 'Minced Beef'),
+(86, 'Minced Lamb'),
+(67, 'Mint Leaves'),
+(74, 'Mixed Nuts'),
+(49, 'Mixed Seafood'),
+(84, 'Mozzarella Cheese'),
+(114, 'Mushrooms'),
+(71, 'Nutmeg'),
+(11, 'Oil'),
+(66, 'Olive Oil'),
+(65, 'Olives'),
+(5, 'Onion'),
+(41, 'Paprika'),
+(110, 'Parmesan Cheese'),
+(59, 'Parsley'),
+(90, 'Pastry Dough'),
+(55, 'Peas'),
+(106, 'Pepperoni'),
+(81, 'Pistachios'),
+(104, 'Pita Bread'),
+(108, 'Pizza Dough'),
+(31, 'Potato'),
+(50, 'Prawns'),
+(79, 'Puff Pastry'),
+(102, 'Radish'),
+(26, 'Raisins'),
+(53, 'Red Lentils'),
+(69, 'Regag Bread'),
+(4, 'Rice'),
+(73, 'Rose Essence'),
+(98, 'Rose Syrup'),
+(38, 'Rose Water'),
+(17, 'Saffron'),
+(51, 'Safi Fish'),
+(75, 'Sago Pearls'),
+(18, 'Salt'),
+(83, 'Samosa Sheets'),
+(35, 'Shark Meat'),
+(42, 'Shrimp'),
+(89, 'Spinach'),
+(87, 'Spring Roll Sheets'),
+(12, 'Sugar'),
+(103, 'Sumac'),
+(113, 'Sweet Corn'),
+(96, 'Tamarind'),
+(6, 'Tomato'),
+(34, 'Tomato Paste'),
+(23, 'Turmeric'),
+(78, 'Vanilla Extract'),
+(36, 'Vermicelli'),
+(97, 'Vimto Syrup'),
+(21, 'Water'),
+(20, 'Wheat'),
+(76, 'Whole Wheat Flour'),
+(60, 'Yeast'),
+(28, 'Yogurt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipes`
+--
+
+CREATE TABLE `recipes` (
+  `recipe_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `recipe_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `prep_time` int(11) DEFAULT NULL,
+  `cook_time` int(11) DEFAULT NULL,
+  `servings` int(11) DEFAULT NULL,
+  `difficulty` enum('Easy','Medium','Hard') DEFAULT NULL,
+  `spice_level` varchar(20) NOT NULL DEFAULT 'mild',
+  `diet` varchar(100) NOT NULL,
+  `goal` varchar(30) NOT NULL DEFAULT 'any',
+  `calories` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `recipes`
+--
+
+INSERT INTO `recipes` (`recipe_id`, `category_id`, `recipe_name`, `description`, `prep_time`, `cook_time`, `servings`, `difficulty`, `spice_level`, `diet`, `goal`, `calories`, `image`, `created_at`) VALUES
+(1, 1, 'Chicken Machboos', 'Traditional Bahraini spiced chicken rice.', 20, 60, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lactose-free', 'high-protein', 680, 'chicken_machboos.png', '2026-07-24 17:09:48'),
+(2, 1, 'Lamb Machboos', 'Traditional Bahraini lamb rice.', 25, 90, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 780, 'lamb_machboos.png', '2026-07-24 17:09:48'),
+(3, 1, 'Fish Machboos', 'Spiced rice served with local fish.', 20, 45, 5, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 610, 'fish_machboos.png', '2026-07-24 17:09:48'),
+(4, 1, 'Muhammar', 'Sweet saffron rice served with fish.', 20, 40, 5, 'Easy', 'mild', 'non-vegetarian,gluten-free,lac', 'any', 520, 'muhammar.png', '2026-07-24 17:09:48'),
+(5, 1, 'Ghoozi', 'Slow cooked lamb with fragrant rice.', 30, 120, 8, 'Hard', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 890, 'ghoozi.png', '2026-07-24 17:09:48'),
+(6, 1, 'Harees', 'Slow cooked wheat and meat.', 20, 180, 6, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 470, 'harees.png', '2026-07-24 17:09:48'),
+(7, 1, 'Thareed', 'Bread soaked in flavorful stew.', 20, 60, 5, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 520, 'thareed.png', '2026-07-24 17:09:48'),
+(8, 1, 'Chicken Madrouba', 'Creamy rice with shredded chicken.', 20, 70, 6, 'Medium', 'mild', 'non-vegetarian,gluten-free', 'high-protein', 640, 'chicken_madrouba.png', '2026-07-24 17:09:48'),
+(9, 1, 'Fish Madrouba', 'Creamy fish rice dish.', 20, 60, 5, 'Medium', 'mild', 'non-vegetarian,gluten-free', 'high-protein', 590, 'fish_madrouba.png', '2026-07-24 17:09:48'),
+(10, 1, 'Samak Mashwi', 'Traditional grilled Bahraini fish.', 15, 30, 4, 'Easy', 'mild', 'non-vegetarian,gluten-free,lac', 'healthier', 390, 'samak_mashwi.png', '2026-07-24 17:09:48'),
+(11, 1, 'Qabooli Rice', 'Spiced rice with raisins and nuts.', 20, 55, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 610, 'qabooli_rice.png', '2026-07-24 17:09:48'),
+(12, 1, 'Bahraini Style Biryani', 'Bahraini version of biryani.', 30, 75, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 720, 'bahraini_biryani.png', '2026-07-24 17:09:48'),
+(13, 1, 'Chicken Saloona', 'Chicken cooked in vegetable gravy.', 20, 50, 5, 'Easy', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 460, 'chicken_saloona.png', '2026-07-24 17:09:48'),
+(14, 1, 'Lamb Saloona', 'Lamb stew with vegetables.', 25, 90, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 620, 'lamb_saloona.png', '2026-07-24 17:09:48'),
+(15, 1, 'Vegetable Saloona', 'Mixed vegetable curry.', 15, 40, 5, 'Easy', 'medium', 'non-vegetarian,gluten-free,lac', 'healthier', 310, 'vegetable_saloona.png', '2026-07-24 17:09:48'),
+(16, 1, 'Jasheed', 'Traditional shark meat curry.', 20, 60, 5, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 480, 'jasheed.png', '2026-07-24 17:09:48'),
+(17, 2, 'Fried Hammour', 'Crispy deep-fried hammour fish served with lemon and rice.', 20, 25, 4, 'Easy', 'mild', 'non-vegetarian,gluten-free,lac', 'high-protein', 520, 'fried_hammour.png', '2026-07-24 17:09:48'),
+(18, 2, 'Grilled Kingfish', 'Charcoal grilled kingfish seasoned with Bahraini spices.', 20, 30, 4, 'Easy', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 430, 'grilled_kingfish.png', '2026-07-24 17:09:48'),
+(19, 2, 'Shrimp Curry', 'Fresh shrimp cooked in a rich spicy curry sauce.', 20, 35, 5, 'Medium', 'spicy', 'non-vegetarian,gluten-free,lac', 'high-protein', 480, 'shrimp_curry.png', '2026-07-24 17:09:48'),
+(20, 2, 'Fried Shrimp', 'Golden crispy fried shrimp served with dipping sauce.', 15, 20, 4, 'Easy', 'mild', 'non-vegetarian', 'high-protein', 450, 'fried_shrimp.png', '2026-07-24 17:09:48'),
+(21, 2, 'Fish Curry', 'Tender fish cooked in aromatic curry gravy.', 20, 40, 5, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 510, 'fish_curry.png', '2026-07-24 17:09:48'),
+(22, 2, 'Seafood Saloona', 'Traditional Bahraini seafood stew with mixed vegetables.', 25, 45, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 470, 'seafood_saloona.png', '2026-07-24 17:09:48'),
+(23, 2, 'Prawn Rice', 'Fragrant spiced rice cooked with juicy prawns.', 25, 45, 5, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 620, 'prawn_rice.png', '2026-07-24 17:09:48'),
+(24, 2, 'Fried Safi Fish', 'Traditional Bahraini fried safi fish with spices.', 15, 25, 4, 'Easy', 'mild', 'non-vegetarian', 'high-protein', 410, 'fried_safi_fish.png', '2026-07-24 17:09:48'),
+(25, 2, 'Fish Stew', 'Slow-cooked fish stew with tomatoes and herbs.', 20, 40, 5, 'Medium', 'mild', 'non-vegetarian,gluten-free,lac', 'healthier', 460, 'fish_stew.png', '2026-07-24 17:09:48'),
+(26, 2, 'Spicy Shrimp', 'Spicy sautéed shrimp with garlic and chili.', 15, 20, 4, 'Medium', 'spicy', 'non-vegetarian,gluten-free,lac', 'high-protein', 390, 'spicy_shrimp.png', '2026-07-24 17:09:48'),
+(27, 3, 'Lentil Soup', 'Traditional lentil soup made with red lentils, vegetables, and aromatic spices.', 15, 35, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 280, 'lentil_soup.png', '2026-07-24 17:09:48'),
+(28, 3, 'Chicken Soup', 'Comforting chicken soup with vegetables and flavorful herbs.', 15, 40, 4, 'Easy', 'mild', 'non-vegetarian,gluten-free,lac', 'healthier', 320, 'chicken_soup.png', '2026-07-24 17:09:48'),
+(29, 3, 'Vegetable Soup', 'Healthy mixed vegetable soup prepared with fresh seasonal vegetables.', 15, 30, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 210, 'vegetable_soup.png', '2026-07-24 17:09:48'),
+(30, 3, 'Harees Soup', 'Creamy wheat and meat soup inspired by traditional Bahraini harees.', 20, 90, 5, 'Medium', 'mild', 'non-vegetarian', 'high-protein', 390, 'harees_soup.png', '2026-07-24 17:09:48'),
+(31, 3, 'Seafood Soup', 'Rich seafood soup made with fish, shrimp, and aromatic herbs.', 20, 45, 5, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 350, 'seafood_soup.png', '2026-07-24 17:09:48'),
+(32, 4, 'Khubz', 'Traditional Bahraini flatbread baked until soft and golden.', 15, 10, 6, 'Easy', 'mild', 'vegetarian,lactose-free', 'low-cal', 220, 'khubz.png', '2026-07-24 17:09:48'),
+(33, 4, 'Khubz Tannour', 'Traditional tannour oven bread with a crispy crust and soft interior.', 20, 15, 6, 'Medium', 'mild', 'vegetarian,lactose-free', 'low-cal', 240, 'khubz_tannour.png', '2026-07-24 17:09:48'),
+(34, 4, 'Regag Bread', 'Thin crispy Bahraini bread commonly served with curries and cheese.', 15, 10, 4, 'Easy', 'mild', 'vegetarian,lactose-free', 'low-cal', 180, 'regag_bread.png', '2026-07-24 17:09:48'),
+(35, 4, 'Muhalla Bread', 'Soft sweet Bahraini bread flavored with saffron and cardamom.', 20, 20, 6, 'Medium', 'mild', 'vegetarian', 'any', 290, 'muhalla_bread.png', '2026-07-24 17:09:48'),
+(36, 4, 'Chebab', 'Traditional Bahraini pancakes flavored with saffron and cardamom.', 15, 20, 4, 'Easy', 'mild', 'vegetarian', 'any', 310, 'chebab.png', '2026-07-24 17:09:48'),
+(37, 5, 'Balaleet', 'Traditional Bahraini sweet vermicelli topped with a savory omelet.', 15, 20, 4, 'Easy', 'mild', 'vegetarian', 'any', 420, 'balaleet.png', '2026-07-24 17:09:48'),
+(38, 5, 'Beyd wa Tamat', 'Classic Bahraini breakfast of eggs cooked with tomatoes and spices.', 10, 15, 2, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 280, 'beyd_wa_tamat.png', '2026-07-24 17:09:48'),
+(39, 5, 'Bahraini Falafel', 'Crispy homemade falafel served with fresh vegetables and tahini.', 20, 15, 4, 'Medium', 'medium', 'vegetarian,lactose-free', 'high-protein', 340, 'bahraini_falafel.png', '2026-07-24 17:09:48'),
+(40, 5, 'Labneh Plate', 'Creamy labneh served with olive oil, olives, and fresh bread.', 10, 0, 2, 'Easy', 'mild', 'vegetarian', 'low-cal', 260, 'labneh_plate.png', '2026-07-24 17:09:48'),
+(41, 5, 'Foul Medames', 'Slow-cooked fava beans seasoned with garlic, lemon, and olive oil.', 15, 30, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'high-protein', 310, 'foul_medames.png', '2026-07-24 17:09:48'),
+(42, 5, 'Cheese Regag', 'Thin Bahraini regag bread filled with melted cheese.', 10, 10, 2, 'Easy', 'mild', 'vegetarian', 'any', 350, 'cheese_regag.png', '2026-07-24 17:09:48'),
+(43, 5, 'Egg Regag', 'Traditional regag bread topped with freshly cooked eggs.', 10, 10, 2, 'Easy', 'mild', 'vegetarian', 'high-protein', 330, 'egg_regag.png', '2026-07-24 17:09:48'),
+(44, 6, 'Luqaimat', 'Traditional Bahraini sweet dumplings drizzled with date syrup.', 20, 20, 6, 'Easy', 'mild', 'vegetarian,lactose-free', 'any', 380, 'luqaimat.png', '2026-07-24 17:09:48'),
+(45, 6, 'Khafaroosh', 'Sweet Bahraini fried cakes flavored with saffron and cardamom.', 20, 20, 6, 'Medium', 'mild', 'vegetarian', 'any', 420, 'khafaroosh.png', '2026-07-24 17:09:48'),
+(46, 6, 'Bahraini Halwa', 'Classic Bahraini halwa made with saffron, rose water, and nuts.', 25, 60, 8, 'Hard', 'mild', 'vegetarian,gluten-free,lactose', 'any', 450, 'bahraini_halwa.png', '2026-07-24 17:09:48'),
+(47, 6, 'Sago', 'Traditional sago pudding flavored with saffron and cardamom.', 15, 30, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'any', 290, 'sago.png', '2026-07-24 17:09:48'),
+(48, 6, 'Aseeda', 'Traditional sweet wheat pudding served warm with butter.', 15, 25, 4, 'Easy', 'mild', 'vegetarian', 'any', 340, 'aseeda.png', '2026-07-24 17:09:48'),
+(49, 6, 'Date Cake', 'Soft and moist cake made with sweet Bahraini dates.', 20, 45, 8, 'Medium', 'mild', 'vegetarian', 'any', 360, 'date_cake.png', '2026-07-24 17:09:48'),
+(50, 6, 'Umm Ali', 'Rich Middle Eastern bread pudding topped with nuts and raisins.', 20, 35, 6, 'Medium', 'mild', 'vegetarian', 'any', 410, 'umm_ali.png', '2026-07-24 17:09:48'),
+(51, 6, 'Rice Pudding', 'Creamy rice pudding flavored with cinnamon and cardamom.', 15, 40, 4, 'Easy', 'mild', 'vegetarian,gluten-free', 'any', 300, 'rice_pudding.png', '2026-07-24 17:09:48'),
+(52, 6, 'Sweet Vermicelli', 'Sweet roasted vermicelli cooked with sugar, butter, and nuts.', 15, 20, 4, 'Easy', 'mild', 'vegetarian', 'any', 330, 'sweet_vermicelli.png', '2026-07-24 17:09:48'),
+(53, 6, 'Coconut Cake', 'Soft coconut sponge cake topped with shredded coconut.', 20, 40, 8, 'Medium', 'mild', 'vegetarian', 'any', 390, 'coconut_cake.png', '2026-07-24 17:09:48'),
+(54, 7, 'Samosa', 'Crispy pastry filled with spiced vegetables and herbs.', 20, 15, 4, 'Easy', 'medium', 'vegetarian', 'any', 280, 'samosa.png', '2026-07-24 17:09:48'),
+(55, 7, 'Cheese Samosa', 'Golden fried samosas stuffed with melted cheese.', 20, 15, 4, 'Easy', 'mild', 'vegetarian', 'any', 320, 'cheese_samosa.png', '2026-07-24 17:09:48'),
+(56, 7, 'Meat Samosa', 'Crispy pastry filled with seasoned minced meat.', 25, 15, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 350, 'meat_samosa.png', '2026-07-24 17:09:48'),
+(57, 7, 'Potato Cutlets', 'Crispy potato patties seasoned with herbs and spices.', 20, 15, 4, 'Easy', 'medium', 'vegetarian,lactose-free', 'any', 250, 'potato_cutlets.png', '2026-07-24 17:09:48'),
+(58, 7, 'Bahraini Kebab', 'Traditional Bahraini kebabs made with minced meat and aromatic spices.', 25, 20, 4, 'Medium', 'medium', 'non-vegetarian,gluten-free,lac', 'high-protein', 390, 'bahraini_kebab.png', '2026-07-24 17:09:48'),
+(59, 7, 'Meat Rolls', 'Crunchy rolls filled with seasoned minced meat.', 25, 15, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 340, 'meat_rolls.png', '2026-07-24 17:09:48'),
+(60, 7, 'Stuffed Grape Leaves', 'Tender grape leaves stuffed with seasoned rice and herbs.', 30, 40, 6, 'Medium', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 220, 'stuffed_grape_leaves.png', '2026-07-24 17:09:48'),
+(61, 7, 'Spinach Fatayer', 'Baked pastries filled with seasoned spinach and onions.', 25, 20, 6, 'Medium', 'mild', 'vegetarian,lactose-free', 'low-cal', 270, 'spinach_fatayer.png', '2026-07-24 17:09:48'),
+(62, 8, 'Karak Tea', 'Traditional spiced milk tea brewed with black tea, cardamom, and sugar.', 5, 10, 2, 'Easy', 'mild', 'vegetarian', 'any', 150, 'karak_tea.png', '2026-07-24 17:09:48'),
+(63, 8, 'Arabic Coffee', 'Traditional Arabic coffee flavored with cardamom and served with dates.', 5, 15, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 25, 'arabic_coffee.png', '2026-07-24 17:09:48'),
+(64, 8, 'Lemon Mint Juice', 'Refreshing juice made with fresh lemons, mint leaves, and ice.', 10, 0, 2, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 120, 'lemon_mint_juice.png', '2026-07-24 17:09:48'),
+(65, 8, 'Tamarind Juice', 'Sweet and tangy tamarind drink served chilled.', 15, 10, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'any', 140, 'tamarind_juice.png', '2026-07-24 17:09:48'),
+(66, 8, 'Vimto Drink', 'Refreshing mixed fruit drink served cold, especially during Ramadan.', 5, 0, 2, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'any', 180, 'vimto_drink.png', '2026-07-24 17:09:48'),
+(67, 8, 'Rose Milk', 'Chilled milk flavored with rose syrup and served over ice.', 5, 0, 2, 'Easy', 'mild', 'vegetarian,gluten-free', 'any', 190, 'rose_milk.png', '2026-07-24 17:09:48'),
+(68, 8, 'Date MilkShake', 'Creamy milkshake blended with fresh dates and milk.', 10, 0, 2, 'Easy', 'mild', 'vegetarian,gluten-free', 'high-protein', 320, 'date_milkshake.png', '2026-07-24 17:09:48'),
+(69, 8, 'Saffron Milk', 'Warm milk infused with saffron, cardamom, and a touch of sugar.', 5, 10, 2, 'Easy', 'mild', 'vegetarian,gluten-free', 'low-cal', 170, 'saffron_milk.png', '2026-07-24 17:09:48'),
+(70, 9, 'Salata Hara', 'Traditional Bahraini spicy salad made with tomatoes, cucumbers, onions, green chilies, fresh herbs, and lemon juice.', 15, 0, 4, 'Easy', 'spicy', 'vegetarian,gluten-free,lactose', 'low-cal', 120, 'salata_hara.png', '2026-07-24 17:09:48'),
+(71, 9, 'Salatat Khiyar wa Tamatim', 'Refreshing salad prepared with fresh cucumbers, tomatoes, onions, lemon juice, and herbs.', 10, 0, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 90, 'cucumber_tomato_salad.png', '2026-07-24 17:09:48'),
+(72, 9, 'Tabbouleh', 'Fresh parsley salad with bulgur, tomatoes, mint, onions, olive oil, and lemon juice.', 20, 0, 4, 'Easy', 'mild', 'vegetarian,lactose-free', 'low-cal', 180, 'tabbouleh.png', '2026-07-24 17:09:48'),
+(73, 9, 'Fattoush', 'Traditional Arabic mixed vegetable salad with crispy toasted pita bread and tangy dressing.', 20, 0, 4, 'Easy', 'mild', 'vegetarian,lactose-free', 'low-cal', 210, 'fattoush.png', '2026-07-24 17:09:48'),
+(74, 9, 'Green Salad', 'Classic mixed green salad with lettuce, cucumbers, tomatoes, carrots, and lemon olive oil dressing.', 10, 0, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'low-cal', 85, 'green_salad.png', '2026-07-24 17:09:48'),
+(75, 10, 'Margherita Pizza', 'Classic pizza topped with tomato sauce, mozzarella cheese, and fresh basil.', 20, 15, 4, 'Easy', 'mild', 'vegetarian', 'any', 280, 'margherita_pizza.png', '2026-07-24 17:09:48'),
+(76, 10, 'Pepperoni Pizza', 'Pizza topped with tomato sauce, mozzarella cheese, and pepperoni slices.', 20, 15, 4, 'Easy', 'medium', 'non-vegetarian', 'high-protein', 350, 'pepperoni_pizza.png', '2026-07-24 17:09:48'),
+(77, 10, 'Chicken Tikka Pizza', 'Pizza topped with spicy chicken tikka, onions, bell peppers, and mozzarella cheese.', 25, 15, 4, 'Medium', 'spicy', 'non-vegetarian', 'high-protein', 380, 'chicken_tikka_pizza.png', '2026-07-24 17:09:48'),
+(78, 10, 'BBQ Chicken Pizza', 'Pizza topped with grilled chicken, BBQ sauce, onions, and mozzarella cheese.', 20, 15, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 370, 'bbq_chicken_pizza.png', '2026-07-24 17:09:48'),
+(79, 10, 'Meat Lovers Pizza', 'Loaded pizza with beef, chicken, pepperoni, and mozzarella cheese.', 25, 18, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 450, 'meat_lovers_pizza.png', '2026-07-24 17:09:48'),
+(80, 10, 'Seafood Pizza', 'Pizza topped with shrimp, calamari, mixed seafood, mozzarella cheese, and herbs.', 25, 18, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 360, 'seafood_pizza.png', '2026-07-24 17:09:48'),
+(81, 10, 'Vegetable Pizza', 'Pizza topped with mushrooms, onions, bell peppers, olives, tomatoes, and mozzarella cheese.', 20, 15, 4, 'Easy', 'mild', 'vegetarian', 'healthier', 290, 'vegetable_pizza.png', '2026-07-24 17:09:48'),
+(82, 10, 'Four Cheese Pizza', 'Pizza topped with mozzarella, cheddar, parmesan, and blue cheese.', 20, 15, 4, 'Easy', 'mild', 'vegetarian', 'any', 400, 'four_cheese_pizza.png', '2026-07-24 17:09:48'),
+(83, 10, 'Supreme Pizza', 'Pizza topped with chicken, beef, mushrooms, onions, bell peppers, olives, and mozzarella cheese.', 25, 18, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 420, 'supreme_pizza.png', '2026-07-24 17:09:48'),
+(84, 10, 'Mexican Pizza', 'Spicy pizza topped with seasoned beef, jalapeños, sweet corn, onions, and mozzarella cheese.', 25, 18, 4, 'Medium', 'spicy', 'non-vegetarian', 'high-protein', 390, 'mexican_pizza.png', '2026-07-24 17:09:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe_ingredients`
+--
+
+CREATE TABLE `recipe_ingredients` (
+  `id` int(11) NOT NULL,
+  `recipe_id` int(11) NOT NULL,
+  `ingredient_id` int(11) NOT NULL,
+  `quantity` varchar(50) DEFAULT NULL,
+  `is_core` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `recipe_ingredients`
+--
+
+INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`, `is_core`) VALUES
+(1, 1, 1, '1 kg', 1),
+(2, 1, 4, '3 cups', 1),
+(3, 1, 5, '2 medium', 0),
+(4, 1, 6, '2 medium', 0),
+(5, 1, 7, '4 cloves', 0),
+(6, 1, 8, '1 tbsp', 0),
+(7, 1, 9, '2 tbsp', 0),
+(8, 1, 18, '1 tsp', 0),
+(9, 1, 10, '1/2 tsp', 0),
+(10, 1, 11, '3 tbsp', 0),
+(11, 2, 2, '1 kg', 0),
+(12, 2, 4, '3 cups', 0),
+(13, 2, 5, '2', 0),
+(14, 2, 6, '2', 0),
+(15, 2, 7, '4 cloves', 0),
+(16, 2, 8, '1 tbsp', 0),
+(17, 2, 9, '2 tbsp', 0),
+(18, 2, 18, '1 tsp', 0),
+(19, 2, 10, '1/2 tsp', 0),
+(20, 2, 11, '3 tbsp', 0),
+(21, 3, 3, '1 kg', 0),
+(22, 3, 4, '3 cups', 0),
+(23, 3, 5, '2', 0),
+(24, 3, 6, '2', 0),
+(25, 3, 7, '4 cloves', 0),
+(26, 3, 8, '1 tbsp', 0),
+(27, 3, 9, '2 tbsp', 0),
+(28, 3, 18, '1 tsp', 0),
+(29, 3, 10, '1/2 tsp', 0),
+(30, 3, 11, '3 tbsp', 0),
+(31, 4, 4, '3 cups', 0),
+(32, 4, 12, '3 tbsp', 0),
+(33, 4, 13, '2 tbsp', 0),
+(34, 4, 14, '1 tsp', 0),
+(35, 4, 17, '1 pinch', 0),
+(36, 4, 18, '1 tsp', 0),
+(37, 4, 19, '2 tbsp', 0),
+(38, 5, 2, '1.5 kg', 0),
+(39, 5, 4, '3 cups', 0),
+(40, 5, 5, '2 medium', 0),
+(41, 5, 6, '2 medium', 0),
+(42, 5, 7, '4 cloves', 0),
+(43, 5, 8, '1 tbsp', 0),
+(44, 5, 14, '4 pods', 0),
+(45, 5, 15, '1 tsp', 0),
+(46, 5, 16, '3 pieces', 0),
+(47, 5, 18, '1 tsp', 0),
+(48, 5, 10, '1/2 tsp', 0),
+(49, 5, 11, '3 tbsp', 0),
+(50, 6, 20, '2 cups', 0),
+(51, 6, 2, '500 g', 0),
+(52, 6, 21, '6 cups', 0),
+(53, 6, 18, '1 tsp', 0),
+(54, 6, 19, '2 tbsp', 0),
+(55, 7, 2, '1 kg', 0),
+(56, 7, 5, '2 medium', 0),
+(57, 7, 6, '2 medium', 0),
+(58, 7, 7, '4 cloves', 0),
+(59, 7, 8, '1 tbsp', 0),
+(60, 7, 18, '1 tsp', 0),
+(61, 7, 10, '1/2 tsp', 0),
+(62, 7, 11, '3 tbsp', 0),
+(63, 7, 22, '4 pieces', 0),
+(64, 8, 1, '1 kg', 0),
+(65, 8, 4, '2 cups', 0),
+(66, 8, 5, '1 medium', 0),
+(67, 8, 7, '4 cloves', 0),
+(68, 8, 8, '1 tbsp', 0),
+(69, 8, 23, '1 tsp', 0),
+(70, 8, 18, '1 tsp', 0),
+(71, 8, 10, '1/2 tsp', 0),
+(72, 8, 11, '2 tbsp', 0),
+(73, 9, 3, '1 kg', 0),
+(74, 9, 4, '2 cups', 0),
+(75, 9, 5, '1 medium', 0),
+(76, 9, 7, '4 cloves', 0),
+(77, 9, 8, '1 tbsp', 0),
+(78, 9, 23, '1 tsp', 0),
+(79, 9, 18, '1 tsp', 0),
+(80, 9, 10, '1/2 tsp', 0),
+(81, 9, 11, '2 tbsp', 0),
+(82, 10, 3, '1 whole', 0),
+(83, 10, 7, '4 cloves', 0),
+(84, 10, 8, '1 tbsp', 0),
+(85, 10, 24, '2 tbsp', 0),
+(86, 10, 25, '1 tsp', 0),
+(87, 10, 10, '1/2 tsp', 0),
+(88, 10, 18, '1 tsp', 0),
+(89, 10, 11, '2 tbsp', 0),
+(90, 11, 1, '1 kg', 0),
+(91, 11, 4, '3 cups', 0),
+(92, 11, 5, '2 medium', 0),
+(93, 11, 7, '4 cloves', 0),
+(94, 11, 8, '1 tbsp', 0),
+(95, 11, 14, '4 pods', 0),
+(96, 11, 15, '1 stick', 0),
+(97, 11, 16, '4 pieces', 0),
+(98, 11, 26, '1/4 cup', 0),
+(99, 11, 27, '1/4 cup', 0),
+(100, 11, 18, '1 tsp', 0),
+(101, 11, 10, '1/2 tsp', 0),
+(102, 11, 11, '3 tbsp', 0),
+(103, 12, 1, '1 kg', 0),
+(104, 12, 4, '3 cups', 0),
+(105, 12, 5, '2 medium', 0),
+(106, 12, 6, '2 medium', 0),
+(107, 12, 7, '4 cloves', 0),
+(108, 12, 8, '1 tbsp', 0),
+(109, 12, 28, '1 cup', 0),
+(110, 12, 23, '1 tsp', 0),
+(111, 12, 14, '4 pods', 0),
+(112, 12, 15, '1 stick', 0),
+(113, 12, 16, '4 pieces', 0),
+(114, 12, 29, '2 leaves', 0),
+(115, 12, 17, '1 pinch', 0),
+(116, 12, 18, '1 tsp', 0),
+(117, 12, 10, '1/2 tsp', 0),
+(118, 12, 11, '3 tbsp', 0),
+(119, 12, 30, '2 tbsp', 0),
+(120, 13, 1, '1 kg', 0),
+(121, 13, 5, '2 medium', 0),
+(122, 13, 6, '2 medium', 0),
+(123, 13, 7, '4 cloves', 0),
+(124, 13, 8, '1 tbsp', 0),
+(125, 13, 31, '2 medium', 0),
+(126, 13, 32, '2 medium', 0),
+(127, 13, 33, '1 medium', 0),
+(128, 13, 34, '2 tbsp', 0),
+(129, 13, 25, '1 tsp', 0),
+(130, 13, 30, '2 tbsp', 0),
+(131, 13, 18, '1 tsp', 0),
+(132, 13, 10, '1/2 tsp', 0),
+(133, 13, 11, '3 tbsp', 0),
+(134, 14, 2, '1 kg', 0),
+(135, 14, 5, '2 medium', 0),
+(136, 14, 6, '2 medium', 0),
+(137, 14, 7, '4 cloves', 0),
+(138, 14, 8, '1 tbsp', 0),
+(139, 14, 31, '2 medium', 0),
+(140, 14, 32, '2 medium', 0),
+(141, 14, 33, '1 medium', 0),
+(142, 14, 34, '2 tbsp', 0),
+(143, 14, 25, '1 tsp', 0),
+(144, 14, 30, '2 tbsp', 0),
+(145, 14, 18, '1 tsp', 0),
+(146, 14, 10, '1/2 tsp', 0),
+(147, 14, 11, '3 tbsp', 0),
+(148, 15, 31, '2 medium', 0),
+(149, 15, 32, '2 medium', 0),
+(150, 15, 33, '1 medium', 0),
+(151, 15, 5, '2 medium', 0),
+(152, 15, 6, '2 medium', 0),
+(153, 15, 7, '4 cloves', 0),
+(154, 15, 8, '1 tbsp', 0),
+(155, 15, 34, '2 tbsp', 0),
+(156, 15, 25, '1 tsp', 0),
+(157, 15, 30, '2 tbsp', 0),
+(158, 15, 18, '1 tsp', 0),
+(159, 15, 10, '1/2 tsp', 0),
+(160, 15, 11, '3 tbsp', 0),
+(161, 16, 35, '1 kg', 0),
+(162, 16, 5, '2 medium', 0),
+(163, 16, 6, '2 medium', 0),
+(164, 16, 7, '4 cloves', 0),
+(165, 16, 8, '1 tbsp', 0),
+(166, 16, 23, '1 tsp', 0),
+(167, 16, 25, '1 tsp', 0),
+(168, 16, 30, '2 tbsp', 0),
+(169, 16, 18, '1 tsp', 0),
+(170, 16, 10, '1/2 tsp', 0),
+(171, 16, 11, '3 tbsp', 0),
+(222, 22, 49, '1 kg', 0),
+(223, 22, 5, '2 medium', 0),
+(224, 22, 6, '2 medium', 0),
+(225, 22, 7, '4 cloves', 0),
+(226, 22, 8, '1 tbsp', 0),
+(227, 22, 31, '2 medium', 0),
+(228, 22, 32, '2 medium', 0),
+(229, 22, 33, '1 medium', 0),
+(230, 22, 34, '2 tbsp', 0),
+(231, 22, 25, '1 tsp', 0),
+(232, 22, 30, '2 tbsp', 0),
+(233, 22, 18, '1 tsp', 0),
+(234, 22, 10, '1/2 tsp', 0),
+(235, 22, 11, '3 tbsp', 0),
+(236, 23, 50, '500 g', 0),
+(237, 23, 4, '3 cups', 0),
+(238, 23, 5, '2 medium', 0),
+(239, 23, 6, '2 medium', 0),
+(240, 23, 7, '4 cloves', 0),
+(241, 23, 8, '1 tbsp', 0),
+(242, 23, 23, '1 tsp', 0),
+(243, 23, 18, '1 tsp', 0),
+(244, 23, 10, '1/2 tsp', 0),
+(245, 23, 11, '3 tbsp', 0),
+(246, 24, 51, '1 whole', 0),
+(247, 24, 7, '4 cloves', 0),
+(248, 24, 8, '1 tbsp', 0),
+(249, 24, 23, '1 tsp', 0),
+(250, 24, 41, '1 tsp', 0),
+(251, 24, 24, '2 tbsp', 0),
+(252, 24, 18, '1 tsp', 0),
+(253, 24, 10, '1/2 tsp', 0),
+(254, 24, 11, '3 tbsp', 0),
+(255, 25, 3, '1 kg', 0),
+(256, 25, 5, '2 medium', 0),
+(257, 25, 6, '2 medium', 0),
+(258, 25, 7, '4 cloves', 0),
+(259, 25, 8, '1 tbsp', 0),
+(260, 25, 31, '2 medium', 0),
+(261, 25, 32, '1 medium', 0),
+(262, 25, 34, '2 tbsp', 0),
+(263, 25, 25, '1 tsp', 0),
+(264, 25, 30, '1 tbsp', 0),
+(265, 25, 18, '1 tsp', 0),
+(266, 25, 10, '1/2 tsp', 0),
+(267, 25, 11, '3 tbsp', 0),
+(268, 26, 42, '500 g', 0),
+(269, 26, 7, '5 cloves', 0),
+(270, 26, 8, '1 tbsp', 0),
+(271, 26, 39, '2', 0),
+(272, 26, 52, '1 tsp', 0),
+(273, 26, 41, '1 tsp', 0),
+(274, 26, 24, '2 tbsp', 0),
+(275, 26, 18, '1 tsp', 0),
+(276, 26, 10, '1/2 tsp', 0),
+(277, 26, 11, '2 tbsp', 0),
+(278, 27, 53, '2 cups', 0),
+(279, 27, 5, '1 medium', 0),
+(280, 27, 6, '2 medium', 0),
+(281, 27, 7, '3 cloves', 0),
+(282, 27, 8, '1 tbsp', 0),
+(283, 27, 25, '1 tsp', 0),
+(284, 27, 23, '1/2 tsp', 0),
+(285, 27, 18, '1 tsp', 0),
+(286, 27, 10, '1/2 tsp', 0),
+(287, 27, 11, '2 tbsp', 0),
+(288, 27, 21, '5 cups', 0),
+(289, 28, 1, '500 g', 0),
+(290, 28, 5, '1 medium', 0),
+(291, 28, 7, '3 cloves', 0),
+(292, 28, 8, '1 tbsp', 0),
+(293, 28, 32, '1 medium', 0),
+(294, 28, 54, '4 cups', 0),
+(295, 28, 29, '1', 0),
+(296, 28, 18, '1 tsp', 0),
+(297, 28, 10, '1/2 tsp', 0),
+(298, 28, 11, '1 tbsp', 0),
+(299, 29, 32, '2 medium', 0),
+(300, 29, 31, '2 medium', 0),
+(301, 29, 55, '1 cup', 0),
+(302, 29, 56, '2 stalks', 0),
+(303, 29, 5, '1 medium', 0),
+(304, 29, 6, '2 medium', 0),
+(305, 29, 7, '3 cloves', 0),
+(306, 29, 8, '1 tbsp', 0),
+(307, 29, 18, '1 tsp', 0),
+(308, 29, 10, '1/2 tsp', 0),
+(309, 29, 11, '2 tbsp', 0),
+(310, 29, 21, '5 cups', 0),
+(311, 30, 1, '500 g', 0),
+(312, 30, 20, '1 cup', 0),
+(313, 30, 5, '1 medium', 0),
+(314, 30, 7, '3 cloves', 0),
+(315, 30, 8, '1 tbsp', 0),
+(316, 30, 54, '5 cups', 0),
+(317, 30, 18, '1 tsp', 0),
+(318, 30, 10, '1/2 tsp', 0),
+(319, 30, 57, '1/2 tsp', 0),
+(320, 30, 19, '1 tbsp', 0),
+(321, 31, 49, '500 g', 0),
+(322, 31, 5, '1 medium', 0),
+(323, 31, 6, '2 medium', 0),
+(324, 31, 7, '3 cloves', 0),
+(325, 31, 8, '1 tbsp', 0),
+(326, 31, 58, '4 cups', 0),
+(327, 31, 59, '2 tbsp', 0),
+(328, 31, 18, '1 tsp', 0),
+(329, 31, 10, '1/2 tsp', 0),
+(330, 31, 11, '2 tbsp', 0),
+(331, 32, 46, '4 cups', 0),
+(332, 32, 60, '1 tbsp', 0),
+(333, 32, 18, '1 tsp', 0),
+(334, 32, 21, '1½ cups', 0),
+(335, 32, 11, '2 tbsp', 0),
+(336, 33, 46, '4 cups', 0),
+(337, 33, 60, '1 tbsp', 0),
+(338, 33, 18, '1 tsp', 0),
+(339, 33, 21, '1½ cups', 0),
+(340, 33, 11, '2 tbsp', 0),
+(341, 34, 46, '2 cups', 0),
+(342, 34, 21, '2 cups', 0),
+(343, 34, 18, '1/2 tsp', 0),
+(344, 34, 11, '1 tbsp', 0),
+(345, 35, 46, '4 cups', 0),
+(346, 35, 60, '1 tbsp', 0),
+(347, 35, 61, '1 cup', 0),
+(348, 35, 12, '2 tbsp', 0),
+(349, 35, 14, '1 tsp', 0),
+(350, 35, 17, '1 pinch', 0),
+(351, 35, 19, '2 tbsp', 0),
+(352, 35, 18, '1/2 tsp', 0),
+(353, 36, 46, '2 cups', 0),
+(354, 36, 60, '1 tsp', 0),
+(355, 36, 61, '1 cup', 0),
+(356, 36, 37, '1', 0),
+(357, 36, 12, '1 tbsp', 0),
+(358, 36, 14, '1 tsp', 0),
+(359, 36, 17, '1 pinch', 0),
+(360, 36, 19, '2 tbsp', 0),
+(361, 36, 18, '1/4 tsp', 0),
+(362, 37, 36, '250 g', 0),
+(363, 37, 12, '1/4 cup', 0),
+(364, 37, 19, '2 tbsp', 0),
+(365, 37, 14, '1 tsp', 0),
+(366, 37, 17, '1 pinch', 0),
+(367, 37, 38, '1 tsp', 0),
+(368, 37, 37, '3', 0),
+(369, 37, 18, '1/2 tsp', 0),
+(370, 38, 37, '3', 0),
+(371, 38, 6, '2 medium', 0),
+(372, 38, 39, '1', 0),
+(373, 38, 18, '1/2 tsp', 0),
+(374, 38, 10, '1/4 tsp', 0),
+(375, 38, 11, '1 tbsp', 0),
+(376, 39, 62, '2 cups', 0),
+(377, 39, 5, '1 medium', 0),
+(378, 39, 7, '3 cloves', 0),
+(379, 39, 59, '1/2 cup', 0),
+(380, 39, 30, '1/4 cup', 0),
+(381, 39, 25, '1 tsp', 0),
+(382, 39, 18, '1 tsp', 0),
+(383, 39, 10, '1/2 tsp', 0),
+(384, 39, 63, '1 tsp', 0),
+(385, 39, 11, 'As needed for frying', 0),
+(386, 40, 64, '250 g', 0),
+(387, 40, 66, '2 tbsp', 0),
+(388, 40, 65, '8 pieces', 0),
+(389, 40, 67, '1 tbsp', 0),
+(390, 41, 68, '2 cups', 0),
+(391, 41, 7, '3 cloves', 0),
+(392, 41, 24, '2 tbsp', 0),
+(393, 41, 66, '2 tbsp', 0),
+(394, 41, 59, '2 tbsp', 0),
+(395, 41, 25, '1 tsp', 0),
+(396, 41, 18, '1 tsp', 0),
+(397, 41, 10, '1/2 tsp', 0),
+(398, 42, 69, '1 piece', 0),
+(399, 42, 70, '100 g', 0),
+(400, 42, 19, '1 tbsp', 0),
+(401, 43, 69, '1 piece', 0),
+(402, 43, 37, '2', 0),
+(403, 43, 19, '1 tbsp', 0),
+(404, 43, 18, '1/4 tsp', 0),
+(405, 43, 10, '1/4 tsp', 0),
+(406, 44, 46, '2 cups', 0),
+(407, 44, 47, '2 tbsp', 0),
+(408, 44, 60, '1 tsp', 0),
+(409, 44, 63, '1 tsp', 0),
+(410, 44, 12, '1 tbsp', 0),
+(411, 44, 21, '1½ cups', 0),
+(412, 44, 11, 'As needed for frying', 0),
+(413, 44, 13, '1/2 cup', 0),
+(414, 45, 46, '2 cups', 0),
+(415, 45, 37, '2', 0),
+(416, 45, 12, '1/2 cup', 0),
+(417, 45, 14, '1 tsp', 0),
+(418, 45, 17, '1 pinch', 0),
+(419, 45, 38, '1 tbsp', 0),
+(420, 45, 71, '1/4 tsp', 0),
+(421, 45, 63, '1 tsp', 0),
+(422, 45, 19, '2 tbsp', 0),
+(423, 45, 11, 'As needed for frying', 0),
+(424, 46, 72, '1 cup', 0),
+(425, 46, 12, '2 cups', 0),
+(426, 46, 21, '4 cups', 0),
+(427, 46, 14, '1 tsp', 0),
+(428, 46, 17, '1 pinch', 0),
+(429, 46, 38, '2 tbsp', 0),
+(430, 46, 73, '1 tsp', 0),
+(431, 46, 19, '2 tbsp', 0),
+(432, 46, 74, '1/2 cup', 0),
+(433, 47, 75, '1 cup', 0),
+(434, 47, 12, '1 cup', 0),
+(435, 47, 21, '4 cups', 0),
+(436, 47, 14, '1 tsp', 0),
+(437, 47, 17, '1 pinch', 0),
+(438, 47, 38, '1 tbsp', 0),
+(439, 47, 19, '1 tbsp', 0),
+(440, 48, 76, '2 cups', 0),
+(441, 48, 21, '4 cups', 0),
+(442, 48, 19, '3 tbsp', 0),
+(443, 48, 12, '1/2 cup', 0),
+(444, 48, 14, '1 tsp', 0),
+(445, 48, 17, '1 pinch', 0),
+(446, 48, 18, '1/4 tsp', 0),
+(447, 49, 77, '2 cups', 0),
+(448, 49, 46, '2 cups', 0),
+(449, 49, 37, '2', 0),
+(450, 49, 19, '1/2 cup', 0),
+(451, 49, 12, '1/2 cup', 0),
+(452, 49, 61, '1 cup', 0),
+(453, 49, 63, '2 tsp', 0),
+(454, 49, 78, '1 tsp', 0),
+(455, 50, 79, '250 g', 0),
+(456, 50, 61, '2 cups', 0),
+(457, 50, 80, '1 cup', 0),
+(458, 50, 12, '1/2 cup', 0),
+(459, 50, 19, '2 tbsp', 0),
+(460, 50, 26, '1/4 cup', 0),
+(461, 50, 27, '1/4 cup', 0),
+(462, 50, 81, '1/4 cup', 0),
+(463, 50, 78, '1 tsp', 0),
+(464, 51, 4, '1 cup', 0),
+(465, 51, 61, '4 cups', 0),
+(466, 51, 12, '1/2 cup', 0),
+(467, 51, 14, '1 tsp', 0),
+(468, 51, 17, '1 pinch', 0),
+(469, 51, 78, '1 tsp', 0),
+(470, 51, 19, '1 tbsp', 0),
+(471, 52, 36, '250 g', 0),
+(472, 52, 19, '2 tbsp', 0),
+(473, 52, 12, '1/2 cup', 0),
+(474, 52, 14, '1 tsp', 0),
+(475, 52, 17, '1 pinch', 0),
+(476, 52, 21, '1 cup', 0),
+(477, 52, 74, '1/4 cup', 0),
+(478, 53, 46, '2 cups', 0),
+(479, 53, 82, '1 cup', 0),
+(480, 53, 12, '1 cup', 0),
+(481, 53, 19, '1/2 cup', 0),
+(482, 53, 61, '1 cup', 0),
+(483, 53, 37, '2', 0),
+(484, 53, 63, '2 tsp', 0),
+(485, 53, 78, '1 tsp', 0),
+(486, 54, 83, '10 sheets', 0),
+(487, 54, 31, '3 medium', 0),
+(488, 54, 55, '1/2 cup', 0),
+(489, 54, 5, '1 medium', 0),
+(490, 54, 25, '1 tsp', 0),
+(491, 54, 23, '1/2 tsp', 0),
+(492, 54, 18, '1 tsp', 0),
+(493, 54, 10, '1/2 tsp', 0),
+(494, 54, 11, 'As needed for frying', 0),
+(495, 55, 83, '10 sheets', 0),
+(496, 55, 70, '1 cup', 0),
+(497, 55, 84, '1 cup', 0),
+(498, 55, 11, 'As needed for frying', 0),
+(499, 56, 83, '10 sheets', 0),
+(500, 56, 85, '500 g', 0),
+(501, 56, 5, '1 medium', 0),
+(502, 56, 7, '2 cloves', 0),
+(503, 56, 18, '1 tsp', 0),
+(504, 56, 10, '1/2 tsp', 0),
+(505, 56, 11, '2 tbsp', 0),
+(506, 57, 31, '4 medium', 0),
+(507, 57, 37, '1', 0),
+(508, 57, 59, '2 tbsp', 0),
+(509, 57, 48, '1 cup', 0),
+(510, 57, 18, '1 tsp', 0),
+(511, 57, 10, '1/2 tsp', 0),
+(512, 57, 11, 'As needed for frying', 0),
+(513, 58, 86, '500 g', 0),
+(514, 58, 5, '1 medium', 0),
+(515, 58, 7, '3 cloves', 0),
+(516, 58, 59, '2 tbsp', 0),
+(517, 58, 25, '1 tsp', 0),
+(518, 58, 18, '1 tsp', 0),
+(519, 58, 10, '1/2 tsp', 0),
+(520, 58, 11, '1 tbsp', 0),
+(521, 59, 87, '10 sheets', 0),
+(522, 59, 85, '500 g', 0),
+(523, 59, 5, '1 medium', 0),
+(524, 59, 7, '2 cloves', 0),
+(525, 59, 18, '1 tsp', 0),
+(526, 59, 10, '1/2 tsp', 0),
+(527, 59, 11, 'As needed for frying', 0),
+(528, 60, 88, '30 leaves', 0),
+(529, 60, 4, '1 cup', 0),
+(530, 60, 86, '250 g', 0),
+(531, 60, 5, '1 medium', 0),
+(532, 60, 6, '1 medium', 0),
+(533, 60, 59, '1/4 cup', 0),
+(534, 60, 24, '2 tbsp', 0),
+(535, 60, 18, '1 tsp', 0),
+(536, 60, 10, '1/2 tsp', 0),
+(537, 60, 11, '2 tbsp', 0),
+(538, 61, 90, '500 g', 0),
+(539, 61, 89, '300 g', 0),
+(540, 61, 5, '1 medium', 0),
+(541, 61, 24, '2 tbsp', 0),
+(542, 61, 18, '1 tsp', 0),
+(543, 61, 10, '1/2 tsp', 0),
+(544, 61, 11, '1 tbsp', 0),
+(545, 62, 21, '2 cups', 0),
+(546, 62, 91, '2 tsp', 0),
+(547, 62, 92, '1 cup', 0),
+(548, 62, 12, '2 tbsp', 0),
+(549, 62, 14, '2 pods', 0),
+(550, 63, 21, '4 cups', 0),
+(551, 63, 93, '4 tbsp', 0),
+(552, 63, 14, '4 pods', 0),
+(553, 63, 17, '1 pinch', 0),
+(554, 63, 77, '6 pieces', 0),
+(555, 64, 94, '2', 0),
+(556, 64, 67, '10 leaves', 0),
+(557, 64, 12, '2 tbsp', 0),
+(558, 64, 21, '2 cups', 0),
+(559, 64, 95, '1 cup', 0),
+(560, 65, 96, '200 g', 0),
+(561, 65, 21, '4 cups', 0),
+(562, 65, 12, '1/2 cup', 0),
+(563, 65, 95, '1 cup', 0),
+(564, 66, 97, '1/2 cup', 0),
+(565, 66, 21, '2 cups', 0),
+(566, 66, 95, '1 cup', 0),
+(567, 67, 61, '2 cups', 0),
+(568, 67, 98, '3 tbsp', 0),
+(569, 67, 12, '1 tbsp', 0),
+(570, 67, 95, '1 cup', 0),
+(571, 68, 77, '8 pieces', 0),
+(572, 68, 61, '2 cups', 0),
+(573, 68, 12, '1 tbsp', 0),
+(574, 68, 95, '1 cup', 0),
+(575, 69, 61, '2 cups', 0),
+(576, 69, 17, '1 pinch', 0),
+(577, 69, 14, '2 pods', 0),
+(578, 69, 12, '2 tbsp', 0),
+(579, 70, 6, '3 medium', 0),
+(580, 70, 5, '1 medium', 0),
+(581, 70, 59, '1/4 cup', 0),
+(582, 70, 24, '2 tbsp', 0),
+(583, 70, 66, '2 tbsp', 0),
+(584, 70, 18, '1 tsp', 0),
+(585, 70, 10, '1/2 tsp', 0),
+(586, 71, 99, '2 medium', 0),
+(587, 71, 6, '2 medium', 0),
+(588, 71, 24, '2 tbsp', 0),
+(589, 71, 66, '2 tbsp', 0),
+(590, 71, 18, '1 tsp', 0),
+(591, 71, 10, '1/2 tsp', 0),
+(592, 72, 59, '2 cups', 0),
+(593, 72, 100, '1/2 cup', 0),
+(594, 72, 6, '2 medium', 0),
+(595, 72, 99, '1 medium', 0),
+(596, 72, 67, '1/4 cup', 0),
+(597, 72, 5, '1 small', 0),
+(598, 72, 24, '3 tbsp', 0),
+(599, 72, 66, '2 tbsp', 0),
+(600, 72, 18, '1 tsp', 0),
+(601, 72, 10, '1/2 tsp', 0),
+(602, 73, 101, '2 cups', 0),
+(603, 73, 6, '2 medium', 0),
+(604, 73, 99, '1 medium', 0),
+(605, 73, 102, '4', 0),
+(606, 73, 67, '1/4 cup', 0),
+(607, 73, 104, '1 piece', 0),
+(608, 73, 24, '3 tbsp', 0),
+(609, 73, 66, '2 tbsp', 0),
+(610, 73, 103, '1 tsp', 0),
+(611, 73, 18, '1 tsp', 0),
+(612, 74, 101, '2 cups', 0),
+(613, 74, 99, '1 medium', 0),
+(614, 74, 6, '2 medium', 0),
+(615, 74, 5, '1 small', 0),
+(616, 74, 24, '2 tbsp', 0),
+(617, 74, 66, '2 tbsp', 0),
+(618, 74, 18, '1 tsp', 0),
+(619, 74, 10, '1/2 tsp', 0),
+(620, 75, 46, '3 cups', 0),
+(621, 75, 21, '1 cup', 0),
+(622, 75, 11, '2 tbsp', 0),
+(623, 75, 18, '1 tsp', 0),
+(624, 75, 12, '1 tsp', 0),
+(625, 75, 6, '2 medium', 0),
+(626, 76, 46, '3 cups', 0),
+(627, 76, 21, '1 cup', 0),
+(628, 76, 60, '2 tsp', 0),
+(629, 76, 12, '1 tsp', 0),
+(630, 76, 18, '1 tsp', 0),
+(631, 76, 11, '2 tbsp', 0),
+(632, 76, 6, '2 medium', 0),
+(633, 76, 84, '2 cups', 0),
+(634, 76, 106, '150 g', 0),
+(635, 77, 46, '3 cups', 0),
+(636, 77, 21, '1 cup', 0),
+(637, 77, 60, '2 tsp', 0),
+(638, 77, 12, '1 tsp', 0),
+(639, 77, 18, '1 tsp', 0),
+(640, 77, 11, '2 tbsp', 0),
+(641, 77, 6, '2 medium', 0),
+(642, 77, 84, '2 cups', 0),
+(643, 77, 1, '250 g', 0),
+(644, 77, 28, '2 tbsp', 0),
+(645, 77, 41, '1 tsp', 0),
+(646, 77, 23, '1/2 tsp', 0),
+(647, 77, 25, '1 tsp', 0),
+(648, 77, 52, '1/2 tsp', 0),
+(649, 77, 7, '2 cloves', 0),
+(650, 77, 8, '1 tsp', 0),
+(651, 77, 5, '1 medium', 0),
+(652, 77, 33, '1 medium', 0),
+(653, 78, 46, '3 cups', 0),
+(654, 78, 21, '1 cup', 0),
+(655, 78, 60, '2 tsp', 0),
+(656, 78, 12, '1 tsp', 0),
+(657, 78, 18, '1 tsp', 0),
+(658, 78, 11, '2 tbsp', 0),
+(659, 78, 107, '4 tbsp', 0),
+(660, 78, 84, '2 cups', 0),
+(661, 78, 1, '250 g', 0),
+(662, 78, 5, '1 medium', 0),
+(663, 78, 33, '1 medium', 0),
+(664, 79, 46, '3 cups', 0),
+(665, 79, 21, '1 cup', 0),
+(666, 79, 60, '2 tsp', 0),
+(667, 79, 12, '1 tsp', 0),
+(668, 79, 18, '1 tsp', 0),
+(669, 79, 11, '2 tbsp', 0),
+(670, 79, 6, '2 medium', 0),
+(671, 79, 84, '2 cups', 0),
+(672, 79, 1, '150 g', 0),
+(673, 79, 85, '150 g', 0),
+(674, 79, 106, '100 g', 0),
+(675, 79, 5, '1 medium', 0),
+(676, 80, 46, '3 cups', 0),
+(677, 80, 21, '1 cup', 0),
+(678, 80, 60, '2 tsp', 0),
+(679, 80, 12, '1 tsp', 0),
+(680, 80, 18, '1 tsp', 0),
+(681, 80, 11, '2 tbsp', 0),
+(682, 80, 6, '2 medium', 0),
+(683, 80, 84, '2 cups', 0),
+(684, 80, 49, '200 g', 0),
+(685, 80, 42, '100 g', 0),
+(686, 80, 5, '1 medium', 0),
+(687, 80, 33, '1 medium', 0),
+(688, 81, 46, '3 cups', 0),
+(689, 81, 21, '1 cup', 0),
+(690, 81, 60, '2 tsp', 0),
+(691, 81, 12, '1 tsp', 0),
+(692, 81, 18, '1 tsp', 0),
+(693, 81, 11, '2 tbsp', 0),
+(694, 81, 6, '2 medium', 0),
+(695, 81, 84, '2 cups', 0),
+(696, 81, 5, '1 medium', 0),
+(697, 81, 33, '1 medium', 0),
+(698, 81, 114, '100 g', 0),
+(699, 81, 65, '50 g', 0),
+(700, 82, 46, '3 cups', 0),
+(701, 82, 21, '1 cup', 0),
+(702, 82, 60, '2 tsp', 0),
+(703, 82, 12, '1 tsp', 0),
+(704, 82, 18, '1 tsp', 0),
+(705, 82, 11, '2 tbsp', 0),
+(706, 82, 6, '2 medium', 0),
+(707, 82, 84, '1 cup', 0),
+(708, 82, 70, '1 cup', 0),
+(709, 82, 110, '1/2 cup', 0),
+(710, 82, 111, '1/2 cup', 0),
+(711, 83, 46, '3 cups', 0),
+(712, 83, 21, '1 cup', 0),
+(713, 83, 60, '2 tsp', 0),
+(714, 83, 12, '1 tsp', 0),
+(715, 83, 18, '1 tsp', 0),
+(716, 83, 11, '2 tbsp', 0),
+(717, 83, 6, '2 medium', 0),
+(718, 83, 84, '2 cups', 0),
+(719, 83, 1, '100 g', 0),
+(720, 83, 85, '100 g', 0),
+(721, 83, 114, '100 g', 0),
+(722, 83, 5, '1 medium', 0),
+(723, 83, 33, '1 medium', 0),
+(724, 83, 65, '50 g', 0),
+(725, 84, 46, '3 cups', 0),
+(726, 84, 21, '1 cup', 0),
+(727, 84, 60, '2 tsp', 0),
+(728, 84, 12, '1 tsp', 0),
+(729, 84, 18, '1 tsp', 0),
+(730, 84, 11, '2 tbsp', 0),
+(731, 84, 6, '2 medium', 0),
+(732, 84, 84, '2 cups', 0),
+(733, 84, 85, '200 g', 0),
+(734, 84, 5, '1 medium', 0),
+(735, 84, 33, '1 medium', 0),
+(736, 84, 112, '50 g', 0),
+(737, 84, 113, '50 g', 0),
+(738, 84, 52, '1/2 tsp', 0),
+(739, 17, 40, '1 whole', 1),
+(740, 17, 46, '1 cup', 1),
+(741, 17, 7, '4 cloves', 0),
+(742, 17, 8, '1 tbsp', 0),
+(743, 17, 24, '2 tbsp', 0),
+(744, 17, 41, '1 tsp', 0),
+(745, 17, 25, '1 tsp', 0),
+(746, 17, 18, '1 tsp', 0),
+(747, 17, 10, '1/2 tsp', 0),
+(748, 17, 11, '500 ml', 0),
+(749, 18, 43, '1 whole', 1),
+(750, 18, 7, '4 cloves', 0),
+(751, 18, 8, '1 tbsp', 0),
+(752, 18, 24, '2 tbsp', 0),
+(753, 18, 41, '1 tsp', 0),
+(754, 18, 25, '1 tsp', 0),
+(755, 18, 18, '1 tsp', 0),
+(756, 18, 10, '1/2 tsp', 0),
+(757, 18, 11, '2 tbsp', 0),
+(758, 19, 42, '500 g', 1),
+(759, 19, 44, '2 tbsp', 1),
+(760, 19, 45, '1 cup', 1),
+(761, 19, 5, '1 medium', 0),
+(762, 19, 6, '2 medium', 0),
+(763, 19, 7, '3 cloves', 0),
+(764, 19, 8, '1 tbsp', 0),
+(765, 19, 39, '1', 0),
+(766, 19, 18, '1 tsp', 0),
+(767, 19, 10, '1/2 tsp', 0),
+(768, 19, 11, '2 tbsp', 0),
+(769, 20, 42, '500 g', 1),
+(770, 20, 46, '1 cup', 1),
+(771, 20, 48, '1 cup', 1),
+(772, 20, 47, '1/2 cup', 0),
+(773, 20, 37, '2', 0),
+(774, 20, 18, '1 tsp', 0),
+(775, 20, 10, '1/2 tsp', 0),
+(776, 20, 11, '500 ml', 0),
+(777, 21, 3, '1 kg', 1),
+(778, 21, 44, '2 tbsp', 1),
+(779, 21, 45, '1 cup', 1),
+(780, 21, 5, '2 medium', 0),
+(781, 21, 6, '2 medium', 0),
+(782, 21, 7, '4 cloves', 0),
+(783, 21, 8, '1 tbsp', 0),
+(784, 21, 39, '1', 0),
+(785, 21, 18, '1 tsp', 0),
+(786, 21, 10, '1/2 tsp', 0),
+(787, 21, 11, '2 tbsp', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe_steps`
+--
+
+CREATE TABLE `recipe_steps` (
+  `step_id` int(11) NOT NULL,
+  `recipe_id` int(11) NOT NULL,
+  `step_number` int(11) DEFAULT NULL,
+  `instruction` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `recipe_steps`
+--
+
+INSERT INTO `recipe_steps` (`step_id`, `recipe_id`, `step_number`, `instruction`) VALUES
+(1, 1, 1, 'Wash and season the chicken with spices.'),
+(2, 1, 2, 'Fry the onions until golden brown.'),
+(3, 1, 3, 'Add garlic, ginger, and tomatoes, then cook well.'),
+(4, 1, 4, 'Add the chicken and cook until tender.'),
+(5, 1, 5, 'Add the rice and enough water.'),
+(6, 1, 6, 'Cook until the rice is tender and serve hot.'),
+(7, 2, 1, 'Wash the lamb pieces thoroughly.'),
+(8, 2, 2, 'Cook lamb with spices until tender.'),
+(9, 2, 3, 'Fry onions until golden brown.'),
+(10, 2, 4, 'Add garlic, ginger, and tomatoes.'),
+(11, 2, 5, 'Mix lamb with rice and water.'),
+(12, 2, 6, 'Cook until rice is fully done and serve hot.'),
+(13, 3, 1, 'Clean and prepare the fish properly.'),
+(14, 3, 2, 'Season fish with salt and spices.'),
+(15, 3, 3, 'Fry onions until golden brown.'),
+(16, 3, 4, 'Add garlic, ginger, and tomatoes.'),
+(17, 3, 5, 'Cook fish lightly in the spice mixture.'),
+(18, 3, 6, 'Add rice and water, then cook until done.'),
+(19, 3, 7, 'Serve hot with lemon and salad.'),
+(20, 4, 1, 'Wash the rice thoroughly.'),
+(21, 4, 2, 'Soak saffron in warm water.'),
+(22, 4, 3, 'Cook rice with sugar and salt.'),
+(23, 4, 4, 'Add cardamom and saffron mixture.'),
+(24, 4, 5, 'Mix in date syrup for sweetness.'),
+(25, 4, 6, 'Add butter for rich flavor.'),
+(26, 4, 7, 'Cook until rice is soft and fragrant.'),
+(27, 5, 1, 'Wash and clean the lamb pieces.'),
+(28, 5, 2, 'Cook lamb with spices until tender.'),
+(29, 5, 3, 'Fry onions until golden brown.'),
+(30, 5, 4, 'Add garlic, ginger, and tomatoes.'),
+(31, 5, 5, 'Add cardamom, cinnamon, and cloves.'),
+(32, 5, 6, 'Add rice and water, then mix well.'),
+(33, 5, 7, 'Slow cook until rice is fully done.'),
+(34, 5, 8, 'Serve hot with salad or yogurt.'),
+(35, 6, 1, 'Wash the wheat thoroughly and soak it overnight.'),
+(36, 6, 2, 'Add meat (lamb or chicken) to a pot with water.'),
+(37, 6, 3, 'Cook on low heat until meat becomes soft.'),
+(38, 6, 4, 'Add soaked wheat to the pot.'),
+(39, 6, 5, 'Stir continuously to avoid lumps.'),
+(40, 6, 6, 'Cook slowly until mixture becomes creamy.'),
+(41, 6, 7, 'Add salt and butter for flavor.'),
+(42, 6, 8, 'Serve hot with cinnamon on top.'),
+(43, 7, 1, 'Cut the lamb into medium-sized pieces and wash thoroughly.'),
+(44, 7, 2, 'Cook the lamb until tender.'),
+(45, 7, 3, 'Fry the onion until golden, then add garlic and ginger.'),
+(46, 7, 4, 'Add tomatoes and cook until soft.'),
+(47, 7, 5, 'Return the lamb to the pot and season with salt and black pepper.'),
+(48, 7, 6, 'Simmer until the stew thickens.'),
+(49, 7, 7, 'Place pieces of Arabic bread in a serving dish and pour the stew over the bread.'),
+(50, 7, 8, 'Serve hot.'),
+(51, 8, 1, 'Wash and cut the chicken into medium pieces.'),
+(52, 8, 2, 'Heat oil and sauté the onion until golden.'),
+(53, 8, 3, 'Add garlic, ginger, and turmeric, then cook for 2 minutes.'),
+(54, 8, 4, 'Add the chicken and cook until lightly browned.'),
+(55, 8, 5, 'Add the rice and enough water to cover the ingredients.'),
+(56, 8, 6, 'Cook until the chicken and rice are very tender.'),
+(57, 8, 7, 'Mash and stir the mixture until it becomes creamy.'),
+(58, 8, 8, 'Serve hot with melted butter if desired.'),
+(59, 9, 1, 'Clean and cut the fish into medium-sized pieces.'),
+(60, 9, 2, 'Heat oil and sauté the onion until soft.'),
+(61, 9, 3, 'Add garlic, ginger, and turmeric, then cook for 2 minutes.'),
+(62, 9, 4, 'Add the fish and cook gently for a few minutes.'),
+(63, 9, 5, 'Add the rice and enough water to cover the ingredients.'),
+(64, 9, 6, 'Cook until the fish and rice are very soft.'),
+(65, 9, 7, 'Stir and mash the mixture until it becomes creamy.'),
+(66, 9, 8, 'Serve hot with melted butter if desired.'),
+(67, 10, 1, 'Clean and wash the fish thoroughly.'),
+(68, 10, 2, 'Mix garlic, ginger, lemon juice, cumin, salt, and black pepper to make a marinade.'),
+(69, 10, 3, 'Coat the fish evenly with the marinade.'),
+(70, 10, 4, 'Let the fish marinate for 30 minutes.'),
+(71, 10, 5, 'Brush the fish lightly with oil.'),
+(72, 10, 6, 'Grill the fish over medium heat until cooked on both sides.'),
+(73, 10, 7, 'Serve hot with rice, salad, and lemon wedges.'),
+(74, 11, 1, 'Wash and season the chicken with salt and spices.'),
+(75, 11, 2, 'Cook the chicken until tender and set aside.'),
+(76, 11, 3, 'Fry the onions until golden, then add garlic and ginger.'),
+(77, 11, 4, 'Add cardamom, cinnamon, and cloves and cook briefly.'),
+(78, 11, 5, 'Add the rice and pour in enough water or chicken stock.'),
+(79, 11, 6, 'Cook until the rice is almost done.'),
+(80, 11, 7, 'Top with cooked chicken, raisins, and almonds.'),
+(81, 11, 8, 'Cover and cook on low heat until the rice is fully cooked.'),
+(82, 11, 9, 'Serve hot.'),
+(83, 12, 1, 'Wash and marinate the chicken with yogurt, turmeric, salt, and black pepper for 30 minutes.'),
+(84, 12, 2, 'Heat oil and fry the onions until golden brown.'),
+(85, 12, 3, 'Add garlic, ginger, tomatoes, and whole spices, then cook well.'),
+(86, 12, 4, 'Add the marinated chicken and cook until tender.'),
+(87, 12, 5, 'Cook the rice until it is partially done.'),
+(88, 12, 6, 'Layer the rice over the chicken mixture.'),
+(89, 12, 7, 'Sprinkle saffron water and chopped coriander over the rice.'),
+(90, 12, 8, 'Cover and cook on low heat until the rice is fully cooked.'),
+(91, 12, 9, 'Serve hot with salad or yogurt.'),
+(92, 13, 1, 'Cut the chicken into medium-sized pieces and wash thoroughly.'),
+(93, 13, 2, 'Heat oil and fry the onions until soft.'),
+(94, 13, 3, 'Add garlic and ginger, then cook for 2 minutes.'),
+(95, 13, 4, 'Add tomatoes and tomato paste, then cook until combined.'),
+(96, 13, 5, 'Add the chicken and cook until lightly browned.'),
+(97, 13, 6, 'Add potato, carrot, and bell pepper.'),
+(98, 13, 7, 'Season with cumin, coriander, salt, and black pepper.'),
+(99, 13, 8, 'Add water and simmer until the chicken and vegetables are tender.'),
+(100, 13, 9, 'Serve hot with rice or fresh bread.'),
+(101, 14, 1, 'Wash and cut the lamb into medium-sized pieces.'),
+(102, 14, 2, 'Heat oil and fry the onions until golden.'),
+(103, 14, 3, 'Add garlic and ginger, then cook for 2 minutes.'),
+(104, 14, 4, 'Add tomatoes and tomato paste and cook until soft.'),
+(105, 14, 5, 'Add the lamb and cook until browned.'),
+(106, 14, 6, 'Add potato, carrot, and bell pepper.'),
+(107, 14, 7, 'Season with cumin, coriander, salt, and black pepper.'),
+(108, 14, 8, 'Add water and simmer until the lamb becomes tender.'),
+(109, 14, 9, 'Serve hot with rice or fresh bread.'),
+(110, 15, 1, 'Wash and chop all the vegetables into medium-sized pieces.'),
+(111, 15, 2, 'Heat oil and fry the onions until soft.'),
+(112, 15, 3, 'Add garlic and ginger, then cook for 2 minutes.'),
+(113, 15, 4, 'Add tomatoes and tomato paste and cook until softened.'),
+(114, 15, 5, 'Add potato, carrot, and bell pepper.'),
+(115, 15, 6, 'Season with cumin, coriander, salt, and black pepper.'),
+(116, 15, 7, 'Add enough water and simmer until the vegetables are tender.'),
+(117, 15, 8, 'Serve hot with rice or fresh bread.'),
+(118, 16, 1, 'Wash the shark meat thoroughly and cut it into medium-sized pieces.'),
+(119, 16, 2, 'Boil the shark meat until cooked, then drain and shred it.'),
+(120, 16, 3, 'Heat oil and sauté the onion until golden brown.'),
+(121, 16, 4, 'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(122, 16, 5, 'Add turmeric, cumin, coriander, salt, and black pepper.'),
+(123, 16, 6, 'Mix in the shredded shark meat and cook for 10–15 minutes.'),
+(124, 16, 7, 'Stir well until the flavors are combined.'),
+(125, 16, 8, 'Serve hot with Bahraini rice or Arabic bread.'),
+(164, 22, 1, 'Clean and prepare the mixed seafood.'),
+(165, 22, 2, 'Heat the oil and sauté the onions until soft.'),
+(166, 22, 3, 'Add garlic and ginger, then cook for 2 minutes.'),
+(167, 22, 4, 'Add tomatoes and tomato paste, then cook until softened.'),
+(168, 22, 5, 'Add potato, carrot, and bell pepper.'),
+(169, 22, 6, 'Season with cumin, coriander, salt, and black pepper.'),
+(170, 22, 7, 'Add the mixed seafood and enough water, then simmer until the vegetables are tender and the seafood is cooked.'),
+(171, 22, 8, 'Serve hot with rice or Arabic bread.'),
+(172, 23, 1, 'Clean and devein the prawns thoroughly.'),
+(173, 23, 2, 'Heat the oil and fry the onions until golden brown.'),
+(174, 23, 3, 'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(175, 23, 4, 'Add turmeric, salt, and black pepper, then mix well.'),
+(176, 23, 5, 'Add the prawns and cook for 3 to 4 minutes.'),
+(177, 23, 6, 'Add the rice and enough water, then stir well.'),
+(178, 23, 7, 'Cook until the rice is tender and the liquid is absorbed.'),
+(179, 23, 8, 'Serve hot with salad and lemon wedges.'),
+(180, 24, 1, 'Clean and wash the Safi fish thoroughly.'),
+(181, 24, 2, 'Prepare a marinade using garlic, ginger, turmeric, paprika, lemon juice, salt, and black pepper.'),
+(182, 24, 3, 'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
+(183, 24, 4, 'Heat the oil in a frying pan.'),
+(184, 24, 5, 'Fry the fish on both sides until golden brown and fully cooked.'),
+(185, 24, 6, 'Drain excess oil and serve hot with rice, salad, and lemon wedges.'),
+(186, 25, 1, 'Clean and cut the fish into medium-sized pieces.'),
+(187, 25, 2, 'Heat the oil and sauté the onions until soft.'),
+(188, 25, 3, 'Add garlic, ginger, tomatoes, and tomato paste, then cook well.'),
+(189, 25, 4, 'Add the potato and carrot and stir for a few minutes.'),
+(190, 25, 5, 'Season with cumin, coriander, salt, and black pepper.'),
+(191, 25, 6, 'Add enough water and simmer until the vegetables are almost tender.'),
+(192, 25, 7, 'Add the fish and cook gently until fully cooked.'),
+(193, 25, 8, 'Serve hot with rice or fresh bread.'),
+(194, 26, 1, 'Clean and devein the shrimp thoroughly.'),
+(195, 26, 2, 'Season the shrimp with salt, black pepper, paprika, and lemon juice.'),
+(196, 26, 3, 'Heat the oil in a frying pan.'),
+(197, 26, 4, 'Sauté the garlic, ginger, and green chili until fragrant.'),
+(198, 26, 5, 'Add the shrimp and cook for 3 to 5 minutes.'),
+(199, 26, 6, 'Sprinkle the chili flakes and stir well.'),
+(200, 26, 7, 'Cook until the shrimp are fully cooked and coated with the spices.'),
+(201, 26, 8, 'Serve hot with rice, bread, or a fresh salad.'),
+(202, 27, 1, 'Wash the red lentils thoroughly.'),
+(203, 27, 2, 'Heat the oil and sauté the onion until soft.'),
+(204, 27, 3, 'Add garlic, ginger, and tomatoes, then cook until softened.'),
+(205, 27, 4, 'Add the red lentils, cumin, turmeric, salt, and black pepper.'),
+(206, 27, 5, 'Pour in the water and bring to a boil.'),
+(207, 27, 6, 'Reduce the heat and simmer until the lentils are tender.'),
+(208, 27, 7, 'Blend the soup until smooth if desired.'),
+(209, 27, 8, 'Serve hot with lemon wedges or fresh bread.'),
+(210, 28, 1, 'Cut the chicken into small pieces.'),
+(211, 28, 2, 'Heat the oil and sauté the onion until soft.'),
+(212, 28, 3, 'Add the garlic and ginger, then cook for 2 minutes.'),
+(213, 28, 4, 'Add the chicken and cook until lightly browned.'),
+(214, 28, 5, 'Add the carrot, chicken stock, and bay leaf.'),
+(215, 28, 6, 'Season with salt and black pepper.'),
+(216, 28, 7, 'Simmer for 30 minutes until the chicken is tender.'),
+(217, 28, 8, 'Serve hot with fresh bread.'),
+(218, 29, 1, 'Wash and chop all the vegetables into small pieces.'),
+(219, 29, 2, 'Heat the oil and sauté the onion until soft.'),
+(220, 29, 3, 'Add the garlic and ginger, then cook for 2 minutes.'),
+(221, 29, 4, 'Add the tomatoes, carrots, potatoes, peas, and celery.'),
+(222, 29, 5, 'Season with salt and black pepper.'),
+(223, 29, 6, 'Pour in the water and bring to a boil.'),
+(224, 29, 7, 'Simmer for 25 to 30 minutes until the vegetables are tender.'),
+(225, 29, 8, 'Serve hot with fresh bread or crackers.'),
+(226, 30, 1, 'Wash the wheat and soak it for at least 2 hours.'),
+(227, 30, 2, 'Cook the chicken until tender, then shred it into small pieces.'),
+(228, 30, 3, 'Heat butter and sauté the onion, garlic, and ginger.'),
+(229, 30, 4, 'Add the soaked wheat and chicken stock.'),
+(230, 30, 5, 'Add the shredded chicken, salt, black pepper, and ground cinnamon.'),
+(231, 30, 6, 'Simmer on low heat until the wheat becomes very soft.'),
+(232, 30, 7, 'Stir continuously until the soup reaches a smooth and creamy consistency.'),
+(233, 30, 8, 'Serve hot with a sprinkle of cinnamon if desired.'),
+(234, 31, 1, 'Clean and prepare the mixed seafood.'),
+(235, 31, 2, 'Heat the oil and sauté the onion until soft.'),
+(236, 31, 3, 'Add the garlic, ginger, and tomatoes, then cook until softened.'),
+(237, 31, 4, 'Pour in the fish stock and bring it to a boil.'),
+(238, 31, 5, 'Add the mixed seafood and cook for 8 to 10 minutes.'),
+(239, 31, 6, 'Season with salt and black pepper.'),
+(240, 31, 7, 'Stir in the chopped parsley and simmer for 2 minutes.'),
+(241, 31, 8, 'Serve hot with lemon wedges and fresh bread.'),
+(242, 32, 1, 'Mix the flour, yeast, and salt in a large bowl.'),
+(243, 32, 2, 'Gradually add the water and knead into a smooth dough.'),
+(244, 32, 3, 'Add the oil and continue kneading until the dough is soft.'),
+(245, 32, 4, 'Cover the dough and let it rise for 1 hour.'),
+(246, 32, 5, 'Divide the dough into equal portions and flatten into round breads.'),
+(247, 32, 6, 'Bake in a preheated oven until golden brown.'),
+(248, 32, 7, 'Remove from the oven and brush lightly with oil if desired.'),
+(249, 32, 8, 'Serve warm with curries, soups, or breakfast dishes.'),
+(250, 33, 1, 'Mix the flour, yeast, and salt in a large bowl.'),
+(251, 33, 2, 'Gradually add water and knead until a smooth dough forms.'),
+(252, 33, 3, 'Add the oil and continue kneading for 8 to 10 minutes.'),
+(253, 33, 4, 'Cover the dough and let it rise for about 1 hour.'),
+(254, 33, 5, 'Divide the dough into equal portions and flatten each into a round shape.'),
+(255, 33, 6, 'Bake in a hot tannour oven until the bread is golden and slightly crisp.'),
+(256, 33, 7, 'Remove the bread carefully and allow it to cool slightly.'),
+(257, 33, 8, 'Serve warm with curries, grilled meat, or traditional Bahraini dishes.'),
+(258, 34, 1, 'Mix the flour, water, salt, and oil into a smooth batter.'),
+(259, 34, 2, 'Heat a flat griddle over medium heat.'),
+(260, 34, 3, 'Pour a thin layer of batter onto the hot griddle.'),
+(261, 34, 4, 'Spread the batter evenly into a thin round shape.'),
+(262, 34, 5, 'Cook until the edges become crisp and the bread is fully cooked.'),
+(263, 34, 6, 'Carefully remove the bread from the griddle.'),
+(264, 34, 7, 'Repeat with the remaining batter.'),
+(265, 34, 8, 'Serve warm with cheese, honey, or traditional Bahraini dishes.'),
+(266, 35, 1, 'Mix the flour, yeast, sugar, and salt in a large bowl.'),
+(267, 35, 2, 'Add the warm milk, butter, cardamom, and saffron, then knead into a soft dough.'),
+(268, 35, 3, 'Cover the dough and let it rise for about 1 hour.'),
+(269, 35, 4, 'Divide the dough into equal portions and shape into small round breads.'),
+(270, 35, 5, 'Place the dough on a baking tray and let it rest for 15 minutes.'),
+(271, 35, 6, 'Bake in a preheated oven until golden brown.'),
+(272, 35, 7, 'Brush with melted butter after baking for a soft texture.'),
+(273, 35, 8, 'Serve warm with tea or as a breakfast bread.'),
+(274, 36, 1, 'Mix the flour, yeast, sugar, and salt in a bowl.'),
+(275, 36, 2, 'Add the milk, egg, cardamom, and saffron, then whisk into a smooth batter.'),
+(276, 36, 3, 'Cover the batter and let it rest for about 1 hour.'),
+(277, 36, 4, 'Heat a lightly buttered non-stick pan over medium heat.'),
+(278, 36, 5, 'Pour a ladle of batter onto the pan to form a round pancake.'),
+(279, 36, 6, 'Cook until bubbles appear, then flip and cook the other side until golden brown.'),
+(280, 36, 7, 'Repeat with the remaining batter.'),
+(281, 36, 8, 'Serve warm with honey, date syrup, or cream.'),
+(282, 37, 1, 'Cook the vermicelli until tender and drain well.'),
+(283, 37, 2, 'Melt the butter in a pan and stir in the sugar.'),
+(284, 37, 3, 'Add the vermicelli along with cardamom, saffron, and rose water.'),
+(285, 37, 4, 'Cook for a few minutes until the flavors are well combined.'),
+(286, 37, 5, 'Beat the eggs with a pinch of salt.'),
+(287, 37, 6, 'Cook the eggs into a thin omelet in a separate pan.'),
+(288, 37, 7, 'Place the omelet over the sweet vermicelli.'),
+(289, 37, 8, 'Serve warm for breakfast.'),
+(290, 38, 1, 'Heat the oil in a frying pan over medium heat.'),
+(291, 38, 2, 'Add the chopped tomatoes and green chili, then cook until softened.'),
+(292, 38, 3, 'Season with salt and black pepper.'),
+(293, 38, 4, 'Beat the eggs in a bowl.'),
+(294, 38, 5, 'Pour the eggs over the tomato mixture.'),
+(295, 38, 6, 'Cook gently until the eggs are set.'),
+(296, 38, 7, 'Fold the mixture lightly and cook for another minute.'),
+(297, 38, 8, 'Serve hot with fresh Khubz or Regag bread.'),
+(298, 39, 1, 'Soak the chickpeas overnight and drain well.'),
+(299, 39, 2, 'Blend the chickpeas with onion, garlic, parsley, and coriander.'),
+(300, 39, 3, 'Add cumin, salt, black pepper, and baking powder, then mix well.'),
+(301, 39, 4, 'Shape the mixture into small balls or patties.'),
+(302, 39, 5, 'Heat the oil in a deep pan.'),
+(303, 39, 6, 'Fry the falafel until golden brown and crispy.'),
+(304, 39, 7, 'Drain on paper towels to remove excess oil.'),
+(305, 39, 8, 'Serve hot with tahini sauce, salad, and Khubz bread.'),
+(306, 40, 1, 'Spread the labneh evenly on a serving plate.'),
+(307, 40, 2, 'Drizzle the olive oil over the labneh.'),
+(308, 40, 3, 'Arrange the olives around the labneh.'),
+(309, 40, 4, 'Garnish with fresh mint leaves.'),
+(310, 40, 5, 'Chill for a few minutes before serving if desired.'),
+(311, 40, 6, 'Serve with warm Khubz or Regag bread.'),
+(312, 41, 1, 'Cook the fava beans until they are soft.'),
+(313, 41, 2, 'Mash the beans lightly with a spoon or fork.'),
+(314, 41, 3, 'Add the garlic, cumin, salt, and black pepper.'),
+(315, 41, 4, 'Stir in the lemon juice and olive oil.'),
+(316, 41, 5, 'Cook for 5 minutes over low heat while stirring.'),
+(317, 41, 6, 'Transfer the foul to a serving bowl.'),
+(318, 41, 7, 'Garnish with chopped parsley and a drizzle of olive oil.'),
+(319, 41, 8, 'Serve hot with Khubz or Regag bread.'),
+(320, 42, 1, 'Heat a flat pan over medium heat.'),
+(321, 42, 2, 'Place the Regag bread on the pan.'),
+(322, 42, 3, 'Spread the butter evenly over the bread.'),
+(323, 42, 4, 'Sprinkle the cheddar cheese evenly on top.'),
+(324, 42, 5, 'Fold the bread in half.'),
+(325, 42, 6, 'Cook until the cheese melts completely.'),
+(326, 42, 7, 'Remove from the pan and cut into pieces if desired.'),
+(327, 42, 8, 'Serve hot as a traditional Bahraini breakfast.'),
+(328, 43, 1, 'Heat a flat pan over medium heat.'),
+(329, 43, 2, 'Place the Regag bread on the pan and spread the butter evenly.'),
+(330, 43, 3, 'Crack the eggs directly onto the bread.'),
+(331, 43, 4, 'Season with salt and black pepper.'),
+(332, 43, 5, 'Spread the eggs evenly over the bread.'),
+(333, 43, 6, 'Cook until the eggs are fully set.'),
+(334, 43, 7, 'Fold the bread if desired and cook for another minute.'),
+(335, 43, 8, 'Serve hot as a traditional Bahraini breakfast.'),
+(336, 44, 1, 'Mix the flour, cornstarch, yeast, baking powder, and sugar in a bowl.'),
+(337, 44, 2, 'Gradually add the water and mix into a smooth batter.'),
+(338, 44, 3, 'Cover the batter and let it rest for 1 hour.'),
+(339, 44, 4, 'Heat the oil in a deep frying pan.'),
+(340, 44, 5, 'Drop small portions of the batter into the hot oil.'),
+(341, 44, 6, 'Fry until the luqaimat are golden brown and crispy.'),
+(342, 44, 7, 'Drain on paper towels to remove excess oil.'),
+(343, 44, 8, 'Drizzle generously with date syrup and serve warm.'),
+(344, 45, 1, 'Mix the flour, sugar, baking powder, and nutmeg in a bowl.'),
+(345, 45, 2, 'Add the eggs, melted butter, rose water, cardamom, and saffron.'),
+(346, 45, 3, 'Mix until a smooth batter is formed.'),
+(347, 45, 4, 'Heat the oil in a deep frying pan.'),
+(348, 45, 5, 'Drop spoonfuls of the batter into the hot oil.'),
+(349, 45, 6, 'Fry until golden brown on both sides.'),
+(350, 45, 7, 'Drain on paper towels to remove excess oil.'),
+(351, 45, 8, 'Serve warm with tea or coffee.'),
+(352, 46, 1, 'Mix the corn flour with water until smooth.'),
+(353, 46, 2, 'Heat the mixture over medium heat while stirring continuously.'),
+(354, 46, 3, 'Add the sugar and continue stirring until dissolved.'),
+(355, 46, 4, 'Mix in the butter, saffron, cardamom, rose water, and rose essence.'),
+(356, 46, 5, 'Cook until the mixture becomes thick and glossy.'),
+(357, 46, 6, 'Stir in half of the mixed nuts.'),
+(358, 46, 7, 'Pour the halwa into a serving dish and garnish with the remaining nuts.'),
+(359, 46, 8, 'Allow it to cool slightly before serving.'),
+(360, 47, 1, 'Wash the sago pearls thoroughly.'),
+(361, 47, 2, 'Boil the water and add the sago pearls.'),
+(362, 47, 3, 'Cook until the sago becomes soft and translucent.'),
+(363, 47, 4, 'Add the sugar and stir until completely dissolved.'),
+(364, 47, 5, 'Mix in the cardamom, saffron, and rose water.'),
+(365, 47, 6, 'Stir in the butter until melted.'),
+(366, 47, 7, 'Cook for another 5 minutes until slightly thickened.'),
+(367, 47, 8, 'Serve warm or chilled as desired.'),
+(368, 48, 1, 'Bring the water to a boil in a large pot.'),
+(369, 48, 2, 'Gradually add the whole wheat flour while stirring continuously.'),
+(370, 48, 3, 'Cook over low heat until the mixture becomes thick and smooth.'),
+(371, 48, 4, 'Add the sugar, butter, cardamom, saffron, and salt.'),
+(372, 48, 5, 'Continue stirring until all the ingredients are well combined.'),
+(373, 48, 6, 'Cook for another 5 to 10 minutes until creamy.'),
+(374, 48, 7, 'Transfer to a serving dish.'),
+(375, 48, 8, 'Serve warm with extra melted butter if desired.'),
+(376, 49, 1, 'Preheat the oven to 180°C.'),
+(377, 49, 2, 'Blend the dates with the milk until smooth.'),
+(378, 49, 3, 'Mix the flour and baking powder in a bowl.'),
+(379, 49, 4, 'Add the eggs, butter, sugar, vanilla extract, and date mixture.'),
+(380, 49, 5, 'Mix until a smooth batter forms.'),
+(381, 49, 6, 'Pour the batter into a greased cake tin.'),
+(382, 49, 7, 'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
+(383, 49, 8, 'Allow the cake to cool before slicing and serving.'),
+(384, 50, 1, 'Preheat the oven to 180°C.'),
+(385, 50, 2, 'Break the baked puff pastry into small pieces and place them in a baking dish.'),
+(386, 50, 3, 'Sprinkle the raisins, almonds, and pistachios over the pastry.'),
+(387, 50, 4, 'Heat the milk, cream, sugar, butter, and vanilla extract until the sugar dissolves.'),
+(388, 50, 5, 'Pour the warm milk mixture evenly over the pastry.'),
+(389, 50, 6, 'Bake for 20 to 25 minutes until the top is golden brown.'),
+(390, 50, 7, 'Allow it to cool slightly before serving.'),
+(391, 50, 8, 'Serve warm, garnished with extra nuts if desired.'),
+(392, 51, 1, 'Wash the rice thoroughly.'),
+(393, 51, 2, 'Cook the rice with the milk over medium heat.'),
+(394, 51, 3, 'Stir frequently until the rice becomes soft and creamy.'),
+(395, 51, 4, 'Add the sugar, cardamom, saffron, and vanilla extract.'),
+(396, 51, 5, 'Mix well and continue cooking for 5 to 10 minutes.'),
+(397, 51, 6, 'Stir in the butter until melted.'),
+(398, 51, 7, 'Transfer the pudding to serving bowls.'),
+(399, 51, 8, 'Serve warm or chilled, garnished with cinnamon or chopped nuts if desired.'),
+(400, 52, 1, 'Melt the butter in a pan over medium heat.'),
+(401, 52, 2, 'Add the vermicelli and roast until golden brown.'),
+(402, 52, 3, 'Pour in the water and cook until the vermicelli softens.'),
+(403, 52, 4, 'Add the sugar and stir until dissolved.'),
+(404, 52, 5, 'Mix in the cardamom and saffron.'),
+(405, 52, 6, 'Cook until the liquid is absorbed.'),
+(406, 52, 7, 'Garnish with the mixed nuts.'),
+(407, 52, 8, 'Serve warm as a traditional Bahraini dessert.'),
+(408, 53, 1, 'Preheat the oven to 180°C.'),
+(409, 53, 2, 'Mix the flour, baking powder, and shredded coconut in a bowl.'),
+(410, 53, 3, 'In another bowl, beat the butter and sugar until creamy.'),
+(411, 53, 4, 'Add the eggs, milk, and vanilla extract, then mix well.'),
+(412, 53, 5, 'Gradually add the dry ingredients and stir until smooth.'),
+(413, 53, 6, 'Pour the batter into a greased cake tin.'),
+(414, 53, 7, 'Bake for 35 to 40 minutes or until a toothpick comes out clean.'),
+(415, 53, 8, 'Allow the cake to cool before slicing and serving.'),
+(416, 54, 1, 'Boil and mash the potatoes.'),
+(417, 54, 2, 'Cook the onion, peas, cumin, turmeric, salt, and black pepper in a little oil.'),
+(418, 54, 3, 'Mix the mashed potatoes with the cooked vegetables.'),
+(419, 54, 4, 'Fill each samosa sheet with the potato mixture.'),
+(420, 54, 5, 'Fold and seal the samosas securely.'),
+(421, 54, 6, 'Heat the oil in a deep pan.'),
+(422, 54, 7, 'Fry the samosas until golden brown and crispy.'),
+(423, 54, 8, 'Serve hot with chutney or your favorite dipping sauce.'),
+(424, 55, 1, 'Mix the cheddar and mozzarella cheese together.'),
+(425, 55, 2, 'Place a spoonful of the cheese mixture onto each samosa sheet.'),
+(426, 55, 3, 'Fold the sheets into triangle shapes and seal the edges.'),
+(427, 55, 4, 'Heat the oil in a deep frying pan.'),
+(428, 55, 5, 'Carefully place the samosas into the hot oil.'),
+(429, 55, 6, 'Fry until golden brown and crispy.'),
+(430, 55, 7, 'Drain on paper towels to remove excess oil.'),
+(431, 55, 8, 'Serve hot with ketchup or chili sauce.'),
+(432, 56, 1, 'Heat the oil in a pan and sauté the onion until soft.'),
+(433, 56, 2, 'Add the garlic and cook for 1 minute.'),
+(434, 56, 3, 'Add the minced beef and cook until browned.'),
+(435, 56, 4, 'Season with salt and black pepper, then let the filling cool.'),
+(436, 56, 5, 'Place a spoonful of filling onto each samosa sheet.'),
+(437, 56, 6, 'Fold the sheets into triangles and seal the edges.'),
+(438, 56, 7, 'Deep-fry until golden brown and crispy.'),
+(439, 56, 8, 'Serve hot with your favorite dipping sauce.'),
+(440, 57, 1, 'Boil the potatoes until tender, then mash them.'),
+(441, 57, 2, 'Mix the potatoes with the egg, parsley, salt, and black pepper.'),
+(442, 57, 3, 'Shape the mixture into small patties.'),
+(443, 57, 4, 'Coat each patty with breadcrumbs.'),
+(444, 57, 5, 'Heat the oil in a frying pan.'),
+(445, 57, 6, 'Fry the cutlets until golden brown on both sides.'),
+(446, 57, 7, 'Drain on paper towels to remove excess oil.'),
+(447, 57, 8, 'Serve hot with ketchup or your favorite dipping sauce.'),
+(448, 58, 1, 'Combine the minced lamb, onion, garlic, parsley, cumin, salt, and black pepper in a bowl.'),
+(449, 58, 2, 'Mix well until all ingredients are evenly combined.'),
+(450, 58, 3, 'Shape the mixture into kebab logs or patties.'),
+(451, 58, 4, 'Lightly brush the kebabs with oil.'),
+(452, 58, 5, 'Preheat a grill or grill pan over medium-high heat.'),
+(453, 58, 6, 'Grill the kebabs for 10–12 minutes, turning occasionally.'),
+(454, 58, 7, 'Cook until browned and fully cooked through.'),
+(455, 58, 8, 'Serve hot with Arabic bread, salad, and yogurt sauce.'),
+(456, 59, 1, 'Heat a little oil in a pan and cook the onion until soft.'),
+(457, 59, 2, 'Add the garlic and minced beef, then cook until browned.'),
+(458, 59, 3, 'Season with salt and black pepper and allow the filling to cool.'),
+(459, 59, 4, 'Place a spoonful of the filling onto each spring roll sheet.'),
+(460, 59, 5, 'Roll tightly and seal the edges.'),
+(461, 59, 6, 'Heat oil in a deep frying pan.'),
+(462, 59, 7, 'Fry the rolls until golden brown and crispy.'),
+(463, 59, 8, 'Serve hot with ketchup or chili sauce.'),
+(464, 60, 1, 'Rinse the grape leaves and blanch them in hot water if needed.'),
+(465, 60, 2, 'Mix the rice, minced lamb, onion, tomato, parsley, salt, and black pepper.'),
+(466, 60, 3, 'Place a small amount of filling onto each grape leaf.'),
+(467, 60, 4, 'Roll the leaves tightly and fold in the sides.'),
+(468, 60, 5, 'Arrange the rolls in a pot.'),
+(469, 60, 6, 'Drizzle with oil and lemon juice, then add enough water to cover.'),
+(470, 60, 7, 'Simmer over low heat for about 45 minutes until cooked.'),
+(471, 60, 8, 'Serve warm with yogurt or lemon wedges.'),
+(472, 61, 1, 'Preheat the oven to 180°C.'),
+(473, 61, 2, 'Cook the onion in a little oil until soft.'),
+(474, 61, 3, 'Add the spinach and cook until wilted.'),
+(475, 61, 4, 'Mix in the lemon juice, salt, and black pepper, then let the filling cool.'),
+(476, 61, 5, 'Cut the pastry dough into small circles and add the spinach filling.'),
+(477, 61, 6, 'Fold into triangles and seal the edges firmly.'),
+(478, 61, 7, 'Place on a baking tray and bake for 20 to 25 minutes until golden brown.'),
+(479, 61, 8, 'Serve warm as an appetizer or snack.'),
+(480, 62, 1, 'Boil the water in a saucepan.'),
+(481, 62, 2, 'Add the black tea and crushed cardamom.'),
+(482, 62, 3, 'Simmer for 3 to 5 minutes.'),
+(483, 62, 4, 'Add the evaporated milk and sugar.'),
+(484, 62, 5, 'Stir well and bring to a gentle boil.'),
+(485, 62, 6, 'Simmer for another 2 to 3 minutes.'),
+(486, 62, 7, 'Strain the tea into serving cups.'),
+(487, 62, 8, 'Serve hot.'),
+(488, 63, 1, 'Boil the water in a coffee pot.'),
+(489, 63, 2, 'Add the Arabic coffee and simmer for 10 minutes.'),
+(490, 63, 3, 'Add the crushed cardamom and saffron.'),
+(491, 63, 4, 'Simmer for another 2 to 3 minutes.'),
+(492, 63, 5, 'Remove from the heat and let the coffee settle briefly.'),
+(493, 63, 6, 'Strain the coffee into a traditional dallah.'),
+(494, 63, 7, 'Serve in small cups.'),
+(495, 63, 8, 'Enjoy with fresh dates.'),
+(496, 64, 1, 'Wash the lemons and mint leaves.'),
+(497, 64, 2, 'Squeeze the lemons and remove the seeds.'),
+(498, 64, 3, 'Add the lemon juice, mint leaves, sugar, and water to a blender.'),
+(499, 64, 4, 'Blend until smooth.'),
+(500, 64, 5, 'Add the ice cubes and blend briefly.'),
+(501, 64, 6, 'Strain the juice if desired.'),
+(502, 64, 7, 'Pour into serving glasses.'),
+(503, 64, 8, 'Serve chilled.'),
+(504, 65, 1, 'Soak the tamarind in warm water for 30 minutes.'),
+(505, 65, 2, 'Mash the tamarind to extract the juice.'),
+(506, 65, 3, 'Strain the mixture to remove seeds and fibers.'),
+(507, 65, 4, 'Add the sugar and stir until dissolved.'),
+(508, 65, 5, 'Add the remaining water and mix well.'),
+(509, 65, 6, 'Chill the juice in the refrigerator.'),
+(510, 65, 7, 'Pour into glasses filled with ice cubes.'),
+(511, 65, 8, 'Serve cold.'),
+(512, 66, 1, 'Fill a serving glass with ice cubes.'),
+(513, 66, 2, 'Pour the Vimto syrup into the glass.'),
+(514, 66, 3, 'Add the chilled water.'),
+(515, 66, 4, 'Stir well until combined.'),
+(516, 66, 5, 'Taste and adjust the syrup if desired.'),
+(517, 66, 6, 'Garnish with a lemon slice if preferred.'),
+(518, 66, 7, 'Serve immediately while cold.'),
+(519, 66, 8, 'Enjoy chilled.'),
+(520, 67, 1, 'Pour the chilled milk into a serving glass.'),
+(521, 67, 2, 'Add the rose syrup and sugar.'),
+(522, 67, 3, 'Stir well until everything is fully mixed.'),
+(523, 67, 4, 'Add the ice cubes.'),
+(524, 67, 5, 'Serve immediately while chilled.'),
+(525, 68, 1, 'Remove the seeds from the dates.'),
+(526, 68, 2, 'Add the dates, milk, and sugar into a blender.'),
+(527, 68, 3, 'Blend until smooth and creamy.'),
+(528, 68, 4, 'Add the ice cubes and blend for a few more seconds.'),
+(529, 68, 5, 'Pour into serving glasses and serve chilled.'),
+(530, 69, 1, 'Pour the milk into a saucepan and heat over medium heat.'),
+(531, 69, 2, 'Add the saffron and crushed cardamom to the milk.'),
+(532, 69, 3, 'Stir in the sugar until it dissolves completely.'),
+(533, 69, 4, 'Simmer gently for 5 to 10 minutes to infuse the flavors.'),
+(534, 69, 5, 'Serve warm, or chill before serving if desired.'),
+(535, 70, 1, 'Wash and finely chop the tomatoes, onion, and parsley.'),
+(536, 70, 2, 'Place all the chopped ingredients in a mixing bowl.'),
+(537, 70, 3, 'Add the lemon juice and olive oil.'),
+(538, 70, 4, 'Season with salt and black pepper.'),
+(539, 70, 5, 'Mix well until all ingredients are evenly combined.'),
+(540, 70, 6, 'Serve fresh as a side dish.'),
+(541, 71, 1, 'Wash the cucumber and tomatoes thoroughly.'),
+(542, 71, 2, 'Dice the cucumber and tomatoes into small pieces.'),
+(543, 71, 3, 'Place them in a mixing bowl.'),
+(544, 71, 4, 'Add the lemon juice and olive oil.'),
+(545, 71, 5, 'Season with salt and black pepper, then toss well.'),
+(546, 71, 6, 'Serve fresh and chilled.'),
+(547, 72, 1, 'Soak the bulgur in water for 15 minutes, then drain well.'),
+(548, 72, 2, 'Finely chop the parsley, mint leaves, tomatoes, cucumber, and onion.'),
+(549, 72, 3, 'Place all the ingredients in a large mixing bowl.'),
+(550, 72, 4, 'Add the soaked bulgur, lemon juice, and olive oil.'),
+(551, 72, 5, 'Season with salt and black pepper.'),
+(552, 72, 6, 'Mix well until all the ingredients are evenly combined.'),
+(553, 72, 7, 'Chill for 15 minutes before serving.'),
+(554, 73, 1, 'Wash and chop the lettuce, tomatoes, cucumber, and radishes into bite-sized pieces.'),
+(555, 73, 2, 'Toast or fry the pita bread until crispy, then break it into small pieces.'),
+(556, 73, 3, 'Place the vegetables and mint leaves in a large bowl.'),
+(557, 73, 4, 'Add the toasted pita bread.'),
+(558, 73, 5, 'Mix the lemon juice, olive oil, sumac, and salt to prepare the dressing.'),
+(559, 73, 6, 'Pour the dressing over the salad and toss gently.'),
+(560, 73, 7, 'Serve immediately to keep the bread crispy.'),
+(561, 74, 1, 'Wash the lettuce, cucumber, tomatoes, and onion thoroughly.'),
+(562, 74, 2, 'Chop the vegetables into bite-sized pieces.'),
+(563, 74, 3, 'Place all the vegetables in a large salad bowl.'),
+(564, 74, 4, 'Mix the lemon juice, olive oil, salt, and black pepper to prepare the dressing.'),
+(565, 74, 5, 'Pour the dressing over the salad and toss gently until evenly coated.'),
+(566, 74, 6, 'Serve immediately while fresh.'),
+(567, 75, 1, 'Prepare the pizza dough and let it rise.'),
+(568, 75, 2, 'Roll out the dough into a pizza base.'),
+(569, 75, 3, 'Spread tomato sauce evenly over the base.'),
+(570, 75, 4, 'Top with mozzarella cheese and fresh basil leaves.'),
+(571, 75, 5, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(572, 75, 6, 'Slice and serve hot.'),
+(573, 76, 1, 'Prepare the pizza dough and let it rise.'),
+(574, 76, 2, 'Roll out the dough into a pizza base.'),
+(575, 76, 3, 'Spread tomato sauce evenly over the base.'),
+(576, 76, 4, 'Sprinkle mozzarella cheese over the sauce.'),
+(577, 76, 5, 'Arrange the pepperoni slices evenly on top.'),
+(578, 76, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(579, 76, 7, 'Slice and serve hot.'),
+(580, 77, 1, 'Mix the yogurt and spices, then marinate the chicken for 30 minutes.'),
+(581, 77, 2, 'Cook the marinated chicken until nearly done.'),
+(582, 77, 3, 'Prepare the pizza dough and roll it into a base.'),
+(583, 77, 4, 'Spread tomato sauce over the base and add mozzarella cheese.'),
+(584, 77, 5, 'Top with the cooked chicken, onion, and bell pepper.'),
+(585, 77, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(586, 77, 7, 'Slice and serve hot.'),
+(587, 78, 1, 'Prepare the pizza dough and let it rise.'),
+(588, 78, 2, 'Cook the chicken until fully done and slice it into small pieces.'),
+(589, 78, 3, 'Roll out the dough into a pizza base.'),
+(590, 78, 4, 'Spread BBQ sauce evenly over the base.'),
+(591, 78, 5, 'Top with mozzarella cheese, chicken, onion, and bell pepper.'),
+(592, 78, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(593, 78, 7, 'Slice and serve hot.'),
+(594, 79, 1, 'Prepare the pizza dough and let it rise.'),
+(595, 79, 2, 'Cook the chicken and minced beef until fully done.'),
+(596, 79, 3, 'Roll out the dough into a pizza base.'),
+(597, 79, 4, 'Spread tomato sauce over the base and add mozzarella cheese.'),
+(598, 79, 5, 'Top with the chicken, minced beef, pepperoni, and onion.'),
+(599, 79, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(600, 79, 7, 'Slice and serve hot.'),
+(601, 80, 1, 'Prepare the pizza dough and let it rise.'),
+(602, 80, 2, 'Cook the mixed seafood and shrimp until just done.'),
+(603, 80, 3, 'Roll out the dough into a pizza base.'),
+(604, 80, 4, 'Spread tomato sauce over the base and sprinkle mozzarella cheese.'),
+(605, 80, 5, 'Top with the seafood, shrimp, onion, and bell pepper.'),
+(606, 80, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(607, 80, 7, 'Slice and serve hot.'),
+(608, 81, 1, 'Prepare the pizza dough and let it rise.'),
+(609, 81, 2, 'Slice the vegetables into thin pieces.'),
+(610, 81, 3, 'Roll out the dough into a pizza base.'),
+(611, 81, 4, 'Spread tomato sauce over the base and sprinkle mozzarella cheese.'),
+(612, 81, 5, 'Top with the onion, bell pepper, mushrooms, and olives.'),
+(613, 81, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(614, 81, 7, 'Slice and serve hot.'),
+(615, 82, 1, 'Prepare the pizza dough and let it rise.'),
+(616, 82, 2, 'Roll out the dough into a pizza base.'),
+(617, 82, 3, 'Spread tomato sauce evenly over the base.'),
+(618, 82, 4, 'Top with mozzarella, cheddar, parmesan, and blue cheese.'),
+(619, 82, 5, 'Bake in a preheated oven until the crust is golden and the cheeses have melted.'),
+(620, 82, 6, 'Allow to cool for 2 minutes.'),
+(621, 82, 7, 'Slice and serve hot.'),
+(622, 83, 1, 'Prepare the pizza dough and let it rise.'),
+(623, 83, 2, 'Cook the chicken and minced beef until fully done.'),
+(624, 83, 3, 'Roll out the dough into a pizza base.'),
+(625, 83, 4, 'Spread tomato sauce over the base and add mozzarella cheese.'),
+(626, 83, 5, 'Top with chicken, minced beef, mushrooms, onion, bell pepper, and olives.'),
+(627, 83, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(628, 83, 7, 'Slice and serve hot.'),
+(629, 84, 1, 'Prepare the pizza dough and let it rise.'),
+(630, 84, 2, 'Cook the minced beef with spices until fully done.'),
+(631, 84, 3, 'Roll out the dough into a pizza base.'),
+(632, 84, 4, 'Spread tomato sauce over the base and add mozzarella cheese.'),
+(633, 84, 5, 'Top with seasoned beef, onion, bell pepper, jalapenos, and sweet corn.'),
+(634, 84, 6, 'Bake in a preheated oven until the crust is golden and the cheese has melted.'),
+(635, 84, 7, 'Slice and serve hot.'),
+(636, 17, 1, 'Clean and wash the hammour fish thoroughly.'),
+(637, 17, 2, 'Season the fish with garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper.'),
+(638, 17, 3, 'Leave the fish to marinate for 30 minutes.'),
+(639, 17, 4, 'Coat the fish evenly with flour.'),
+(640, 17, 5, 'Heat the oil in a deep frying pan.'),
+(641, 17, 6, 'Fry the fish until golden brown and fully cooked.'),
+(642, 17, 7, 'Drain the excess oil and serve hot with lemon and rice.'),
+(643, 18, 1, 'Clean and wash the kingfish thoroughly.'),
+(644, 18, 2, 'Prepare a marinade using garlic, ginger, lemon juice, paprika, cumin, salt, and black pepper.'),
+(645, 18, 3, 'Coat the fish evenly with the marinade and let it rest for 30 minutes.'),
+(646, 18, 4, 'Brush the fish lightly with oil.'),
+(647, 18, 5, 'Grill the fish over medium heat for 6–8 minutes on each side until fully cooked.'),
+(648, 18, 6, 'Serve hot with rice, grilled vegetables, or salad.'),
+(649, 19, 1, 'Clean and devein the shrimp thoroughly.'),
+(650, 19, 2, 'Heat the oil and sauté the onion until soft.'),
+(651, 19, 3, 'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(652, 19, 4, 'Add the tomatoes and curry powder, then cook until the tomatoes soften.'),
+(653, 19, 5, 'Pour in the coconut milk and stir well.'),
+(654, 19, 6, 'Add the shrimp and cook for 5–7 minutes until pink and fully cooked.'),
+(655, 19, 7, 'Season with salt and black pepper.'),
+(656, 19, 8, 'Serve hot with steamed rice.'),
+(657, 20, 1, 'Clean and devein the shrimp thoroughly.'),
+(658, 20, 2, 'Season the shrimp with salt and black pepper.'),
+(659, 20, 3, 'Coat each shrimp with flour and cornstarch.'),
+(660, 20, 4, 'Dip the shrimp into the beaten eggs.'),
+(661, 20, 5, 'Cover the shrimp evenly with breadcrumbs.'),
+(662, 20, 6, 'Heat the oil in a deep frying pan.'),
+(663, 20, 7, 'Fry the shrimp until golden brown and crispy.'),
+(664, 20, 8, 'Drain on paper towels and serve hot with dipping sauce.'),
+(665, 21, 1, 'Clean and cut the fish into medium-sized pieces.'),
+(666, 21, 2, 'Heat the oil and sauté the onion until soft.'),
+(667, 21, 3, 'Add garlic, ginger, and green chili, then cook for 2 minutes.'),
+(668, 21, 4, 'Add tomatoes and curry powder, then cook until the tomatoes soften.'),
+(669, 21, 5, 'Pour in the coconut milk and stir well.'),
+(670, 21, 6, 'Add the fish and simmer gently for 10–12 minutes until cooked.'),
+(671, 21, 7, 'Season with salt and black pepper.'),
+(672, 21, 8, 'Serve hot with steamed rice or bread.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password_hash`, `created_at`) VALUES
+(1, 'test123', '$2y$10$dbGUHzCt1a.twAq0NVZ.CeINYdQtw58okdMywNwbNHvxBZYDAnIRK', '2026-07-26 11:37:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_preferences`
+--
+
+CREATE TABLE `user_preferences` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `spice_level` varchar(50) DEFAULT NULL,
+  `sweetness_level` varchar(50) DEFAULT NULL,
+  `goal` varchar(50) DEFAULT NULL,
+  `diet` varchar(50) DEFAULT NULL,
+  `likes` text DEFAULT NULL,
+  `dislikes` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_preferences`
+--
+
+INSERT INTO `user_preferences` (`id`, `user_id`, `spice_level`, `sweetness_level`, `goal`, `diet`, `likes`, `dislikes`, `created_at`) VALUES
+(1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-07-26 11:37:55');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`category_id`),
+  ADD UNIQUE KEY `category_name` (`category_name`);
+
+--
+-- Indexes for table `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`favorite_id`),
+  ADD UNIQUE KEY `unique_favorite` (`user_id`,`recipe_id`),
+  ADD KEY `fk_favorites_recipe` (`recipe_id`);
+
+--
+-- Indexes for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  ADD PRIMARY KEY (`ingredient_id`),
+  ADD UNIQUE KEY `ingredient_name` (`ingredient_name`);
+
+--
+-- Indexes for table `recipes`
+--
+ALTER TABLE `recipes`
+  ADD PRIMARY KEY (`recipe_id`),
+  ADD UNIQUE KEY `recipe_name` (`recipe_name`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `recipe_ingredients`
+--
+ALTER TABLE `recipe_ingredients`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `recipe_id` (`recipe_id`,`ingredient_id`),
+  ADD KEY `ingredient_id` (`ingredient_id`);
+
+--
+-- Indexes for table `recipe_steps`
+--
+ALTER TABLE `recipe_steps`
+  ADD PRIMARY KEY (`step_id`),
+  ADD UNIQUE KEY `recipe_id` (`recipe_id`,`step_number`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `user_preferences`
+--
+ALTER TABLE `user_preferences`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user_preferences_user` (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `favorites`
+--
+ALTER TABLE `favorites`
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  MODIFY `ingredient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+
+--
+-- AUTO_INCREMENT for table `recipes`
+--
+ALTER TABLE `recipes`
+  MODIFY `recipe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+
+--
+-- AUTO_INCREMENT for table `recipe_ingredients`
+--
+ALTER TABLE `recipe_ingredients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
+
+--
+-- AUTO_INCREMENT for table `recipe_steps`
+--
+ALTER TABLE `recipe_steps`
+  MODIFY `step_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=673;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user_preferences`
+--
+ALTER TABLE `user_preferences`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `favorites`
+--
+ALTER TABLE `favorites`
+  ADD CONSTRAINT `fk_favorites_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_favorites_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `recipes`
+--
+ALTER TABLE `recipes`
+  ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+
+--
+-- Constraints for table `recipe_ingredients`
+--
+ALTER TABLE `recipe_ingredients`
+  ADD CONSTRAINT `recipe_ingredients_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`),
+  ADD CONSTRAINT `recipe_ingredients_ibfk_2` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`ingredient_id`);
+
+--
+-- Constraints for table `recipe_steps`
+--
+ALTER TABLE `recipe_steps`
+  ADD CONSTRAINT `recipe_steps_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`);
+
+--
+-- Constraints for table `user_preferences`
+--
+ALTER TABLE `user_preferences`
+  ADD CONSTRAINT `fk_user_preferences_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
