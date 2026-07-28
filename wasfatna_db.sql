@@ -1,40 +1,13 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jul 28, 2026 at 01:31 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `wasfatna`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categories`
---
 
 CREATE TABLE `categories` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `categories`
---
 
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (4, 'Bread'),
@@ -48,11 +21,6 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (7, 'Snacks'),
 (3, 'Soups');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `favorites`
---
 
 CREATE TABLE `favorites` (
   `favorite_id` int(11) NOT NULL,
@@ -61,27 +29,17 @@ CREATE TABLE `favorites` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `favorites`
---
 
 INSERT INTO `favorites` (`favorite_id`, `user_id`, `recipe_id`, `created_at`) VALUES
 (18, 1, 4, '2026-07-26 18:38:33');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `ingredients`
---
 
 CREATE TABLE `ingredients` (
   `ingredient_id` int(11) NOT NULL,
   `ingredient_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `ingredients`
---
+
 
 INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`) VALUES
 (27, 'Almonds'),
@@ -199,11 +157,6 @@ INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`) VALUES
 (60, 'Yeast'),
 (28, 'Yogurt');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `recipes`
---
 
 CREATE TABLE `recipes` (
   `recipe_id` int(11) NOT NULL,
@@ -222,9 +175,6 @@ CREATE TABLE `recipes` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `recipes`
---
 
 INSERT INTO `recipes` (`recipe_id`, `category_id`, `recipe_name`, `description`, `prep_time`, `cook_time`, `servings`, `difficulty`, `spice_level`, `diet`, `goal`, `calories`, `image`, `created_at`) VALUES
 (1, 1, 'Chicken Machboos', 'Traditional Bahraini spiced chicken rice.', 20, 60, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lactose-free', 'high-protein', 680, 'chicken_machboos.png', '2026-07-24 17:09:48'),
@@ -312,11 +262,6 @@ INSERT INTO `recipes` (`recipe_id`, `category_id`, `recipe_name`, `description`,
 (83, 10, 'Supreme Pizza', 'Pizza topped with chicken, beef, mushrooms, onions, bell peppers, olives, and mozzarella cheese.', 25, 18, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 420, 'supreme_pizza.png', '2026-07-24 17:09:48'),
 (84, 10, 'Mexican Pizza', 'Spicy pizza topped with seasoned beef, jalapeños, sweet corn, onions, and mozzarella cheese.', 25, 18, 4, 'Medium', 'spicy', 'non-vegetarian', 'high-protein', 390, 'mexican_pizza.png', '2026-07-24 17:09:48');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `recipe_ingredients`
---
 
 CREATE TABLE `recipe_ingredients` (
   `id` int(11) NOT NULL,
@@ -326,9 +271,6 @@ CREATE TABLE `recipe_ingredients` (
   `is_core` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `recipe_ingredients`
---
 
 INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`, `is_core`) VALUES
 (1, 1, 1, '1 kg', 1),
@@ -341,8 +283,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (8, 1, 18, '1 tsp', 0),
 (9, 1, 10, '1/2 tsp', 0),
 (10, 1, 11, '3 tbsp', 0),
-(11, 2, 2, '1 kg', 0),
-(12, 2, 4, '3 cups', 0),
+(11, 2, 2, '1 kg', 1),
+(12, 2, 4, '3 cups', 1),
 (13, 2, 5, '2', 0),
 (14, 2, 6, '2', 0),
 (15, 2, 7, '4 cloves', 0),
@@ -351,8 +293,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (18, 2, 18, '1 tsp', 0),
 (19, 2, 10, '1/2 tsp', 0),
 (20, 2, 11, '3 tbsp', 0),
-(21, 3, 3, '1 kg', 0),
-(22, 3, 4, '3 cups', 0),
+(21, 3, 3, '1 kg', 1),
+(22, 3, 4, '3 cups', 1),
 (23, 3, 5, '2', 0),
 (24, 3, 6, '2', 0),
 (25, 3, 7, '4 cloves', 0),
@@ -361,15 +303,15 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (28, 3, 18, '1 tsp', 0),
 (29, 3, 10, '1/2 tsp', 0),
 (30, 3, 11, '3 tbsp', 0),
-(31, 4, 4, '3 cups', 0),
+(31, 4, 4, '3 cups', 1),
 (32, 4, 12, '3 tbsp', 0),
-(33, 4, 13, '2 tbsp', 0),
+(33, 4, 13, '2 tbsp', 1),
 (34, 4, 14, '1 tsp', 0),
 (35, 4, 17, '1 pinch', 0),
 (36, 4, 18, '1 tsp', 0),
 (37, 4, 19, '2 tbsp', 0),
-(38, 5, 2, '1.5 kg', 0),
-(39, 5, 4, '3 cups', 0),
+(38, 5, 2, '1.5 kg', 1),
+(39, 5, 4, '3 cups', 1),
 (40, 5, 5, '2 medium', 0),
 (41, 5, 6, '2 medium', 0),
 (42, 5, 7, '4 cloves', 0),
@@ -380,12 +322,12 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (47, 5, 18, '1 tsp', 0),
 (48, 5, 10, '1/2 tsp', 0),
 (49, 5, 11, '3 tbsp', 0),
-(50, 6, 20, '2 cups', 0),
-(51, 6, 2, '500 g', 0),
+(50, 6, 20, '2 cups', 1),
+(51, 6, 2, '500 g', 1),
 (52, 6, 21, '6 cups', 0),
 (53, 6, 18, '1 tsp', 0),
 (54, 6, 19, '2 tbsp', 0),
-(55, 7, 2, '1 kg', 0),
+(55, 7, 2, '1 kg', 1),
 (56, 7, 5, '2 medium', 0),
 (57, 7, 6, '2 medium', 0),
 (58, 7, 7, '4 cloves', 0),
@@ -393,9 +335,9 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (60, 7, 18, '1 tsp', 0),
 (61, 7, 10, '1/2 tsp', 0),
 (62, 7, 11, '3 tbsp', 0),
-(63, 7, 22, '4 pieces', 0),
-(64, 8, 1, '1 kg', 0),
-(65, 8, 4, '2 cups', 0),
+(63, 7, 22, '4 pieces', 1),
+(64, 8, 1, '1 kg', 1),
+(65, 8, 4, '2 cups', 1),
 (66, 8, 5, '1 medium', 0),
 (67, 8, 7, '4 cloves', 0),
 (68, 8, 8, '1 tbsp', 0),
@@ -403,8 +345,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (70, 8, 18, '1 tsp', 0),
 (71, 8, 10, '1/2 tsp', 0),
 (72, 8, 11, '2 tbsp', 0),
-(73, 9, 3, '1 kg', 0),
-(74, 9, 4, '2 cups', 0),
+(73, 9, 3, '1 kg', 1),
+(74, 9, 4, '2 cups', 1),
 (75, 9, 5, '1 medium', 0),
 (76, 9, 7, '4 cloves', 0),
 (77, 9, 8, '1 tbsp', 0),
@@ -412,7 +354,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (79, 9, 18, '1 tsp', 0),
 (80, 9, 10, '1/2 tsp', 0),
 (81, 9, 11, '2 tbsp', 0),
-(82, 10, 3, '1 whole', 0),
+(82, 10, 3, '1 whole', 1),
 (83, 10, 7, '4 cloves', 0),
 (84, 10, 8, '1 tbsp', 0),
 (85, 10, 24, '2 tbsp', 0),
@@ -420,8 +362,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (87, 10, 10, '1/2 tsp', 0),
 (88, 10, 18, '1 tsp', 0),
 (89, 10, 11, '2 tbsp', 0),
-(90, 11, 1, '1 kg', 0),
-(91, 11, 4, '3 cups', 0),
+(90, 11, 1, '1 kg', 1),
+(91, 11, 4, '3 cups', 1),
 (92, 11, 5, '2 medium', 0),
 (93, 11, 7, '4 cloves', 0),
 (94, 11, 8, '1 tbsp', 0),
@@ -433,8 +375,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (100, 11, 18, '1 tsp', 0),
 (101, 11, 10, '1/2 tsp', 0),
 (102, 11, 11, '3 tbsp', 0),
-(103, 12, 1, '1 kg', 0),
-(104, 12, 4, '3 cups', 0),
+(103, 12, 1, '1 kg', 1),
+(104, 12, 4, '3 cups', 1),
 (105, 12, 5, '2 medium', 0),
 (106, 12, 6, '2 medium', 0),
 (107, 12, 7, '4 cloves', 0),
@@ -450,7 +392,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (117, 12, 10, '1/2 tsp', 0),
 (118, 12, 11, '3 tbsp', 0),
 (119, 12, 30, '2 tbsp', 0),
-(120, 13, 1, '1 kg', 0),
+(120, 13, 1, '1 kg', 1),
 (121, 13, 5, '2 medium', 0),
 (122, 13, 6, '2 medium', 0),
 (123, 13, 7, '4 cloves', 0),
@@ -464,7 +406,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (131, 13, 18, '1 tsp', 0),
 (132, 13, 10, '1/2 tsp', 0),
 (133, 13, 11, '3 tbsp', 0),
-(134, 14, 2, '1 kg', 0),
+(134, 14, 2, '1 kg', 1),
 (135, 14, 5, '2 medium', 0),
 (136, 14, 6, '2 medium', 0),
 (137, 14, 7, '4 cloves', 0),
@@ -478,9 +420,9 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (145, 14, 18, '1 tsp', 0),
 (146, 14, 10, '1/2 tsp', 0),
 (147, 14, 11, '3 tbsp', 0),
-(148, 15, 31, '2 medium', 0),
-(149, 15, 32, '2 medium', 0),
-(150, 15, 33, '1 medium', 0),
+(148, 15, 31, '2 medium', 1),
+(149, 15, 32, '2 medium', 1),
+(150, 15, 33, '1 medium', 1),
 (151, 15, 5, '2 medium', 0),
 (152, 15, 6, '2 medium', 0),
 (153, 15, 7, '4 cloves', 0),
@@ -491,7 +433,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (158, 15, 18, '1 tsp', 0),
 (159, 15, 10, '1/2 tsp', 0),
 (160, 15, 11, '3 tbsp', 0),
-(161, 16, 35, '1 kg', 0),
+(161, 16, 35, '1 kg', 1),
 (162, 16, 5, '2 medium', 0),
 (163, 16, 6, '2 medium', 0),
 (164, 16, 7, '4 cloves', 0),
@@ -502,7 +444,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (169, 16, 18, '1 tsp', 0),
 (170, 16, 10, '1/2 tsp', 0),
 (171, 16, 11, '3 tbsp', 0),
-(222, 22, 49, '1 kg', 0),
+(222, 22, 49, '1 kg', 1),
 (223, 22, 5, '2 medium', 0),
 (224, 22, 6, '2 medium', 0),
 (225, 22, 7, '4 cloves', 0),
@@ -516,8 +458,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (233, 22, 18, '1 tsp', 0),
 (234, 22, 10, '1/2 tsp', 0),
 (235, 22, 11, '3 tbsp', 0),
-(236, 23, 50, '500 g', 0),
-(237, 23, 4, '3 cups', 0),
+(236, 23, 50, '500 g', 1),
+(237, 23, 4, '3 cups', 1),
 (238, 23, 5, '2 medium', 0),
 (239, 23, 6, '2 medium', 0),
 (240, 23, 7, '4 cloves', 0),
@@ -526,7 +468,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (243, 23, 18, '1 tsp', 0),
 (244, 23, 10, '1/2 tsp', 0),
 (245, 23, 11, '3 tbsp', 0),
-(246, 24, 51, '1 whole', 0),
+(246, 24, 51, '1 whole', 1),
 (247, 24, 7, '4 cloves', 0),
 (248, 24, 8, '1 tbsp', 0),
 (249, 24, 23, '1 tsp', 0),
@@ -535,7 +477,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (252, 24, 18, '1 tsp', 0),
 (253, 24, 10, '1/2 tsp', 0),
 (254, 24, 11, '3 tbsp', 0),
-(255, 25, 3, '1 kg', 0),
+(255, 25, 3, '1 kg', 1),
 (256, 25, 5, '2 medium', 0),
 (257, 25, 6, '2 medium', 0),
 (258, 25, 7, '4 cloves', 0),
@@ -548,17 +490,17 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (265, 25, 18, '1 tsp', 0),
 (266, 25, 10, '1/2 tsp', 0),
 (267, 25, 11, '3 tbsp', 0),
-(268, 26, 42, '500 g', 0),
+(268, 26, 42, '500 g', 1),
 (269, 26, 7, '5 cloves', 0),
 (270, 26, 8, '1 tbsp', 0),
-(271, 26, 39, '2', 0),
-(272, 26, 52, '1 tsp', 0),
+(271, 26, 39, '2', 1),
+(272, 26, 52, '1 tsp', 1),
 (273, 26, 41, '1 tsp', 0),
 (274, 26, 24, '2 tbsp', 0),
 (275, 26, 18, '1 tsp', 0),
 (276, 26, 10, '1/2 tsp', 0),
 (277, 26, 11, '2 tbsp', 0),
-(278, 27, 53, '2 cups', 0),
+(278, 27, 53, '2 cups', 1),
 (279, 27, 5, '1 medium', 0),
 (280, 27, 6, '2 medium', 0),
 (281, 27, 7, '3 cloves', 0),
@@ -569,20 +511,20 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (286, 27, 10, '1/2 tsp', 0),
 (287, 27, 11, '2 tbsp', 0),
 (288, 27, 21, '5 cups', 0),
-(289, 28, 1, '500 g', 0),
+(289, 28, 1, '500 g', 1),
 (290, 28, 5, '1 medium', 0),
 (291, 28, 7, '3 cloves', 0),
 (292, 28, 8, '1 tbsp', 0),
 (293, 28, 32, '1 medium', 0),
-(294, 28, 54, '4 cups', 0),
+(294, 28, 54, '4 cups', 1),
 (295, 28, 29, '1', 0),
 (296, 28, 18, '1 tsp', 0),
 (297, 28, 10, '1/2 tsp', 0),
 (298, 28, 11, '1 tbsp', 0),
-(299, 29, 32, '2 medium', 0),
-(300, 29, 31, '2 medium', 0),
-(301, 29, 55, '1 cup', 0),
-(302, 29, 56, '2 stalks', 0),
+(299, 29, 32, '2 medium', 1),
+(300, 29, 31, '2 medium', 1),
+(301, 29, 55, '1 cup', 1),
+(302, 29, 56, '2 stalks', 1),
 (303, 29, 5, '1 medium', 0),
 (304, 29, 6, '2 medium', 0),
 (305, 29, 7, '3 cloves', 0),
@@ -591,8 +533,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (308, 29, 10, '1/2 tsp', 0),
 (309, 29, 11, '2 tbsp', 0),
 (310, 29, 21, '5 cups', 0),
-(311, 30, 1, '500 g', 0),
-(312, 30, 20, '1 cup', 0),
+(311, 30, 1, '500 g', 1),
+(312, 30, 20, '1 cup', 1),
 (313, 30, 5, '1 medium', 0),
 (314, 30, 7, '3 cloves', 0),
 (315, 30, 8, '1 tbsp', 0),
@@ -601,62 +543,62 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (318, 30, 10, '1/2 tsp', 0),
 (319, 30, 57, '1/2 tsp', 0),
 (320, 30, 19, '1 tbsp', 0),
-(321, 31, 49, '500 g', 0),
+(321, 31, 49, '500 g', 1),
 (322, 31, 5, '1 medium', 0),
 (323, 31, 6, '2 medium', 0),
 (324, 31, 7, '3 cloves', 0),
 (325, 31, 8, '1 tbsp', 0),
-(326, 31, 58, '4 cups', 0),
+(326, 31, 58, '4 cups', 1),
 (327, 31, 59, '2 tbsp', 0),
 (328, 31, 18, '1 tsp', 0),
 (329, 31, 10, '1/2 tsp', 0),
 (330, 31, 11, '2 tbsp', 0),
-(331, 32, 46, '4 cups', 0),
-(332, 32, 60, '1 tbsp', 0),
+(331, 32, 46, '4 cups', 1),
+(332, 32, 60, '1 tbsp', 1),
 (333, 32, 18, '1 tsp', 0),
 (334, 32, 21, '1½ cups', 0),
 (335, 32, 11, '2 tbsp', 0),
-(336, 33, 46, '4 cups', 0),
-(337, 33, 60, '1 tbsp', 0),
+(336, 33, 46, '4 cups', 1),
+(337, 33, 60, '1 tbsp', 1),
 (338, 33, 18, '1 tsp', 0),
 (339, 33, 21, '1½ cups', 0),
 (340, 33, 11, '2 tbsp', 0),
-(341, 34, 46, '2 cups', 0),
+(341, 34, 46, '2 cups', 1),
 (342, 34, 21, '2 cups', 0),
 (343, 34, 18, '1/2 tsp', 0),
 (344, 34, 11, '1 tbsp', 0),
-(345, 35, 46, '4 cups', 0),
+(345, 35, 46, '4 cups', 1),
 (346, 35, 60, '1 tbsp', 0),
-(347, 35, 61, '1 cup', 0),
+(347, 35, 61, '1 cup', 1),
 (348, 35, 12, '2 tbsp', 0),
 (349, 35, 14, '1 tsp', 0),
 (350, 35, 17, '1 pinch', 0),
 (351, 35, 19, '2 tbsp', 0),
 (352, 35, 18, '1/2 tsp', 0),
-(353, 36, 46, '2 cups', 0),
+(353, 36, 46, '2 cups', 1),
 (354, 36, 60, '1 tsp', 0),
-(355, 36, 61, '1 cup', 0),
-(356, 36, 37, '1', 0),
+(355, 36, 61, '1 cup', 1),
+(356, 36, 37, '1', 1),
 (357, 36, 12, '1 tbsp', 0),
 (358, 36, 14, '1 tsp', 0),
 (359, 36, 17, '1 pinch', 0),
 (360, 36, 19, '2 tbsp', 0),
 (361, 36, 18, '1/4 tsp', 0),
-(362, 37, 36, '250 g', 0),
+(362, 37, 36, '250 g', 1),
 (363, 37, 12, '1/4 cup', 0),
 (364, 37, 19, '2 tbsp', 0),
 (365, 37, 14, '1 tsp', 0),
 (366, 37, 17, '1 pinch', 0),
 (367, 37, 38, '1 tsp', 0),
-(368, 37, 37, '3', 0),
+(368, 37, 37, '3', 1),
 (369, 37, 18, '1/2 tsp', 0),
-(370, 38, 37, '3', 0),
-(371, 38, 6, '2 medium', 0),
+(370, 38, 37, '3', 1),
+(371, 38, 6, '2 medium', 1),
 (372, 38, 39, '1', 0),
 (373, 38, 18, '1/2 tsp', 0),
 (374, 38, 10, '1/4 tsp', 0),
 (375, 38, 11, '1 tbsp', 0),
-(376, 39, 62, '2 cups', 0),
+(376, 39, 62, '2 cups', 1),
 (377, 39, 5, '1 medium', 0),
 (378, 39, 7, '3 cloves', 0),
 (379, 39, 59, '1/2 cup', 0),
@@ -666,11 +608,11 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (383, 39, 10, '1/2 tsp', 0),
 (384, 39, 63, '1 tsp', 0),
 (385, 39, 11, 'As needed for frying', 0),
-(386, 40, 64, '250 g', 0),
+(386, 40, 64, '250 g', 1),
 (387, 40, 66, '2 tbsp', 0),
 (388, 40, 65, '8 pieces', 0),
 (389, 40, 67, '1 tbsp', 0),
-(390, 41, 68, '2 cups', 0),
+(390, 41, 68, '2 cups', 1),
 (391, 41, 7, '3 cloves', 0),
 (392, 41, 24, '2 tbsp', 0),
 (393, 41, 66, '2 tbsp', 0),
@@ -678,24 +620,24 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (395, 41, 25, '1 tsp', 0),
 (396, 41, 18, '1 tsp', 0),
 (397, 41, 10, '1/2 tsp', 0),
-(398, 42, 69, '1 piece', 0),
-(399, 42, 70, '100 g', 0),
+(398, 42, 69, '1 piece', 1),
+(399, 42, 70, '100 g', 1),
 (400, 42, 19, '1 tbsp', 0),
-(401, 43, 69, '1 piece', 0),
-(402, 43, 37, '2', 0),
+(401, 43, 69, '1 piece', 1),
+(402, 43, 37, '2', 1),
 (403, 43, 19, '1 tbsp', 0),
 (404, 43, 18, '1/4 tsp', 0),
 (405, 43, 10, '1/4 tsp', 0),
-(406, 44, 46, '2 cups', 0),
+(406, 44, 46, '2 cups', 1),
 (407, 44, 47, '2 tbsp', 0),
 (408, 44, 60, '1 tsp', 0),
 (409, 44, 63, '1 tsp', 0),
 (410, 44, 12, '1 tbsp', 0),
 (411, 44, 21, '1½ cups', 0),
 (412, 44, 11, 'As needed for frying', 0),
-(413, 44, 13, '1/2 cup', 0),
-(414, 45, 46, '2 cups', 0),
-(415, 45, 37, '2', 0),
+(413, 44, 13, '1/2 cup', 1),
+(414, 45, 46, '2 cups', 1),
+(415, 45, 37, '2', 1),
 (416, 45, 12, '1/2 cup', 0),
 (417, 45, 14, '1 tsp', 0),
 (418, 45, 17, '1 pinch', 0),
@@ -704,8 +646,8 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (421, 45, 63, '1 tsp', 0),
 (422, 45, 19, '2 tbsp', 0),
 (423, 45, 11, 'As needed for frying', 0),
-(424, 46, 72, '1 cup', 0),
-(425, 46, 12, '2 cups', 0),
+(424, 46, 72, '1 cup', 1),
+(425, 46, 12, '2 cups', 1),
 (426, 46, 21, '4 cups', 0),
 (427, 46, 14, '1 tsp', 0),
 (428, 46, 17, '1 pinch', 0),
@@ -713,87 +655,87 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (430, 46, 73, '1 tsp', 0),
 (431, 46, 19, '2 tbsp', 0),
 (432, 46, 74, '1/2 cup', 0),
-(433, 47, 75, '1 cup', 0),
+(433, 47, 75, '1 cup', 1),
 (434, 47, 12, '1 cup', 0),
 (435, 47, 21, '4 cups', 0),
 (436, 47, 14, '1 tsp', 0),
 (437, 47, 17, '1 pinch', 0),
 (438, 47, 38, '1 tbsp', 0),
 (439, 47, 19, '1 tbsp', 0),
-(440, 48, 76, '2 cups', 0),
+(440, 48, 76, '2 cups', 1),
 (441, 48, 21, '4 cups', 0),
 (442, 48, 19, '3 tbsp', 0),
 (443, 48, 12, '1/2 cup', 0),
 (444, 48, 14, '1 tsp', 0),
 (445, 48, 17, '1 pinch', 0),
 (446, 48, 18, '1/4 tsp', 0),
-(447, 49, 77, '2 cups', 0),
-(448, 49, 46, '2 cups', 0),
+(447, 49, 77, '2 cups', 1),
+(448, 49, 46, '2 cups', 1),
 (449, 49, 37, '2', 0),
 (450, 49, 19, '1/2 cup', 0),
 (451, 49, 12, '1/2 cup', 0),
 (452, 49, 61, '1 cup', 0),
 (453, 49, 63, '2 tsp', 0),
 (454, 49, 78, '1 tsp', 0),
-(455, 50, 79, '250 g', 0),
-(456, 50, 61, '2 cups', 0),
-(457, 50, 80, '1 cup', 0),
+(455, 50, 79, '250 g', 1),
+(456, 50, 61, '2 cups', 1),
+(457, 50, 80, '1 cup', 1),
 (458, 50, 12, '1/2 cup', 0),
 (459, 50, 19, '2 tbsp', 0),
 (460, 50, 26, '1/4 cup', 0),
 (461, 50, 27, '1/4 cup', 0),
 (462, 50, 81, '1/4 cup', 0),
 (463, 50, 78, '1 tsp', 0),
-(464, 51, 4, '1 cup', 0),
-(465, 51, 61, '4 cups', 0),
+(464, 51, 4, '1 cup', 1),
+(465, 51, 61, '4 cups', 1),
 (466, 51, 12, '1/2 cup', 0),
 (467, 51, 14, '1 tsp', 0),
 (468, 51, 17, '1 pinch', 0),
 (469, 51, 78, '1 tsp', 0),
 (470, 51, 19, '1 tbsp', 0),
-(471, 52, 36, '250 g', 0),
+(471, 52, 36, '250 g', 1),
 (472, 52, 19, '2 tbsp', 0),
 (473, 52, 12, '1/2 cup', 0),
 (474, 52, 14, '1 tsp', 0),
 (475, 52, 17, '1 pinch', 0),
 (476, 52, 21, '1 cup', 0),
 (477, 52, 74, '1/4 cup', 0),
-(478, 53, 46, '2 cups', 0),
-(479, 53, 82, '1 cup', 0),
+(478, 53, 46, '2 cups', 1),
+(479, 53, 82, '1 cup', 1),
 (480, 53, 12, '1 cup', 0),
 (481, 53, 19, '1/2 cup', 0),
 (482, 53, 61, '1 cup', 0),
 (483, 53, 37, '2', 0),
 (484, 53, 63, '2 tsp', 0),
 (485, 53, 78, '1 tsp', 0),
-(486, 54, 83, '10 sheets', 0),
-(487, 54, 31, '3 medium', 0),
-(488, 54, 55, '1/2 cup', 0),
+(486, 54, 83, '10 sheets', 1),
+(487, 54, 31, '3 medium', 1),
+(488, 54, 55, '1/2 cup', 1),
 (489, 54, 5, '1 medium', 0),
 (490, 54, 25, '1 tsp', 0),
 (491, 54, 23, '1/2 tsp', 0),
 (492, 54, 18, '1 tsp', 0),
 (493, 54, 10, '1/2 tsp', 0),
 (494, 54, 11, 'As needed for frying', 0),
-(495, 55, 83, '10 sheets', 0),
-(496, 55, 70, '1 cup', 0),
-(497, 55, 84, '1 cup', 0),
+(495, 55, 83, '10 sheets', 1),
+(496, 55, 70, '1 cup', 1),
+(497, 55, 84, '1 cup', 1),
 (498, 55, 11, 'As needed for frying', 0),
-(499, 56, 83, '10 sheets', 0),
-(500, 56, 85, '500 g', 0),
+(499, 56, 83, '10 sheets', 1),
+(500, 56, 85, '500 g', 1),
 (501, 56, 5, '1 medium', 0),
 (502, 56, 7, '2 cloves', 0),
 (503, 56, 18, '1 tsp', 0),
 (504, 56, 10, '1/2 tsp', 0),
 (505, 56, 11, '2 tbsp', 0),
-(506, 57, 31, '4 medium', 0),
+(506, 57, 31, '4 medium', 1),
 (507, 57, 37, '1', 0),
 (508, 57, 59, '2 tbsp', 0),
-(509, 57, 48, '1 cup', 0),
+(509, 57, 48, '1 cup', 1),
 (510, 57, 18, '1 tsp', 0),
 (511, 57, 10, '1/2 tsp', 0),
 (512, 57, 11, 'As needed for frying', 0),
-(513, 58, 86, '500 g', 0),
+(513, 58, 86, '500 g', 1),
 (514, 58, 5, '1 medium', 0),
 (515, 58, 7, '3 cloves', 0),
 (516, 58, 59, '2 tbsp', 0),
@@ -801,16 +743,16 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (518, 58, 18, '1 tsp', 0),
 (519, 58, 10, '1/2 tsp', 0),
 (520, 58, 11, '1 tbsp', 0),
-(521, 59, 87, '10 sheets', 0),
-(522, 59, 85, '500 g', 0),
+(521, 59, 87, '10 sheets', 1),
+(522, 59, 85, '500 g', 1),
 (523, 59, 5, '1 medium', 0),
 (524, 59, 7, '2 cloves', 0),
 (525, 59, 18, '1 tsp', 0),
 (526, 59, 10, '1/2 tsp', 0),
 (527, 59, 11, 'As needed for frying', 0),
-(528, 60, 88, '30 leaves', 0),
-(529, 60, 4, '1 cup', 0),
-(530, 60, 86, '250 g', 0),
+(528, 60, 88, '30 leaves', 1),
+(529, 60, 4, '1 cup', 1),
+(530, 60, 86, '250 g', 1),
 (531, 60, 5, '1 medium', 0),
 (532, 60, 6, '1 medium', 0),
 (533, 60, 59, '1/4 cup', 0),
@@ -818,62 +760,62 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (535, 60, 18, '1 tsp', 0),
 (536, 60, 10, '1/2 tsp', 0),
 (537, 60, 11, '2 tbsp', 0),
-(538, 61, 90, '500 g', 0),
-(539, 61, 89, '300 g', 0),
+(538, 61, 90, '500 g', 1),
+(539, 61, 89, '300 g', 1),
 (540, 61, 5, '1 medium', 0),
 (541, 61, 24, '2 tbsp', 0),
 (542, 61, 18, '1 tsp', 0),
 (543, 61, 10, '1/2 tsp', 0),
 (544, 61, 11, '1 tbsp', 0),
 (545, 62, 21, '2 cups', 0),
-(546, 62, 91, '2 tsp', 0),
-(547, 62, 92, '1 cup', 0),
+(546, 62, 91, '2 tsp', 1),
+(547, 62, 92, '1 cup', 1),
 (548, 62, 12, '2 tbsp', 0),
 (549, 62, 14, '2 pods', 0),
 (550, 63, 21, '4 cups', 0),
-(551, 63, 93, '4 tbsp', 0),
+(551, 63, 93, '4 tbsp', 1),
 (552, 63, 14, '4 pods', 0),
 (553, 63, 17, '1 pinch', 0),
 (554, 63, 77, '6 pieces', 0),
-(555, 64, 94, '2', 0),
-(556, 64, 67, '10 leaves', 0),
+(555, 64, 94, '2', 1),
+(556, 64, 67, '10 leaves', 1),
 (557, 64, 12, '2 tbsp', 0),
 (558, 64, 21, '2 cups', 0),
 (559, 64, 95, '1 cup', 0),
-(560, 65, 96, '200 g', 0),
+(560, 65, 96, '200 g', 1),
 (561, 65, 21, '4 cups', 0),
 (562, 65, 12, '1/2 cup', 0),
 (563, 65, 95, '1 cup', 0),
-(564, 66, 97, '1/2 cup', 0),
+(564, 66, 97, '1/2 cup', 1),
 (565, 66, 21, '2 cups', 0),
 (566, 66, 95, '1 cup', 0),
-(567, 67, 61, '2 cups', 0),
-(568, 67, 98, '3 tbsp', 0),
+(567, 67, 61, '2 cups', 1),
+(568, 67, 98, '3 tbsp', 1),
 (569, 67, 12, '1 tbsp', 0),
 (570, 67, 95, '1 cup', 0),
-(571, 68, 77, '8 pieces', 0),
-(572, 68, 61, '2 cups', 0),
+(571, 68, 77, '8 pieces', 1),
+(572, 68, 61, '2 cups', 1),
 (573, 68, 12, '1 tbsp', 0),
 (574, 68, 95, '1 cup', 0),
-(575, 69, 61, '2 cups', 0),
-(576, 69, 17, '1 pinch', 0),
+(575, 69, 61, '2 cups', 1),
+(576, 69, 17, '1 pinch', 1),
 (577, 69, 14, '2 pods', 0),
 (578, 69, 12, '2 tbsp', 0),
-(579, 70, 6, '3 medium', 0),
-(580, 70, 5, '1 medium', 0),
+(579, 70, 6, '3 medium', 1),
+(580, 70, 5, '1 medium', 1),
 (581, 70, 59, '1/4 cup', 0),
 (582, 70, 24, '2 tbsp', 0),
 (583, 70, 66, '2 tbsp', 0),
 (584, 70, 18, '1 tsp', 0),
 (585, 70, 10, '1/2 tsp', 0),
-(586, 71, 99, '2 medium', 0),
-(587, 71, 6, '2 medium', 0),
+(586, 71, 99, '2 medium', 1),
+(587, 71, 6, '2 medium', 1),
 (588, 71, 24, '2 tbsp', 0),
 (589, 71, 66, '2 tbsp', 0),
 (590, 71, 18, '1 tsp', 0),
 (591, 71, 10, '1/2 tsp', 0),
-(592, 72, 59, '2 cups', 0),
-(593, 72, 100, '1/2 cup', 0),
+(592, 72, 59, '2 cups', 1),
+(593, 72, 100, '1/2 cup', 1),
 (594, 72, 6, '2 medium', 0),
 (595, 72, 99, '1 medium', 0),
 (596, 72, 67, '1/4 cup', 0),
@@ -882,48 +824,48 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (599, 72, 66, '2 tbsp', 0),
 (600, 72, 18, '1 tsp', 0),
 (601, 72, 10, '1/2 tsp', 0),
-(602, 73, 101, '2 cups', 0),
+(602, 73, 101, '2 cups', 1),
 (603, 73, 6, '2 medium', 0),
 (604, 73, 99, '1 medium', 0),
 (605, 73, 102, '4', 0),
 (606, 73, 67, '1/4 cup', 0),
-(607, 73, 104, '1 piece', 0),
+(607, 73, 104, '1 piece', 1),
 (608, 73, 24, '3 tbsp', 0),
 (609, 73, 66, '2 tbsp', 0),
 (610, 73, 103, '1 tsp', 0),
 (611, 73, 18, '1 tsp', 0),
-(612, 74, 101, '2 cups', 0),
-(613, 74, 99, '1 medium', 0),
-(614, 74, 6, '2 medium', 0),
+(612, 74, 101, '2 cups', 1),
+(613, 74, 99, '1 medium', 1),
+(614, 74, 6, '2 medium', 1),
 (615, 74, 5, '1 small', 0),
 (616, 74, 24, '2 tbsp', 0),
 (617, 74, 66, '2 tbsp', 0),
 (618, 74, 18, '1 tsp', 0),
 (619, 74, 10, '1/2 tsp', 0),
-(620, 75, 46, '3 cups', 0),
+(620, 75, 46, '3 cups', 1),
 (621, 75, 21, '1 cup', 0),
 (622, 75, 11, '2 tbsp', 0),
 (623, 75, 18, '1 tsp', 0),
 (624, 75, 12, '1 tsp', 0),
-(625, 75, 6, '2 medium', 0),
-(626, 76, 46, '3 cups', 0),
+(625, 75, 6, '2 medium', 1),
+(626, 76, 46, '3 cups', 1),
 (627, 76, 21, '1 cup', 0),
 (628, 76, 60, '2 tsp', 0),
 (629, 76, 12, '1 tsp', 0),
 (630, 76, 18, '1 tsp', 0),
 (631, 76, 11, '2 tbsp', 0),
-(632, 76, 6, '2 medium', 0),
-(633, 76, 84, '2 cups', 0),
-(634, 76, 106, '150 g', 0),
-(635, 77, 46, '3 cups', 0),
+(632, 76, 6, '2 medium', 1),
+(633, 76, 84, '2 cups', 1),
+(634, 76, 106, '150 g', 1),
+(635, 77, 46, '3 cups', 1),
 (636, 77, 21, '1 cup', 0),
 (637, 77, 60, '2 tsp', 0),
 (638, 77, 12, '1 tsp', 0),
 (639, 77, 18, '1 tsp', 0),
 (640, 77, 11, '2 tbsp', 0),
-(641, 77, 6, '2 medium', 0),
-(642, 77, 84, '2 cups', 0),
-(643, 77, 1, '250 g', 0),
+(641, 77, 6, '2 medium', 1),
+(642, 77, 84, '2 cups', 1),
+(643, 77, 1, '250 g', 1),
 (644, 77, 28, '2 tbsp', 0),
 (645, 77, 41, '1 tsp', 0),
 (646, 77, 23, '1/2 tsp', 0),
@@ -933,94 +875,94 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (650, 77, 8, '1 tsp', 0),
 (651, 77, 5, '1 medium', 0),
 (652, 77, 33, '1 medium', 0),
-(653, 78, 46, '3 cups', 0),
+(653, 78, 46, '3 cups', 1),
 (654, 78, 21, '1 cup', 0),
 (655, 78, 60, '2 tsp', 0),
 (656, 78, 12, '1 tsp', 0),
 (657, 78, 18, '1 tsp', 0),
 (658, 78, 11, '2 tbsp', 0),
-(659, 78, 107, '4 tbsp', 0),
-(660, 78, 84, '2 cups', 0),
-(661, 78, 1, '250 g', 0),
+(659, 78, 107, '4 tbsp', 1),
+(660, 78, 84, '2 cups', 1),
+(661, 78, 1, '250 g', 1),
 (662, 78, 5, '1 medium', 0),
 (663, 78, 33, '1 medium', 0),
-(664, 79, 46, '3 cups', 0),
+(664, 79, 46, '3 cups', 1),
 (665, 79, 21, '1 cup', 0),
 (666, 79, 60, '2 tsp', 0),
 (667, 79, 12, '1 tsp', 0),
 (668, 79, 18, '1 tsp', 0),
 (669, 79, 11, '2 tbsp', 0),
-(670, 79, 6, '2 medium', 0),
-(671, 79, 84, '2 cups', 0),
-(672, 79, 1, '150 g', 0),
-(673, 79, 85, '150 g', 0),
-(674, 79, 106, '100 g', 0),
+(670, 79, 6, '2 medium', 1),
+(671, 79, 84, '2 cups', 1),
+(672, 79, 1, '150 g', 1),
+(673, 79, 85, '150 g', 1),
+(674, 79, 106, '100 g', 1),
 (675, 79, 5, '1 medium', 0),
-(676, 80, 46, '3 cups', 0),
+(676, 80, 46, '3 cups', 1),
 (677, 80, 21, '1 cup', 0),
 (678, 80, 60, '2 tsp', 0),
 (679, 80, 12, '1 tsp', 0),
 (680, 80, 18, '1 tsp', 0),
 (681, 80, 11, '2 tbsp', 0),
-(682, 80, 6, '2 medium', 0),
-(683, 80, 84, '2 cups', 0),
-(684, 80, 49, '200 g', 0),
-(685, 80, 42, '100 g', 0),
+(682, 80, 6, '2 medium', 1),
+(683, 80, 84, '2 cups', 1),
+(684, 80, 49, '200 g', 1),
+(685, 80, 42, '100 g', 1),
 (686, 80, 5, '1 medium', 0),
 (687, 80, 33, '1 medium', 0),
-(688, 81, 46, '3 cups', 0),
+(688, 81, 46, '3 cups', 1),
 (689, 81, 21, '1 cup', 0),
 (690, 81, 60, '2 tsp', 0),
 (691, 81, 12, '1 tsp', 0),
 (692, 81, 18, '1 tsp', 0),
 (693, 81, 11, '2 tbsp', 0),
-(694, 81, 6, '2 medium', 0),
-(695, 81, 84, '2 cups', 0),
-(696, 81, 5, '1 medium', 0),
-(697, 81, 33, '1 medium', 0),
-(698, 81, 114, '100 g', 0),
-(699, 81, 65, '50 g', 0),
-(700, 82, 46, '3 cups', 0),
+(694, 81, 6, '2 medium', 1),
+(695, 81, 84, '2 cups', 1),
+(696, 81, 5, '1 medium', 1),
+(697, 81, 33, '1 medium', 1),
+(698, 81, 114, '100 g', 1),
+(699, 81, 65, '50 g', 1),
+(700, 82, 46, '3 cups', 1),
 (701, 82, 21, '1 cup', 0),
 (702, 82, 60, '2 tsp', 0),
 (703, 82, 12, '1 tsp', 0),
 (704, 82, 18, '1 tsp', 0),
 (705, 82, 11, '2 tbsp', 0),
-(706, 82, 6, '2 medium', 0),
-(707, 82, 84, '1 cup', 0),
-(708, 82, 70, '1 cup', 0),
-(709, 82, 110, '1/2 cup', 0),
-(710, 82, 111, '1/2 cup', 0),
-(711, 83, 46, '3 cups', 0),
+(706, 82, 6, '2 medium', 1),
+(707, 82, 84, '1 cup', 1),
+(708, 82, 70, '1 cup', 1),
+(709, 82, 110, '1/2 cup', 1),
+(710, 82, 111, '1/2 cup', 1),
+(711, 83, 46, '3 cups', 1),
 (712, 83, 21, '1 cup', 0),
 (713, 83, 60, '2 tsp', 0),
 (714, 83, 12, '1 tsp', 0),
 (715, 83, 18, '1 tsp', 0),
 (716, 83, 11, '2 tbsp', 0),
-(717, 83, 6, '2 medium', 0),
-(718, 83, 84, '2 cups', 0),
-(719, 83, 1, '100 g', 0),
-(720, 83, 85, '100 g', 0),
+(717, 83, 6, '2 medium', 1),
+(718, 83, 84, '2 cups', 1),
+(719, 83, 1, '100 g', 1),
+(720, 83, 85, '100 g', 1),
 (721, 83, 114, '100 g', 0),
 (722, 83, 5, '1 medium', 0),
 (723, 83, 33, '1 medium', 0),
 (724, 83, 65, '50 g', 0),
-(725, 84, 46, '3 cups', 0),
+(725, 84, 46, '3 cups', 1),
 (726, 84, 21, '1 cup', 0),
 (727, 84, 60, '2 tsp', 0),
 (728, 84, 12, '1 tsp', 0),
 (729, 84, 18, '1 tsp', 0),
 (730, 84, 11, '2 tbsp', 0),
-(731, 84, 6, '2 medium', 0),
-(732, 84, 84, '2 cups', 0),
-(733, 84, 85, '200 g', 0),
+(731, 84, 6, '2 medium', 1),
+(732, 84, 84, '2 cups', 1),
+(733, 84, 85, '200 g', 1),
 (734, 84, 5, '1 medium', 0),
 (735, 84, 33, '1 medium', 0),
-(736, 84, 112, '50 g', 0),
+(736, 84, 112, '50 g', 1),
 (737, 84, 113, '50 g', 0),
 (738, 84, 52, '1/2 tsp', 0),
 (739, 17, 40, '1 whole', 1),
-(740, 17, 46, '1 cup', 1),
+(740, 17, 46, '1 cup', 0),
 (741, 17, 7, '4 cloves', 0),
 (742, 17, 8, '1 tbsp', 0),
 (743, 17, 24, '2 tbsp', 0),
@@ -1069,11 +1011,7 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (786, 21, 10, '1/2 tsp', 0),
 (787, 21, 11, '2 tbsp', 0);
 
--- --------------------------------------------------------
 
---
--- Table structure for table `recipe_steps`
---
 
 CREATE TABLE `recipe_steps` (
   `step_id` int(11) NOT NULL,
@@ -1082,9 +1020,6 @@ CREATE TABLE `recipe_steps` (
   `instruction` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `recipe_steps`
---
 
 INSERT INTO `recipe_steps` (`step_id`, `recipe_id`, `step_number`, `instruction`) VALUES
 (1, 1, 1, 'Wash and season the chicken with spices.'),
@@ -1722,11 +1657,6 @@ INSERT INTO `recipe_steps` (`step_id`, `recipe_id`, `step_number`, `instruction`
 (671, 21, 7, 'Season with salt and black pepper.'),
 (672, 21, 8, 'Serve hot with steamed rice or bread.');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -1735,18 +1665,10 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
 
 INSERT INTO `users` (`id`, `username`, `password_hash`, `created_at`) VALUES
 (1, 'test123', '$2y$10$dbGUHzCt1a.twAq0NVZ.CeINYdQtw58okdMywNwbNHvxBZYDAnIRK', '2026-07-26 11:37:55');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user_preferences`
---
 
 CREATE TABLE `user_preferences` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -1760,165 +1682,89 @@ CREATE TABLE `user_preferences` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user_preferences`
---
 
 INSERT INTO `user_preferences` (`id`, `user_id`, `spice_level`, `sweetness_level`, `goal`, `diet`, `likes`, `dislikes`, `created_at`) VALUES
 (1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-07-26 11:37:55');
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `categories`
---
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`),
   ADD UNIQUE KEY `category_name` (`category_name`);
 
---
--- Indexes for table `favorites`
---
 ALTER TABLE `favorites`
   ADD PRIMARY KEY (`favorite_id`),
   ADD UNIQUE KEY `unique_favorite` (`user_id`,`recipe_id`),
   ADD KEY `fk_favorites_recipe` (`recipe_id`);
 
---
--- Indexes for table `ingredients`
---
 ALTER TABLE `ingredients`
   ADD PRIMARY KEY (`ingredient_id`),
   ADD UNIQUE KEY `ingredient_name` (`ingredient_name`);
 
---
--- Indexes for table `recipes`
---
+
 ALTER TABLE `recipes`
   ADD PRIMARY KEY (`recipe_id`),
   ADD UNIQUE KEY `recipe_name` (`recipe_name`),
   ADD KEY `category_id` (`category_id`);
 
---
--- Indexes for table `recipe_ingredients`
---
+
 ALTER TABLE `recipe_ingredients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `recipe_id` (`recipe_id`,`ingredient_id`),
   ADD KEY `ingredient_id` (`ingredient_id`);
 
---
--- Indexes for table `recipe_steps`
---
 ALTER TABLE `recipe_steps`
   ADD PRIMARY KEY (`step_id`),
   ADD UNIQUE KEY `recipe_id` (`recipe_id`,`step_number`);
 
---
--- Indexes for table `users`
---
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
---
--- Indexes for table `user_preferences`
---
 ALTER TABLE `user_preferences`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user_preferences_user` (`user_id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `categories`
---
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- AUTO_INCREMENT for table `favorites`
---
 ALTER TABLE `favorites`
   MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
---
--- AUTO_INCREMENT for table `ingredients`
---
 ALTER TABLE `ingredients`
   MODIFY `ingredient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
---
--- AUTO_INCREMENT for table `recipes`
---
 ALTER TABLE `recipes`
   MODIFY `recipe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
---
--- AUTO_INCREMENT for table `recipe_ingredients`
---
 ALTER TABLE `recipe_ingredients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
 
---
--- AUTO_INCREMENT for table `recipe_steps`
---
 ALTER TABLE `recipe_steps`
   MODIFY `step_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=673;
 
---
--- AUTO_INCREMENT for table `users`
---
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT for table `user_preferences`
---
 ALTER TABLE `user_preferences`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `favorites`
---
 ALTER TABLE `favorites`
   ADD CONSTRAINT `fk_favorites_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_favorites_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
---
--- Constraints for table `recipes`
---
 ALTER TABLE `recipes`
   ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
---
--- Constraints for table `recipe_ingredients`
---
 ALTER TABLE `recipe_ingredients`
   ADD CONSTRAINT `recipe_ingredients_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`),
   ADD CONSTRAINT `recipe_ingredients_ibfk_2` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`ingredient_id`);
 
---
--- Constraints for table `recipe_steps`
---
 ALTER TABLE `recipe_steps`
   ADD CONSTRAINT `recipe_steps_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`);
 
---
--- Constraints for table `user_preferences`
---
 ALTER TABLE `user_preferences`
   ADD CONSTRAINT `fk_user_preferences_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
