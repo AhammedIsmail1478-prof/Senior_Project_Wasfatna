@@ -227,11 +227,27 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .results-tools{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:12px;
+  margin-bottom:18px;
+  width:100%;
+}
+
+.recipe-search-wrapper{
+  width:100%;
+}
+
+.recipe-controls{
   display:grid;
-  grid-template-columns:minmax(0, 1fr) 190px 190px;
-  gap:10px;
-  margin-top:10px;
-  margin-bottom:12px;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  width:100%;
+}
+
+.recipe-controls select{
+  width:100%;
 }
 
 .stats-grid{
@@ -764,9 +780,9 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 @media (max-width:700px){
 
-   .results-tools{
+   .recipe-controls{
     grid-template-columns:1fr;
-  }
+}
 
   .stats-grid{
     grid-template-columns:1fr;
