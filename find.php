@@ -62,9 +62,18 @@ require 'auth.php';
           ></textarea>
 
           <div class="row">
-            <button id="suggestBtn" class="btn btn-primary">Suggest Recipes</button>
-            <button id="clearBtn" class="btn btn-outline">Clear</button>
-          </div>
+    <button id="suggestBtn" class="btn btn-primary">
+        Suggest Recipes
+    </button>
+
+    <button id="randomRecipeBtn" class="btn btn-outline">
+        🎲 Surprise Me
+    </button>
+
+    <button id="clearBtn" class="btn btn-outline">
+        Clear
+    </button>
+</div>
 
           <hr class="hr"/>
 
