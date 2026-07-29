@@ -132,26 +132,7 @@ require 'auth.php';
             <span id="resultsCount" class="badge">0</span>
           </div>
           <div class="results-tools">
-  <input
-    type="search"
-    id="recipeSearch"
-    class="recipe-search-input"
-    placeholder="Search by recipe or ingredient..."
-    list="recipeSuggestions"
-    autocomplete="off"
-  />
 
-  <datalist id="recipeSuggestions"></datalist>
-
-  <select
-    id="recipeSort"
-    class="recipe-sort-input"
-    aria-label="Sort recipe results"
-  >
-    <option value="best-match">
-      Best Match
-
-      <div class="results-tools">
   <input
     type="search"
     id="recipeSearch"
@@ -232,9 +213,8 @@ require 'auth.php';
       Favorites Only
     </option>
   </select>
-</div>
 
-    
+</div>
 
 <div
   class="recipe-navigation"
@@ -301,6 +281,6 @@ require 'auth.php';
     <span id="toastMessage"></span>
 </div>
   
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>
