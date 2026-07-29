@@ -133,89 +133,92 @@ require 'auth.php';
           </div>
           <div class="results-tools">
 
-  <input
-    type="search"
-    id="recipeSearch"
-    class="recipe-search-input"
-    placeholder="Search by recipe or ingredient..."
-    list="recipeSuggestions"
-    autocomplete="off"
-  />
+  <div class="recipe-search-wrapper">
+    <input
+      type="search"
+      id="recipeSearch"
+      class="recipe-search-input"
+      placeholder="🔍 Search recipes or ingredients..."
+      list="recipeSuggestions"
+      autocomplete="off"
+    />
 
-  <datalist id="recipeSuggestions"></datalist>
+    <datalist id="recipeSuggestions"></datalist>
+  </div>
 
-  <!-- Existing sorting dropdown -->
-  <select
-    id="recipeSort"
-    class="recipe-sort-input"
-    aria-label="Sort recipe results"
-  >
-    <option value="best-match">
-      Best Match
-    </option>
+  <div class="recipe-controls">
 
-    <option value="name-asc">
-      Name: A–Z
-    </option>
+    <select
+      id="recipeSort"
+      class="recipe-sort-input"
+      aria-label="Sort recipe results"
+    >
+      <option value="best-match">
+        Best Match
+      </option>
 
-    <option value="name-desc">
-      Name: Z–A
-    </option>
+      <option value="name-asc">
+        Name: A–Z
+      </option>
 
-    <option value="most-matched">
-      Most Ingredients Matched
-    </option>
+      <option value="name-desc">
+        Name: Z–A
+      </option>
 
-    <option value="lowest-match">
-      Lowest Match First
-    </option>
-  </select>
+      <option value="most-matched">
+        Most Ingredients Matched
+      </option>
 
-  <!-- New filtering dropdown -->
-  <select
-    id="recipeFilter"
-    class="recipe-filter-input"
-    aria-label="Filter recipe results"
-  >
-    <option value="all">
-      All Recipes
-    </option>
+      <option value="lowest-match">
+        Lowest Match First
+      </option>
+    </select>
 
-    <option value="perfect">
-      100% Match
-    </option>
+    <select
+      id="recipeFilter"
+      class="recipe-filter-input"
+      aria-label="Filter recipe results"
+    >
+      <option value="all">
+        All Recipes
+      </option>
 
-    <option value="excellent">
-      90–99% Match
-    </option>
+      <option value="perfect">
+        100% Match
+      </option>
 
-    <option value="good">
-      75–89% Match
-    </option>
+      <option value="excellent">
+        90–99% Match
+      </option>
 
-    <option value="partial">
-      50–74% Match
-    </option>
+      <option value="good">
+        75–89% Match
+      </option>
 
-    <option value="low">
-      Below 50%
-    </option>
+      <option value="partial">
+        50–74% Match
+      </option>
 
-    <option value="ready">
-      Ready to Cook
-    </option>
+      <option value="low">
+        Below 50%
+      </option>
 
-    <option value="missing-core">
-      Missing Core Ingredients
-    </option>
+      <option value="ready">
+        Ready to Cook
+      </option>
 
-    <option value="favorites">
-      Favorites Only
-    </option>
-  </select>
+      <option value="missing-core">
+        Missing Core Ingredients
+      </option>
+
+      <option value="favorites">
+        Favorites Only
+      </option>
+    </select>
+
+  </div>
 
 </div>
-
 <div
   class="recipe-navigation"
   id="recipeNavigation"
