@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=15" />
+  <link rel="stylesheet" href="styles.css?v=16" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -150,6 +150,27 @@ require 'auth.php';
   >
     <option value="best-match">
       Best Match
+
+      <div class="results-tools">
+  <input
+    type="search"
+    id="recipeSearch"
+    class="recipe-search-input"
+    placeholder="Search by recipe or ingredient..."
+    list="recipeSuggestions"
+    autocomplete="off"
+  />
+
+  <datalist id="recipeSuggestions"></datalist>
+
+  <!-- Existing sorting dropdown -->
+  <select
+    id="recipeSort"
+    class="recipe-sort-input"
+    aria-label="Sort recipe results"
+  >
+    <option value="best-match">
+      Best Match
     </option>
 
     <option value="name-asc">
@@ -168,9 +189,52 @@ require 'auth.php';
       Lowest Match First
     </option>
   </select>
+
+  <!-- New filtering dropdown -->
+  <select
+    id="recipeFilter"
+    class="recipe-filter-input"
+    aria-label="Filter recipe results"
+  >
+    <option value="all">
+      All Recipes
+    </option>
+
+    <option value="perfect">
+      100% Match
+    </option>
+
+    <option value="excellent">
+      90–99% Match
+    </option>
+
+    <option value="good">
+      75–89% Match
+    </option>
+
+    <option value="partial">
+      50–74% Match
+    </option>
+
+    <option value="low">
+      Below 50%
+    </option>
+
+    <option value="ready">
+      Ready to Cook
+    </option>
+
+    <option value="missing-core">
+      Missing Core Ingredients
+    </option>
+
+    <option value="favorites">
+      Favorites Only
+    </option>
+  </select>
 </div>
 
-          </div>
+    
 
 <div
   class="recipe-navigation"
@@ -237,6 +301,6 @@ require 'auth.php';
     <span id="toastMessage"></span>
 </div>
   
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>
