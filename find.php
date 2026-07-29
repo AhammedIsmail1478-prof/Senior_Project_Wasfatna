@@ -66,9 +66,14 @@ require 'auth.php';
         Suggest Recipes
     </button>
 
-    <button id="randomRecipeBtn" class="btn btn-outline">
-        🎲 Surprise Me
-    </button>
+    <button
+  type="button"
+  id="randomRecipeBtn"
+  class="btn btn-outline"
+  disabled
+>
+  🎲 Surprise Me
+</button>
 
     <button id="clearBtn" class="btn btn-outline">
         Clear
@@ -293,6 +298,6 @@ require 'auth.php';
     <span id="toastMessage"></span>
 </div>
   
-  <script src="app.js?v=10"></script>
+  <script src="app.js?v=11"></script>
 </body>
 </html>
