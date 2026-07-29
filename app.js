@@ -165,6 +165,9 @@ const recipeSort =
 const recipeFilter =
   document.getElementById("recipeFilter");
 
+const randomRecipeBtn =
+  document.getElementById("randomRecipeBtn");
+
 const recipeNavigation =
   document.getElementById("recipeNavigation");
 
@@ -179,6 +182,7 @@ const recipePageInfo =
 
 // Current displayed recipe position.
 let currentRecipeIndex = 0;
+let currentlyFilteredCards = [];
 
 // Preference fields.
 const spiceEl =
@@ -276,6 +280,12 @@ if (recipeSuggestions) {
 
     currentRecipeIndex = 0;
 
+    currentlyFilteredCards = [];
+
+if (randomRecipeBtn) {
+  randomRecipeBtn.disabled = true;
+}
+
 if (recipeNavigation) {
   recipeNavigation.style.display = "none";
 }
@@ -301,9 +311,15 @@ if (
   resultsEl &&
   resultsCount
 ) {
-  suggestBtn.addEventListener("click", async () => {
+ suggestBtn.addEventListener("click", async () => {
 
 currentRecipeIndex = 0;
+
+currentlyFilteredCards = [];
+
+if (randomRecipeBtn) {
+  randomRecipeBtn.disabled = true;
+}
 
 if (recipeNavigation) {
   recipeNavigation.style.display = "none";
@@ -430,6 +446,11 @@ if (statsFavorites) {
       if (!recipes.length) {
 
   currentRecipeIndex = 0;
+  currentlyFilteredCards = [];
+
+  if (randomRecipeBtn) {
+    randomRecipeBtn.disabled = true;
+  }
 
   if (recipeNavigation) {
     recipeNavigation.style.display = "none";
@@ -702,6 +723,12 @@ ${coreIngredientsHtml}
       console.error(error);
 
       resultsCount.textContent = "0";
+
+      currentlyFilteredCards = [];
+
+if (randomRecipeBtn) {
+  randomRecipeBtn.disabled = true;
+}
 
       if (statsRecipes) {
   statsRecipes.textContent = "0";
@@ -1077,8 +1104,13 @@ const filteredCards =
   recipeCards.forEach((card) => {
     card.hidden = true;
   });
-
+currentlyFilteredCards = filteredCards;
   const visibleCount = filteredCards.length;
+
+  if (randomRecipeBtn) {
+  randomRecipeBtn.disabled =
+    visibleCount === 0;
+}
 
   resultsCount.textContent =
     String(visibleCount);
@@ -1173,6 +1205,56 @@ if (recipeFilter) {
     () => {
       currentRecipeIndex = 0;
       updateDisplayedRecipes();
+    }
+  );
+}
+
+if (randomRecipeBtn) {
+  randomRecipeBtn.addEventListener(
+    "click",
+    () => {
+      const recipeCount =
+        currentlyFilteredCards.length;
+
+      if (recipeCount === 0) {
+        showToast(
+          "Search for recipes first.",
+          "⚠️"
+        );
+
+        return;
+      }
+
+      let randomIndex =
+        Math.floor(
+          Math.random() * recipeCount
+        );
+
+      if (
+        recipeCount > 1 &&
+        randomIndex === currentRecipeIndex
+      ) {
+        randomIndex =
+          (randomIndex + 1) % recipeCount;
+      }
+
+      currentRecipeIndex = randomIndex;
+
+      updateDisplayedRecipes();
+
+      const selectedCard =
+        currentlyFilteredCards[
+          currentRecipeIndex
+        ];
+
+      const selectedName =
+        selectedCard?.dataset.recipeName ||
+        "a random recipe";
+
+      showToast(
+        `Surprise! Try ${selectedName}.`,
+        "🎲"
+      );
     }
   );
 }
