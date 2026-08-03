@@ -81,6 +81,32 @@ function showToast(message, icon = "❤️") {
   }, 2500);
 }
 
+// ---------- Perfect Match Celebration ----------
+
+function celebratePerfectMatch() {
+  if (typeof confetti !== "function") {
+    return;
+  }
+
+  confetti({
+    particleCount: 100,
+    spread: 75,
+    origin: {
+      y: 0.6
+    }
+  });
+
+  setTimeout(() => {
+    confetti({
+      particleCount: 70,
+      spread: 100,
+      origin: {
+        y: 0.6
+      }
+    });
+  }, 450);
+}
+
 // Display the ingredient name together with its quantity.
 function ingredientText(item) {
   if (!item) {
@@ -1614,6 +1640,23 @@ ${coreIngredientsHtml}
         })
         .join("");
       updateDisplayedRecipes();
+
+      const hasPerfectMatch =
+        recipes.some(
+          (recipe) =>
+            Number(
+              recipe.match_percentage
+            ) === 100
+        );
+
+      if (hasPerfectMatch) {
+        showToast(
+          "Perfect Match! Everything you need is available. Enjoy cooking!",
+          "🎉"
+        );
+
+        celebratePerfectMatch();
+      }
     } catch (error) {
       console.error(error);
 
