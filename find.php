@@ -337,27 +337,24 @@ require 'auth.php';
     <button
         type="button"
         id="printShoppingListBtn"
-        class="btn btn-primary"
-    >
+        class="btn btn-primary">
         🖨 Print
     </button>
 
     <button
         type="button"
-        id="clearShoppingListBtn"
-        class="btn btn-outline"
-    >
-
+        id="downloadShoppingPdfBtn"
+        class="btn btn-outline">
         📄 Download PDF
-          </button>
+    </button>
 
-      <button
-    type="button"
-    id="clearShoppingListBtn"
-    class="btn btn-outline"
-  >
-    Clear Shopping List
-  </button>
+    <button
+        type="button"
+        id="clearShoppingListBtn"
+        class="btn btn-outline">
+        Clear Shopping List
+    </button>
+
 </div>
   </div>
 </aside>
@@ -368,10 +365,10 @@ require 'auth.php';
     <span id="toastMessage"></span>
 </div>
 
-  <script
+ <script
   src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.2/jspdf.umd.min.js"
 ></script>
   
-  <script src="app.js?v=14"></script>
+  <script src="app.js?v=15"></script>
 </body>
 </html>
