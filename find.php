@@ -347,11 +347,18 @@ require 'auth.php';
         id="clearShoppingListBtn"
         class="btn btn-outline"
     >
-        Clear Shopping List
-    </button>
 
+        📄 Download PDF
+          </button>
+
+      <button
+    type="button"
+    id="clearShoppingListBtn"
+    class="btn btn-outline"
+  >
+    Clear Shopping List
+  </button>
 </div>
-
   </div>
 </aside>
   
