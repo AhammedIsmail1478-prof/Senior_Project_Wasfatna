@@ -75,22 +75,40 @@ require 'auth.php';
           ></textarea>
 
           <div class="row">
-    <button type="button" id="suggestBtn" class="btn btn-primary">
-        Suggest Recipes
-    </button>
+  <button
+    type="button"
+    id="suggestBtn"
+    class="btn btn-primary"
+  >
+    Suggest Recipes
+  </button>
 
-    <button
-  type="button"
-  id="randomRecipeBtn"
-  class="btn btn-outline"
-  disabled
->
-  🎲 Surprise Me
-</button>
+  <button
+    type="button"
+    id="voiceSearchBtn"
+    class="btn btn-outline"
+    aria-label="Speak ingredients"
+    title="Speak ingredients"
+  >
+    🎤 Speak Ingredients
+  </button>
 
-    <button type="button" id="clearBtn" class="btn btn-outline">
-        Clear
-    </button>
+  <button
+    type="button"
+    id="randomRecipeBtn"
+    class="btn btn-outline"
+    disabled
+  >
+    🎲 Surprise Me
+  </button>
+
+  <button
+    type="button"
+    id="clearBtn"
+    class="btn btn-outline"
+  >
+    Clear
+  </button>
 </div>
 
           <hr class="hr"/>
