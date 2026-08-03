@@ -1275,13 +1275,15 @@ const filterText = [
  
     <div class="recipe-summary">
 
-      <img
-        src="${imagePath}"
-        alt="${escapeHtml(recipeName)}"
-        class="recipe-image"
-        loading="lazy"
-        onerror="this.onerror=null; this.src='images/default_recipe.png';"
-      >
+      <div class="recipe-image-wrapper">
+  <img
+    src="${imagePath}"
+    alt="${escapeHtml(recipeName)}"
+    class="recipe-image"
+    loading="lazy"
+    onerror="this.onerror=null; this.src='images/default_recipe.png';"
+  >
+</div>
 
       <div class="recipe-information">
 
