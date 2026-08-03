@@ -205,6 +205,22 @@ const nextRecipeBtn =
 const recipePageInfo =
   document.getElementById("recipePageInfo");
 
+// Recently Viewed elements.
+const recentlyViewedSection =
+  document.getElementById(
+    "recentlyViewedSection"
+  );
+
+const recentlyViewedList =
+  document.getElementById(
+    "recentlyViewedList"
+  );
+
+const clearRecentlyViewedBtn =
+  document.getElementById(
+    "clearRecentlyViewedBtn"
+  );
+
 // Current displayed recipe position.
 let currentRecipeIndex = 0;
 let currentlyFilteredCards = [];
@@ -1248,6 +1264,8 @@ const filterText = [
 <article
   class="recipe"
   data-recipe-name="${escapeHtml(recipeName.toLowerCase())}"
+  data-display-name="${escapeHtml(recipeName)}"
+  data-image-path="${escapeHtml(imagePath)}"
   data-filter-text="${escapeHtml(filterText)}"
   data-match-percentage="${matchPercentage}"
   data-matched-count="${matchedCount}"
@@ -1603,6 +1621,148 @@ if (resultsEl) {
   );
 }
 
+// ---------- Recently Viewed Recipes ----------
+
+const RECENTLY_VIEWED_KEY =
+  "wasfatna-recently-viewed";
+
+const MAX_RECENTLY_VIEWED = 5;
+
+function loadRecentlyViewed() {
+  try {
+    const savedRecipes =
+      localStorage.getItem(
+        RECENTLY_VIEWED_KEY
+      );
+
+    if (!savedRecipes) {
+      return [];
+    }
+
+    const parsedRecipes =
+      JSON.parse(savedRecipes);
+
+    return Array.isArray(parsedRecipes)
+      ? parsedRecipes
+      : [];
+  } catch (error) {
+    console.error(
+      "Unable to load recently viewed recipes:",
+      error
+    );
+
+    return [];
+  }
+}
+
+function saveRecentlyViewedRecipe(
+  recipeName,
+  imagePath
+) {
+  const cleanName =
+    String(recipeName || "").trim();
+
+  if (!cleanName) {
+    return;
+  }
+
+  let recipes = loadRecentlyViewed();
+
+  // Remove an older copy of the same recipe.
+  recipes = recipes.filter(
+    (recipe) =>
+      normalizeIngredient(recipe.name) !==
+      normalizeIngredient(cleanName)
+  );
+
+  // Add the newest recipe to the beginning.
+  recipes.unshift({
+    name: cleanName,
+    image:
+      String(imagePath || "").trim()
+  });
+
+  // Keep only the latest five recipes.
+  recipes = recipes.slice(
+    0,
+    MAX_RECENTLY_VIEWED
+  );
+
+  localStorage.setItem(
+    RECENTLY_VIEWED_KEY,
+    JSON.stringify(recipes)
+  );
+
+  renderRecentlyViewed();
+}
+
+function renderRecentlyViewed() {
+  if (
+    !recentlyViewedSection ||
+    !recentlyViewedList
+  ) {
+    return;
+  }
+
+  const recipes = loadRecentlyViewed();
+
+  if (recipes.length === 0) {
+    recentlyViewedSection.hidden = true;
+    recentlyViewedList.innerHTML = "";
+    return;
+  }
+
+  recentlyViewedSection.hidden = false;
+
+  recentlyViewedList.innerHTML =
+    recipes
+      .map((recipe) => {
+        const imagePath =
+          recipe.image ||
+          "images/default_recipe.png";
+
+        return `
+          <div class="recently-viewed-item">
+            <img
+              src="${escapeHtml(imagePath)}"
+              alt="${escapeHtml(recipe.name)}"
+              class="recently-viewed-image"
+              onerror="
+                this.onerror=null;
+                this.src='images/default_recipe.png';
+              "
+            >
+
+            <span class="recently-viewed-name">
+              ${escapeHtml(recipe.name)}
+            </span>
+          </div>
+        `;
+      })
+      .join("");
+}
+
+if (clearRecentlyViewedBtn) {
+  clearRecentlyViewedBtn.addEventListener(
+    "click",
+    () => {
+      localStorage.removeItem(
+        RECENTLY_VIEWED_KEY
+      );
+
+      renderRecentlyViewed();
+
+      showToast(
+        "Recently viewed history cleared.",
+        "🗑️"
+      );
+    }
+  );
+}
+
+// Display saved history when the page opens.
+renderRecentlyViewed();
+
 function updateDisplayedRecipes() {
   if (!resultsEl || !resultsCount) {
     return;
@@ -1849,6 +2009,15 @@ currentlyFilteredCards = filteredCards;
   // Display only the selected recipe.
   filteredCards[currentRecipeIndex].hidden =
     false;
+
+  const displayedRecipe =
+  filteredCards[currentRecipeIndex];
+
+saveRecentlyViewedRecipe(
+  displayedRecipe.dataset.displayName ||
+    displayedRecipe.dataset.recipeName,
+  displayedRecipe.dataset.imagePath
+);
 
   // Show the navigation.
   if (recipeNavigation) {
