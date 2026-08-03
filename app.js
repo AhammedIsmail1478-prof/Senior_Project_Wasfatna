@@ -1483,8 +1483,7 @@ const filterText = [
 >
  
     <div class="recipe-summary">
-
-      <div class="recipe-image-wrapper">
+    
  <div class="recipe-image-wrapper">
   <img
     src="${imagePath}"
@@ -1493,7 +1492,6 @@ const filterText = [
     loading="lazy"
     onerror="this.onerror=null; this.src='images/default_recipe.png';"
   >
-</div>
 </div>
 
       <div class="recipe-information">
