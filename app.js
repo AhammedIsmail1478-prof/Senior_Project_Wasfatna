@@ -568,18 +568,27 @@ if (printShoppingListBtn) {
       `;
 
       const printWindow =
-        window.open(
-          "",
-          "_blank"
-        );
+  window.open(
+    "",
+    "_blank"
+  );
 
-      printWindow.document.write(html);
+if (!printWindow) {
+  showToast(
+    "Please allow pop-ups to print the Shopping List.",
+    "⚠️"
+  );
 
-      printWindow.document.close();
+  return;
+}
 
-      printWindow.focus();
+printWindow.document.write(html);
 
-      printWindow.print();
+printWindow.document.close();
+
+printWindow.focus();
+
+printWindow.print();
 
     }
 
