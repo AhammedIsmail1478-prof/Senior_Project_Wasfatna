@@ -1287,10 +1287,22 @@ const filterText = [
 
         <div class="recipe-top">
 
-  <div class="recipe-title-row">
-    <h4>
-      ${escapeHtml(recipeName)}
-    </h4>
+<div class="recipe-title-row">
+  <h4>
+    ${escapeHtml(recipeName)}
+  </h4>
+
+  <div class="recipe-title-actions">
+
+    <button
+      type="button"
+      class="share-recipe-btn"
+      data-recipe-name="${escapeHtml(recipeName)}"
+      aria-label="Share ${escapeHtml(recipeName)}"
+      title="Share recipe"
+    >
+      🔗
+    </button>
 
     <button
       type="button"
@@ -1312,7 +1324,9 @@ const filterText = [
     >
       ${isFavorite ? "❤️" : "🤍"}
     </button>
+
   </div>
+</div>
 
   <div class="tags">
             <span class="tag ${matchClass}">
@@ -1572,6 +1586,98 @@ if (
   );
 } finally {
         favoriteBtn.disabled = false;
+      }
+    }
+  );
+}
+
+// ---------- Share Recipe ----------
+if (resultsEl) {
+  resultsEl.addEventListener(
+    "click",
+    async (event) => {
+      const shareBtn =
+        event.target.closest(
+          ".share-recipe-btn"
+        );
+
+      if (!shareBtn) {
+        return;
+      }
+
+      const recipeCard =
+        shareBtn.closest(".recipe");
+
+      if (!recipeCard) {
+        return;
+      }
+
+      const recipeName =
+        shareBtn.dataset.recipeName ||
+        "Wasfatna Recipe";
+
+      const matchedText =
+        recipeCard.querySelector(
+          ".tags"
+        )?.innerText || "";
+
+      const neededText =
+        Array.from(
+          recipeCard.querySelectorAll(
+            ".small"
+          )
+        )
+          .map((element) =>
+            element.innerText.trim()
+          )
+          .filter(Boolean)
+          .join("\n");
+
+      const shareText =
+        `${recipeName}\n\n` +
+        `${matchedText}\n\n` +
+        `${neededText}\n\n` +
+        "Shared from Wasfatna";
+
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: recipeName,
+            text: shareText
+          });
+
+          showToast(
+            "Recipe shared.",
+            "🔗"
+          );
+
+          return;
+        }
+
+        await navigator.clipboard.writeText(
+          shareText
+        );
+
+        showToast(
+          "Recipe details copied.",
+          "📋"
+        );
+      } catch (error) {
+        if (
+          error.name === "AbortError"
+        ) {
+          return;
+        }
+
+        console.error(
+          "Unable to share recipe:",
+          error
+        );
+
+        showToast(
+          "Unable to share this recipe.",
+          "⚠️"
+        );
       }
     }
   );
