@@ -138,6 +138,9 @@ const suggestBtn =
 const clearBtn =
   document.getElementById("clearBtn");
 
+const voiceSearchBtn =
+  document.getElementById("voiceSearchBtn");
+
 const resultsEl =
   document.getElementById("results");
 
@@ -250,6 +253,212 @@ const aboutClose =
 
 const backdrop =
   document.getElementById("backdrop");
+
+// ---------- Voice Ingredient Search ----------
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+let ingredientRecognition = null;
+let isVoiceListening = false;
+
+function setVoiceButtonState(isListening) {
+  if (!voiceSearchBtn) {
+    return;
+  }
+
+  isVoiceListening = isListening;
+
+  voiceSearchBtn.classList.toggle(
+    "is-listening",
+    isListening
+  );
+
+  voiceSearchBtn.textContent =
+    isListening
+      ? "🎙 Listening..."
+      : "🎤 Speak Ingredients";
+
+  voiceSearchBtn.setAttribute(
+    "aria-pressed",
+    String(isListening)
+  );
+}
+
+if (
+  voiceSearchBtn &&
+  ingredientsInput
+) {
+  if (!SpeechRecognition) {
+    voiceSearchBtn.disabled = true;
+    voiceSearchBtn.textContent =
+      "🎤 Voice Not Supported";
+
+    voiceSearchBtn.title =
+      "Voice recognition is not supported by this browser.";
+  } else {
+    ingredientRecognition =
+      new SpeechRecognition();
+
+    ingredientRecognition.lang =
+      "en-US";
+
+    ingredientRecognition.continuous =
+      false;
+
+    ingredientRecognition.interimResults =
+      false;
+
+    ingredientRecognition.maxAlternatives =
+      1;
+
+    voiceSearchBtn.addEventListener(
+      "click",
+      () => {
+        if (isVoiceListening) {
+          ingredientRecognition.stop();
+          return;
+        }
+
+        try {
+          ingredientRecognition.start();
+        } catch (error) {
+          console.error(
+            "Unable to start voice search:",
+            error
+          );
+
+          showToast(
+            "Voice search is already running.",
+            "⚠️"
+          );
+        }
+      }
+    );
+
+    ingredientRecognition.addEventListener(
+      "start",
+      () => {
+        setVoiceButtonState(true);
+
+        showToast(
+          "Speak your ingredients now.",
+          "🎤"
+        );
+      }
+    );
+
+    ingredientRecognition.addEventListener(
+      "result",
+      (event) => {
+        const transcript =
+          event.results?.[0]?.[0]
+            ?.transcript || "";
+
+        const spokenIngredients =
+          transcript
+            .replace(/\band\b/gi, ",")
+            .replace(/[.،]/g, ",")
+            .split(",")
+            .map((ingredient) =>
+              ingredient.trim()
+            )
+            .filter(Boolean);
+
+        if (
+          spokenIngredients.length === 0
+        ) {
+          showToast(
+            "No ingredients were recognized.",
+            "⚠️"
+          );
+
+          return;
+        }
+
+        const existingIngredients =
+          parseIngredients(
+            ingredientsInput.value
+          );
+
+        const combinedIngredients =
+          uniq([
+            ...existingIngredients,
+            ...spokenIngredients.map(
+              normalizeIngredient
+            )
+          ]);
+
+        ingredientsInput.value =
+          combinedIngredients.join(", ");
+
+        if (statsIngredients) {
+          statsIngredients.textContent =
+            String(
+              combinedIngredients.length
+            );
+        }
+
+        showToast(
+          `${spokenIngredients.length} ingredient${
+            spokenIngredients.length === 1
+              ? ""
+              : "s"
+          } recognized.`,
+          "✅"
+        );
+      }
+    );
+
+    ingredientRecognition.addEventListener(
+      "error",
+      (event) => {
+        console.error(
+          "Voice recognition error:",
+          event.error
+        );
+
+        let message =
+          "Unable to recognize your voice.";
+
+        if (
+          event.error === "not-allowed" ||
+          event.error ===
+            "service-not-allowed"
+        ) {
+          message =
+            "Please allow microphone access.";
+        } else if (
+          event.error === "no-speech"
+        ) {
+          message =
+            "No speech was detected. Please try again.";
+        } else if (
+          event.error === "audio-capture"
+        ) {
+          message =
+            "No microphone was detected.";
+        } else if (
+          event.error === "network"
+        ) {
+          message =
+            "Voice recognition network error.";
+        }
+
+        showToast(message, "⚠️");
+      }
+    );
+
+    ingredientRecognition.addEventListener(
+      "end",
+      () => {
+        setVoiceButtonState(false);
+      }
+    );
+  }
+}
+
 // ---------- Shopping List ----------
 
 const SHOPPING_LIST_KEY =
