@@ -190,6 +190,9 @@ const clearShoppingListBtn =
 const printShoppingListBtn =
   document.getElementById("printShoppingListBtn");
 
+const downloadShoppingPdfBtn =
+  document.getElementById("downloadShoppingPdfBtn");
+
 const recipeNavigation =
   document.getElementById("recipeNavigation");
 
@@ -288,6 +291,16 @@ function renderShoppingList() {
     clearShoppingListBtn.disabled =
       items.length === 0;
   }
+
+  if (printShoppingListBtn) {
+  printShoppingListBtn.disabled =
+    items.length === 0;
+}
+
+if (downloadShoppingPdfBtn) {
+  downloadShoppingPdfBtn.disabled =
+    items.length === 0;
+}
 
   if (items.length === 0) {
     shoppingListItems.innerHTML = `
@@ -595,6 +608,135 @@ printWindow.print();
   );
 
 }
+
+// ---------- Download Shopping List as PDF ----------
+if (downloadShoppingPdfBtn) {
+  downloadShoppingPdfBtn.addEventListener(
+    "click",
+    () => {
+      const items = loadShoppingList();
+
+      if (items.length === 0) {
+        showToast(
+          "Shopping List is empty.",
+          "⚠️"
+        );
+
+        return;
+      }
+
+      if (
+        !window.jspdf ||
+        !window.jspdf.jsPDF
+      ) {
+        showToast(
+          "PDF library could not be loaded.",
+          "⚠️"
+        );
+
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+      });
+
+      const pageWidth =
+        pdf.internal.pageSize.getWidth();
+
+      const pageHeight =
+        pdf.internal.pageSize.getHeight();
+
+      const margin = 18;
+
+      let y = 22;
+
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(20);
+
+      pdf.text(
+        "Wasfatna Shopping List",
+        margin,
+        y
+      );
+
+      y += 9;
+
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(10);
+
+      const generatedDate =
+        new Date().toLocaleDateString();
+
+      pdf.text(
+        `Generated: ${generatedDate}`,
+        margin,
+        y
+      );
+
+      y += 10;
+
+      pdf.setDrawColor(180);
+      pdf.line(
+        margin,
+        y,
+        pageWidth - margin,
+        y
+      );
+
+      y += 9;
+
+      pdf.setFontSize(12);
+
+      items.forEach((item, index) => {
+        if (y > pageHeight - 20) {
+          pdf.addPage();
+          y = 22;
+        }
+
+        const status =
+          item.checked ? "[x]" : "[ ]";
+
+        const quantity =
+          item.quantity
+            ? ` - ${item.quantity}`
+            : "";
+
+        const line =
+          `${status} ${index + 1}. ` +
+          `${item.name}${quantity}`;
+
+        const wrappedLines =
+          pdf.splitTextToSize(
+            line,
+            pageWidth - margin * 2
+          );
+
+        pdf.text(
+          wrappedLines,
+          margin,
+          y
+        );
+
+        y += wrappedLines.length * 7;
+      });
+
+      pdf.save(
+        "wasfatna-shopping-list.pdf"
+      );
+
+      showToast(
+        "Shopping List PDF downloaded.",
+        "📄"
+      );
+    }
+  );
+}
+
 
 // Mark ingredients as purchased.
 if (shoppingListItems) {
