@@ -193,6 +193,40 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
 .btn-small{ padding:8px 10px; font-size:13px; border-radius:12px; }
 
+/* ---------- Voice Search Button ---------- */
+
+#voiceSearchBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+
+#voiceSearchBtn.is-listening{
+  color:#fff;
+  border-color:#ef4444;
+  background:rgba(239,68,68,.18);
+  box-shadow:0 0 0 4px rgba(239,68,68,.10);
+  animation:voiceListeningPulse 1.2s ease-in-out infinite;
+}
+
+#voiceSearchBtn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+@keyframes voiceListeningPulse{
+
+  0%,100%{
+    box-shadow:0 0 0 3px rgba(239,68,68,.10);
+  }
+
+  50%{
+    box-shadow:0 0 0 8px rgba(239,68,68,.20);
+  }
+
+}
+
 .hr{ border:none; border-top:1px solid var(--line); margin:14px 0; }
 
 .form-grid{
