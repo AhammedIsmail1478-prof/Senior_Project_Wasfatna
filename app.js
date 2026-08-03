@@ -187,6 +187,9 @@ const shoppingListItems =
 const clearShoppingListBtn =
   document.getElementById("clearShoppingListBtn");
 
+const printShoppingListBtn =
+  document.getElementById("printShoppingListBtn");
+
 const recipeNavigation =
   document.getElementById("recipeNavigation");
 
@@ -489,6 +492,99 @@ if (clearShoppingListBtn) {
       );
     }
   );
+}
+
+// ---------- Print Shopping List ----------
+if (printShoppingListBtn) {
+
+  printShoppingListBtn.addEventListener(
+    "click",
+    () => {
+
+      const items = loadShoppingList();
+
+      if (items.length === 0) {
+
+        showToast(
+          "Shopping List is empty.",
+          "⚠️"
+        );
+
+        return;
+      }
+
+      let html = `
+        <html>
+        <head>
+          <title>Shopping List</title>
+
+          <style>
+
+            body{
+              font-family:Arial,sans-serif;
+              padding:40px;
+            }
+
+            h1{
+              margin-bottom:20px;
+            }
+
+            li{
+              margin-bottom:10px;
+              font-size:18px;
+            }
+
+          </style>
+
+        </head>
+
+        <body>
+
+          <h1>🛒 Shopping List</h1>
+
+          <ul>
+      `;
+
+      items.forEach(item => {
+
+        html += `
+          <li>
+
+            ${item.name}
+
+            ${item.quantity
+              ? `(${item.quantity})`
+              : ""}
+
+          </li>
+        `;
+
+      });
+
+      html += `
+          </ul>
+        </body>
+        </html>
+      `;
+
+      const printWindow =
+        window.open(
+          "",
+          "_blank"
+        );
+
+      printWindow.document.write(html);
+
+      printWindow.document.close();
+
+      printWindow.focus();
+
+      printWindow.print();
+
+    }
+
+  );
+
 }
 
 // Mark ingredients as purchased.
