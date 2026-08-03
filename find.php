@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=18" />
+  <link rel="stylesheet" href="styles.css?v=19" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -32,8 +32,22 @@ require 'auth.php';
         <a href="signin.php" class="nav-link">Sign in</a>
         <a href="signup.php" class="nav-link">Sign up</a>
       <?php endif; ?>
-      <button id="themeToggle" class="btn btn-ghost btn-small">🌙 Dark</button>
-      <button id="aboutBtn" class="btn btn-ghost">About / CVs</button>
+      <button
+  type="button"
+  id="shoppingListBtn"
+  class="btn btn-ghost"
+>
+  🛒 Shopping List
+  <span id="shoppingListCount" class="shopping-count">0</span>
+</button>
+
+<button type="button" id="themeToggle" class="btn btn-ghost btn-small">
+  🌙 Dark
+</button>
+
+<button type="button" id="aboutBtn" class="btn btn-ghost">
+  About / CVs
+</button>
     </nav>
   </header>
 
@@ -61,7 +75,7 @@ require 'auth.php';
           ></textarea>
 
           <div class="row">
-    <button id="suggestBtn" class="btn btn-primary">
+    <button type="button" id="suggestBtn" class="btn btn-primary">
         Suggest Recipes
     </button>
 
@@ -74,7 +88,7 @@ require 'auth.php';
   🎲 Surprise Me
 </button>
 
-    <button id="clearBtn" class="btn btn-outline">
+    <button type="button" id="clearBtn" class="btn btn-outline">
         Clear
     </button>
 </div>
@@ -290,13 +304,51 @@ require 'auth.php';
       <div class="cv-card"><div class="cv-name">Bassem Mohammad Irshad Mohammed Islam</div><div class="muted">202201552</div></div>
     </div>
   </aside>
+<!-- Shopping List Side Panel -->
+<aside
+  id="shoppingListPanel"
+  class="sidepanel"
+  aria-hidden="true"
+>
+  <div class="sidepanel-top">
+    <div class="sidepanel-title">
+      🛒 Shopping List
+    </div>
 
+    <button
+      type="button"
+      id="shoppingListClose"
+      class="btn btn-ghost"
+    >
+      ✕
+    </button>
+  </div>
+
+  <div class="sidepanel-content">
+
+    <div id="shoppingListItems" class="shopping-list-items">
+      <div class="empty">
+        Your shopping list is empty.
+      </div>
+    </div>
+
+    <button
+      type="button"
+      id="clearShoppingListBtn"
+      class="btn btn-outline shopping-clear-btn"
+    >
+      Clear Shopping List
+    </button>
+
+  </div>
+</aside>
+  
   <div id="backdrop" class="backdrop" hidden></div>
 <div id="toast" class="toast">
     <span id="toastIcon">❤️</span>
     <span id="toastMessage"></span>
 </div>
   
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>
