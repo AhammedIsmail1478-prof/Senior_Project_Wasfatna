@@ -332,13 +332,25 @@ require 'auth.php';
       </div>
     </div>
 
+    <div class="shopping-actions">
+
     <button
-      type="button"
-      id="clearShoppingListBtn"
-      class="btn btn-outline shopping-clear-btn"
+        type="button"
+        id="printShoppingListBtn"
+        class="btn btn-primary"
     >
-      Clear Shopping List
+        🖨 Print
     </button>
+
+    <button
+        type="button"
+        id="clearShoppingListBtn"
+        class="btn btn-outline"
+    >
+        Clear Shopping List
+    </button>
+
+</div>
 
   </div>
 </aside>
