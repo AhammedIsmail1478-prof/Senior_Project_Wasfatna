@@ -356,6 +356,15 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   border:1px solid var(--line);
   background:rgba(255,255,255,.04);
   flex-shrink:0;
+
+  transition:
+      transform .35s ease,
+      box-shadow .35s ease;
+}
+
+.recipe-image:hover{
+    transform:scale(1.05);
+    box-shadow:0 12px 28px rgba(0,0,0,.35);
 }
 
 .recipe-information{
