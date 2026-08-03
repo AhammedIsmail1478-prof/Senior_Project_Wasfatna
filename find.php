@@ -367,7 +367,11 @@ require 'auth.php';
     <span id="toastIcon">❤️</span>
     <span id="toastMessage"></span>
 </div>
+
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.2/jspdf.umd.min.js"
+></script>
   
-  <script src="app.js?v=13"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>
