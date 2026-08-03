@@ -415,6 +415,43 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   transform:scale(1.05);
 }
 
+.recipe-title-actions{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+}
+
+.share-recipe-btn{
+  flex-shrink:0;
+  border:none;
+  background:transparent;
+  color:var(--text);
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+  padding:5px;
+  border-radius:50%;
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+.share-recipe-btn:hover{
+  transform:scale(1.12);
+  background:rgba(255,255,255,.08);
+}
+
+.share-recipe-btn:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+
+[data-theme="light"] .share-recipe-btn:hover{
+  background:rgba(0,0,0,.06);
+}
+
 .recipe-details{
   display:flex;
   align-items:center;
