@@ -658,7 +658,7 @@ if (downloadShoppingPdfBtn) {
      pdf.setFont("helvetica", "bold");
 
 pdf.setFontSize(24);
-pdf.text("🍲 Wasfatna", margin, y);
+pdf.text("Wasfatna", margin, y);
 
 y += 10;
 
@@ -696,7 +696,8 @@ y += 8;
           y = 22;
         }
 
-        const status = item.checked ? "☑" : "☐";
+        const status =
+  item.checked ? "✓" : "-";
 
         const quantity =
           item.quantity
