@@ -168,6 +168,25 @@ const recipeFilter =
 const randomRecipeBtn =
   document.getElementById("randomRecipeBtn");
 
+// Shopping List elements.
+const shoppingListBtn =
+  document.getElementById("shoppingListBtn");
+
+const shoppingListCount =
+  document.getElementById("shoppingListCount");
+
+const shoppingListPanel =
+  document.getElementById("shoppingListPanel");
+
+const shoppingListClose =
+  document.getElementById("shoppingListClose");
+
+const shoppingListItems =
+  document.getElementById("shoppingListItems");
+
+const clearShoppingListBtn =
+  document.getElementById("clearShoppingListBtn");
+
 const recipeNavigation =
   document.getElementById("recipeNavigation");
 
@@ -209,6 +228,340 @@ const aboutClose =
 
 const backdrop =
   document.getElementById("backdrop");
+// ---------- Shopping List ----------
+
+const SHOPPING_LIST_KEY =
+  "wasfatna-shopping-list";
+
+function loadShoppingList() {
+  try {
+    const savedItems =
+      localStorage.getItem(
+        SHOPPING_LIST_KEY
+      );
+
+    if (!savedItems) {
+      return [];
+    }
+
+    const parsedItems =
+      JSON.parse(savedItems);
+
+    return Array.isArray(parsedItems)
+      ? parsedItems
+      : [];
+  } catch (error) {
+    console.error(
+      "Unable to load Shopping List:",
+      error
+    );
+
+    return [];
+  }
+}
+
+function saveShoppingList(items) {
+  localStorage.setItem(
+    SHOPPING_LIST_KEY,
+    JSON.stringify(items)
+  );
+
+  renderShoppingList();
+}
+
+function renderShoppingList() {
+  if (!shoppingListItems) {
+    return;
+  }
+
+  const items = loadShoppingList();
+
+  if (shoppingListCount) {
+    shoppingListCount.textContent =
+      String(items.length);
+  }
+
+  if (clearShoppingListBtn) {
+    clearShoppingListBtn.disabled =
+      items.length === 0;
+  }
+
+  if (items.length === 0) {
+    shoppingListItems.innerHTML = `
+      <div class="empty">
+        Your shopping list is empty.
+      </div>
+    `;
+
+    return;
+  }
+
+  shoppingListItems.innerHTML =
+    items
+      .map((item, index) => {
+        return `
+          <div
+            class="shopping-item ${
+              item.checked
+                ? "shopping-item-completed"
+                : ""
+            }"
+          >
+            <label class="shopping-item-label">
+              <input
+                type="checkbox"
+                class="shopping-item-checkbox"
+                data-index="${index}"
+                ${item.checked ? "checked" : ""}
+              >
+
+              <span>
+                <strong>
+                  ${escapeHtml(item.name)}
+                </strong>
+
+                ${
+                  item.quantity
+                    ? `
+                      <span class="shopping-quantity">
+                        ${escapeHtml(item.quantity)}
+                      </span>
+                    `
+                    : ""
+                }
+              </span>
+            </label>
+
+            <button
+              type="button"
+              class="shopping-remove-btn"
+              data-index="${index}"
+              aria-label="Remove ${escapeHtml(item.name)}"
+              title="Remove ingredient"
+            >
+              ✕
+            </button>
+          </div>
+        `;
+      })
+      .join("");
+}
+
+function addIngredientsToShoppingList(
+  ingredients
+) {
+  if (!Array.isArray(ingredients)) {
+    return;
+  }
+
+  const items = loadShoppingList();
+
+  const existingNames = new Set(
+    items.map((item) =>
+      normalizeIngredient(item.name)
+    )
+  );
+
+  let addedCount = 0;
+
+  ingredients.forEach((ingredient) => {
+    const name =
+      String(
+        ingredient?.name || ""
+      ).trim();
+
+    const quantity =
+      String(
+        ingredient?.quantity || ""
+      ).trim();
+
+    if (!name) {
+      return;
+    }
+
+    const normalizedName =
+      normalizeIngredient(name);
+
+    if (existingNames.has(normalizedName)) {
+      return;
+    }
+
+    items.push({
+      name: name,
+      quantity: quantity,
+      checked: false
+    });
+
+    existingNames.add(normalizedName);
+    addedCount++;
+  });
+
+  saveShoppingList(items);
+
+  if (addedCount > 0) {
+    showToast(
+      `${addedCount} ingredient${
+        addedCount === 1 ? "" : "s"
+      } added to Shopping List.`,
+      "🛒"
+    );
+  } else {
+    showToast(
+      "These ingredients are already in your Shopping List.",
+      "ℹ️"
+    );
+  }
+}
+
+function openShoppingList() {
+  if (!shoppingListPanel || !backdrop) {
+    return;
+  }
+
+  // Close the About panel if it is open.
+  if (aboutPanel) {
+    aboutPanel.classList.remove("open");
+    aboutPanel.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+  }
+
+  renderShoppingList();
+
+  shoppingListPanel.classList.add("open");
+
+  shoppingListPanel.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  backdrop.hidden = false;
+}
+
+function closeShoppingList() {
+  if (!shoppingListPanel) {
+    return;
+  }
+
+  shoppingListPanel.classList.remove("open");
+
+  shoppingListPanel.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  if (backdrop) {
+    backdrop.hidden = true;
+  }
+}
+
+// Open the Shopping List.
+if (shoppingListBtn) {
+  shoppingListBtn.addEventListener(
+    "click",
+    openShoppingList
+  );
+}
+
+// Close the Shopping List.
+if (shoppingListClose) {
+  shoppingListClose.addEventListener(
+    "click",
+    closeShoppingList
+  );
+}
+
+// Clear the complete Shopping List.
+if (clearShoppingListBtn) {
+  clearShoppingListBtn.addEventListener(
+    "click",
+    () => {
+      localStorage.removeItem(
+        SHOPPING_LIST_KEY
+      );
+
+      renderShoppingList();
+
+      showToast(
+        "Shopping List cleared.",
+        "🗑️"
+      );
+    }
+  );
+}
+
+// Mark ingredients as purchased.
+if (shoppingListItems) {
+  shoppingListItems.addEventListener(
+    "change",
+    (event) => {
+      const checkbox =
+        event.target.closest(
+          ".shopping-item-checkbox"
+        );
+
+      if (!checkbox) {
+        return;
+      }
+
+      const index =
+        Number(checkbox.dataset.index);
+
+      const items =
+        loadShoppingList();
+
+      if (!items[index]) {
+        return;
+      }
+
+      items[index].checked =
+        checkbox.checked;
+
+      saveShoppingList(items);
+    }
+  );
+
+  // Remove one ingredient.
+  shoppingListItems.addEventListener(
+    "click",
+    (event) => {
+      const removeBtn =
+        event.target.closest(
+          ".shopping-remove-btn"
+        );
+
+      if (!removeBtn) {
+        return;
+      }
+
+      const index =
+        Number(removeBtn.dataset.index);
+
+      const items =
+        loadShoppingList();
+
+      if (!items[index]) {
+        return;
+      }
+
+      const removedName =
+        items[index].name;
+
+      items.splice(index, 1);
+
+      saveShoppingList(items);
+
+      showToast(
+        `${removedName} removed.`,
+        "🗑️"
+      );
+    }
+  );
+}
+
+// Load the saved count when the page opens.
+renderShoppingList();
 
 // ---------- About panel ----------
 function openAbout() {
@@ -240,7 +593,13 @@ if (aboutClose) {
 }
 
 if (backdrop) {
-  backdrop.addEventListener("click", closeAbout);
+  backdrop.addEventListener(
+    "click",
+    () => {
+      closeAbout();
+      closeShoppingList();
+    }
+  );
 }
 
 // ---------- Clear button ----------
@@ -516,6 +875,13 @@ const hasAllCoreIngredients =
                   .join(", ")
               : "None — you have all ingredients ✅";
 
+          const encodedMissingIngredients =
+  encodeURIComponent(
+    JSON.stringify(
+      missingIngredients
+    )
+  );
+
           const coreIngredientsHtml =
   hasAllCoreIngredients
     ? `
@@ -681,6 +1047,21 @@ const filterText = [
 </div>
 
 ${coreIngredientsHtml}
+
+<div class="shopping-recipe-action">
+  <button
+    type="button"
+    class="btn btn-outline add-shopping-btn"
+    data-shopping-items="${encodedMissingIngredients}"
+    ${missingIngredients.length === 0 ? "disabled" : ""}
+  >
+    ${
+      missingIngredients.length === 0
+        ? "✅ No Missing Ingredients"
+        : "🛒 Add Missing Ingredients"
+    }
+  </button>
+</div>
 
 <div class="recipe-details">
 
@@ -902,6 +1283,50 @@ if (
   );
 } finally {
         favoriteBtn.disabled = false;
+      }
+    }
+  );
+}
+
+// ---------- Add missing ingredients to Shopping List ----------
+if (resultsEl) {
+  resultsEl.addEventListener(
+    "click",
+    (event) => {
+      const addShoppingBtn =
+        event.target.closest(
+          ".add-shopping-btn"
+        );
+
+      if (!addShoppingBtn) {
+        return;
+      }
+
+      try {
+        const encodedItems =
+          addShoppingBtn.dataset
+            .shoppingItems || "";
+
+        const missingItems =
+          JSON.parse(
+            decodeURIComponent(
+              encodedItems
+            )
+          );
+
+        addIngredientsToShoppingList(
+          missingItems
+        );
+      } catch (error) {
+        console.error(
+          "Unable to add Shopping List ingredients:",
+          error
+        );
+
+        showToast(
+          "Unable to add ingredients.",
+          "⚠️"
+        );
       }
     }
   );
