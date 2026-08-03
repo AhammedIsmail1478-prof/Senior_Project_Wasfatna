@@ -21,7 +21,6 @@ require 'auth.php';
         <div class="brand-sub">Smart Meal Suggestions</div>
       </div>
     </div>
-
     <nav class="nav">
       <a href="profile.php" class="nav-link">Profile</a>
       <?php if (is_logged_in()): ?>
