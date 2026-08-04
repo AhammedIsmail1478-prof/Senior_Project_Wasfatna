@@ -1404,6 +1404,19 @@ const hasAllCoreIngredients =
     )
   );
 
+          const encodedAllIngredients =
+  encodeURIComponent(
+    JSON.stringify([
+      ...matchedIngredients,
+      ...missingIngredients
+    ])
+  );
+
+const encodedSteps =
+  encodeURIComponent(
+    JSON.stringify(steps)
+  );
+
           const coreIngredientsHtml =
   hasAllCoreIngredients
     ? `
@@ -1506,6 +1519,12 @@ const filterText = [
   data-matched-count="${matchedCount}"
   data-ready-to-cook="${hasAllCoreIngredients}"
   data-is-favorite="${isFavorite}"
+  data-description="${escapeHtml(recipe.description || "")}"
+  data-prep-time="${Number(recipe.prep_time) || 0}"
+  data-cook-time="${Number(recipe.cook_time) || 0}"
+  data-servings="${Number(recipe.servings) || 0}"
+  data-all-ingredients="${encodedAllIngredients}"
+  data-recipe-steps="${encodedSteps}"
 >
  
     <div class="recipe-summary">
