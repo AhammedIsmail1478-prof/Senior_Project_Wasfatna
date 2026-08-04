@@ -2201,6 +2201,290 @@ if (resultsEl) {
   );
 }
 
+// ---------- Print Recipe ----------
+
+if (resultsEl) {
+  resultsEl.addEventListener(
+    "click",
+    (event) => {
+      const printRecipeBtn =
+        event.target.closest(
+          ".print-recipe-btn"
+        );
+
+      if (!printRecipeBtn) {
+        return;
+      }
+
+      const recipeCard =
+        printRecipeBtn.closest(".recipe");
+
+      if (!recipeCard) {
+        return;
+      }
+
+      const recipeName =
+        recipeCard.dataset.displayName ||
+        "Wasfatna Recipe";
+
+      const description =
+        recipeCard.dataset.description || "";
+
+      const imagePath =
+        recipeCard.dataset.imagePath ||
+        "images/default_recipe.png";
+
+      const prepTime =
+        Number(recipeCard.dataset.prepTime) || 0;
+
+      const cookTime =
+        Number(recipeCard.dataset.cookTime) || 0;
+
+      const totalTime =
+        prepTime + cookTime;
+
+      const servings =
+        Number(recipeCard.dataset.servings) || 0;
+
+      let ingredients = [];
+      let steps = [];
+
+      try {
+        ingredients = JSON.parse(
+          decodeURIComponent(
+            recipeCard.dataset.allIngredients || "[]"
+          )
+        );
+
+        steps = JSON.parse(
+          decodeURIComponent(
+            recipeCard.dataset.recipeSteps || "[]"
+          )
+        );
+      } catch (error) {
+        console.error(
+          "Unable to read recipe print data:",
+          error
+        );
+
+        showToast(
+          "Unable to prepare this recipe for printing.",
+          "⚠️"
+        );
+
+        return;
+      }
+
+      const ingredientsHtml =
+        ingredients.length
+          ? ingredients
+              .map((ingredient) => {
+                const name =
+                  escapeHtml(
+                    ingredient.name || ""
+                  );
+
+                const quantity =
+                  ingredient.quantity
+                    ? ` — ${escapeHtml(
+                        ingredient.quantity
+                      )}`
+                    : "";
+
+                return `
+                  <li>
+                    ${name}${quantity}
+                  </li>
+                `;
+              })
+              .join("")
+          : `
+              <li>
+                No ingredients available.
+              </li>
+            `;
+
+      const stepsHtml =
+        steps.length
+          ? steps
+              .map(
+                (step) => `
+                  <li>
+                    ${escapeHtml(step)}
+                  </li>
+                `
+              )
+              .join("")
+          : `
+              <li>
+                No preparation steps available.
+              </li>
+            `;
+
+      const printWindow =
+        window.open("", "_blank");
+
+      if (!printWindow) {
+        showToast(
+          "Please allow pop-ups to print the recipe.",
+          "⚠️"
+        );
+
+        return;
+      }
+
+      printWindow.document.write(`
+        <!doctype html>
+        <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <title>${escapeHtml(recipeName)}</title>
+
+          <style>
+            body{
+              max-width:850px;
+              margin:0 auto;
+              padding:40px;
+              color:#111;
+              font-family:Arial,sans-serif;
+              line-height:1.5;
+            }
+
+            h1{
+              margin:0 0 8px;
+            }
+
+            .description{
+              margin:0 0 18px;
+              color:#444;
+            }
+
+            .recipe-image{
+              width:100%;
+              max-width:520px;
+              height:300px;
+              margin:16px 0 22px;
+              object-fit:cover;
+              border-radius:14px;
+            }
+
+            .details{
+              display:flex;
+              flex-wrap:wrap;
+              gap:10px;
+              margin:18px 0;
+            }
+
+            .detail{
+              padding:8px 12px;
+              border:1px solid #ccc;
+              border-radius:999px;
+              font-weight:700;
+            }
+
+            h2{
+              margin-top:28px;
+              padding-bottom:7px;
+              border-bottom:1px solid #ddd;
+            }
+
+            li{
+              margin-bottom:8px;
+            }
+
+            .footer{
+              margin-top:40px;
+              padding-top:14px;
+              border-top:1px solid #ddd;
+              color:#666;
+              font-size:12px;
+            }
+
+            @media print{
+              body{
+                padding:20px;
+              }
+            }
+          </style>
+        </head>
+
+        <body>
+          <h1>${escapeHtml(recipeName)}</h1>
+
+          ${
+            description
+              ? `
+                <p class="description">
+                  ${escapeHtml(description)}
+                </p>
+              `
+              : ""
+          }
+
+          <img
+            src="${escapeHtml(imagePath)}"
+            alt="${escapeHtml(recipeName)}"
+            class="recipe-image"
+          >
+
+          <div class="details">
+            <div class="detail">
+              ⏱ Prep:
+              ${prepTime || "Not specified"}
+              ${prepTime ? "min" : ""}
+            </div>
+
+            <div class="detail">
+              🔥 Cook:
+              ${cookTime || "Not specified"}
+              ${cookTime ? "min" : ""}
+            </div>
+
+            <div class="detail">
+              ⌛ Total:
+              ${totalTime || "Not specified"}
+              ${totalTime ? "min" : ""}
+            </div>
+
+            <div class="detail">
+              🍽 Serves:
+              ${servings || "Not specified"}
+            </div>
+          </div>
+
+          <h2>Ingredients</h2>
+
+          <ul>
+            ${ingredientsHtml}
+          </ul>
+
+          <h2>Steps</h2>
+
+          <ol>
+            ${stepsHtml}
+          </ol>
+
+          <div class="footer">
+            Generated by Wasfatna —
+            University of Bahrain Senior Project
+          </div>
+        </body>
+        </html>
+      `);
+
+      printWindow.document.close();
+      printWindow.focus();
+
+      printWindow.addEventListener(
+        "load",
+        () => {
+          printWindow.print();
+        }
+      );
+    }
+  );
+}
+
 // ---------- Recently Viewed Recipes ----------
 
 const RECENTLY_VIEWED_KEY =
