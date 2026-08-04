@@ -27,7 +27,7 @@ a{ color:inherit; text-decoration:none; }
   width:100%;
   max-width:none;
   margin:0;
-  padding:28px 40px;
+  padding:28px clamp(24px, 4vw, 70px);
 }
 
 .topbar{
