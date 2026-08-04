@@ -423,6 +423,6 @@ require 'auth.php';
 ></script>
 
   
-  <script src="app.js?v=25"></script>
+  <script src="app.js?v=26"></script>
 </body>
 </html>
