@@ -1605,10 +1605,15 @@ ${coreIngredientsHtml}
 
 <div class="recipe-details">
 
-  <div class="small">
-    <strong>Serves:</strong>
-    ${escapeHtml(recipe.servings || "Not specified")}
-  </div>
+  <div class="recipe-servings">
+  🍽 Serves
+  ${escapeHtml(recipe.servings || "Not specified")}
+  ${
+    recipe.servings
+      ? "people"
+      : ""
+  }
+</div>
 
   <div class="small">
     <strong>Difficulty:</strong>
