@@ -133,55 +133,62 @@ try {
      * 2. Contain at least one entered ingredient.
      */
     $sql = "
-        SELECT
-    r.recipe_id,
-    r.recipe_name,
-    r.description,
-    r.prep_time,
-    r.cook_time,
-    r.servings,
-    r.calories,
-    r.image,
-    r.spice_level,
-    r.goal,
-    r.diet
-
-            COUNT(
-                DISTINCT CASE
-                    WHEN ($matchCondition)
-                    THEN i.ingredient_id
-                END
-            ) AS matched_count,
-
-            COUNT(DISTINCT i.ingredient_id) AS total_ingredients
-
-        FROM recipes r
-
-        JOIN recipe_ingredients ri
-            ON ri.recipe_id = r.recipe_id
-
-        JOIN ingredients i
-            ON i.ingredient_id = ri.ingredient_id
-
-        $whereSql
-
-        GROUP BY
+    SELECT
         r.recipe_id,
         r.recipe_name,
+        r.description,
+        r.prep_time,
+        r.cook_time,
+        r.servings,
+        r.difficulty,
+        r.calories,
         r.image,
         r.spice_level,
-        r.diet,
         r.goal,
+        r.diet,
+
+        COUNT(
+            DISTINCT CASE
+                WHEN ($matchCondition)
+                THEN i.ingredient_id
+            END
+        ) AS matched_count,
+
+        COUNT(
+            DISTINCT i.ingredient_id
+        ) AS total_ingredients
+
+    FROM recipes r
+
+    JOIN recipe_ingredients ri
+        ON ri.recipe_id = r.recipe_id
+
+    JOIN ingredients i
+        ON i.ingredient_id = ri.ingredient_id
+
+    $whereSql
+
+    GROUP BY
+        r.recipe_id,
+        r.recipe_name,
+        r.description,
+        r.prep_time,
+        r.cook_time,
         r.servings,
-        r.difficulty
+        r.difficulty,
+        r.calories,
+        r.image,
+        r.spice_level,
+        r.goal,
+        r.diet
 
-        HAVING matched_count > 0
+    HAVING matched_count > 0
 
-        ORDER BY
-            matched_count DESC,
-            total_ingredients ASC,
-            r.recipe_name ASC
-    ";
+    ORDER BY
+        matched_count DESC,
+        total_ingredients ASC,
+        r.recipe_name ASC
+";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
