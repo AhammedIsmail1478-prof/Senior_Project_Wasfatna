@@ -134,14 +134,17 @@ try {
      */
     $sql = "
         SELECT
-        r.recipe_id,
-        r.recipe_name,
-        r.image,
-        r.spice_level,
-        r.diet,
-        r.goal,
-        r.servings,
-        r.difficulty,
+    r.recipe_id,
+    r.recipe_name,
+    r.description,
+    r.prep_time,
+    r.cook_time,
+    r.servings,
+    r.calories,
+    r.image,
+    r.spice_level,
+    r.goal,
+    r.diet
 
             COUNT(
                 DISTINCT CASE
