@@ -2110,7 +2110,7 @@ if (resultsEl) {
         return;
       }
 
-      let remainingSeconds = 10;
+      let remainingSeconds = Math.round(cookMinutes * 60);
 
       function updateTimerDisplay() {
         const minutes =
