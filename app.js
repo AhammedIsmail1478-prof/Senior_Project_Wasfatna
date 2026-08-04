@@ -1605,17 +1605,46 @@ ${coreIngredientsHtml}
 
 <div class="recipe-details">
 
-  <div class="recipe-servings">
-  🍽 Serves
-  ${escapeHtml(recipe.servings || "Not specified")}
-  ${
-    recipe.servings
-      ? "people"
-      : ""
-  }
-</div>
+  <div class="recipe-time-item">
+    ⏱ Prep:
+    <strong>
+      ${escapeHtml(recipe.prep_time || "Not specified")}
+      ${recipe.prep_time ? "min" : ""}
+    </strong>
+  </div>
 
-  <div class="small">
+  <div class="recipe-time-item">
+    🔥 Cook:
+    <strong>
+      ${escapeHtml(recipe.cook_time || "Not specified")}
+      ${recipe.cook_time ? "min" : ""}
+    </strong>
+  </div>
+
+  <div class="recipe-time-item">
+    ⌛ Total:
+    <strong>
+      ${
+        Number(recipe.prep_time) > 0 ||
+        Number(recipe.cook_time) > 0
+          ? `${Number(recipe.prep_time || 0) +
+              Number(recipe.cook_time || 0)} min`
+          : "Not specified"
+      }
+    </strong>
+  </div>
+
+  <div class="recipe-servings">
+    🍽 Serves
+    ${escapeHtml(recipe.servings || "Not specified")}
+    ${
+      recipe.servings
+        ? "people"
+        : ""
+    }
+  </div>
+
+  <div class="recipe-difficulty-item">
     <strong>Difficulty:</strong>
 
     <span class="difficulty difficulty-${String(
@@ -1628,9 +1657,10 @@ ${coreIngredientsHtml}
       )}
     </span>
   </div>
+
 </div>
 
-      </div>
+</div>
     </div>
 
     <div class="steps">
