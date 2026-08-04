@@ -1617,6 +1617,15 @@ ${coreIngredientsHtml}
   </button>
 </div>
 
+<div class="recipe-print-action">
+  <button
+    type="button"
+    class="btn btn-outline print-recipe-btn"
+  >
+    🖨 Print Recipe
+  </button>
+</div>
+
 <div class="recipe-details">
 
   <div class="recipe-time-item">
