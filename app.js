@@ -2201,11 +2201,6 @@ if (resultsEl) {
   );
 }
 
-// ---------- Print Recipe ----------
-
-if (resultsEl) {
-    resultsEl.addEventListener("click", (event) => {
-
 // ---------- Recently Viewed Recipes ----------
 
 const RECENTLY_VIEWED_KEY =
