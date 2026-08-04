@@ -1635,6 +1635,21 @@ ${coreIngredientsHtml}
     </strong>
   </div>
 
+  <div class="recipe-timer-controls">
+  <button
+    type="button"
+    class="start-timer-btn"
+    data-minutes="${Number(recipe.cook_time) || 0}"
+  >
+    ⏱ Start Timer
+  </button>
+
+  <div
+    class="recipe-timer"
+    aria-live="polite"
+  ></div>
+</div>
+
   <div class="recipe-time-item">
     ⌛ Total:
     <strong>
@@ -2026,6 +2041,134 @@ if (resultsEl) {
           "⚠️"
         );
       }
+    }
+  );
+}
+
+// ---------- Cooking Timer ----------
+
+const activeRecipeTimers = new WeakMap();
+
+if (resultsEl) {
+  resultsEl.addEventListener(
+    "click",
+    (event) => {
+      const timerBtn =
+        event.target.closest(
+          ".start-timer-btn"
+        );
+
+      if (!timerBtn) {
+        return;
+      }
+
+      const timerControls =
+        timerBtn.closest(
+          ".recipe-timer-controls"
+        );
+
+      const timerDisplay =
+        timerControls?.querySelector(
+          ".recipe-timer"
+        );
+
+      if (!timerDisplay) {
+        return;
+      }
+
+      const cookMinutes =
+        Number(timerBtn.dataset.minutes);
+
+      if (
+        !Number.isFinite(cookMinutes) ||
+        cookMinutes <= 0
+      ) {
+        showToast(
+          "Cooking time is not available.",
+          "⚠️"
+        );
+
+        return;
+      }
+
+      const existingTimer =
+        activeRecipeTimers.get(timerBtn);
+
+      if (existingTimer) {
+        clearInterval(existingTimer);
+        activeRecipeTimers.delete(timerBtn);
+
+        timerDisplay.textContent = "";
+        timerBtn.textContent =
+          "⏱ Start Timer";
+
+        showToast(
+          "Cooking timer cancelled.",
+          "⏹️"
+        );
+
+        return;
+      }
+
+      let remainingSeconds = 10;
+
+      function updateTimerDisplay() {
+        const minutes =
+          Math.floor(
+            remainingSeconds / 60
+          );
+
+        const seconds =
+          remainingSeconds % 60;
+
+        timerDisplay.textContent =
+          `${String(minutes).padStart(2, "0")}:` +
+          `${String(seconds).padStart(2, "0")}`;
+      }
+
+      updateTimerDisplay();
+
+      timerBtn.textContent =
+        "⏹ Cancel Timer";
+
+      const intervalId =
+        setInterval(() => {
+          remainingSeconds -= 1;
+
+          if (remainingSeconds <= 0) {
+            clearInterval(intervalId);
+            activeRecipeTimers.delete(
+              timerBtn
+            );
+
+            timerDisplay.textContent =
+              "⏰ Your recipe is ready!";
+
+            timerBtn.textContent =
+              "⏱ Start Again";
+
+            showToast(
+              "Your recipe is ready!",
+              "⏰"
+            );
+
+            return;
+          }
+
+          updateTimerDisplay();
+        }, 1000);
+
+      activeRecipeTimers.set(
+        timerBtn,
+        intervalId
+      );
+
+      showToast(
+        `Cooking timer started for ${cookMinutes} minute${
+          cookMinutes === 1 ? "" : "s"
+        }.`,
+        "⏱️"
+      );
     }
   );
 }
