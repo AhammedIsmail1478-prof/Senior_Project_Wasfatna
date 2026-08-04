@@ -536,9 +536,28 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 .recipe-details{
   display:flex;
   align-items:center;
-  gap:16px;
+  gap:10px;
   flex-wrap:wrap;
-  margin-top:8px;
+  margin-top:12px;
+}
+
+.recipe-time-item,
+.recipe-servings,
+.recipe-difficulty-item{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:7px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  font-size:12px;
+  font-weight:600;
+}
+
+.recipe-time-item strong{
+  font-weight:800;
 }
 
 .recipe-servings{
@@ -831,6 +850,13 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
 [data-theme="light"] .recently-viewed-item{
   background:rgba(0,0,0,.03);
+  border-color:rgba(0,0,0,.12);
+}
+
+[data-theme="light"] .recipe-time-item,
+[data-theme="light"] .recipe-servings,
+[data-theme="light"] .recipe-difficulty-item{
+  background:rgba(0,0,0,.04);
   border-color:rgba(0,0,0,.12);
 }
 
