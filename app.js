@@ -1562,10 +1562,24 @@ const filterText = [
       ${isFavorite ? "❤️" : "🤍"}
     </button>
 
-  </div>
+   </div>
 </div>
 
-  <div class="tags">
+${
+  hasAllCoreIngredients
+    ? `
+      <div class="ready-cook-badge is-ready">
+        ✅ Ready to Cook
+      </div>
+    `
+    : `
+      <div class="ready-cook-badge is-missing">
+        ⚠️ Missing Core Ingredients
+      </div>
+    `
+}
+
+<div class="tags">
             <span class="tag ${matchClass}">
               ${matchPercentage}% match
             </span>
