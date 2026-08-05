@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Dynamic Meal Suggestion</title>
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=7" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -35,7 +35,7 @@ require 'auth.php';
     </nav>
   </header>
 
-  <main id="home" class="container">
+  <main id="home">
     <!-- Hero Section -->
 <section class="main-hero">
 
