@@ -4,11 +4,11 @@ require 'auth.php';
 
 $message = '';
 
+$username =
+    $_COOKIE['remember_user'] ?? '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $username = trim(
-    $_POST['username']
-    ?? ($_COOKIE['remember_user'] ?? '')
-);
+  $username = trim($_POST['username'] ?? '');
   $password = $_POST['password'] ?? '';
 
   $stmt = $pdo->prepare("SELECT id, username, password_hash FROM users WHERE username = :username");
@@ -21,19 +21,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['remember_me'])) {
 
     setcookie(
-        "remember_user",
+        'remember_user',
         $user['username'],
-        time() + (30 * 24 * 60 * 60),
-        "/"
+        [
+            'expires' => time() + (30 * 24 * 60 * 60),
+            'path' => '/',
+            'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]
     );
 
 } else {
 
     setcookie(
-        "remember_user",
-        "",
-        time() - 3600,
-        "/"
+        'remember_user',
+        '',
+        [
+            'expires' => time() - 3600,
+            'path' => '/',
+            'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]
     );
 
 }
@@ -107,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <input
     type="checkbox"
     name="remember_me"
-    <?= isset($_COOKIE['remember_user']) ? 'checked' : '' ?>
+    <?= isset($_POST['remember_me']) || isset($_COOKIE['remember_user']) ? 'checked' : '' ?>
   >
 
   <span>Remember Me</span>
