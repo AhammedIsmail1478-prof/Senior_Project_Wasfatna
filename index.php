@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Dynamic Meal Suggestion</title>
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -37,18 +37,59 @@ require 'auth.php';
 
   <main id="home" class="container">
     <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-text">
-        <h1>Cook smarter with what you already have.</h1>
-        <p>
-          Enter your ingredients and get personalized recipe suggestions
-          based on your taste preferences and dietary needs.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="find.php">Start Now</a>
-        </div>
+<section class="main-hero">
+
+  <div class="main-hero-content">
+
+    <div class="main-hero-text">
+
+      <div class="main-hero-label">
+        🍲 Smart Recipe Suggestions
       </div>
-    </section>
+
+      <h1>
+        Cook delicious meals with what you already have.
+      </h1>
+
+      <p>
+        Enter the ingredients available in your kitchen and Wasfatna
+        will recommend recipes based on your preferences.
+      </p>
+
+      <a
+        href="find.php"
+        class="btn btn-primary main-hero-button"
+      >
+        Find My Recipe →
+      </a>
+
+    </div>
+
+    <div class="main-hero-image-wrapper">
+
+      <img
+        src="images/chicken_machboos.png"
+        alt="Chicken Machboos"
+        class="main-hero-image"
+      >
+
+      <div class="main-hero-image-caption">
+
+        <strong>
+          Chicken Machboos
+        </strong>
+
+        <span>
+          Discover recipes using your ingredients
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
     <footer class="footer">
       <div>© 2025/2026 — University of Bahrain — Senior Project</div>
