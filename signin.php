@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign In</title>
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=11" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
   <style>
     body{display:flex;min-height:100vh;align-items:center;justify-content:center;background:var(--bg);color:var(--text);}
@@ -54,7 +54,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form method="POST">
       <input name="username" placeholder="Username" required />
-      <input type="password" name="password" placeholder="Password" required />
+      <div class="password-wrapper">
+
+  <input
+    id="passwordInput"
+    type="password"
+    name="password"
+    placeholder="Password"
+    required
+  />
+
+  <button
+    type="button"
+    id="togglePassword"
+    class="password-toggle"
+    aria-label="Show password"
+  >
+    👁
+  </button>
+
+</div>
       <div class="row">
         <button class="btn btn-primary" type="submit">Sign In</button>
         <a class="btn btn-outline" href="signup.php">Sign Up</a>
