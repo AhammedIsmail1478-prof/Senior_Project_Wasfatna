@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   class="forgot-password-message"
   hidden
 >
-  Password reset is not available in this prototype.
+  Password reset is not available in this prototype. Please contact the administrator for assistance.
 </div>
       
       <div class="row">
