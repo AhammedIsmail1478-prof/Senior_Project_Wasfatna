@@ -3270,3 +3270,34 @@ if (passwordInput && togglePassword) {
   });
 
 }
+
+// ---------- Forgot Password ----------
+
+const forgotPasswordBtn =
+  document.getElementById("forgotPasswordBtn");
+
+const forgotPasswordMessage =
+  document.getElementById(
+    "forgotPasswordMessage"
+  );
+
+if (
+  forgotPasswordBtn &&
+  forgotPasswordMessage
+) {
+  forgotPasswordBtn.addEventListener(
+    "click",
+    () => {
+      const isHidden =
+        forgotPasswordMessage.hidden;
+
+      forgotPasswordMessage.hidden =
+        !isHidden;
+
+      forgotPasswordBtn.textContent =
+        isHidden
+          ? "Hide Message"
+          : "Forgot Password?";
+    }
+  );
+}
