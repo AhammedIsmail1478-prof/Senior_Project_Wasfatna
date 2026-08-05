@@ -3294,10 +3294,7 @@ if (
       forgotPasswordMessage.hidden =
         !isHidden;
 
-      forgotPasswordBtn.textContent =
-        isHidden
-          ? "Hide Message"
-          : "Forgot Password?";
+      forgotPasswordBtn.textContent = "Forgot Password?";
     }
   );
 }
