@@ -80,5 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </form>
   </div>
+  <script src="app.js?v=9"></script>
 </body>
 </html>
