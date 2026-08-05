@@ -1502,3 +1502,39 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 .remember-me span{
   white-space:nowrap;
 }
+
+/* ---------- Forgot Password ---------- */
+
+.forgot-password-link{
+  display:block;
+  width:fit-content;
+  margin:2px 0 12px;
+  padding:0;
+  border:none;
+  background:transparent;
+  color:var(--accent2);
+  font-family:var(--font);
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.forgot-password-link:hover{
+  text-decoration:underline;
+}
+
+.forgot-password-message{
+  margin:0 0 12px;
+  padding:10px 12px;
+  border:1px solid rgba(245,158,11,.35);
+  border-radius:12px;
+  background:rgba(245,158,11,.10);
+  color:#fbbf24;
+  font-size:13px;
+  line-height:1.4;
+}
+
+[data-theme="light"] .forgot-password-message{
+  color:#92400e;
+  background:rgba(245,158,11,.12);
+}
