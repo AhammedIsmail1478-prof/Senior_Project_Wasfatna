@@ -3195,3 +3195,42 @@ if (signOutLinks.length) {
     );
   });
 }
+
+// ---------- Homepage Recipe Slideshow ----------
+
+const homeRecipeSlider =
+  document.getElementById("homeRecipeSlider");
+
+if (homeRecipeSlider) {
+
+  const homeImages = [
+    "images/chicken_machboos.png",
+    "images/lamb_machboos.png",
+    "images/fish_machboos.png",
+    "images/bahraini_halwa.png"
+  ];
+
+  let currentHomeImage = 0;
+
+  setInterval(() => {
+
+    homeRecipeSlider.style.opacity = "0";
+
+    setTimeout(() => {
+
+      currentHomeImage++;
+
+      if (currentHomeImage >= homeImages.length) {
+        currentHomeImage = 0;
+      }
+
+      homeRecipeSlider.src =
+        homeImages[currentHomeImage];
+
+      homeRecipeSlider.style.opacity = "1";
+
+    }, 300);
+
+  }, 3500);
+
+}
