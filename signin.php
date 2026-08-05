@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: index.php");
     exit;
   } else {
-    $message = "Invalid username or password.";
+    $message = "Incorrect username or password.";
   }
 }
 ?>
@@ -82,24 +82,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="auth">
     <a href="index.php" class="auth-close" title="Back to home">✕</a>
     <h1>Welcome back</h1>
-    <?php if ($message): ?><div class="msg"><?= htmlspecialchars($message) ?></div><?php endif; ?>
+    <?php if ($message): ?>
+  <div class="msg" role="alert">
+    ❌ <?= htmlspecialchars($message) ?>
+  </div>
+<?php endif; ?>
 
-    <form method="POST">
-      <input
-    name="username"
-    placeholder="Username"
-    value="<?= htmlspecialchars($username) ?>"
-    required
+<form method="POST" id="signinForm">
+     <input
+  name="username"
+  placeholder="Username"
+  value="<?= htmlspecialchars($username) ?>"
+  class="<?= $message ? 'input-error' : '' ?>"
+  aria-invalid="<?= $message ? 'true' : 'false' ?>"
+  required
 />
       <div class="password-wrapper">
 
-  <input
-    id="passwordInput"
-    type="password"
-    name="password"
-    placeholder="Password"
-    required
-  />
+ <input
+  id="passwordInput"
+  type="password"
+  name="password"
+  placeholder="Password"
+  class="<?= $message ? 'input-error' : '' ?>"
+  aria-invalid="<?= $message ? 'true' : 'false' ?>"
+  required
+/>
 
   <button
     type="button"
@@ -141,7 +149,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
       
       <div class="row">
-        <button class="btn btn-primary" type="submit">Sign In</button>
+        <button
+  class="btn btn-primary"
+  type="submit"
+  id="signinBtn"
+>
+  <span class="signin-btn-text">Sign In</span>
+  <span class="signin-spinner" hidden></span>
+</button>
+          
         <a class="btn btn-outline" href="signup.php">Sign Up</a>
       </div>
     </form>
