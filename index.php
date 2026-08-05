@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Dynamic Meal Suggestion</title>
-  <link rel="stylesheet" href="styles.css?v=7" />
+  <link rel="stylesheet" href="styles.css?v=8" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -67,25 +67,46 @@ require 'auth.php';
 
     <div class="main-hero-image-wrapper">
 
-      <img
-        src="images/chicken_machboos.png"
-        alt="Chicken Machboos"
-        class="main-hero-image"
-      >
+  <img
+    id="homeRecipeSlider"
+    src="images/chicken_machboos.png"
+    alt="Featured Wasfatna recipe"
+    class="main-hero-image"
+  >
 
-      <div class="main-hero-image-caption">
+  <div class="main-hero-slider-dots">
 
-        <strong>
-          Chicken Machboos
-        </strong>
+    <button
+      type="button"
+      class="home-slider-dot active"
+      data-slide="0"
+      aria-label="Show recipe image 1"
+    ></button>
 
-        <span>
-          Discover recipes using your ingredients
-        </span>
+    <button
+      type="button"
+      class="home-slider-dot"
+      data-slide="1"
+      aria-label="Show recipe image 2"
+    ></button>
 
-      </div>
+    <button
+      type="button"
+      class="home-slider-dot"
+      data-slide="2"
+      aria-label="Show recipe image 3"
+    ></button>
 
-    </div>
+    <button
+      type="button"
+      class="home-slider-dot"
+      data-slide="3"
+      aria-label="Show recipe image 4"
+    ></button>
+
+  </div>
+
+</div>
 
   </div>
 
@@ -119,7 +140,7 @@ require 'auth.php';
   </aside>
 
   <div id="backdrop" class="backdrop" hidden></div>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
 
