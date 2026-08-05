@@ -1436,3 +1436,41 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     height:220px;
 }
 }
+
+/* ---------- Show / Hide Password ---------- */
+
+.password-wrapper{
+    position:relative;
+    width:100%;
+}
+
+.password-wrapper input{
+    width:100%;
+    padding-right:48px;
+}
+
+.password-toggle{
+    position:absolute;
+    top:50%;
+    right:14px;
+    transform:translateY(-50%);
+
+    border:none;
+    background:transparent;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    color:var(--muted);
+
+    transition:.2s;
+}
+
+.password-toggle:hover{
+    color:var(--text);
+}
+
+.password-toggle:focus{
+    outline:none;
+}
