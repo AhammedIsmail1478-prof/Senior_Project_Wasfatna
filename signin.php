@@ -5,7 +5,10 @@ require 'auth.php';
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $username = trim($_POST['username'] ?? '');
+  $username = trim(
+    $_POST['username']
+    ?? ($_COOKIE['remember_user'] ?? '')
+);
   $password = $_POST['password'] ?? '';
 
   $stmt = $pdo->prepare("SELECT id, username, password_hash FROM users WHERE username = :username");
@@ -15,6 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($user && password_verify($password, $user['password_hash'])) {
     $_SESSION['user_id'] = (int)$user['id'];
     $_SESSION['username'] = $user['username'];
+    if (isset($_POST['remember_me'])) {
+
+    setcookie(
+        "remember_user",
+        $user['username'],
+        time() + (30 * 24 * 60 * 60),
+        "/"
+    );
+
+}
     header("Location: index.php");
     exit;
   } else {
@@ -53,7 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if ($message): ?><div class="msg"><?= htmlspecialchars($message) ?></div><?php endif; ?>
 
     <form method="POST">
-      <input name="username" placeholder="Username" required />
+      <input
+    name="username"
+    placeholder="Username"
+    value="<?= htmlspecialchars($username) ?>"
+    required
+/>
       <div class="password-wrapper">
 
   <input
@@ -74,6 +92,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </button>
 
 </div>
+
+<label class="remember-me">
+
+  <input
+    type="checkbox"
+    name="remember_me"
+    <?= isset($_COOKIE['remember_user']) ? 'checked' : '' ?>
+  >
+
+  <span>Remember Me</span>
+
+</label>
+      
       <div class="row">
         <button class="btn btn-primary" type="submit">Sign In</button>
         <a class="btn btn-outline" href="signup.php">Sign Up</a>
