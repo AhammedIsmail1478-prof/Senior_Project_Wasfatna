@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Dynamic Meal Suggestion</title>
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -140,7 +140,7 @@ require 'auth.php';
   </aside>
 
   <div id="backdrop" class="backdrop" hidden></div>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
 
