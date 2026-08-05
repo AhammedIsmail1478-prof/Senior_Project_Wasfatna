@@ -1538,3 +1538,67 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   color:#92400e;
   background:rgba(245,158,11,.12);
 }
+
+/* ---------- Sign-in validation ---------- */
+
+.auth input.input-error{
+  border-color:#ef4444;
+  box-shadow:0 0 0 3px rgba(239,68,68,.12);
+}
+
+.auth input.input-error:focus{
+  border-color:#ef4444;
+  box-shadow:0 0 0 4px rgba(239,68,68,.16);
+}
+
+.msg{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin:8px 0 12px;
+  padding:10px 12px;
+  border:1px solid rgba(239,68,68,.40);
+  border-radius:12px;
+  background:rgba(239,68,68,.10);
+  color:#fca5a5;
+  font-size:13px;
+  line-height:1.4;
+}
+
+[data-theme="light"] .msg{
+  color:#b91c1c;
+  background:rgba(239,68,68,.08);
+}
+
+/* ---------- Sign-in loading button ---------- */
+
+#signinBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-width:92px;
+}
+
+#signinBtn:disabled{
+  opacity:.75;
+  cursor:wait;
+  transform:none;
+}
+
+.signin-spinner{
+  width:15px;
+  height:15px;
+  border:2px solid rgba(255,255,255,.35);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:signinSpin .7s linear infinite;
+}
+
+@keyframes signinSpin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+
