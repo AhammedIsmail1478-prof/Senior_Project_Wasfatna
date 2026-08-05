@@ -3234,3 +3234,39 @@ if (homeRecipeSlider) {
   }, 3500);
 
 }
+
+// ---------- Show / Hide Password ----------
+
+const passwordInput =
+  document.getElementById("passwordInput");
+
+const togglePassword =
+  document.getElementById("togglePassword");
+
+if (passwordInput && togglePassword) {
+
+  togglePassword.addEventListener("click", () => {
+
+    if (passwordInput.type === "password") {
+
+      passwordInput.type = "text";
+      togglePassword.textContent = "🙈";
+      togglePassword.setAttribute(
+        "aria-label",
+        "Hide password"
+      );
+
+    } else {
+
+      passwordInput.type = "password";
+      togglePassword.textContent = "👁";
+      togglePassword.setAttribute(
+        "aria-label",
+        "Show password"
+      );
+
+    }
+
+  });
+
+}
