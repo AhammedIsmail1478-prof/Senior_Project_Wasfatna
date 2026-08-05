@@ -3298,3 +3298,43 @@ if (
     }
   );
 }
+
+// ---------- Sign-in loading button ----------
+
+const signinForm =
+  document.getElementById("signinForm");
+
+const signinBtn =
+  document.getElementById("signinBtn");
+
+if (signinForm && signinBtn) {
+  signinForm.addEventListener(
+    "submit",
+    (event) => {
+      if (!signinForm.checkValidity()) {
+        return;
+      }
+
+      const buttonText =
+        signinBtn.querySelector(
+          ".signin-btn-text"
+        );
+
+      const spinner =
+        signinBtn.querySelector(
+          ".signin-spinner"
+        );
+
+      signinBtn.disabled = true;
+
+      if (buttonText) {
+        buttonText.textContent =
+          "Signing in...";
+      }
+
+      if (spinner) {
+        spinner.hidden = false;
+      }
+    }
+  );
+}
