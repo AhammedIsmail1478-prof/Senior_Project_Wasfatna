@@ -3,17 +3,40 @@ require 'config.php';
 require 'auth.php';
 
 $message = '';
+$username = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = trim($_POST['username'] ?? '');
   $password = $_POST['password'] ?? '';
   $confirm  = $_POST['confirm_password'] ?? '';
 
-  if ($username === '' || $password === '') {
-    $message = "Please fill all fields.";
-  } elseif ($password !== $confirm) {
-    $message = "Passwords do not match!";
-  } else {
+  if (
+    $username === '' ||
+    $password === '' ||
+    $confirm === ''
+) {
+    $message = "Please complete all fields.";
+
+} elseif (strlen($username) < 3) {
+    $message =
+        "Username must contain at least 3 characters.";
+
+} elseif (strlen($password) < 8) {
+    $message =
+        "Password must contain at least 8 characters.";
+
+} elseif (!preg_match('/[A-Za-z]/', $password)) {
+    $message =
+        "Password must contain at least one letter.";
+
+} elseif (!preg_match('/[0-9]/', $password)) {
+    $message =
+        "Password must contain at least one number.";
+
+} elseif ($password !== $confirm) {
+    $message = "Passwords do not match.";
+
+} else {
     // Check if username exists
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = :username");
     $stmt->execute(['username' => $username]);
@@ -76,17 +99,142 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="auth">
     <a href="index.php" class="auth-close" title="Back to home">✕</a>
     <h1>Create account</h1>
-    <?php if ($message): ?><div class="msg"><?= htmlspecialchars($message) ?></div><?php endif; ?>
 
-    <form method="POST">
-      <input name="username" placeholder="Username" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <input type="password" name="confirm_password" placeholder="Confirm password" required />
-      <div class="row">
-        <button class="btn btn-primary" type="submit">Sign Up</button>
-        <a class="btn btn-outline" href="signin.php">Sign In</a>
-      </div>
-    </form>
+<p class="auth-subtitle">
+  Join Wasfatna to save favorite recipes and personal preferences.
+</p>
+
+<?php if ($message): ?>
+  <div class="msg" role="alert">
+    ❌ <?= htmlspecialchars($message) ?>
+  </div>
+<?php endif; ?>
+
+<form method="POST" id="signupForm">
+
+  <label for="signupUsername">
+    Username
+  </label>
+
+  <input
+    id="signupUsername"
+    type="text"
+    name="username"
+    placeholder="Enter your username"
+    value="<?= htmlspecialchars($username) ?>"
+    autocomplete="username"
+    minlength="3"
+    required
+  >
+
+  <label for="signupPassword">
+    Password
+  </label>
+
+  <div class="password-wrapper">
+
+    <input
+      id="signupPassword"
+      type="password"
+      name="password"
+      placeholder="Create a password"
+      autocomplete="new-password"
+      minlength="8"
+      required
+    >
+
+    <button
+      type="button"
+      id="toggleSignupPassword"
+      class="password-toggle"
+      aria-label="Show password"
+      title="Show password"
+    >
+      👁
+    </button>
+
+  </div>
+
+  <div class="password-strength">
+
+    <div class="password-strength-track">
+      <div
+        id="passwordStrengthBar"
+        class="password-strength-bar"
+      ></div>
+    </div>
+
+    <span id="passwordStrengthText">
+      Password strength
+    </span>
+
+  </div>
+
+  <p class="password-requirements">
+    Use at least 8 characters, including a letter and a number.
+  </p>
+
+  <label for="confirmPassword">
+    Confirm password
+  </label>
+
+  <div class="password-wrapper">
+
+    <input
+      id="confirmPassword"
+      type="password"
+      name="confirm_password"
+      placeholder="Enter the password again"
+      autocomplete="new-password"
+      minlength="8"
+      required
+    >
+
+    <button
+      type="button"
+      id="toggleConfirmPassword"
+      class="password-toggle"
+      aria-label="Show confirmation password"
+      title="Show password"
+    >
+      👁
+    </button>
+
+  </div>
+
+  <div
+    id="passwordMatchMessage"
+    class="password-match-message"
+    aria-live="polite"
+  ></div>
+
+  <div class="row">
+
+    <button
+      class="btn btn-primary"
+      type="submit"
+      id="signupBtn"
+    >
+      <span class="signup-btn-text">
+        Sign Up
+      </span>
+
+      <span
+        class="signup-spinner"
+        hidden
+      ></span>
+    </button>
+
+    <a
+      class="btn btn-outline"
+      href="signin.php"
+    >
+      Sign In
+    </a>
+
+  </div>
+
+</form>
   </div>
 </body>
 </html>
