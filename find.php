@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=32" />
+  <link rel="stylesheet" href="styles.css?v=33" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -342,16 +342,129 @@ require 'auth.php';
   ✕
 </button>
     </div>
-    <div class="sidepanel-content">
-      <p>
-        Wasfatna is a smart recipe suggestion system that reduces food waste
-        by recommending meals based on available ingredients and user preferences.
-      </p>
-      <h4>Team Members</h4>
-      <div class="cv-card"><div class="cv-name">Ahammed Ismail</div><div class="muted">202201478</div></div>
-      <div class="cv-card"><div class="cv-name">Bilal Mohammad Tofeeq</div><div class="muted">202200507</div></div>
-      <div class="cv-card"><div class="cv-name">Bassem Mohammad Irshad Mohammed Islam</div><div class="muted">202201552</div></div>
+   <div class="sidepanel-content">
+
+  <section class="about-section">
+
+    <div class="about-section-heading">
+      <span class="about-section-icon">📖</span>
+
+      <div>
+        <h3>About Wasfatna</h3>
+        <p class="muted">Smart Meal Suggestions</p>
+      </div>
     </div>
+
+    <p class="about-description">
+      <strong>Wasfatna</strong> is a smart meal recommendation system
+      developed as a University of Bahrain Senior Project. It helps users
+      discover recipes using available ingredients while considering their
+      dietary preferences and helping to reduce food waste.
+    </p>
+
+  </section>
+
+  <section class="about-section">
+
+    <div class="about-section-heading">
+      <span class="about-section-icon">✨</span>
+
+      <div>
+        <h3>Key Features</h3>
+        <p class="muted">What you can do with Wasfatna</p>
+      </div>
+    </div>
+
+    <div class="about-feature-list">
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Ingredient-based recipe search
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Personalized recipe recommendations
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Save and manage favorite recipes
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Shopping list and recipe printing
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Dietary and spice preferences
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Dark and light display modes
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="about-section">
+
+    <div class="about-section-heading">
+      <span class="about-section-icon">👨‍💻</span>
+
+      <div>
+        <h3>Team Members</h3>
+        <p class="muted">University of Bahrain</p>
+      </div>
+    </div>
+
+    <div class="cv-card">
+      <div class="cv-avatar">A</div>
+
+      <div>
+        <div class="cv-name">Ahammed Ismail</div>
+        <div class="muted">202201478</div>
+      </div>
+    </div>
+
+    <div class="cv-card">
+      <div class="cv-avatar">B</div>
+
+      <div>
+        <div class="cv-name">Bilal Mohammad Tofeeq</div>
+        <div class="muted">202200507</div>
+      </div>
+    </div>
+
+    <div class="cv-card">
+      <div class="cv-avatar">B</div>
+
+      <div>
+        <div class="cv-name">
+          Bassem Mohammad Irshad Mohammed Islam
+        </div>
+
+        <div class="muted">202201552</div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="about-project-info">
+
+    <strong>University of Bahrain</strong>
+
+    <span>Senior Project 2025–2026</span>
+
+    <span>Wasfatna Version 1.0</span>
+
+  </div>
+
+</div>
   </aside>
 <!-- Shopping List Side Panel -->
 <aside
@@ -423,6 +536,6 @@ require 'auth.php';
 ></script>
 
   
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>
