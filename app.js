@@ -3097,11 +3097,11 @@ function openLogoutConfirm(targetHref) {
         id="logoutTitle"
         class="logout-title"
       >
-        You are about to log out
+        Sign out of Wasfatna?
       </h3>
 
       <p class="logout-text">
-        Are you sure you want to continue?
+        You will need to sign in again to access your favorites and preferences.
       </p>
 
       <div class="logout-actions">
@@ -3118,7 +3118,7 @@ function openLogoutConfirm(targetHref) {
           class="btn btn-danger"
           data-action="confirm"
         >
-          Confirm
+          Sign Out
         </button>
       </div>
     </div>
