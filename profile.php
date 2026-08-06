@@ -107,6 +107,6 @@ $prefs = $stmt->fetch() ?: ['spice_level'=>'medium','diet'=>'none','likes'=>'','
       </form>
     </div>
   </div>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=11"></script>
 </body>
 </html>
