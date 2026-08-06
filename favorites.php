@@ -31,10 +31,7 @@ if (!isset($_SESSION['user_id'])) {
         );
     </script>
 
-    <link
-        rel="stylesheet"
-        href="styles.css"
-    >
+    <link rel="stylesheet" href="styles.css?v=17">
 </head>
 
 <body>
@@ -146,7 +143,7 @@ if (!isset($_SESSION['user_id'])) {
 
 </footer>
 
-<script src="favorites.js?v=17"></script>
+<script src="favorites.js?v=1"></script>
 
 </body>
 </html>
