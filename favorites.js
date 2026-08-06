@@ -220,15 +220,15 @@ async function loadFavorites() {
             >
               <div class="recipe-summary">
 
-                <img
-                  src="${imagePath}"
-                  alt="${escapeHtml(
-                    recipeName
-                  )}"
-                  class="recipe-image"
-                  loading="lazy"
-                  onerror="this.onerror=null; this.src='images/default_recipe.png';"
-                >
+                <div class="recipe-image-wrapper">
+  <img
+    src="${imagePath}"
+    alt="${escapeHtml(recipeName)}"
+    class="recipe-image"
+    loading="lazy"
+    onerror="this.onerror=null; this.src='images/default_recipe.png';"
+  >
+</div>
 
                 <div class="recipe-information">
 
@@ -254,51 +254,62 @@ async function loadFavorites() {
 
                   <div class="recipe-details">
 
-                    <div class="small">
-                      <strong>Serves:</strong>
-                      ${escapeHtml(
-                        recipe.servings ||
-                        "Not specified"
-                      )}
-                    </div>
+  <div class="recipe-time-item">
+    ⏱ Prep:
+    <strong>
+      ${escapeHtml(
+        recipe.prep_time || "Not specified"
+      )}
+      ${recipe.prep_time ? "min" : ""}
+    </strong>
+  </div>
 
-                    <div class="small">
-                      <strong>Difficulty:</strong>
+  <div class="recipe-time-item">
+    🔥 Cook:
+    <strong>
+      ${escapeHtml(
+        recipe.cook_time || "Not specified"
+      )}
+      ${recipe.cook_time ? "min" : ""}
+    </strong>
+  </div>
 
-                      <span
-                        class="difficulty difficulty-${escapeHtml(
-                          difficulty.toLowerCase()
-                        )}"
-                      >
-                        <span
-                          class="difficulty-dot"
-                        ></span>
+  <div class="recipe-time-item">
+    ⌛ Total:
+    <strong>
+      ${
+        Number(recipe.prep_time) > 0 ||
+        Number(recipe.cook_time) > 0
+          ? `${Number(recipe.prep_time || 0) +
+              Number(recipe.cook_time || 0)} min`
+          : "Not specified"
+      }
+    </strong>
+  </div>
 
-                        ${escapeHtml(
-                          difficulty
-                        )}
-                      </span>
-                    </div>
+  <div class="recipe-servings">
+    🍽 Serves
+    ${escapeHtml(
+      recipe.servings || "Not specified"
+    )}
+    ${recipe.servings ? "people" : ""}
+  </div>
 
-                  </div>
+  <div class="recipe-difficulty-item">
+    <strong>Difficulty:</strong>
 
-                  <div class="small">
-                    <strong>Prep time:</strong>
-                    ${escapeHtml(
-                      recipe.prep_time ??
-                      "Not specified"
-                    )}
-                    minutes
-                  </div>
+    <span
+      class="difficulty difficulty-${escapeHtml(
+        difficulty.toLowerCase()
+      )}"
+    >
+      <span class="difficulty-dot"></span>
 
-                  <div class="small">
-                    <strong>Cook time:</strong>
-                    ${escapeHtml(
-                      recipe.cook_time ??
-                      "Not specified"
-                    )}
-                    minutes
-                  </div>
+      ${escapeHtml(difficulty)}
+    </span>
+  </div>
+
+</div>
 
                   <div class="small">
                     <strong>Ingredients:</strong>
