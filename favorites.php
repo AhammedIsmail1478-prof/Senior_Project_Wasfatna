@@ -143,7 +143,7 @@ if (!isset($_SESSION['user_id'])) {
 
 </footer>
 
-<script src="favorites.js?v=1"></script>
+<script src="favorites.js?v=2"></script>
 
 </body>
 </html>
