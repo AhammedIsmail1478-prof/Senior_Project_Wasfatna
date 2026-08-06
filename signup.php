@@ -236,5 +236,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </form>
   </div>
+   <script src="app.js?v=14"></script>
 </body>
 </html>
