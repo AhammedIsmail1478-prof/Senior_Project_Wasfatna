@@ -3338,3 +3338,260 @@ if (signinForm && signinBtn) {
     }
   );
 }
+
+// ---------- Sign Up Page ----------
+
+const signupPassword =
+  document.getElementById("signupPassword");
+
+const confirmPassword =
+  document.getElementById("confirmPassword");
+
+const toggleSignupPassword =
+  document.getElementById("toggleSignupPassword");
+
+const toggleConfirmPassword =
+  document.getElementById("toggleConfirmPassword");
+
+const passwordStrengthBar =
+  document.getElementById("passwordStrengthBar");
+
+const passwordStrengthText =
+  document.getElementById("passwordStrengthText");
+
+const passwordMatchMessage =
+  document.getElementById("passwordMatchMessage");
+
+const signupForm =
+  document.getElementById("signupForm");
+
+const signupBtn =
+  document.getElementById("signupBtn");
+
+function togglePasswordVisibility(
+  input,
+  button
+) {
+  if (!input || !button) {
+    return;
+  }
+
+  const isHidden =
+    input.type === "password";
+
+  input.type =
+    isHidden ? "text" : "password";
+
+  button.textContent =
+    isHidden ? "🙈" : "👁";
+
+  button.setAttribute(
+    "aria-label",
+    isHidden
+      ? "Hide password"
+      : "Show password"
+  );
+}
+
+if (
+  toggleSignupPassword &&
+  signupPassword
+) {
+  toggleSignupPassword.addEventListener(
+    "click",
+    () => {
+      togglePasswordVisibility(
+        signupPassword,
+        toggleSignupPassword
+      );
+    }
+  );
+}
+
+if (
+  toggleConfirmPassword &&
+  confirmPassword
+) {
+  toggleConfirmPassword.addEventListener(
+    "click",
+    () => {
+      togglePasswordVisibility(
+        confirmPassword,
+        toggleConfirmPassword
+      );
+    }
+  );
+}
+
+function updatePasswordStrength() {
+  if (
+    !signupPassword ||
+    !passwordStrengthBar ||
+    !passwordStrengthText
+  ) {
+    return;
+  }
+
+  const password =
+    signupPassword.value;
+
+  let score = 0;
+
+  if (password.length >= 8) {
+    score++;
+  }
+
+  if (/[A-Z]/.test(password)) {
+    score++;
+  }
+
+  if (/[a-z]/.test(password)) {
+    score++;
+  }
+
+  if (/[0-9]/.test(password)) {
+    score++;
+  }
+
+  if (/[^A-Za-z0-9]/.test(password)) {
+    score++;
+  }
+
+  passwordStrengthBar.classList.remove(
+    "weak",
+    "medium",
+    "strong"
+  );
+
+  if (password.length === 0) {
+    passwordStrengthText.textContent =
+      "Password strength";
+
+    return;
+  }
+
+  if (score <= 2) {
+    passwordStrengthBar.classList.add(
+      "weak"
+    );
+
+    passwordStrengthText.textContent =
+      "Weak";
+  } else if (score <= 4) {
+    passwordStrengthBar.classList.add(
+      "medium"
+    );
+
+    passwordStrengthText.textContent =
+      "Medium";
+  } else {
+    passwordStrengthBar.classList.add(
+      "strong"
+    );
+
+    passwordStrengthText.textContent =
+      "Strong";
+  }
+}
+
+function updatePasswordMatch() {
+  if (
+    !signupPassword ||
+    !confirmPassword ||
+    !passwordMatchMessage
+  ) {
+    return;
+  }
+
+  passwordMatchMessage.classList.remove(
+    "is-match",
+    "is-not-match"
+  );
+
+  if (confirmPassword.value === "") {
+    passwordMatchMessage.textContent = "";
+    return;
+  }
+
+  if (
+    signupPassword.value ===
+    confirmPassword.value
+  ) {
+    passwordMatchMessage.textContent =
+      "✓ Passwords match";
+
+    passwordMatchMessage.classList.add(
+      "is-match"
+    );
+  } else {
+    passwordMatchMessage.textContent =
+      "✕ Passwords do not match";
+
+    passwordMatchMessage.classList.add(
+      "is-not-match"
+    );
+  }
+}
+
+if (signupPassword) {
+  signupPassword.addEventListener(
+    "input",
+    () => {
+      updatePasswordStrength();
+      updatePasswordMatch();
+    }
+  );
+}
+
+if (confirmPassword) {
+  confirmPassword.addEventListener(
+    "input",
+    updatePasswordMatch
+  );
+}
+
+if (signupForm && signupBtn) {
+  signupForm.addEventListener(
+    "submit",
+    (event) => {
+      if (!signupForm.checkValidity()) {
+        return;
+      }
+
+      if (
+        signupPassword &&
+        confirmPassword &&
+        signupPassword.value !==
+          confirmPassword.value
+      ) {
+        event.preventDefault();
+
+        updatePasswordMatch();
+        confirmPassword.focus();
+
+        return;
+      }
+
+      const buttonText =
+        signupBtn.querySelector(
+          ".signup-btn-text"
+        );
+
+      const spinner =
+        signupBtn.querySelector(
+          ".signup-spinner"
+        );
+
+      signupBtn.disabled = true;
+
+      if (buttonText) {
+        buttonText.textContent =
+          "Creating account...";
+      }
+
+      if (spinner) {
+        spinner.hidden = false;
+      }
+    }
+  );
+}
