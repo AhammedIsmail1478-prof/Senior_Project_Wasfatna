@@ -1,5 +1,59 @@
-<?php 
+<?php
+require 'config.php';
 require 'auth.php';
+
+/*
+ * ---------- Recipe of the Day ----------
+ * Select one recipe from the database.
+ * The recipe changes once per day.
+ */
+
+$recipeOfDay = null;
+
+try {
+
+    $countStmt = $pdo->query("
+        SELECT COUNT(*)
+        FROM recipes
+    ");
+
+    $recipeCount =
+        (int)$countStmt->fetchColumn();
+
+    if ($recipeCount > 0) {
+
+        // Same recipe for the whole day.
+        $dayNumber =
+            (int)date('z');
+
+        $recipeOffset =
+            $dayNumber % $recipeCount;
+
+        $recipeStmt = $pdo->query("
+            SELECT
+                recipe_id,
+                recipe_name,
+                description,
+                prep_time,
+                cook_time,
+                servings,
+                difficulty,
+                image
+            FROM recipes
+            ORDER BY recipe_id
+            LIMIT 1 OFFSET $recipeOffset
+        ");
+
+        $recipeOfDay =
+            $recipeStmt->fetch();
+    }
+
+} catch (Throwable $error) {
+
+    // The homepage should still work
+    // even if the recipe cannot be loaded.
+    $recipeOfDay = null;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -7,7 +61,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Dynamic Meal Suggestion</title>
-  <link rel="stylesheet" href="styles.css?v=24" />
+  <link rel="stylesheet" href="styles.css?v=25" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -111,6 +165,94 @@ require 'auth.php';
   </div>
 
 </section>
+
+    <?php if ($recipeOfDay): ?>
+
+<section class="recipe-day-section">
+
+  <div class="recipe-day-card">
+
+    <div class="recipe-day-content">
+
+      <div class="recipe-day-label">
+        🍽 Recipe of the Day
+      </div>
+
+      <h2>
+        <?= htmlspecialchars(
+          $recipeOfDay['recipe_name']
+        ) ?>
+      </h2>
+
+      <?php if (!empty($recipeOfDay['description'])): ?>
+
+        <p class="recipe-day-description">
+          <?= htmlspecialchars(
+            $recipeOfDay['description']
+          ) ?>
+        </p>
+
+      <?php endif; ?>
+
+      <div class="recipe-day-details">
+
+        <span>
+          ⭐
+          <?= htmlspecialchars(
+            $recipeOfDay['difficulty']
+              ?? 'Not specified'
+          ) ?>
+        </span>
+
+        <span>
+          ⏱
+          <?= (int)(
+            ($recipeOfDay['prep_time'] ?? 0) +
+            ($recipeOfDay['cook_time'] ?? 0)
+          ) ?>
+          min
+        </span>
+
+        <span>
+          🍽 Serves
+          <?= htmlspecialchars(
+            $recipeOfDay['servings']
+              ?? 'N/A'
+          ) ?>
+        </span>
+
+      </div>
+
+      <a
+        href="find.php"
+        class="btn btn-primary recipe-day-button"
+      >
+        View Recipes →
+      </a>
+
+    </div>
+
+    <div class="recipe-day-image-wrapper">
+
+      <img
+        src="images/<?= htmlspecialchars(
+          $recipeOfDay['image']
+            ?: 'default_recipe.png'
+        ) ?>"
+        alt="<?= htmlspecialchars(
+          $recipeOfDay['recipe_name']
+        ) ?>"
+        class="recipe-day-image"
+        onerror="this.onerror=null;this.src='images/default_recipe.png';"
+      >
+
+    </div>
+
+  </div>
+
+</section>
+
+<?php endif; ?>
 
     <footer class="footer">
       <div>© 2025/2026 — University of Bahrain — Senior Project</div>
