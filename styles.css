@@ -2438,3 +2438,94 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   }
 }
 
+/* ---------- Compact Recipe of the Day in Hero ---------- */
+
+.hero-recipe-day{
+  max-width:520px;
+  margin:0 0 20px;
+  padding:16px 18px;
+
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.hero-recipe-day-label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+
+  margin-bottom:8px;
+
+  color:#c4b8ff;
+  font-size:12px;
+  font-weight:800;
+}
+
+.hero-recipe-day-name{
+  margin-bottom:10px;
+
+  color:var(--text);
+  font-size:22px;
+  font-weight:850;
+}
+
+.hero-recipe-day-meta{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+
+  margin-bottom:10px;
+}
+
+.hero-recipe-day-meta span{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+
+  padding:6px 9px;
+
+  border:1px solid var(--line);
+  border-radius:999px;
+
+  background:rgba(255,255,255,.04);
+
+  color:var(--text);
+  font-size:11px;
+  font-weight:700;
+}
+
+.hero-recipe-day-link{
+  display:inline-flex;
+  align-items:center;
+
+  color:var(--accent2);
+  font-size:13px;
+  font-weight:800;
+}
+
+.hero-recipe-day-link:hover{
+  text-decoration:underline;
+}
+
+[data-theme="light"] .hero-recipe-day{
+  background:rgba(0,0,0,.025);
+}
+
+[data-theme="light"] .hero-recipe-day-label{
+  color:#9a4c08;
+}
+
+[data-theme="light"] .hero-recipe-day-meta span{
+  background:rgba(0,0,0,.035);
+}
+
+@media (max-width:980px){
+
+  .hero-recipe-day{
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
