@@ -106,16 +106,62 @@ try {
       </h1>
 
       <p>
-        Enter the ingredients available in your kitchen and Wasfatna
-        will recommend recipes based on your preferences.
-      </p>
+  Enter the ingredients available in your kitchen and Wasfatna
+  will recommend recipes based on your preferences.
+</p>
 
-      <a
-        href="find.php"
-        class="btn btn-primary main-hero-button"
-      >
-        Find My Recipe →
-      </a>
+<?php if ($recipeOfDay): ?>
+
+<div class="hero-recipe-day">
+
+  <div class="hero-recipe-day-label">
+    🍽 Recipe of the Day
+  </div>
+
+  <div class="hero-recipe-day-name">
+    <?= htmlspecialchars($recipeOfDay['recipe_name']) ?>
+  </div>
+
+  <div class="hero-recipe-day-meta">
+
+    <span>
+      ⭐ <?= htmlspecialchars(
+        $recipeOfDay['difficulty'] ?? 'Not specified'
+      ) ?>
+    </span>
+
+    <span>
+      ⏱ <?= (int)(
+        ($recipeOfDay['prep_time'] ?? 0) +
+        ($recipeOfDay['cook_time'] ?? 0)
+      ) ?> min
+    </span>
+
+    <span>
+      🍽 Serves <?= htmlspecialchars(
+        $recipeOfDay['servings'] ?? 'N/A'
+      ) ?>
+    </span>
+
+  </div>
+
+  <a
+    href="find.php"
+    class="hero-recipe-day-link"
+  >
+    View Recipe →
+  </a>
+
+</div>
+
+<?php endif; ?>
+
+<a
+  href="find.php"
+  class="btn btn-primary main-hero-button"
+>
+  Find My Recipe →
+</a>
 
     </div>
 
@@ -165,34 +211,6 @@ try {
   </div>
 
 </section>
-
-    <?php if ($recipeOfDay): ?>
-
-<section class="recipe-day-section">
-
-  <div class="recipe-day-card">
-
-    <div class="recipe-day-content">
-
-      <div class="recipe-day-label">
-        🍽 Recipe of the Day
-      </div>
-
-      <h2>
-        <?= htmlspecialchars(
-          $recipeOfDay['recipe_name']
-        ) ?>
-      </h2>
-
-      <?php if (!empty($recipeOfDay['description'])): ?>
-
-        <p class="recipe-day-description">
-          <?= htmlspecialchars(
-            $recipeOfDay['description']
-          ) ?>
-        </p>
-
-      <?php endif; ?>
 
       <div class="recipe-day-details">
 
