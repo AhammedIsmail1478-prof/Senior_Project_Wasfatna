@@ -212,66 +212,6 @@ try {
 
 </section>
 
-      <div class="recipe-day-details">
-
-        <span>
-          ⭐
-          <?= htmlspecialchars(
-            $recipeOfDay['difficulty']
-              ?? 'Not specified'
-          ) ?>
-        </span>
-
-        <span>
-          ⏱
-          <?= (int)(
-            ($recipeOfDay['prep_time'] ?? 0) +
-            ($recipeOfDay['cook_time'] ?? 0)
-          ) ?>
-          min
-        </span>
-
-        <span>
-          🍽 Serves
-          <?= htmlspecialchars(
-            $recipeOfDay['servings']
-              ?? 'N/A'
-          ) ?>
-        </span>
-
-      </div>
-
-      <a
-        href="find.php"
-        class="btn btn-primary recipe-day-button"
-      >
-        View Recipes →
-      </a>
-
-    </div>
-
-    <div class="recipe-day-image-wrapper">
-
-      <img
-        src="images/<?= htmlspecialchars(
-          $recipeOfDay['image']
-            ?: 'default_recipe.png'
-        ) ?>"
-        alt="<?= htmlspecialchars(
-          $recipeOfDay['recipe_name']
-        ) ?>"
-        class="recipe-day-image"
-        onerror="this.onerror=null;this.src='images/default_recipe.png';"
-      >
-
-    </div>
-
-  </div>
-
-</section>
-
-<?php endif; ?>
-
     <footer class="footer">
       <div>© 2025/2026 — University of Bahrain — Senior Project</div>
     </footer>
