@@ -54,6 +54,144 @@ try {
     // even if the recipe cannot be loaded.
     $recipeOfDay = null;
 }
+    /*
+ * ---------- Recommended for You ----------
+ */
+
+$recommendedRecipes = [];
+
+if (
+    is_logged_in() &&
+    !empty($_SESSION['user_id'])
+) {
+    try {
+
+        $userId =
+            (int)$_SESSION['user_id'];
+
+        /*
+         * Get the user's saved preferences.
+         */
+        $prefStmt = $pdo->prepare("
+            SELECT
+                spice_level,
+                diet
+            FROM user_preferences
+            WHERE user_id = :user_id
+            LIMIT 1
+        ");
+
+        $prefStmt->execute([
+            ':user_id' => $userId
+        ]);
+
+        $preferences =
+            $prefStmt->fetch();
+
+        if ($preferences) {
+
+            $userSpice =
+                strtolower(
+                    trim(
+                        $preferences['spice_level'] ?? ''
+                    )
+                );
+
+            $userDiet =
+                strtolower(
+                    trim(
+                        $preferences['diet'] ?? ''
+                    )
+                );
+
+            $conditions = [];
+            $params = [];
+
+            /*
+             * Match spice preference.
+             */
+            if (
+                $userSpice !== '' &&
+                $userSpice !== 'any'
+            ) {
+                $conditions[] =
+                    "LOWER(TRIM(r.spice_level)) = :spice";
+
+                $params[':spice'] =
+                    $userSpice;
+            }
+
+            /*
+             * Match dietary preference.
+             */
+            if (
+                $userDiet !== '' &&
+                $userDiet !== 'none' &&
+                $userDiet !== 'any'
+            ) {
+                $conditions[] = "
+                    FIND_IN_SET(
+                        :diet,
+                        REPLACE(
+                            LOWER(r.diet),
+                            ' ',
+                            ''
+                        )
+                    ) > 0
+                ";
+
+                $params[':diet'] =
+                    str_replace(
+                        ' ',
+                        '',
+                        $userDiet
+                    );
+            }
+
+            $whereSql = '';
+
+            if ($conditions) {
+                $whereSql =
+                    'WHERE ' .
+                    implode(
+                        ' AND ',
+                        $conditions
+                    );
+            }
+
+            $recommendStmt =
+                $pdo->prepare("
+                    SELECT
+                        r.recipe_id,
+                        r.recipe_name,
+                        r.description,
+                        r.prep_time,
+                        r.cook_time,
+                        r.servings,
+                        r.difficulty,
+                        r.image
+                    FROM recipes r
+
+                    $whereSql
+
+                    ORDER BY RAND()
+
+                    LIMIT 3
+                ");
+
+            $recommendStmt->execute(
+                $params
+            );
+
+            $recommendedRecipes =
+                $recommendStmt->fetchAll();
+        }
+
+    } catch (Throwable $error) {
+
+        $recommendedRecipes = [];
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -228,6 +366,107 @@ try {
   </div>
 
 </section>
+
+      <?php if (!empty($recommendedRecipes)): ?>
+
+<section class="recommended-section">
+
+  <div class="recommended-header">
+
+    <div>
+      <div class="recommended-label">
+        ✨ Recommended for You
+      </div>
+
+      <h2>
+        Recipes picked for your preferences
+      </h2>
+
+      <p>
+        Based on your saved dietary and spice preferences.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="recommended-grid">
+
+    <?php foreach ($recommendedRecipes as $recipe): ?>
+
+      <?php
+
+      $image =
+          !empty($recipe['image'])
+            ? $recipe['image']
+            : 'default_recipe.png';
+
+      $totalTime =
+          (int)($recipe['prep_time'] ?? 0) +
+          (int)($recipe['cook_time'] ?? 0);
+
+      ?>
+
+      <article class="recommended-card">
+
+        <img
+          src="images/<?= htmlspecialchars($image) ?>"
+          alt="<?= htmlspecialchars(
+            $recipe['recipe_name']
+          ) ?>"
+          class="recommended-image"
+          onerror="this.onerror=null;this.src='images/default_recipe.png';"
+        >
+
+        <div class="recommended-card-content">
+
+          <h3>
+            <?= htmlspecialchars(
+              $recipe['recipe_name']
+            ) ?>
+          </h3>
+
+          <div class="recommended-meta">
+
+            <span>
+              ⭐
+              <?= htmlspecialchars(
+                $recipe['difficulty']
+                  ?? 'Unknown'
+              ) ?>
+            </span>
+
+            <span>
+              ⏱ <?= $totalTime ?> min
+            </span>
+
+            <span>
+              🍽 Serves
+              <?= htmlspecialchars(
+                $recipe['servings']
+                  ?? 'N/A'
+              ) ?>
+            </span>
+
+          </div>
+
+          <a
+            href="find.php?recipe_id=<?= (int)$recipe['recipe_id'] ?>"
+            class="btn btn-primary recommended-button"
+          >
+            View Recipe →
+          </a>
+
+        </div>
+
+      </article>
+
+    <?php endforeach; ?>
+
+  </div>
+
+</section>
+
+<?php endif; ?>
 
     <footer class="footer">
       <div>© 2025/2026 — University of Bahrain — Senior Project</div>
