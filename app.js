@@ -3596,14 +3596,8 @@ if (signupForm && signupBtn) {
           "Creating account...";
       }
 
-// ---------- Open Recipe of the Day ----------
-
-if (
-  requestedRecipeId > 0 &&
-  suggestBtn
-) {
-  suggestBtn.click();
-}
+let requestedRecipeId =
+  Number(window.initialRecipeId) || 0;
       
       if (spinner) {
         spinner.hidden = false;
