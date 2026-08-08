@@ -393,7 +393,6 @@ if (
         $recommendedRecipes = [];
     }
 }
-}
 ?>
 <!doctype html>
 <html lang="en">
