@@ -45,6 +45,10 @@ try {
         trim((string)($input['diet'] ?? 'none'))
     );
 
+    $recipeId = isset($input['recipe_id'])
+    ? (int)$input['recipe_id']
+    : 0;
+
     if (!is_array($entered)) {
         respond([
             'success' => false,
@@ -65,20 +69,93 @@ try {
         )
     );
 
-    if (!$entered) {
-        respond([
-            'success' => true,
-            'recipes' => []
-        ]);
-    }
+    if (!$entered && $recipeId <= 0) {
+    respond([
+        'success' => true,
+        'recipes' => []
+    ]);
+}
+
+   /*
+ * Search mode:
+ *
+ * 1. If recipe_id is provided, load that exact recipe.
+ * 2. Otherwise perform the normal ingredient-based search.
+ */
+
+$params = [];
+
+if ($recipeId > 0) {
 
     /*
-     * Build the ingredient-matching conditions.
+     * ---------- Direct Recipe Search ----------
+     * Used by Recipe of the Day.
      */
+
+    $sql = "
+        SELECT
+            r.recipe_id,
+            r.recipe_name,
+            r.description,
+            r.prep_time,
+            r.cook_time,
+            r.servings,
+            r.difficulty,
+            r.calories,
+            r.image,
+            r.spice_level,
+            r.goal,
+            r.diet,
+
+            0 AS matched_count,
+
+            COUNT(
+                DISTINCT i.ingredient_id
+            ) AS total_ingredients
+
+        FROM recipes r
+
+        JOIN recipe_ingredients ri
+            ON ri.recipe_id = r.recipe_id
+
+        JOIN ingredients i
+            ON i.ingredient_id = ri.ingredient_id
+
+        WHERE r.recipe_id = :recipe_id
+
+        GROUP BY
+            r.recipe_id,
+            r.recipe_name,
+            r.description,
+            r.prep_time,
+            r.cook_time,
+            r.servings,
+            r.difficulty,
+            r.calories,
+            r.image,
+            r.spice_level,
+            r.goal,
+            r.diet
+
+        LIMIT 1
+    ";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([
+        ':recipe_id' => $recipeId
+    ]);
+
+} else {
+
+    /*
+     * ---------- Normal Ingredient Search ----------
+     */
+
     $matchParts = [];
-    $params = [];
 
     foreach ($entered as $index => $ingredient) {
+
         $key = ':ingredient_' . $index;
 
         $matchParts[] =
@@ -87,34 +164,52 @@ try {
         $params[$key] = $ingredient;
     }
 
-    $matchCondition = implode(' OR ', $matchParts);
+    $matchCondition =
+        implode(' OR ', $matchParts);
 
     /*
      * Build preference filters.
-     *
-     * "any" means no spice or goal restriction.
-     * "none" means no dietary restriction.
      */
+
     $whereConditions = [];
 
-    if ($spice !== '' && $spice !== 'any') {
+    if (
+        $spice !== '' &&
+        $spice !== 'any'
+    ) {
         $whereConditions[] =
             "LOWER(TRIM(r.spice_level)) = :spice";
 
         $params[':spice'] = $spice;
     }
 
-    if ($diet !== '' && $diet !== 'none' && $diet !== 'any') {
-    $whereConditions[] =
-        "FIND_IN_SET(
-            :diet,
-            REPLACE(LOWER(r.diet), ' ', '')
-        ) > 0";
+    if (
+        $diet !== '' &&
+        $diet !== 'none' &&
+        $diet !== 'any'
+    ) {
 
-    $params[':diet'] = str_replace(' ', '', $diet);
-}
+        $whereConditions[] = "
+            FIND_IN_SET(
+                :diet,
+                REPLACE(
+                    LOWER(r.diet),
+                    ' ',
+                    ''
+                )
+            ) > 0
+        ";
 
-    if ($goal !== '' && $goal !== 'any' && $goal !== 'none') {
+        $params[':diet'] =
+            str_replace(' ', '', $diet);
+    }
+
+    if (
+        $goal !== '' &&
+        $goal !== 'any' &&
+        $goal !== 'none'
+    ) {
+
         $whereConditions[] =
             "LOWER(TRIM(r.goal)) = :goal";
 
@@ -124,76 +219,78 @@ try {
     $whereSql = '';
 
     if ($whereConditions) {
-        $whereSql = 'WHERE ' . implode(' AND ', $whereConditions);
+        $whereSql =
+            'WHERE ' .
+            implode(
+                ' AND ',
+                $whereConditions
+            );
     }
 
-    /*
-     * Search for recipes that:
-     * 1. Match the selected preferences.
-     * 2. Contain at least one entered ingredient.
-     */
     $sql = "
-    SELECT
-        r.recipe_id,
-        r.recipe_name,
-        r.description,
-        r.prep_time,
-        r.cook_time,
-        r.servings,
-        r.difficulty,
-        r.calories,
-        r.image,
-        r.spice_level,
-        r.goal,
-        r.diet,
+        SELECT
+            r.recipe_id,
+            r.recipe_name,
+            r.description,
+            r.prep_time,
+            r.cook_time,
+            r.servings,
+            r.difficulty,
+            r.calories,
+            r.image,
+            r.spice_level,
+            r.goal,
+            r.diet,
 
-        COUNT(
-            DISTINCT CASE
-                WHEN ($matchCondition)
-                THEN i.ingredient_id
-            END
-        ) AS matched_count,
+            COUNT(
+                DISTINCT CASE
+                    WHEN ($matchCondition)
+                    THEN i.ingredient_id
+                END
+            ) AS matched_count,
 
-        COUNT(
-            DISTINCT i.ingredient_id
-        ) AS total_ingredients
+            COUNT(
+                DISTINCT i.ingredient_id
+            ) AS total_ingredients
 
-    FROM recipes r
+        FROM recipes r
 
-    JOIN recipe_ingredients ri
-        ON ri.recipe_id = r.recipe_id
+        JOIN recipe_ingredients ri
+            ON ri.recipe_id = r.recipe_id
 
-    JOIN ingredients i
-        ON i.ingredient_id = ri.ingredient_id
+        JOIN ingredients i
+            ON i.ingredient_id = ri.ingredient_id
 
-    $whereSql
+        $whereSql
 
-    GROUP BY
-        r.recipe_id,
-        r.recipe_name,
-        r.description,
-        r.prep_time,
-        r.cook_time,
-        r.servings,
-        r.difficulty,
-        r.calories,
-        r.image,
-        r.spice_level,
-        r.goal,
-        r.diet
+        GROUP BY
+            r.recipe_id,
+            r.recipe_name,
+            r.description,
+            r.prep_time,
+            r.cook_time,
+            r.servings,
+            r.difficulty,
+            r.calories,
+            r.image,
+            r.spice_level,
+            r.goal,
+            r.diet
 
-    HAVING matched_count > 0
+        HAVING matched_count > 0
 
-    ORDER BY
-        matched_count DESC,
-        total_ingredients ASC,
-        r.recipe_name ASC
-";
+        ORDER BY
+            matched_count DESC,
+            total_ingredients ASC,
+            r.recipe_name ASC
+    ";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
 
-    $recipes = $stmt->fetchAll();
+    $stmt->execute($params);
+}
+
+$recipes = $stmt->fetchAll();
 
     if (!$recipes) {
         respond([
