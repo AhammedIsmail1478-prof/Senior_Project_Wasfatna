@@ -535,7 +535,13 @@ require 'auth.php';
   src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
 ></script>
 
+<script>
+  window.initialRecipeId =
+    <?= isset($_GET['recipe_id'])
+      ? (int)$_GET['recipe_id']
+      : 0 ?>;
+</script>
   
-  <script src="app.js?v=12"></script>
+  <script src="app.js?v=13"></script>
 </body>
 </html>
