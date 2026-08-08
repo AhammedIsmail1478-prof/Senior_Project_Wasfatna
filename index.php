@@ -61,7 +61,7 @@ try {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Dynamic Meal Suggestion</title>
-  <link rel="stylesheet" href="styles.css?v=28" />
+  <link rel="stylesheet" href="styles.css?v=29" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -95,11 +95,28 @@ try {
 
   <div class="main-hero-content">
 
-    <div class="main-hero-text">
+   <div class="main-hero-text">
 
-      <div class="main-hero-label">
-        🍲 Smart Recipe Suggestions
+  <?php if (is_logged_in() && !empty($_SESSION['username'])): ?>
+
+    <div class="welcome-user">
+
+      <div class="welcome-user-title">
+        Welcome back,
+        <?= htmlspecialchars($_SESSION['username']) ?> 👋
       </div>
+
+      <div class="welcome-user-text">
+        Ready to find something delicious?
+      </div>
+
+    </div>
+
+  <?php endif; ?>
+
+  <div class="main-hero-label">
+    🍲 Smart Recipe Suggestions
+  </div>
 
       <h1>
         Cook delicious meals with what you already have.
