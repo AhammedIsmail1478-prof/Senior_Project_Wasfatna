@@ -162,12 +162,12 @@ try {
 
   </div>
 
-  <a
-    href="find.php"
-    class="hero-recipe-day-link"
-  >
-    View Recipe →
-  </a>
+    <a
+  href="find.php?recipe_id=<?= (int)$recipeOfDay['recipe_id'] ?>"
+  class="hero-recipe-day-link"
+>
+  View Recipe →
+</a>
 
 </div>
 
