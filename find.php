@@ -541,7 +541,29 @@ require 'auth.php';
       ? (int)$_GET['recipe_id']
       : 0 ?>;
 </script>
-  
-  <script src="app.js?v=13"></script>
+
+<script src="app.js?v=14"></script>
+
+<script>
+  if (
+    window.initialRecipeId > 0
+  ) {
+    window.addEventListener(
+      "load",
+      function () {
+
+        const suggestButton =
+          document.getElementById(
+            "suggestBtn"
+          );
+
+        if (suggestButton) {
+          suggestButton.click();
+        }
+
+      }
+    );
+  }
+</script>
 </body>
 </html>
