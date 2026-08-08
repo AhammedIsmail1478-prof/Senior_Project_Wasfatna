@@ -1425,21 +1425,23 @@ const encodedSteps =
   );
 
           const coreIngredientsHtml =
-  hasAllCoreIngredients
-    ? `
-      <div class="small core-success">
-        <strong>Core ingredients:</strong>
-        All required core ingredients are available ✅
-      </div>
-    `
-    : `
-      <div class="small core-warning">
-        <strong>Missing core ingredients:</strong>
-        ${missingCoreIngredients
-          .map(ingredientText)
-          .join(", ")}
-      </div>
-    `;
+  requestedRecipeId > 0
+    ? ""
+    : hasAllCoreIngredients
+      ? `
+          <div class="small core-success">
+            <strong>Core ingredients:</strong>
+            All required core ingredients are available ✅
+          </div>
+        `
+      : `
+          <div class="small core-warning">
+            <strong>Missing core ingredients:</strong>
+            ${missingCoreIngredients
+              .map(ingredientText)
+              .join(", ")}
+          </div>
+        `;
 
           const stepsHtml =
             steps.length
@@ -1592,41 +1594,55 @@ const filterText = [
 </div>
 
 ${
-  hasAllCoreIngredients
-    ? `
-      <div class="ready-cook-badge is-ready">
-        ✅ Ready to Cook
-      </div>
-    `
-    : `
-      <div class="ready-cook-badge is-missing">
-        ⚠️ Missing Core Ingredients
-      </div>
-    `
+  requestedRecipeId > 0
+    ? ""
+    : hasAllCoreIngredients
+      ? `
+          <div class="ready-cook-badge is-ready">
+            ✅ Ready to Cook
+          </div>
+        `
+      : `
+          <div class="ready-cook-badge is-missing">
+            ⚠️ Missing Core Ingredients
+          </div>
+        `
 }
 
-<div class="tags">
-            <span class="tag ${matchClass}">
-              ${matchPercentage}% match
-            </span>
+${
+  requestedRecipeId > 0
+    ? ""
+    : `
+        <div class="tags">
+          <span class="tag ${matchClass}">
+            ${matchPercentage}% match
+          </span>
 
-            <span class="tag">
-              ${matchedCount}/${totalIngredients} ingredients
-            </span>
-          </div>
+          <span class="tag">
+            ${matchedCount}/${totalIngredients} ingredients
+          </span>
+        </div>
+      `
+}
         </div>
 
+       ${
+  requestedRecipeId > 0
+    ? ""
+    : `
         <div class="small">
           <strong>You have:</strong>
           ${matchedHtml}
         </div>
 
         <div class="small">
-  <strong>Still needed:</strong>
-  ${missingHtml}
-</div>
+          <strong>Still needed:</strong>
+          ${missingHtml}
+        </div>
 
-${coreIngredientsHtml}
+        ${coreIngredientsHtml}
+      `
+}
 
 <div class="shopping-recipe-action">
   <button
