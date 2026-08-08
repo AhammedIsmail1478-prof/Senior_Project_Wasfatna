@@ -54,8 +54,8 @@ try {
     // even if the recipe cannot be loaded.
     $recipeOfDay = null;
 }
-    /*
- * ---------- Recommended for You ----------
+  /*
+ * ---------- Smart Recommended for You ----------
  */
 
 $recommendedRecipes = [];
@@ -70,12 +70,14 @@ if (
             (int)$_SESSION['user_id'];
 
         /*
-         * Get the user's saved preferences.
+         * Load the user's preferences.
          */
         $prefStmt = $pdo->prepare("
             SELECT
                 spice_level,
-                diet
+                diet,
+                likes,
+                dislikes
             FROM user_preferences
             WHERE user_id = :user_id
             LIMIT 1
@@ -104,92 +106,293 @@ if (
                     )
                 );
 
-            $conditions = [];
-            $params = [];
-
             /*
-             * Match spice preference.
+             * Convert likes and dislikes into arrays.
+             *
+             * Example:
+             * chicken, rice, pasta
              */
-            if (
-                $userSpice !== '' &&
-                $userSpice !== 'any'
-            ) {
-                $conditions[] =
-                    "LOWER(TRIM(r.spice_level)) = :spice";
-
-                $params[':spice'] =
-                    $userSpice;
-            }
-
-            /*
-             * Match dietary preference.
-             */
-            if (
-                $userDiet !== '' &&
-                $userDiet !== 'none' &&
-                $userDiet !== 'any'
-            ) {
-                $conditions[] = "
-                    FIND_IN_SET(
-                        :diet,
-                        REPLACE(
-                            LOWER(r.diet),
-                            ' ',
-                            ''
+            $userLikes = array_values(
+                array_filter(
+                    array_map(
+                        static fn($item) =>
+                            strtolower(trim($item)),
+                        explode(
+                            ',',
+                            $preferences['likes'] ?? ''
                         )
-                    ) > 0
-                ";
-
-                $params[':diet'] =
-                    str_replace(
-                        ' ',
-                        '',
-                        $userDiet
-                    );
-            }
-
-            $whereSql = '';
-
-            if ($conditions) {
-                $whereSql =
-                    'WHERE ' .
-                    implode(
-                        ' AND ',
-                        $conditions
-                    );
-            }
-
-            $recommendStmt =
-                $pdo->prepare("
-                    SELECT
-                        r.recipe_id,
-                        r.recipe_name,
-                        r.description,
-                        r.prep_time,
-                        r.cook_time,
-                        r.servings,
-                        r.difficulty,
-                        r.image
-                    FROM recipes r
-
-                    $whereSql
-
-                    ORDER BY RAND()
-
-                    LIMIT 3
-                ");
-
-            $recommendStmt->execute(
-                $params
+                    )
+                )
             );
 
-            $recommendedRecipes =
+            $userDislikes = array_values(
+                array_filter(
+                    array_map(
+                        static fn($item) =>
+                            strtolower(trim($item)),
+                        explode(
+                            ',',
+                            $preferences['dislikes'] ?? ''
+                        )
+                    )
+                )
+            );
+
+            /*
+             * Load recipes and their ingredients.
+             */
+            $recommendStmt = $pdo->query("
+                SELECT
+                    r.recipe_id,
+                    r.recipe_name,
+                    r.description,
+                    r.prep_time,
+                    r.cook_time,
+                    r.servings,
+                    r.difficulty,
+                    r.image,
+                    r.spice_level,
+                    r.diet,
+
+                    GROUP_CONCAT(
+                        DISTINCT i.ingredient_name
+                        SEPARATOR ', '
+                    ) AS ingredient_names
+
+                FROM recipes r
+
+                LEFT JOIN recipe_ingredients ri
+                    ON ri.recipe_id = r.recipe_id
+
+                LEFT JOIN ingredients i
+                    ON i.ingredient_id =
+                       ri.ingredient_id
+
+                GROUP BY
+                    r.recipe_id,
+                    r.recipe_name,
+                    r.description,
+                    r.prep_time,
+                    r.cook_time,
+                    r.servings,
+                    r.difficulty,
+                    r.image,
+                    r.spice_level,
+                    r.diet
+            ");
+
+            $allRecipes =
                 $recommendStmt->fetchAll();
+
+            $scoredRecipes = [];
+
+            foreach ($allRecipes as $recipe) {
+
+                $score = 0;
+
+                $recipeName =
+                    strtolower(
+                        $recipe['recipe_name'] ?? ''
+                    );
+
+                $description =
+                    strtolower(
+                        $recipe['description'] ?? ''
+                    );
+
+                $ingredients =
+                    strtolower(
+                        $recipe['ingredient_names'] ?? ''
+                    );
+
+                $recipeSpice =
+                    strtolower(
+                        trim(
+                            $recipe['spice_level'] ?? ''
+                        )
+                    );
+
+                $recipeDiet =
+                    strtolower(
+                        str_replace(
+                            ' ',
+                            '',
+                            $recipe['diet'] ?? ''
+                        )
+                    );
+
+                /*
+                 * ---------- Diet ----------
+                 *
+                 * Dietary preference is treated as a
+                 * requirement rather than just a bonus.
+                 */
+                if (
+                    $userDiet !== '' &&
+                    $userDiet !== 'none' &&
+                    $userDiet !== 'any'
+                ) {
+
+                    $cleanUserDiet =
+                        str_replace(
+                            ' ',
+                            '',
+                            $userDiet
+                        );
+
+                    $recipeDietList =
+                        array_map(
+                            'trim',
+                            explode(
+                                ',',
+                                $recipeDiet
+                            )
+                        );
+
+                    if (
+                        !in_array(
+                            $cleanUserDiet,
+                            $recipeDietList,
+                            true
+                        )
+                    ) {
+                        /*
+                         * Recipe does not satisfy the
+                         * user's diet, so don't recommend it.
+                         */
+                        continue;
+                    }
+
+                    $score += 50;
+                }
+
+                /*
+                 * ---------- Spice ----------
+                 */
+                if (
+                    $userSpice !== '' &&
+                    $userSpice !== 'any' &&
+                    $recipeSpice === $userSpice
+                ) {
+                    $score += 25;
+                }
+
+                /*
+                 * Searchable recipe text.
+                 */
+                $recipeText =
+                    $recipeName . ' ' .
+                    $description . ' ' .
+                    $ingredients;
+
+                /*
+                 * ---------- Likes ----------
+                 *
+                 * Give points when a liked food appears
+                 * in the recipe name, description
+                 * or ingredients.
+                 */
+                foreach ($userLikes as $like) {
+
+                    if (
+                        $like !== '' &&
+                        str_contains(
+                            $recipeText,
+                            $like
+                        )
+                    ) {
+                        $score += 15;
+                    }
+                }
+
+                /*
+                 * ---------- Dislikes ----------
+                 *
+                 * Do not recommend recipes containing
+                 * foods the user dislikes.
+                 */
+                $containsDislike = false;
+
+                foreach ($userDislikes as $dislike) {
+
+                    if (
+                        $dislike !== '' &&
+                        str_contains(
+                            $recipeText,
+                            $dislike
+                        )
+                    ) {
+                        $containsDislike = true;
+                        break;
+                    }
+                }
+
+                if ($containsDislike) {
+                    continue;
+                }
+
+                /*
+                 * Add the calculated score.
+                 */
+                $recipe['recommendation_score'] =
+                    $score;
+
+                $scoredRecipes[] =
+                    $recipe;
+            }
+
+            /*
+             * Highest score first.
+             */
+            usort(
+                $scoredRecipes,
+                static function ($a, $b) {
+
+                    $scoreA =
+                        (int)(
+                            $a[
+                                'recommendation_score'
+                            ] ?? 0
+                        );
+
+                    $scoreB =
+                        (int)(
+                            $b[
+                                'recommendation_score'
+                            ] ?? 0
+                        );
+
+                    if ($scoreA !== $scoreB) {
+                        return $scoreB <=> $scoreA;
+                    }
+
+                    /*
+                     * If scores are equal,
+                     * sort alphabetically.
+                     */
+                    return strcasecmp(
+                        $a['recipe_name'],
+                        $b['recipe_name']
+                    );
+                }
+            );
+
+            /*
+             * Keep the best 3 recipes.
+             */
+            $recommendedRecipes =
+                array_slice(
+                    $scoredRecipes,
+                    0,
+                    3
+                );
         }
 
     } catch (Throwable $error) {
 
         $recommendedRecipes = [];
+    }
+}
     }
 }
 ?>
