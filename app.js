@@ -250,9 +250,12 @@ const clearRecentlyViewedBtn =
     "clearRecentlyViewedBtn"
   );
 
-// Current displayed recipe position.
 let currentRecipeIndex = 0;
 let currentlyFilteredCards = [];
+
+// Recipe opened from Recipe of the Day.
+let requestedRecipeId =
+  Number(window.initialRecipeId) || 0;
 
 // Preference fields.
 const spiceEl =
@@ -1234,17 +1237,20 @@ if (recipeNavigation) {
     const diet =
       dietEl ? dietEl.value : "none";
 
-    if (!ingredients.length) {
-      resultsEl.innerHTML = `
-        <div class="empty">
-          Please enter at least one ingredient.
-          Separate ingredients using commas.
-        </div>
-      `;
+    if (
+  !ingredients.length &&
+  requestedRecipeId <= 0
+) {
+  resultsEl.innerHTML = `
+    <div class="empty">
+      Please enter at least one ingredient.
+      Separate ingredients using commas.
+    </div>
+  `;
 
-      resultsCount.textContent = "0";
-      return;
-    }
+  resultsCount.textContent = "0";
+  return;
+}
 
     suggestBtn.disabled = true;
     suggestBtn.textContent = "Searching...";
@@ -1264,12 +1270,13 @@ if (recipeNavigation) {
         },
 
         body: JSON.stringify({
-          ingredients: ingredients,
-          spice: spice,
-          sweetness: sweetness,
-          goal: goal,
-          diet: diet
-        })
+  ingredients: ingredients,
+  spice: spice,
+  sweetness: sweetness,
+  goal: goal,
+  diet: diet,
+  recipe_id: requestedRecipeId
+})
       });
 
       /*
@@ -3589,6 +3596,15 @@ if (signupForm && signupBtn) {
           "Creating account...";
       }
 
+// ---------- Open Recipe of the Day ----------
+
+if (
+  requestedRecipeId > 0 &&
+  suggestBtn
+) {
+  suggestBtn.click();
+}
+      
       if (spinner) {
         spinner.hidden = false;
       }
