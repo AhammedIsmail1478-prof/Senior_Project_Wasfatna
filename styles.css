@@ -664,7 +664,7 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   background:#ef4444;
 }
 
-.recipe h4{ margin:0; font-size:16px; }
+.recipe h4{ margin:0; font-size:18px; }
 .recipe .tags{ display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
 .tag{
   font-size:11px;
@@ -702,15 +702,32 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   color:#F97316 !important;
   border:1px solid rgba(249,115,22,.45) !important;
 }
-.recipe .small{ color: var(--muted); font-size:12px; margin-top:8px; line-height:1.4; }
+
+.recipe .small{
+  color: var(--muted);
+  font-size:15px;
+  margin-top:8px;
+  line-height:1.6;
+}
 
 .steps{
   margin-top:10px;
   border-top:1px solid var(--line);
   padding-top:10px;
+  font-size:15px;
 }
-.steps ol{ margin:8px 0 0 18px; color: rgba(233,238,247,.88); }
-.steps li{ margin:6px 0; }
+
+.steps ol{
+  margin:8px 0 0 18px;
+  color: rgba(233,238,247,.88);
+  font-size:16px;
+  line-height:1.6;
+}
+
+.steps li{
+  margin:7px 0;
+  font-size:16px;
+}
 
 .feature-grid{
   display:grid;
