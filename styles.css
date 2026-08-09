@@ -440,27 +440,27 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   z-index:100;
 }
 
+.recipe-image-wrapper:hover{
+  z-index:1000;
+}
+
 .recipe-image-wrapper:hover .recipe-image{
   position:absolute;
-  top:0;
-  left:0;
 
-  width:360px;
-  height:360px;
+  width:420px;
+  height:420px;
+
+  left:-140px;
+  top:-80px;
 
   object-fit:cover;
   border-radius:16px;
 
-  transform:translateY(-10px);
-
-  box-shadow:
-    0 20px 55px rgba(0,0,0,.65);
-
+  box-shadow:0 20px 60px rgba(0,0,0,.75);
   border:2px solid var(--line);
 
-  filter:brightness(1.06);
-
-  z-index:100;
+  z-index:1000;
+  filter:brightness(1.05);
 }
 
 .recipe-information{
