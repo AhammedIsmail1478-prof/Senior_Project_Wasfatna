@@ -705,33 +705,42 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
 .recipe .small{
   color: var(--muted);
-  font-size:16px;
-  margin-top:8px;
-  line-height:1.6;
+  font-size:18px;
+  margin-top:10px;
+  line-height:1.7;
 }
 
 .recipe .small strong,
 .recipe .small span{
-  font-size:16px;
+  font-size:18px;
 }
 
+/* Steps */
 .steps{
-  margin-top:10px;
+  margin-top:14px;
   border-top:1px solid var(--line);
-  padding-top:10px;
-  font-size:15px;
+  padding-top:14px;
+  font-size:18px;
 }
 
+/* Steps heading */
+.steps .small{
+  font-size:18px;
+  font-weight:700;
+}
+
+/* Step descriptions */
 .steps ol{
-  margin:8px 0 0 18px;
-  color: rgba(233,238,247,.88);
-  font-size:16px;
-  line-height:1.6;
+  margin:12px 0 0 22px;
+  color:rgba(233,238,247,.88);
+  font-size:18px;
+  line-height:1.7;
 }
 
 .steps li{
-  margin:7px 0;
-  font-size:16px;
+  margin:8px 0;
+  font-size:18px;
+  line-height:1.7;
 }
 
 .feature-grid{
