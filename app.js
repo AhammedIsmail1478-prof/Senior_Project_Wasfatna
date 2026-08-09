@@ -1609,6 +1609,23 @@ ${
         `
 }
 
+<div
+  class="recipe-rating"
+  data-recipe-id="${recipeId}"
+>
+  <div class="rating-stars">
+    <button type="button" class="rating-star" data-rating="1">★</button>
+    <button type="button" class="rating-star" data-rating="2">★</button>
+    <button type="button" class="rating-star" data-rating="3">★</button>
+    <button type="button" class="rating-star" data-rating="4">★</button>
+    <button type="button" class="rating-star" data-rating="5">★</button>
+  </div>
+
+  <div class="rating-summary">
+    Not rated yet
+  </div>
+</div>
+
 ${
   requestedRecipeId > 0
     ? ""
@@ -1955,6 +1972,144 @@ if (
   );
 } finally {
         favoriteBtn.disabled = false;
+      }
+    }
+  );
+}
+
+// ---------- Recipe Rating ----------
+if (resultsEl) {
+  resultsEl.addEventListener(
+    "click",
+    async (event) => {
+
+      const star =
+        event.target.closest(".rating-star");
+
+      if (!star) {
+        return;
+      }
+
+      const ratingBox =
+        star.closest(".recipe-rating");
+
+      if (!ratingBox) {
+        return;
+      }
+
+      const recipeId =
+        Number(ratingBox.dataset.recipeId) || 0;
+
+      const rating =
+        Number(star.dataset.rating) || 0;
+
+      if (
+        recipeId <= 0 ||
+        rating < 1 ||
+        rating > 5
+      ) {
+        return;
+      }
+
+      try {
+
+        const response = await fetch(
+          "rate_recipe.php",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+              recipe_id: recipeId,
+              rating: rating
+            })
+          }
+        );
+
+        const responseText =
+          await response.text();
+
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (jsonError) {
+
+          console.error(
+            "Invalid rating response:",
+            responseText
+          );
+
+          throw new Error(
+            "rate_recipe.php did not return valid JSON."
+          );
+        }
+
+        if (
+          !response.ok ||
+          data.success !== true
+        ) {
+          throw new Error(
+            data.message ||
+            "Unable to save rating."
+          );
+        }
+
+        const stars =
+          ratingBox.querySelectorAll(
+            ".rating-star"
+          );
+
+        stars.forEach((button) => {
+
+          const value =
+            Number(button.dataset.rating);
+
+          button.classList.toggle(
+            "active",
+            value <= rating
+          );
+        });
+
+        const summary =
+          ratingBox.querySelector(
+            ".rating-summary"
+          );
+
+        if (summary) {
+
+          const ratingCount =
+            Number(data.rating_count) || 0;
+
+          summary.textContent =
+            `${data.average_rating} / 5 ` +
+            `(${ratingCount} rating${
+              ratingCount === 1
+                ? ""
+                : "s"
+            })`;
+        }
+
+        showToast(
+          "Rating saved!",
+          "⭐"
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Rating error:",
+          error
+        );
+
+        showToast(
+          error.message ||
+          "Unable to save rating.",
+          "⚠️"
+        );
       }
     }
   );
