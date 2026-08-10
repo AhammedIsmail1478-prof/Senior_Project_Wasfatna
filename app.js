@@ -2139,6 +2139,138 @@ if (resultsEl) {
   );
 }
 
+// ---------- Recipe Reviews ----------
+if (resultsEl) {
+  resultsEl.addEventListener(
+    "click",
+    async (event) => {
+
+      const reviewBtn =
+        event.target.closest(".post-review-btn");
+
+      if (!reviewBtn) {
+        return;
+      }
+
+      const reviewSection =
+        reviewBtn.closest(
+          ".recipe-review-section"
+        );
+
+      if (!reviewSection) {
+        return;
+      }
+
+      const recipeId =
+        Number(
+          reviewSection.dataset.recipeId
+        ) || 0;
+
+      const reviewInput =
+        reviewSection.querySelector(
+          ".review-input"
+        );
+
+      if (!reviewInput) {
+        return;
+      }
+
+      const reviewText =
+        reviewInput.value.trim();
+
+      if (recipeId <= 0) {
+        return;
+      }
+
+      if (reviewText === "") {
+        showToast(
+          "Please write a review first.",
+          "⚠️"
+        );
+        return;
+      }
+
+      reviewBtn.disabled = true;
+      reviewBtn.textContent = "Posting...";
+
+      try {
+
+        const response = await fetch(
+          "save_review.php",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              recipe_id: recipeId,
+              review_text: reviewText
+            })
+          }
+        );
+
+        const responseText =
+          await response.text();
+
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (jsonError) {
+
+          console.error(
+            "Invalid review response:",
+            responseText
+          );
+
+          throw new Error(
+            "save_review.php did not return valid JSON."
+          );
+        }
+
+        if (
+          !response.ok ||
+          data.success !== true
+        ) {
+          throw new Error(
+            data.message ||
+            "Unable to post review."
+          );
+        }
+
+        reviewInput.value = "";
+
+        showToast(
+          "Review posted!",
+          "💬"
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Review error:",
+          error
+        );
+
+        showToast(
+          error.message ||
+          "Unable to post review.",
+          "⚠️"
+        );
+
+      } finally {
+
+        reviewBtn.disabled = false;
+        reviewBtn.textContent =
+          "Post Review";
+      }
+    }
+  );
+}
+
 // ---------- Share Recipe ----------
 if (resultsEl) {
   resultsEl.addEventListener(
