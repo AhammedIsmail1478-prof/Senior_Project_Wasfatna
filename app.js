@@ -1648,6 +1648,15 @@ ${
   >
     Post Review
   </button>
+
+  <div
+    class="reviews-list"
+    data-recipe-id="${recipeId}"
+  >
+    <div class="review-loading">
+      Loading reviews...
+    </div>
+  </div>
 </div>
 
 ${
@@ -1794,11 +1803,28 @@ ${
   </article>
 `;
         })
-        .join("");
-      updateDisplayedRecipes();
+  .join("");
 
-      const hasPerfectMatch =
-        recipes.some(
+updateDisplayedRecipes();
+
+/* Load reviews for each displayed recipe */
+resultsEl
+  .querySelectorAll(".reviews-list")
+  .forEach((reviewsList) => {
+
+    const recipeId =
+      Number(
+        reviewsList.dataset.recipeId
+      ) || 0;
+
+    loadRecipeReviews(
+      recipeId,
+      reviewsList
+    );
+  });
+
+const hasPerfectMatch =
+  recipes.some(
           (recipe) =>
             Number(
               recipe.match_percentage
@@ -2139,6 +2165,122 @@ if (resultsEl) {
   );
 }
 
+// ---------- Load Recipe Reviews ----------
+async function loadRecipeReviews(
+  recipeId,
+  reviewsList
+) {
+  if (!recipeId || !reviewsList) {
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      `get_reviews.php?recipe_id=${encodeURIComponent(recipeId)}`
+    );
+
+    const responseText =
+      await response.text();
+
+    let data;
+
+    try {
+      data = JSON.parse(responseText);
+    } catch (jsonError) {
+
+      console.error(
+        "Invalid reviews response:",
+        responseText
+      );
+
+      throw new Error(
+        "get_reviews.php did not return valid JSON."
+      );
+    }
+
+    if (
+      !response.ok ||
+      data.success !== true
+    ) {
+      throw new Error(
+        data.message ||
+        "Unable to load reviews."
+      );
+    }
+
+    const reviews =
+      Array.isArray(data.reviews)
+        ? data.reviews
+        : [];
+
+    if (reviews.length === 0) {
+
+      reviewsList.innerHTML = `
+        <div class="no-reviews">
+          No reviews yet. Be the first to review this recipe.
+        </div>
+      `;
+
+      return;
+    }
+
+    reviewsList.innerHTML = `
+      <div class="reviews-heading">
+        💬 Reviews (${reviews.length})
+      </div>
+
+      ${reviews
+        .map((review) => {
+
+          const date =
+            review.created_at
+              ? new Date(
+                  review.created_at
+                    .replace(" ", "T")
+                ).toLocaleDateString()
+              : "";
+
+          return `
+            <div class="review-item">
+
+              <div class="review-user">
+                ${escapeHtml(
+                  review.username || "User"
+                )}
+              </div>
+
+              <div class="review-text">
+                ${escapeHtml(
+                  review.review_text || ""
+                )}
+              </div>
+
+              <div class="review-date">
+                ${escapeHtml(date)}
+              </div>
+
+            </div>
+          `;
+        })
+        .join("")}
+    `;
+
+  } catch (error) {
+
+    console.error(
+      "Unable to load reviews:",
+      error
+    );
+
+    reviewsList.innerHTML = `
+      <div class="no-reviews">
+        Unable to load reviews.
+      </div>
+    `;
+  }
+}
+
 // ---------- Recipe Reviews ----------
 if (resultsEl) {
   resultsEl.addEventListener(
@@ -2242,6 +2384,18 @@ if (resultsEl) {
         }
 
         reviewInput.value = "";
+
+        const reviewsList =
+  reviewSection.querySelector(
+    ".reviews-list"
+  );
+
+if (reviewsList) {
+  await loadRecipeReviews(
+    recipeId,
+    reviewsList
+  );
+}
 
         showToast(
           "Review posted!",
