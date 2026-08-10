@@ -2225,46 +2225,117 @@ async function loadRecipeReviews(
       return;
     }
 
-    reviewsList.innerHTML = `
-      <div class="reviews-heading">
-        💬 Reviews (${reviews.length})
+   let currentReviewIndex = 0;
+
+function renderCurrentReview() {
+
+  const review =
+    reviews[currentReviewIndex];
+
+  const date =
+    review.created_at
+      ? new Date(
+          review.created_at.replace(" ", "T")
+        ).toLocaleDateString()
+      : "";
+
+  reviewsList.innerHTML = `
+    <div class="reviews-heading">
+      💬 Reviews (${reviews.length})
+    </div>
+
+    <div class="review-item">
+
+      <div class="review-user">
+        ${escapeHtml(
+          review.username || "User"
+        )}
       </div>
 
-      ${reviews
-        .map((review) => {
+      <div class="review-text">
+        ${escapeHtml(
+          review.review_text || ""
+        )}
+      </div>
 
-          const date =
-            review.created_at
-              ? new Date(
-                  review.created_at
-                    .replace(" ", "T")
-                ).toLocaleDateString()
-              : "";
+      <div class="review-date">
+        ${escapeHtml(date)}
+      </div>
 
-          return `
-            <div class="review-item">
+    </div>
 
-              <div class="review-user">
-                ${escapeHtml(
-                  review.username || "User"
-                )}
-              </div>
+    <div class="review-navigation">
 
-              <div class="review-text">
-                ${escapeHtml(
-                  review.review_text || ""
-                )}
-              </div>
+      <button
+        type="button"
+        class="btn btn-outline review-prev-btn"
+        ${currentReviewIndex === 0 ? "disabled" : ""}
+      >
+        ← Previous
+      </button>
 
-              <div class="review-date">
-                ${escapeHtml(date)}
-              </div>
+      <span class="review-page-info">
+        ${currentReviewIndex + 1} of ${reviews.length}
+      </span>
 
-            </div>
-          `;
-        })
-        .join("")}
-    `;
+      <button
+        type="button"
+        class="btn btn-primary review-next-btn"
+        ${
+          currentReviewIndex === reviews.length - 1
+            ? "disabled"
+            : ""
+        }
+      >
+        Next →
+      </button>
+
+    </div>
+  `;
+
+  const prevBtn =
+    reviewsList.querySelector(
+      ".review-prev-btn"
+    );
+
+  const nextBtn =
+    reviewsList.querySelector(
+      ".review-next-btn"
+    );
+
+  if (prevBtn) {
+    prevBtn.addEventListener(
+      "click",
+      () => {
+
+        if (currentReviewIndex > 0) {
+          currentReviewIndex--;
+
+          renderCurrentReview();
+        }
+      }
+    );
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener(
+      "click",
+      () => {
+
+        if (
+          currentReviewIndex <
+          reviews.length - 1
+        ) {
+          currentReviewIndex++;
+
+          renderCurrentReview();
+        }
+      }
+    );
+  }
+}
+
+renderCurrentReview();
 
   } catch (error) {
 
