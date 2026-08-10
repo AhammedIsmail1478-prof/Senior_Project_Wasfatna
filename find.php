@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=36" />
+  <link rel="stylesheet" href="styles.css?v=37" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -533,7 +533,7 @@ require 'auth.php';
 
   <script
   src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
-></script>
+></>
 
 <script>
   window.initialRecipeId =
@@ -542,7 +542,7 @@ require 'auth.php';
       : 0 ?>;
 </script>
 
-<script src="app.js?v=17"></script>
+<script src="app.js?v=18"></script>
 
 <script>
   if (
