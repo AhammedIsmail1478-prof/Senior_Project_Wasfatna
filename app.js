@@ -1626,6 +1626,30 @@ ${
   </div>
 </div>
 
+<div
+  class="recipe-review-section"
+  data-recipe-id="${recipeId}"
+>
+  <div class="review-title">
+    💬 Write a Review
+  </div>
+
+  <textarea
+    class="review-input"
+    rows="3"
+    maxlength="500"
+    placeholder="Write your review..."
+  ></textarea>
+
+  <button
+    type="button"
+    class="btn btn-primary post-review-btn"
+    data-recipe-id="${recipeId}"
+  >
+    Post Review
+  </button>
+</div>
+
 ${
   requestedRecipeId > 0
     ? ""
