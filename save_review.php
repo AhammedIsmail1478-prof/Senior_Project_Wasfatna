@@ -85,6 +85,6 @@ try {
 
     echo json_encode([
         'success' => false,
-        'message' => 'Unable to save review.'
+        'message' => 'Unable to save review: ' . $error->getMessage()
     ]);
 }
