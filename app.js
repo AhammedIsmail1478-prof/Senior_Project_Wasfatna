@@ -1396,6 +1396,123 @@ if (summaryDiet) {
             letter.toUpperCase()
           );
 }
+
+      // ---------- Smart Ingredient Suggestions ----------
+
+if (smartIngredientSuggestions) {
+
+  const missingCounts = {};
+
+  recipes.forEach((recipe) => {
+
+    const missing =
+      Array.isArray(recipe.missing_ingredients)
+        ? recipe.missing_ingredients
+        : [];
+
+    missing.forEach((item) => {
+
+      const name =
+        String(item?.name || "")
+          .trim()
+          .toLowerCase();
+
+      if (!name) {
+        return;
+      }
+
+      if (ingredients.includes(name)) {
+        return;
+      }
+
+      missingCounts[name] =
+        (missingCounts[name] || 0) + 1;
+    });
+  });
+
+  const suggestedIngredients =
+    Object.entries(missingCounts)
+      .sort((first, second) =>
+        second[1] - first[1]
+      )
+      .slice(0, 5)
+      .map(([name]) => name);
+
+  if (suggestedIngredients.length === 0) {
+
+    smartIngredientSuggestions.innerHTML = `
+      <span class="smart-no-suggestions">
+        Great! No additional ingredient suggestions are needed.
+      </span>
+    `;
+
+  } else {
+
+    smartIngredientSuggestions.innerHTML =
+      suggestedIngredients
+        .map((name) => `
+          <button
+            type="button"
+            class="smart-ingredient-btn"
+            data-ingredient="${escapeHtml(name)}"
+          >
+            + ${escapeHtml(name)}
+          </button>
+        `)
+        .join("");
+  }
+}
+
+      // ---------- Add Smart Suggested Ingredient ----------
+
+if (smartIngredientSuggestions) {
+  smartIngredientSuggestions.addEventListener(
+    "click",
+    (event) => {
+
+      const ingredientBtn =
+        event.target.closest(
+          ".smart-ingredient-btn"
+        );
+
+      if (!ingredientBtn) {
+        return;
+      }
+
+      const ingredient =
+        ingredientBtn.dataset.ingredient;
+
+      if (!ingredient) {
+        return;
+      }
+
+      const currentIngredients =
+        uniq(
+          parseIngredients(
+            ingredientsInput.value
+          )
+        );
+
+      if (
+        !currentIngredients.includes(
+          ingredient
+        )
+      ) {
+        currentIngredients.push(
+          ingredient
+        );
+      }
+
+      ingredientsInput.value =
+        currentIngredients.join(", ");
+
+      showToast(
+        `${ingredient} added to your ingredients.`,
+        "➕"
+      );
+    }
+  );
+}
       
 
       if (!recipes.length) {
