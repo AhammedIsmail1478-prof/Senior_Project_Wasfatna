@@ -609,7 +609,7 @@ require 'auth.php';
       : 0 ?>;
 </script>
 
-<script src="app.js?v=22"></script>
+<script src="app.js?v=23"></script>
 
 <script>
   if (
