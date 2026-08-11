@@ -182,6 +182,27 @@ const statsFavorites =
 const statsIngredients =
   document.getElementById("statsIngredients");
 
+const smartSearchSummary =
+  document.getElementById("smartSearchSummary");
+
+const summaryIngredients =
+  document.getElementById("summaryIngredients");
+
+const summaryRecipeCount =
+  document.getElementById("summaryRecipeCount");
+
+const summarySpice =
+  document.getElementById("summarySpice");
+
+const summaryGoal =
+  document.getElementById("summaryGoal");
+
+const summaryDiet =
+  document.getElementById("summaryDiet");
+
+const smartIngredientSuggestions =
+  document.getElementById("smartIngredientSuggestions");
+
 const recipeSearch =
   document.getElementById("recipeSearch");
 
@@ -1328,6 +1349,52 @@ if (statsIngredients) {
 if (statsFavorites) {
   statsFavorites.textContent =
     recipes.filter(recipe => recipe.is_favorite).length;
+}
+
+if (smartSearchSummary) {
+  smartSearchSummary.hidden = false;
+}
+
+if (summaryIngredients) {
+  summaryIngredients.textContent =
+    ingredients.length
+      ? ingredients.join(", ")
+      : "None";
+}
+
+if (summaryRecipeCount) {
+  summaryRecipeCount.textContent =
+    String(recipes.length);
+}
+
+if (summarySpice) {
+  summarySpice.textContent =
+    spice === "any"
+      ? "Any"
+      : spice.charAt(0).toUpperCase() +
+        spice.slice(1);
+}
+
+if (summaryGoal) {
+  summaryGoal.textContent =
+    goal === "any"
+      ? "Any"
+      : goal
+          .replaceAll("-", " ")
+          .replace(/\b\w/g, (letter) =>
+            letter.toUpperCase()
+          );
+}
+
+if (summaryDiet) {
+  summaryDiet.textContent =
+    diet === "none"
+      ? "None"
+      : diet
+          .replaceAll("-", " ")
+          .replace(/\b\w/g, (letter) =>
+            letter.toUpperCase()
+          );
 }
       
 
