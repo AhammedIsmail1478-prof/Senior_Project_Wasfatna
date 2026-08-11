@@ -1418,30 +1418,32 @@ if (smartIngredientSuggestions) {
 
   recipes.forEach((recipe) => {
 
-    const missing =
-      Array.isArray(recipe.missing_ingredients)
-        ? recipe.missing_ingredients
-        : [];
+  const missing =
+    Array.isArray(recipe.missing_ingredients)
+      ? recipe.missing_ingredients
+      : [];
 
-    missing.forEach((item) => {
+  const uniqueMissingNames =
+    new Set(
+      missing
+        .map((item) =>
+          String(item?.name || "")
+            .trim()
+            .toLowerCase()
+        )
+        .filter(Boolean)
+    );
 
-      const name =
-        String(item?.name || "")
-          .trim()
-          .toLowerCase();
+  uniqueMissingNames.forEach((name) => {
 
-      if (!name) {
-        return;
-      }
+    if (ingredients.includes(name)) {
+      return;
+    }
 
-      if (ingredients.includes(name)) {
-        return;
-      }
-
-      missingCounts[name] =
-        (missingCounts[name] || 0) + 1;
-    });
+    missingCounts[name] =
+      (missingCounts[name] || 0) + 1;
   });
+});
 
   const suggestedIngredients =
   Object.entries(missingCounts)
