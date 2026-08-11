@@ -219,6 +219,7 @@ require 'auth.php';
           </div>
 
         </div>
+        </div>
 
         <!-- Results Panel -->
         <div class="panel">
