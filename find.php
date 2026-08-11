@@ -157,66 +157,70 @@ require 'auth.php';
           hidden
         >
 
-          <div class="smart-summary-header">
-            <div>
-              <h3>💡 Improve Your Matches</h3>
-              <p class="muted">
-                Smart suggestions based on your current search.
-              </p>
-            </div>
-          </div>
-
-          <div class="smart-summary-section">
-            <div class="smart-summary-label">
-              Current ingredients
-            </div>
-
-            <div
-              id="summaryIngredients"
-              class="smart-summary-value"
-            >
-              None
-            </div>
-          </div>
-
-          <div class="smart-summary-grid">
-
-            <div class="smart-summary-box">
-              <span>🍽 Recipes Found</span>
-              <strong id="summaryRecipeCount">0</strong>
-            </div>
-
-            <div class="smart-summary-box">
-              <span>🌶 Spice</span>
-              <strong id="summarySpice">Any</strong>
-            </div>
-
-            <div class="smart-summary-box">
-              <span>🎯 Goal</span>
-              <strong id="summaryGoal">Any</strong>
-            </div>
-
-            <div class="smart-summary-box">
-              <span>🥗 Dietary</span>
-              <strong id="summaryDiet">None</strong>
-            </div>
-
-          </div>
-
           <div class="smart-summary-section">
 
-            <div class="smart-summary-label">
-              Suggested ingredients to improve your matches
-            </div>
+  <div class="smart-summary-label">
+    Current ingredients
+  </div>
 
-            <div
-              id="smartIngredientSuggestions"
-              class="smart-ingredient-suggestions"
-            >
-              No suggestions yet.
-            </div>
+  <div
+    id="summaryIngredients"
+    class="smart-summary-value smart-current-ingredients"
+  >
+    None
+  </div>
 
-          </div>
+</div>
+
+
+<div class="smart-summary-meta">
+
+  <div class="smart-match-count">
+    🍽
+    <strong id="summaryRecipeCount">0</strong>
+    matching recipes
+  </div>
+
+  <div class="smart-preference-chips">
+
+    <span class="smart-preference-chip">
+      🌶
+      <span id="summarySpice">Any</span>
+    </span>
+
+    <span class="smart-preference-chip">
+      🎯
+      <span id="summaryGoal">Any</span>
+    </span>
+
+    <span class="smart-preference-chip">
+      🥗
+      <span id="summaryDiet">None</span>
+    </span>
+
+  </div>
+
+</div>
+
+
+<div class="smart-summary-section">
+
+  <div class="smart-summary-label">
+    Recommended next ingredients
+  </div>
+
+  <div class="smart-summary-hint">
+    Frequently needed by your matching recipes
+  </div>
+
+  <div
+    id="smartIngredientSuggestions"
+    class="smart-ingredient-suggestions"
+  >
+    No suggestions yet.
+  </div>
+
+</div>
 
         </div>
         </div>
