@@ -7,7 +7,7 @@ require 'auth.php';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wasfatna — Find Your Recipe</title>
-  <link rel="stylesheet" href="styles.css?v=37" />
+  <link rel="stylesheet" href="styles.css?v=38" />
   <script>var t=localStorage.getItem("wasfatna-theme");if(t)document.documentElement.setAttribute("data-theme",t);</script>
 </head>
 
@@ -394,19 +394,14 @@ require 'auth.php';
 
       <div class="about-feature-item">
         <span>✓</span>
-        Shopping list and recipe printing
-      </div>
-
-      <div class="about-feature-item">
-        <span>✓</span>
         Dietary and spice preferences
       </div>
 
       <div class="about-feature-item">
-        <span>✓</span>
-        Dark and light display modes
-      </div>
-
+  <span>✓</span>
+  Ratings and recipe reviews
+</div>
+      
     </div>
 
   </section>
