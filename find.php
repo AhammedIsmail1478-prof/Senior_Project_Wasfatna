@@ -60,6 +60,7 @@ require 'auth.php';
       </p>
 
       <div class="grid-2">
+        <div class="left-search-column">
 
         <!-- User Input Panel -->
         <div class="panel">
