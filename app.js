@@ -1814,33 +1814,63 @@ ${
   class="recipe-review-section"
   data-recipe-id="${recipeId}"
 >
-  <div class="review-title">
-    💬 Write a Review
+
+  <div class="review-action-buttons">
+
+    <button
+      type="button"
+      class="btn btn-outline toggle-reviews-btn"
+    >
+      💬 Reviews
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline toggle-write-review-btn"
+    >
+      ✍ Write a Review
+    </button>
+
   </div>
-
-  <textarea
-    class="review-input"
-    rows="3"
-    maxlength="500"
-    placeholder="Write your review..."
-  ></textarea>
-
-  <button
-    type="button"
-    class="btn btn-primary post-review-btn"
-    data-recipe-id="${recipeId}"
-  >
-    Post Review
-  </button>
 
   <div
-    class="reviews-list"
-    data-recipe-id="${recipeId}"
+    class="write-review-panel"
+    hidden
   >
-    <div class="review-loading">
-      Loading reviews...
-    </div>
+
+    <textarea
+      class="review-input"
+      rows="3"
+      maxlength="500"
+      placeholder="Write your review..."
+    ></textarea>
+
+    <button
+      type="button"
+      class="btn btn-primary post-review-btn"
+      data-recipe-id="${recipeId}"
+    >
+      Post Review
+    </button>
+
   </div>
+
+  <div
+    class="reviews-panel"
+    hidden
+  >
+
+    <div
+      class="reviews-list"
+      data-recipe-id="${recipeId}"
+    >
+      <div class="review-loading">
+        Loading reviews...
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 ${
