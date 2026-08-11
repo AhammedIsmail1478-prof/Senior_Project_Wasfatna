@@ -1356,10 +1356,23 @@ if (smartSearchSummary) {
 }
 
 if (summaryIngredients) {
-  summaryIngredients.textContent =
-    ingredients.length
-      ? ingredients.join(", ")
-      : "None";
+
+  if (ingredients.length) {
+
+    summaryIngredients.innerHTML =
+      ingredients
+        .map((ingredient) => `
+          <span class="current-ingredient-chip">
+            ${escapeHtml(ingredient)}
+          </span>
+        `)
+        .join("");
+
+  } else {
+
+    summaryIngredients.textContent = "None";
+
+  }
 }
 
 if (summaryRecipeCount) {
@@ -1431,12 +1444,15 @@ if (smartIngredientSuggestions) {
   });
 
   const suggestedIngredients =
-    Object.entries(missingCounts)
-      .sort((first, second) =>
-        second[1] - first[1]
-      )
-      .slice(0, 5)
-      .map(([name]) => name);
+  Object.entries(missingCounts)
+    .sort((first, second) =>
+      second[1] - first[1]
+    )
+    .slice(0, 5)
+    .map(([name, count]) => ({
+      name,
+      count
+    }));
 
   if (suggestedIngredients.length === 0) {
 
@@ -1449,17 +1465,24 @@ if (smartIngredientSuggestions) {
   } else {
 
     smartIngredientSuggestions.innerHTML =
-      suggestedIngredients
-        .map((name) => `
-          <button
-            type="button"
-            class="smart-ingredient-btn"
-            data-ingredient="${escapeHtml(name)}"
-          >
-            + ${escapeHtml(name)}
-          </button>
-        `)
-        .join("");
+  suggestedIngredients
+    .map(({ name, count }) => `
+      <button
+        type="button"
+        class="smart-ingredient-btn"
+        data-ingredient="${escapeHtml(name)}"
+        title="Needed by ${count} matching recipes"
+      >
+        <span class="smart-ingredient-name">
+          + ${escapeHtml(name)}
+        </span>
+
+        <span class="smart-ingredient-count">
+          ${count} recipe${count === 1 ? "" : "s"}
+        </span>
+      </button>
+    `)
+    .join("");
   }
 }
 
