@@ -2396,6 +2396,108 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   margin-top:0;
 }
 
+/* ---------- Smart Search Summary ---------- */
+
+.smart-search-summary{
+  margin-top:18px;
+  padding:18px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.smart-summary-header h3{
+  margin:0 0 4px;
+  font-size:22px;
+  color:var(--text);
+}
+
+.smart-summary-header p{
+  margin:0;
+  font-size:15px;
+}
+
+.smart-summary-section{
+  margin-top:16px;
+}
+
+.smart-summary-label{
+  margin-bottom:8px;
+  font-size:15px;
+  font-weight:800;
+  color:var(--muted);
+}
+
+.smart-summary-value{
+  font-size:17px;
+  font-weight:700;
+  color:var(--text);
+}
+
+.smart-summary-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px;
+}
+
+.smart-summary-box{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+}
+
+.smart-summary-box span{
+  display:block;
+  margin-bottom:5px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.smart-summary-box strong{
+  font-size:16px;
+  color:var(--text);
+}
+
+.smart-ingredient-suggestions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.smart-ingredient-btn{
+  border:1px solid rgba(37,194,160,.35);
+  border-radius:999px;
+  padding:8px 12px;
+
+  background:rgba(37,194,160,.10);
+  color:var(--text);
+
+  font-family:var(--font);
+  font-size:14px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease;
+}
+
+.smart-ingredient-btn:hover{
+  transform:translateY(-2px);
+  background:rgba(37,194,160,.18);
+  border-color:rgba(37,194,160,.55);
+}
+
+.smart-no-suggestions{
+  color:var(--muted);
+  font-size:14px;
+}
+
 /* ---------- Profile Light Theme ---------- */
 
 [data-theme="light"] .profile-label{
@@ -2809,3 +2911,15 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   }
 }
 
+[data-theme="light"] .smart-search-summary{
+  background:#fff;
+}
+
+[data-theme="light"] .smart-summary-box{
+  background:rgba(0,0,0,.03);
+}
+
+[data-theme="light"] .smart-ingredient-btn{
+  background:rgba(232,114,12,.08);
+  border-color:rgba(232,114,12,.30);
+}
