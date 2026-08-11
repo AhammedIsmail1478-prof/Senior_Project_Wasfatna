@@ -2572,6 +2572,83 @@ if (resultsEl) {
     "click",
     async (event) => {
 
+      const toggleReviewsBtn =
+  event.target.closest(
+    ".toggle-reviews-btn"
+  );
+
+if (toggleReviewsBtn) {
+
+  const reviewSection =
+    toggleReviewsBtn.closest(
+      ".recipe-review-section"
+    );
+
+  if (!reviewSection) {
+    return;
+  }
+
+  const reviewsPanel =
+    reviewSection.querySelector(
+      ".reviews-panel"
+    );
+
+  const writePanel =
+    reviewSection.querySelector(
+      ".write-review-panel"
+    );
+
+  if (reviewsPanel) {
+    reviewsPanel.hidden =
+      !reviewsPanel.hidden;
+  }
+
+  if (writePanel) {
+    writePanel.hidden = true;
+  }
+
+  return;
+}
+
+
+const toggleWriteReviewBtn =
+  event.target.closest(
+    ".toggle-write-review-btn"
+  );
+
+if (toggleWriteReviewBtn) {
+
+  const reviewSection =
+    toggleWriteReviewBtn.closest(
+      ".recipe-review-section"
+    );
+
+  if (!reviewSection) {
+    return;
+  }
+
+  const writePanel =
+    reviewSection.querySelector(
+      ".write-review-panel"
+    );
+
+  const reviewsPanel =
+    reviewSection.querySelector(
+      ".reviews-panel"
+    );
+
+  if (writePanel) {
+    writePanel.hidden =
+      !writePanel.hidden;
+  }
+
+  if (reviewsPanel) {
+    reviewsPanel.hidden = true;
+  }
+
+  return;
+}
+
       const reviewBtn =
         event.target.closest(".post-review-btn");
 
