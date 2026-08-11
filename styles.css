@@ -755,6 +755,39 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   cursor:wait;
 }
 
+/* ---------- Collapsible Review Controls ---------- */
+
+.review-action-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.review-action-buttons .btn{
+  flex:1;
+  min-width:150px;
+}
+
+.write-review-panel,
+.reviews-panel{
+  margin-top:12px;
+}
+
+.write-review-panel[hidden],
+.reviews-panel[hidden]{
+  display:none;
+}
+
+.write-review-panel .review-input{
+  margin-top:0;
+}
+
+.toggle-reviews-btn,
+.toggle-write-review-btn{
+  font-size:15px;
+  padding:9px 12px;
+}
+
 /* ---------- Displayed Reviews ---------- */
 
 .reviews-list{
