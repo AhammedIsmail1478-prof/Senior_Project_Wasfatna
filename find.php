@@ -149,6 +149,76 @@ require 'auth.php';
           </div>
         </div>
 
+         <!-- Smart Search Summary -->
+        <div
+          id="smartSearchSummary"
+          class="smart-search-summary"
+          hidden
+        >
+
+          <div class="smart-summary-header">
+            <div>
+              <h3>💡 Improve Your Matches</h3>
+              <p class="muted">
+                Smart suggestions based on your current search.
+              </p>
+            </div>
+          </div>
+
+          <div class="smart-summary-section">
+            <div class="smart-summary-label">
+              Current ingredients
+            </div>
+
+            <div
+              id="summaryIngredients"
+              class="smart-summary-value"
+            >
+              None
+            </div>
+          </div>
+
+          <div class="smart-summary-grid">
+
+            <div class="smart-summary-box">
+              <span>🍽 Recipes Found</span>
+              <strong id="summaryRecipeCount">0</strong>
+            </div>
+
+            <div class="smart-summary-box">
+              <span>🌶 Spice</span>
+              <strong id="summarySpice">Any</strong>
+            </div>
+
+            <div class="smart-summary-box">
+              <span>🎯 Goal</span>
+              <strong id="summaryGoal">Any</strong>
+            </div>
+
+            <div class="smart-summary-box">
+              <span>🥗 Dietary</span>
+              <strong id="summaryDiet">None</strong>
+            </div>
+
+          </div>
+
+          <div class="smart-summary-section">
+
+            <div class="smart-summary-label">
+              Suggested ingredients to improve your matches
+            </div>
+
+            <div
+              id="smartIngredientSuggestions"
+              class="smart-ingredient-suggestions"
+            >
+              No suggestions yet.
+            </div>
+
+          </div>
+
+        </div>
+
         <!-- Results Panel -->
         <div class="panel">
           <div class="stats-grid">
