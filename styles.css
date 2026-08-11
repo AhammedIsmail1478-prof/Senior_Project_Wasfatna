@@ -1060,7 +1060,10 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   padding:12px;
   margin:10px 0;
 }
-.cv-name{ font-weight:800; }
+.cv-name{
+  font-weight:800;
+  font-size:17px;
+}
 .cv-list{ margin:8px 0 10px 18px; color: rgba(233,238,247,.88); }
 /* Sign out confirmation modal */
 .logout-overlay{
@@ -2476,8 +2479,8 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .about-section-heading h3{
-  margin:0 0 2px;
-  font-size:17px;
+  margin:0 0 3px;
+  font-size:22px;
 }
 
 .about-section-heading p{
@@ -2500,8 +2503,8 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 .about-description{
   margin:0;
   color:var(--text);
-  font-size:14px;
-  line-height:1.65;
+  font-size:17px;
+  line-height:1.7;
 }
 
 .about-feature-list{
@@ -2513,14 +2516,14 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 .about-feature-item{
   display:flex;
   align-items:flex-start;
-  gap:9px;
-  padding:10px 12px;
+  gap:10px;
+  padding:12px 14px;
   border:1px solid var(--line);
   border-radius:12px;
   background:rgba(255,255,255,.035);
   color:var(--text);
-  font-size:13px;
-  line-height:1.4;
+  font-size:16px;
+  line-height:1.5;
 }
 
 .about-feature-item span{
@@ -2532,6 +2535,10 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   display:flex;
   align-items:center;
   gap:12px;
+}
+
+.sidepanel-content .cv-card .muted{
+  font-size:15px;
 }
 
 .cv-avatar{
