@@ -614,27 +614,5 @@ require 'auth.php';
 </script>
 
 <script src="app.js?v=25"></script>
-
-<script>
-  if (
-    window.initialRecipeId > 0
-  ) {
-    window.addEventListener(
-      "load",
-      function () {
-
-        const suggestButton =
-          document.getElementById(
-            "suggestBtn"
-          );
-
-        if (suggestButton) {
-          suggestButton.click();
-        }
-
-      }
-    );
-  }
-</script>
 </body>
 </html>
