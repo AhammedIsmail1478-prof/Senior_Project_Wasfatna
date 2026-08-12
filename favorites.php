@@ -56,6 +56,9 @@ if (!isset($_SESSION['user_id'])) {
     </a>
 
     <nav class="nav">
+        <a href="index.php" class="nav-link">
+  Home
+</a>
 
         <a
             class="nav-link"
@@ -85,6 +88,14 @@ if (!isset($_SESSION['user_id'])) {
         >
             🌙 Dark
         </button>
+
+        <button
+  id="aboutBtn"
+  class="nav-link nav-button"
+  type="button"
+>
+  About / CVs
+</button>
 
         <a
             class="nav-link"
