@@ -639,7 +639,8 @@ if (downloadShoppingPdfBtn) {
 }
 
 function addIngredientsToShoppingList(
-  ingredients
+  ingredients,
+  recipeName
 ) {
   if (!Array.isArray(ingredients)) {
     return;
@@ -647,9 +648,11 @@ function addIngredientsToShoppingList(
 
   const items = loadShoppingList();
 
-  const existingNames = new Set(
+  const existingItems = new Set(
     items.map((item) =>
-      normalizeIngredient(item.name)
+      `${normalizeIngredient(
+        item.recipeName || ""
+      )}|${normalizeIngredient(item.name)}`
     )
   );
 
@@ -673,17 +676,24 @@ function addIngredientsToShoppingList(
     const normalizedName =
       normalizeIngredient(name);
 
-    if (existingNames.has(normalizedName)) {
+    const itemKey =
+      `${normalizeIngredient(
+        recipeName || "Recipe"
+      )}|${normalizedName}`;
+
+    if (existingItems.has(itemKey)) {
       return;
     }
 
     items.push({
       name: name,
       quantity: quantity,
+      recipeName: recipeName || "Recipe",
       checked: false
     });
 
-    existingNames.add(normalizedName);
+    existingItems.add(itemKey);
+
     addedCount++;
   });
 
@@ -963,16 +973,54 @@ pdf.line(
 
 y += 8;
 
-      pdf.setFontSize(12);
+      // Group items by recipe name.
+const groupedItems = {};
 
-      items.forEach((item, index) => {
+items.forEach((item) => {
+  const recipeName =
+    item.recipeName || "Other Ingredients";
+
+  if (!groupedItems[recipeName]) {
+    groupedItems[recipeName] = [];
+  }
+
+  groupedItems[recipeName].push(item);
+});
+
+Object.entries(groupedItems).forEach(
+  ([recipeName, recipeItems]) => {
+
+    if (y > pageHeight - 35) {
+      pdf.addPage();
+      y = 22;
+    }
+
+    // Recipe name.
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(15);
+
+    pdf.text(
+      recipeName,
+      margin,
+      y
+    );
+
+    y += 8;
+
+    // Missing ingredients.
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(12);
+
+    recipeItems.forEach(
+      (item, index) => {
+
         if (y > pageHeight - 20) {
           pdf.addPage();
           y = 22;
         }
 
         const status =
-  item.checked ? "✓" : "-";
+          item.checked ? "✓" : "-";
 
         const quantity =
           item.quantity
@@ -996,7 +1044,12 @@ y += 8;
         );
 
         y += wrappedLines.length * 7;
-      });
+      }
+    );
+
+    y += 6;
+  }
+);
 
       pdf.setDrawColor(180);
 
@@ -1938,6 +1991,7 @@ ${
     type="button"
     class="btn btn-outline add-shopping-btn"
     data-shopping-items="${encodedMissingIngredients}"
+    data-recipe-name="${escapeHtml(recipeName)}"
     ${missingIngredients.length === 0 ? "disabled" : ""}
   >
     ${
@@ -2940,9 +2994,13 @@ if (resultsEl) {
             )
           );
 
-        addIngredientsToShoppingList(
-          missingItems
-        );
+        const recipeName =
+  addShoppingBtn.dataset.recipeName || "Recipe";
+
+addIngredientsToShoppingList(
+  missingItems,
+  recipeName
+);
       } catch (error) {
         console.error(
           "Unable to add Shopping List ingredients:",
