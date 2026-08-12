@@ -22,33 +22,71 @@ require 'auth.php';
       </div>
     </div>
     <nav class="nav">
-      <a href="profile.php" class="nav-link">Profile</a>
-      <?php if (is_logged_in()): ?>
-  <a class="nav-link" href="favorites.php">
-    My Favorites
-</a>
-        <a href="signout.php" class="nav-link">Sign out</a>
-      <?php else: ?>
-        <a href="signin.php" class="nav-link">Sign in</a>
-        <a href="signup.php" class="nav-link">Sign up</a>
-      <?php endif; ?>
-      <button
-  type="button"
-  id="shoppingListBtn"
-  class="btn btn-ghost"
->
-  🛒 Shopping List
-  <span id="shoppingListCount" class="shopping-count">0</span>
-</button>
 
-<button type="button" id="themeToggle" class="btn btn-ghost btn-small">
-  🌙 Dark
-</button>
+  <a href="index.php" class="nav-link">
+    Home
+  </a>
 
-<button type="button" id="aboutBtn" class="btn btn-ghost">
-  About / CVs
-</button>
-    </nav>
+  <a href="find.php" class="nav-link">
+    Find Recipes
+  </a>
+
+  <?php if (is_logged_in()): ?>
+
+    <a href="favorites.php" class="nav-link">
+      My Favorites
+    </a>
+
+    <a href="profile.php" class="nav-link">
+      Profile
+    </a>
+
+  <?php else: ?>
+
+    <a href="signin.php" class="nav-link">
+      Sign in
+    </a>
+
+    <a href="signup.php" class="nav-link">
+      Sign up
+    </a>
+
+  <?php endif; ?>
+
+  <button
+    type="button"
+    id="shoppingListBtn"
+    class="nav-link nav-button"
+  >
+    🛒 Shopping List
+    <span id="shoppingListCount" class="shopping-count">0</span>
+  </button>
+
+  <button
+    type="button"
+    id="themeToggle"
+    class="nav-link nav-button"
+  >
+    🌙 Dark
+  </button>
+
+  <button
+    type="button"
+    id="aboutBtn"
+    class="nav-link nav-button"
+  >
+    About / CVs
+  </button>
+
+  <?php if (is_logged_in()): ?>
+
+    <a href="signout.php" class="nav-link">
+      Sign out
+    </a>
+
+  <?php endif; ?>
+
+</nav>
   </header>
 
   <main class="container">
