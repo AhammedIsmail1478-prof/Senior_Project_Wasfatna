@@ -598,13 +598,13 @@ require 'auth.php';
     <span id="toastMessage"></span>
 </div>
 
- <script
+<script
   src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.2/jspdf.umd.min.js"
 ></script>
 
-  <script
+<script
   src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
-></>
+></script>
 
 <script>
   window.initialRecipeId =
@@ -613,6 +613,7 @@ require 'auth.php';
       : 0 ?>;
 </script>
 
-<script src="app.js?v=26"></script>
+<script src="app.js?v=27"></script>
+
 </body>
 </html>
