@@ -154,7 +154,165 @@ if (!isset($_SESSION['user_id'])) {
 
 </footer>
 
+  <!-- About Side Panel -->
+  <aside id="aboutPanel" class="sidepanel" aria-hidden="true">
+    <div class="sidepanel-top">
+      <div>
+        <div class="sidepanel-title">About &amp; CVs</div>
+      </div>
+      <button
+  type="button"
+  id="aboutClose"
+  class="btn btn-ghost"
+>
+  ✕
+</button>
+    </div>
+   <div class="sidepanel-content">
+
+  <section class="about-section">
+
+    <div class="about-section-heading">
+      <span class="about-section-icon">📖</span>
+
+      <div>
+        <h3>About Wasfatna</h3>
+        <p class="muted">Smart Meal Suggestions</p>
+      </div>
+    </div>
+
+    <p class="about-description">
+      <strong>Wasfatna</strong> is a smart meal recommendation system
+      developed as a University of Bahrain Senior Project. It helps users
+      discover recipes using available ingredients while considering their
+      dietary preferences and helping to reduce food waste.
+    </p>
+
+  </section>
+
+  <section class="about-section">
+
+    <div class="about-section-heading">
+      <span class="about-section-icon">✨</span>
+
+      <div>
+        <h3>Key Features</h3>
+        <p class="muted">What you can do with Wasfatna</p>
+      </div>
+    </div>
+
+    <div class="about-feature-list">
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Ingredient-based recipe search
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Personalized recipe recommendations
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Save and manage favorite recipes
+      </div>
+
+      <div class="about-feature-item">
+        <span>✓</span>
+        Dietary and spice preferences
+      </div>
+
+      <div class="about-feature-item">
+  <span>✓</span>
+  Ratings and recipe reviews
+</div>
+      
+    </div>
+
+  </section>
+
+  <section class="about-section">
+
+    <div class="about-section-heading">
+      <span class="about-section-icon">👨‍💻</span>
+
+      <div>
+        <h3>Team Members</h3>
+        <p class="muted">University of Bahrain</p>
+      </div>
+    </div>
+
+    <div class="cv-card">
+      <div class="cv-avatar">A</div>
+
+      <div>
+        <div class="cv-name">Ahammed Ismail</div>
+        <div class="muted">202201478</div>
+      </div>
+    </div>
+
+    <div class="cv-card">
+      <div class="cv-avatar">B</div>
+
+      <div>
+        <div class="cv-name">Bilal Mohammad Tofeeq</div>
+        <div class="muted">202200507</div>
+      </div>
+    </div>
+
+    <div class="cv-card">
+      <div class="cv-avatar">B</div>
+
+      <div>
+        <div class="cv-name">
+          Bassem Mohammad Irshad Mohammed Islam
+        </div>
+
+        <div class="muted">202201552</div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="about-project-info">
+
+    <strong>University of Bahrain</strong>
+
+    <span>Senior Project 2025–2026</span>
+
+    <span>Wasfatna Version 1.0</span>
+
+  </div>
+
+</div>
+  </aside>
+    
 <script src="favorites.js?v=3"></script>
+    <script>
+  const aboutBtn = document.getElementById("aboutBtn");
+  const aboutPanel = document.getElementById("aboutPanel");
+  const aboutClose = document.getElementById("aboutClose");
+  const backdrop = document.getElementById("backdrop");
+
+  function openAbout() {
+    aboutPanel.classList.add("open");
+    aboutPanel.setAttribute("aria-hidden", "false");
+    backdrop.hidden = false;
+  }
+
+  function closeAbout() {
+    aboutPanel.classList.remove("open");
+    aboutPanel.setAttribute("aria-hidden", "true");
+    backdrop.hidden = true;
+  }
+
+  if (aboutBtn && aboutPanel && aboutClose && backdrop) {
+    aboutBtn.addEventListener("click", openAbout);
+    aboutClose.addEventListener("click", closeAbout);
+    backdrop.addEventListener("click", closeAbout);
+  }
+</script>
 
 </body>
 </html>
