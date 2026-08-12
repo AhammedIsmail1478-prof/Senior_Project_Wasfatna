@@ -261,6 +261,41 @@ require 'auth.php';
 </div>
 
         </div>
+
+        <!-- Recent Ingredient Searches -->
+        <div
+          id="recentSearchesSection"
+          class="recent-searches-section"
+          hidden
+        >
+
+          <div class="recent-searches-header">
+
+            <div>
+              <h3>🕘 Recent Searches</h3>
+
+              <p class="muted">
+                Quickly reuse or edit your previous ingredient searches.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              id="clearRecentSearchesBtn"
+              class="btn btn-outline btn-small"
+            >
+              Clear History
+            </button>
+
+          </div>
+
+          <div
+            id="recentSearchesList"
+            class="recent-searches-list"
+          ></div>
+
+        </div>
+
         </div>
 
         <!-- Results Panel -->
