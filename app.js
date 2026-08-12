@@ -2116,6 +2116,16 @@ if (statsIngredients) {
   });
 }
 
+// ---------- Open Recipe of the Day ----------
+if (
+  requestedRecipeId > 0 &&
+  suggestBtn
+) {
+  window.addEventListener("load", () => {
+    suggestBtn.click();
+  });
+}
+
 // ---------- Favorite recipe button ----------
 if (resultsEl) {
   resultsEl.addEventListener(
@@ -4463,9 +4473,6 @@ if (signupForm && signupBtn) {
         buttonText.textContent =
           "Creating account...";
       }
-
-let requestedRecipeId =
-  Number(window.initialRecipeId) || 0;
       
       if (spinner) {
         spinner.hidden = false;
