@@ -184,19 +184,19 @@ require 'auth.php';
   <div class="smart-preference-chips">
 
     <span class="smart-preference-chip">
-      🌶
-      <span id="summarySpice">Any</span>
-    </span>
+  🌶 Spice:
+  <span id="summarySpice">Any</span>
+</span>
 
-    <span class="smart-preference-chip">
-      🎯
-      <span id="summaryGoal">Any</span>
-    </span>
+<span class="smart-preference-chip">
+  🎯 Goal:
+  <span id="summaryGoal">Any</span>
+</span>
 
-    <span class="smart-preference-chip">
-      🥗
-      <span id="summaryDiet">None</span>
-    </span>
+<span class="smart-preference-chip">
+  🥗 Diet:
+  <span id="summaryDiet">None</span>
+</span>
 
   </div>
 
