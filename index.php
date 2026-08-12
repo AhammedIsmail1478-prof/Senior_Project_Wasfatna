@@ -406,27 +406,80 @@ if (
 
 <body>
   <!-- Top Navigation -->
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo">🍲</span>
-      <div>
-        <div class="brand-title">Wasfatna</div>
-        <div class="brand-sub">Smart Meal Suggestions</div>
-      </div>
-    </div>
+<header class="topbar">
 
-    <nav class="nav">
-      <a href="profile.php" class="nav-link">Profile</a>
-      <?php if (is_logged_in()): ?>
-        <a href="signout.php" class="nav-link">Sign out</a>
-      <?php else: ?>
-        <a href="signin.php" class="nav-link">Sign in</a>
-        <a href="signup.php" class="nav-link">Sign up</a>
-      <?php endif; ?>
-      <button id="themeToggle" class="btn btn-ghost btn-small">🌙 Dark</button>
-      <button id="aboutBtn" class="btn btn-ghost">About / CVs</button>
-    </nav>
-  </header>
+  <a href="index.php" class="brand">
+    <span class="logo">🍲</span>
+
+    <div>
+      <div class="brand-title">Wasfatna</div>
+      <div class="brand-sub">Smart Meal Suggestions</div>
+    </div>
+  </a>
+
+  <nav class="nav">
+
+    <a href="index.php" class="nav-link">
+      Home
+    </a>
+
+    <a href="find.php" class="nav-link">
+      Find Recipes
+    </a>
+
+    <?php if (is_logged_in()): ?>
+
+      <a href="favorites.php" class="nav-link">
+        My Favorites
+      </a>
+
+      <a href="profile.php" class="nav-link">
+        Profile
+      </a>
+
+    <?php else: ?>
+
+      <a href="signin.php" class="nav-link">
+        Sign in
+      </a>
+
+      <a href="signup.php" class="nav-link">
+        Sign up
+      </a>
+
+    <?php endif; ?>
+
+    <a href="shopping_list.php" class="nav-link">
+      🛒 Shopping List
+    </a>
+
+    <button
+      id="themeToggle"
+      class="nav-link nav-button"
+      type="button"
+    >
+      🌙 Dark
+    </button>
+
+    <button
+      id="aboutBtn"
+      class="nav-link nav-button"
+      type="button"
+    >
+      About / CVs
+    </button>
+
+    <?php if (is_logged_in()): ?>
+
+      <a href="signout.php" class="nav-link">
+        Sign out
+      </a>
+
+    <?php endif; ?>
+
+  </nav>
+
+</header>
 
   <main id="home">
     <!-- Hero Section -->
