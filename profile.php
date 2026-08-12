@@ -86,6 +86,10 @@ $favorite_count = (int)$stmt->fetchColumn();
       My Favorites
     </a>
 
+    <a href="profile.php" class="nav-link">
+  Profile
+</a>
+
     <button
       id="themeToggle"
       class="btn btn-ghost btn-small"
