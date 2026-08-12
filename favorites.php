@@ -287,9 +287,11 @@ if (!isset($_SESSION['user_id'])) {
 
 </div>
   </aside>
+
+    <div id="backdrop" class="backdrop" hidden></div>
     
-<script src="favorites.js?v=3"></script>
-    <script src="app.js?v=27"></script>
+    <script src="favorites.js?v=3"></script>
+    
     <script>
   const aboutBtn = document.getElementById("aboutBtn");
   const aboutPanel = document.getElementById("aboutPanel");
