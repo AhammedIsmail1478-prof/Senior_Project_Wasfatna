@@ -255,6 +255,23 @@ const nextRecipeBtn =
 const recipePageInfo =
   document.getElementById("recipePageInfo");
 
+// ---------- Recent Ingredient Searches ----------
+
+const recentSearchesSection =
+  document.getElementById(
+    "recentSearchesSection"
+  );
+
+const recentSearchesList =
+  document.getElementById(
+    "recentSearchesList"
+  );
+
+const clearRecentSearchesBtn =
+  document.getElementById(
+    "clearRecentSearchesBtn"
+  );
+
 // Recently Viewed elements.
 const recentlyViewedSection =
   document.getElementById(
@@ -508,6 +525,203 @@ if (
     );
   }
 }
+
+// ---------- Recent Ingredient Searches ----------
+
+const RECENT_SEARCHES_KEY =
+  "wasfatna-recent-ingredient-searches";
+
+const MAX_RECENT_SEARCHES = 5;
+
+function loadRecentSearches() {
+  try {
+    const saved =
+      localStorage.getItem(
+        RECENT_SEARCHES_KEY
+      );
+
+    if (!saved) {
+      return [];
+    }
+
+    const searches =
+      JSON.parse(saved);
+
+    return Array.isArray(searches)
+      ? searches
+      : [];
+  } catch (error) {
+    console.error(
+      "Unable to load recent searches:",
+      error
+    );
+
+    return [];
+  }
+}
+
+function saveRecentSearches(searches) {
+  localStorage.setItem(
+    RECENT_SEARCHES_KEY,
+    JSON.stringify(searches)
+  );
+
+  renderRecentSearches();
+}
+
+function addRecentSearch(ingredients) {
+  if (
+    !Array.isArray(ingredients) ||
+    ingredients.length === 0
+  ) {
+    return;
+  }
+
+  const searchText =
+    ingredients.join(", ");
+
+  let searches =
+    loadRecentSearches();
+
+  // Remove same search if it already exists.
+  searches =
+    searches.filter(
+      (search) =>
+        normalizeIngredient(search) !==
+        normalizeIngredient(searchText)
+    );
+
+  // Put newest search first.
+  searches.unshift(searchText);
+
+  // Keep only last 5 searches.
+  searches =
+    searches.slice(
+      0,
+      MAX_RECENT_SEARCHES
+    );
+
+  saveRecentSearches(searches);
+}
+
+function renderRecentSearches() {
+  if (
+    !recentSearchesSection ||
+    !recentSearchesList
+  ) {
+    return;
+  }
+
+  const searches =
+    loadRecentSearches();
+
+  if (searches.length === 0) {
+    recentSearchesSection.hidden = true;
+
+    recentSearchesList.innerHTML = "";
+
+    return;
+  }
+
+  recentSearchesSection.hidden = false;
+
+  recentSearchesList.innerHTML =
+    searches
+      .map(
+        (search, index) => `
+          <div class="recent-search-item">
+
+            <div class="recent-search-text">
+              ${escapeHtml(search)}
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-outline btn-small reuse-search-btn"
+              data-search-index="${index}"
+            >
+              ↻ Use Again
+            </button>
+
+          </div>
+        `
+      )
+      .join("");
+}
+
+// Reuse a previous ingredient search.
+if (recentSearchesList) {
+  recentSearchesList.addEventListener(
+    "click",
+    (event) => {
+
+      const reuseBtn =
+        event.target.closest(
+          ".reuse-search-btn"
+        );
+
+      if (!reuseBtn) {
+        return;
+      }
+
+      const index =
+        Number(
+          reuseBtn.dataset.searchIndex
+        );
+
+      const searches =
+        loadRecentSearches();
+
+      if (!searches[index]) {
+        return;
+      }
+
+      ingredientsInput.value =
+        searches[index];
+
+      if (statsIngredients) {
+        statsIngredients.textContent =
+          String(
+            parseIngredients(
+              searches[index]
+            ).length
+          );
+      }
+
+      ingredientsInput.focus();
+
+      showToast(
+        "Previous search loaded. You can edit it before searching.",
+        "↻"
+      );
+    }
+  );
+}
+
+
+// Clear recent ingredient searches.
+if (clearRecentSearchesBtn) {
+  clearRecentSearchesBtn.addEventListener(
+    "click",
+    () => {
+
+      localStorage.removeItem(
+        RECENT_SEARCHES_KEY
+      );
+
+      renderRecentSearches();
+
+      showToast(
+        "Recent searches cleared.",
+        "🗑️"
+      );
+    }
+  );
+}
+
+
+// Show saved searches when page opens.
+renderRecentSearches();
 
 // ---------- Shopping List ----------
 
@@ -1324,6 +1538,13 @@ if (recipeNavigation) {
 
   resultsCount.textContent = "0";
   return;
+}
+
+   if (
+  ingredients.length > 0 &&
+  requestedRecipeId <= 0
+) {
+  addRecentSearch(ingredients);
 }
 
     suggestBtn.disabled = true;
