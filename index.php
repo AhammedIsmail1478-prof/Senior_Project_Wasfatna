@@ -449,10 +449,6 @@ if (
 
     <?php endif; ?>
 
-    <a href="shopping_list.php" class="nav-link">
-      🛒 Shopping List
-    </a>
-
     <button
       id="themeToggle"
       class="nav-link nav-button"
