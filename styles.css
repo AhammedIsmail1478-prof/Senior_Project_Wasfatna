@@ -2464,9 +2464,9 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
 .smart-summary-label{
   margin-bottom:8px;
-  font-size:17px;
+  font-size:20px;
   font-weight:800;
-  color:var(--muted);
+  color:var(--text);
 }
 
 .smart-summary-value{
@@ -2536,7 +2536,7 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 .smart-summary-hint{
   margin-bottom:10px;
   color:var(--muted);
-  font-size:15px;
+  font-size:16px;
 }
 
 .smart-ingredient-suggestions{
@@ -2576,7 +2576,7 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .smart-ingredient-count{
-  font-size:14px;
+  font-size:16px;
   color:var(--muted);
 }
 
