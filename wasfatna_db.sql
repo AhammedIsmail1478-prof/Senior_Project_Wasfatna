@@ -1,13 +1,40 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 18, 2026 at 08:59 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `wasfatna`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
 
 CREATE TABLE `categories` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `categories`
+--
 
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (4, 'Bread'),
@@ -21,6 +48,11 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (7, 'Snacks'),
 (3, 'Soups');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
 
 CREATE TABLE `favorites` (
   `favorite_id` int(11) NOT NULL,
@@ -29,17 +61,29 @@ CREATE TABLE `favorites` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `favorites`
+--
 
 INSERT INTO `favorites` (`favorite_id`, `user_id`, `recipe_id`, `created_at`) VALUES
-(18, 1, 4, '2026-07-26 18:38:33');
+(28, 2, 1, '2026-08-06 22:48:20'),
+(29, 5, 7, '2026-08-09 06:37:43'),
+(30, 5, 9, '2026-08-09 06:38:04');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ingredients`
+--
 
 CREATE TABLE `ingredients` (
   `ingredient_id` int(11) NOT NULL,
   `ingredient_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+--
+-- Dumping data for table `ingredients`
+--
 
 INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`) VALUES
 (27, 'Almonds'),
@@ -157,6 +201,11 @@ INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`) VALUES
 (60, 'Yeast'),
 (28, 'Yogurt');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipes`
+--
 
 CREATE TABLE `recipes` (
   `recipe_id` int(11) NOT NULL,
@@ -175,6 +224,9 @@ CREATE TABLE `recipes` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `recipes`
+--
 
 INSERT INTO `recipes` (`recipe_id`, `category_id`, `recipe_name`, `description`, `prep_time`, `cook_time`, `servings`, `difficulty`, `spice_level`, `diet`, `goal`, `calories`, `image`, `created_at`) VALUES
 (1, 1, 'Chicken Machboos', 'Traditional Bahraini spiced chicken rice.', 20, 60, 6, 'Medium', 'medium', 'non-vegetarian,gluten-free,lactose-free', 'high-protein', 680, 'chicken_machboos.png', '2026-07-24 17:09:48'),
@@ -221,7 +273,7 @@ INSERT INTO `recipes` (`recipe_id`, `category_id`, `recipe_name`, `description`,
 (42, 5, 'Cheese Regag', 'Thin Bahraini regag bread filled with melted cheese.', 10, 10, 2, 'Easy', 'mild', 'vegetarian', 'any', 350, 'cheese_regag.png', '2026-07-24 17:09:48'),
 (43, 5, 'Egg Regag', 'Traditional regag bread topped with freshly cooked eggs.', 10, 10, 2, 'Easy', 'mild', 'vegetarian', 'high-protein', 330, 'egg_regag.png', '2026-07-24 17:09:48'),
 (44, 6, 'Luqaimat', 'Traditional Bahraini sweet dumplings drizzled with date syrup.', 20, 20, 6, 'Easy', 'mild', 'vegetarian,lactose-free', 'any', 380, 'luqaimat.png', '2026-07-24 17:09:48'),
-(45, 6, 'Khafaroosh', 'Sweet Bahraini fried cakes flavored with saffron and cardamom.', 20, 20, 6, 'Medium', 'mild', 'vegetarian', 'any', 420, 'khafaroosh.png', '2026-07-24 17:09:48'),
+(45, 6, 'Khanfaroosh', 'Sweet Bahraini fried cakes flavored with saffron and cardamom.', 20, 20, 6, 'Medium', 'mild', 'vegetarian', 'any', 420, 'khanfaroosh.png', '2026-07-24 17:09:48'),
 (46, 6, 'Bahraini Halwa', 'Classic Bahraini halwa made with saffron, rose water, and nuts.', 25, 60, 8, 'Hard', 'mild', 'vegetarian,gluten-free,lactose', 'any', 450, 'bahraini_halwa.png', '2026-07-24 17:09:48'),
 (47, 6, 'Sago', 'Traditional sago pudding flavored with saffron and cardamom.', 15, 30, 4, 'Easy', 'mild', 'vegetarian,gluten-free,lactose', 'any', 290, 'sago.png', '2026-07-24 17:09:48'),
 (48, 6, 'Aseeda', 'Traditional sweet wheat pudding served warm with butter.', 15, 25, 4, 'Easy', 'mild', 'vegetarian', 'any', 340, 'aseeda.png', '2026-07-24 17:09:48'),
@@ -262,6 +314,11 @@ INSERT INTO `recipes` (`recipe_id`, `category_id`, `recipe_name`, `description`,
 (83, 10, 'Supreme Pizza', 'Pizza topped with chicken, beef, mushrooms, onions, bell peppers, olives, and mozzarella cheese.', 25, 18, 4, 'Medium', 'medium', 'non-vegetarian', 'high-protein', 420, 'supreme_pizza.png', '2026-07-24 17:09:48'),
 (84, 10, 'Mexican Pizza', 'Spicy pizza topped with seasoned beef, jalapeños, sweet corn, onions, and mozzarella cheese.', 25, 18, 4, 'Medium', 'spicy', 'non-vegetarian', 'high-protein', 390, 'mexican_pizza.png', '2026-07-24 17:09:48');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe_ingredients`
+--
 
 CREATE TABLE `recipe_ingredients` (
   `id` int(11) NOT NULL,
@@ -271,6 +328,9 @@ CREATE TABLE `recipe_ingredients` (
   `is_core` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `recipe_ingredients`
+--
 
 INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`, `is_core`) VALUES
 (1, 1, 1, '1 kg', 1),
@@ -1011,6 +1071,66 @@ INSERT INTO `recipe_ingredients` (`id`, `recipe_id`, `ingredient_id`, `quantity`
 (786, 21, 10, '1/2 tsp', 0),
 (787, 21, 11, '2 tbsp', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe_ratings`
+--
+
+CREATE TABLE `recipe_ratings` (
+  `rating_id` int(11) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `recipe_id` int(11) NOT NULL,
+  `rating` tinyint(3) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ;
+
+--
+-- Dumping data for table `recipe_ratings`
+--
+
+INSERT INTO `recipe_ratings` (`rating_id`, `user_id`, `recipe_id`, `rating`, `created_at`, `updated_at`) VALUES
+(1, 2, 8, 4, '2026-08-09 20:48:24', '2026-08-09 20:48:24'),
+(2, 2, 68, 5, '2026-08-10 21:21:43', '2026-08-12 00:02:25'),
+(3, 2, 1, 4, '2026-08-10 22:08:36', '2026-08-10 22:08:36'),
+(4, 2, 66, 4, '2026-08-12 00:02:21', '2026-08-12 00:02:21'),
+(6, 6, 28, 4, '2026-08-12 18:24:50', '2026-08-12 18:24:50'),
+(7, 6, 78, 4, '2026-08-12 22:56:36', '2026-08-12 22:57:57'),
+(8, 2, 78, 4, '2026-08-12 22:57:14', '2026-08-12 22:57:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe_reviews`
+--
+
+CREATE TABLE `recipe_reviews` (
+  `review_id` int(11) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `recipe_id` int(11) NOT NULL,
+  `review_text` varchar(500) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `recipe_reviews`
+--
+
+INSERT INTO `recipe_reviews` (`review_id`, `user_id`, `recipe_id`, `review_text`, `created_at`, `updated_at`) VALUES
+(1, 2, 8, 'Yummy Delicious', '2026-08-10 20:49:43', '2026-08-10 20:49:43'),
+(2, 2, 68, 'I like this date milkshake', '2026-08-10 21:21:54', '2026-08-10 21:21:54'),
+(3, 2, 68, 'Nice milkshake', '2026-08-10 21:24:25', '2026-08-10 21:24:25'),
+(4, 2, 8, 'Like it', '2026-08-10 22:08:23', '2026-08-10 22:08:23'),
+(5, 2, 1, 'Yumm', '2026-08-10 22:08:42', '2026-08-10 22:08:42'),
+(6, 2, 78, 'Looks yummy and delicious', '2026-08-12 22:57:31', '2026-08-12 22:57:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe_steps`
+--
 
 CREATE TABLE `recipe_steps` (
   `step_id` int(11) NOT NULL,
@@ -1019,6 +1139,9 @@ CREATE TABLE `recipe_steps` (
   `instruction` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `recipe_steps`
+--
 
 INSERT INTO `recipe_steps` (`step_id`, `recipe_id`, `step_number`, `instruction`) VALUES
 (1, 1, 1, 'Wash and season the chicken with spices.'),
@@ -1656,6 +1779,11 @@ INSERT INTO `recipe_steps` (`step_id`, `recipe_id`, `step_number`, `instruction`
 (671, 21, 7, 'Season with salt and black pepper.'),
 (672, 21, 8, 'Serve hot with steamed rice or bread.');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -1664,10 +1792,22 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
 
 INSERT INTO `users` (`id`, `username`, `password_hash`, `created_at`) VALUES
-(1, 'test123', '$2y$10$dbGUHzCt1a.twAq0NVZ.CeINYdQtw58okdMywNwbNHvxBZYDAnIRK', '2026-07-26 11:37:55');
+(2, 'Bilalmt', '$2y$10$woMQyMbATiRP6OhzO/pROOCbO4i2oSjGaXS81sJrcX/VsmvgLdLU2', '2026-08-05 21:56:21'),
+(3, 'bilalmohammad', '$2y$10$2J.9RF4aKgZMAXgVtvBU9uwuAN5193IevWfZgbk0x1zsjgK/Mq9lu', '2026-08-06 22:05:44'),
+(4, 'randomuser', '$2y$10$mCZbsOpQrnEtolLn5Om1GOADVpzB2BUml3RrBk.YVQ7tVt/QHg9LC', '2026-08-06 22:09:16'),
+(5, 'farhan123', '$2y$10$L6tnS/lFSKxGYf6RIsy.RudeLwq3IG7Q1YhyEVJ5F1lJIMwNFEIUm', '2026-08-09 06:34:13'),
+(6, 'AhmedIsmail123', '$2y$10$bvQb34860JbITUfXZTX94.7p7fBh52g/jyAxHU1pY0VRLZ95NpxGq', '2026-08-12 18:21:11');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_preferences`
+--
 
 CREATE TABLE `user_preferences` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -1681,89 +1821,211 @@ CREATE TABLE `user_preferences` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `user_preferences`
+--
 
 INSERT INTO `user_preferences` (`id`, `user_id`, `spice_level`, `sweetness_level`, `goal`, `diet`, `likes`, `dislikes`, `created_at`) VALUES
-(1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2026-07-26 11:37:55');
+(2, 2, 'medium', NULL, NULL, 'non-vegetarian', 'chicken, rice', 'shrimp', '2026-08-05 21:56:21'),
+(3, 3, NULL, NULL, NULL, NULL, NULL, NULL, '2026-08-06 22:05:44'),
+(4, 4, NULL, NULL, NULL, NULL, NULL, NULL, '2026-08-06 22:09:16'),
+(5, 5, 'medium', NULL, NULL, 'non-vegetarian', 'chicken, rice, fiah, lamb', 'shrimp, lobster', '2026-08-09 06:34:13'),
+(6, 6, 'medium', NULL, NULL, 'non-vegetarian', 'chicken, fish, lamb,', 'shrimp, milk', '2026-08-12 18:21:12');
 
+--
+-- Indexes for dumped tables
+--
 
+--
+-- Indexes for table `categories`
+--
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`),
   ADD UNIQUE KEY `category_name` (`category_name`);
 
+--
+-- Indexes for table `favorites`
+--
 ALTER TABLE `favorites`
   ADD PRIMARY KEY (`favorite_id`),
   ADD UNIQUE KEY `unique_favorite` (`user_id`,`recipe_id`),
   ADD KEY `fk_favorites_recipe` (`recipe_id`);
 
+--
+-- Indexes for table `ingredients`
+--
 ALTER TABLE `ingredients`
   ADD PRIMARY KEY (`ingredient_id`),
   ADD UNIQUE KEY `ingredient_name` (`ingredient_name`);
 
-
+--
+-- Indexes for table `recipes`
+--
 ALTER TABLE `recipes`
   ADD PRIMARY KEY (`recipe_id`),
   ADD UNIQUE KEY `recipe_name` (`recipe_name`),
   ADD KEY `category_id` (`category_id`);
 
-
+--
+-- Indexes for table `recipe_ingredients`
+--
 ALTER TABLE `recipe_ingredients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `recipe_id` (`recipe_id`,`ingredient_id`),
   ADD KEY `ingredient_id` (`ingredient_id`);
 
+--
+-- Indexes for table `recipe_ratings`
+--
+ALTER TABLE `recipe_ratings`
+  ADD PRIMARY KEY (`rating_id`),
+  ADD UNIQUE KEY `unique_user_recipe_rating` (`user_id`,`recipe_id`),
+  ADD KEY `fk_ratings_recipe` (`recipe_id`);
+
+--
+-- Indexes for table `recipe_reviews`
+--
+ALTER TABLE `recipe_reviews`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `fk_reviews_user` (`user_id`),
+  ADD KEY `fk_reviews_recipe` (`recipe_id`);
+
+--
+-- Indexes for table `recipe_steps`
+--
 ALTER TABLE `recipe_steps`
   ADD PRIMARY KEY (`step_id`),
   ADD UNIQUE KEY `recipe_id` (`recipe_id`,`step_number`);
 
+--
+-- Indexes for table `users`
+--
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
+--
+-- Indexes for table `user_preferences`
+--
 ALTER TABLE `user_preferences`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user_preferences_user` (`user_id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
+--
+-- AUTO_INCREMENT for table `categories`
+--
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
+--
+-- AUTO_INCREMENT for table `favorites`
+--
 ALTER TABLE `favorites`
-  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
+--
+-- AUTO_INCREMENT for table `ingredients`
+--
 ALTER TABLE `ingredients`
   MODIFY `ingredient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
+--
+-- AUTO_INCREMENT for table `recipes`
+--
 ALTER TABLE `recipes`
   MODIFY `recipe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
+--
+-- AUTO_INCREMENT for table `recipe_ingredients`
+--
 ALTER TABLE `recipe_ingredients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
 
+--
+-- AUTO_INCREMENT for table `recipe_ratings`
+--
+ALTER TABLE `recipe_ratings`
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `recipe_reviews`
+--
+ALTER TABLE `recipe_reviews`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `recipe_steps`
+--
 ALTER TABLE `recipe_steps`
   MODIFY `step_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=673;
 
+--
+-- AUTO_INCREMENT for table `users`
+--
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
+--
+-- AUTO_INCREMENT for table `user_preferences`
+--
 ALTER TABLE `user_preferences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `favorites`
+--
 ALTER TABLE `favorites`
   ADD CONSTRAINT `fk_favorites_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_favorites_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
+--
+-- Constraints for table `recipes`
+--
 ALTER TABLE `recipes`
   ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
+--
+-- Constraints for table `recipe_ingredients`
+--
 ALTER TABLE `recipe_ingredients`
   ADD CONSTRAINT `recipe_ingredients_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`),
   ADD CONSTRAINT `recipe_ingredients_ibfk_2` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`ingredient_id`);
 
+--
+-- Constraints for table `recipe_ratings`
+--
+ALTER TABLE `recipe_ratings`
+  ADD CONSTRAINT `fk_ratings_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_ratings_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `recipe_reviews`
+--
+ALTER TABLE `recipe_reviews`
+  ADD CONSTRAINT `fk_reviews_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_reviews_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `recipe_steps`
+--
 ALTER TABLE `recipe_steps`
   ADD CONSTRAINT `recipe_steps_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`);
 
+--
+-- Constraints for table `user_preferences`
+--
 ALTER TABLE `user_preferences`
   ADD CONSTRAINT `fk_user_preferences_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
