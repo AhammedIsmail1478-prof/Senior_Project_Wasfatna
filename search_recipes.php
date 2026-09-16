@@ -352,11 +352,12 @@ if ($userId > 0) {
      * Load all ingredients for the matching recipes.
      */
     $ingredientStmt = $pdo->prepare("
-        SELECT
-            ri.recipe_id,
-            i.ingredient_name,
-            ri.quantity,
-            ri.is_core
+    SELECT
+        ri.recipe_id,
+        i.ingredient_id,
+        i.ingredient_name,
+        ri.quantity,
+        ri.is_core
 
         FROM recipe_ingredients ri
 
@@ -378,12 +379,51 @@ if ($userId > 0) {
         $recipeId = (int)$row['recipe_id'];
 
         $ingredientsByRecipe[$recipeId][] = [
+    'ingredient_id' => (int)$row['ingredient_id'],
     'name' => $row['ingredient_name'],
     'quantity' => $row['quantity'],
     'is_core' => (bool)$row['is_core']
 ];
     }
 
+/*
+ * Load ingredient substitutions.
+ */
+$substitutionStmt = $pdo->query("
+    SELECT
+        s.ingredient_id,
+        s.substitute_ingredient_id,
+        i.ingredient_name AS substitute_name,
+        s.note
+
+    FROM ingredient_substitutions s
+
+    JOIN ingredients i
+        ON i.ingredient_id = s.substitute_ingredient_id
+
+    ORDER BY
+        s.ingredient_id,
+        i.ingredient_name
+");
+
+$substitutionsByIngredient = [];
+
+foreach ($substitutionStmt->fetchAll() as $row) {
+
+    $ingredientId = (int)$row['ingredient_id'];
+
+    $substitutionsByIngredient[$ingredientId][] = [
+        'ingredient_id' =>
+            (int)$row['substitute_ingredient_id'],
+
+        'name' =>
+            $row['substitute_name'],
+
+        'note' =>
+            $row['note'] ?? ''
+    ];
+}
+    
     /*
      * Load all preparation steps.
      */
@@ -438,22 +478,64 @@ if ($userId > 0) {
         $missingOptionalIngredients = [];
 
         foreach ($allIngredients as $ingredient) {
-            $normalizedName = mb_strtolower(
-                trim($ingredient['name'])
+
+    $normalizedName = mb_strtolower(
+        trim($ingredient['name'])
+    );
+
+    /*
+     * User already has this ingredient.
+     */
+    if (isset($enteredSet[$normalizedName])) {
+
+        $ingredient['substitutions'] = [];
+        $matchedIngredients[] = $ingredient;
+
+    } else {
+
+        /*
+         * Ingredient is missing.
+         * Check whether substitutions exist.
+         */
+        $ingredientId =
+            (int)$ingredient['ingredient_id'];
+
+        $availableSubstitutions =
+            $substitutionsByIngredient[$ingredientId] ?? [];
+
+        /*
+         * Also check whether the user already entered
+         * one of the substitute ingredients.
+         */
+        foreach ($availableSubstitutions as &$substitute) {
+
+            $substituteName = mb_strtolower(
+                trim($substitute['name'])
             );
 
-            if (isset($enteredSet[$normalizedName])) {
-    $matchedIngredients[] = $ingredient;
-} else {
-    $missingIngredients[] = $ingredient;
+            $substitute['user_has'] =
+                isset($enteredSet[$substituteName]);
+        }
 
-    if ($ingredient['is_core']) {
-        $missingCoreIngredients[] = $ingredient;
-    } else {
-        $missingOptionalIngredients[] = $ingredient;
+        unset($substitute);
+
+        $ingredient['substitutions'] =
+            $availableSubstitutions;
+
+        $missingIngredients[] = $ingredient;
+
+        if ($ingredient['is_core']) {
+
+            $missingCoreIngredients[] =
+                $ingredient;
+
+        } else {
+
+            $missingOptionalIngredients[] =
+                $ingredient;
+        }
     }
 }
-        }
 
         $totalIngredients = count($allIngredients);
         $matchedCount = count($matchedIngredients);
