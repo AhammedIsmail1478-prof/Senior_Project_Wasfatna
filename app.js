@@ -2684,46 +2684,88 @@ if (missingItem) {
 return;
     }
 
+   // ---------- Undo Substitute ----------
+const undoSubstitutionBtn =
+  event.target.closest(".undo-substitution-btn");
 
-    // ---------- Undo Substitute ----------
-    const undoSubstitutionBtn =
-      event.target.closest(".undo-substitution-btn");
+if (undoSubstitutionBtn) {
+  const recipeId =
+    Number(undoSubstitutionBtn.dataset.recipeId) || 0;
 
-    if (undoSubstitutionBtn) {
-      const recipeId =
-        Number(undoSubstitutionBtn.dataset.recipeId) || 0;
+  const originalIngredient =
+    undoSubstitutionBtn.dataset.originalIngredient || "";
 
-      const originalIngredient =
-        undoSubstitutionBtn.dataset.originalIngredient || "";
+  if (!recipeId || !originalIngredient) {
+    return;
+  }
 
-      if (!recipeId || !originalIngredient) {
-        return;
-      }
+  const selectedSubstitutions =
+    loadSelectedSubstitutions();
 
-      const selectedSubstitutions =
-        loadSelectedSubstitutions();
+  const key =
+    substitutionKey(
+      recipeId,
+      originalIngredient
+    );
 
-      const key =
-        substitutionKey(
-          recipeId,
-          originalIngredient
+  delete selectedSubstitutions[key];
+
+  saveSelectedSubstitutions(
+    selectedSubstitutions
+  );
+
+  // Find the original missing ingredient information
+  // from the current recipe card.
+  const recipeCard =
+    undoSubstitutionBtn.closest(".recipe");
+
+  const missingItem =
+    undoSubstitutionBtn.closest(
+      ".missing-ingredient-item"
+    );
+
+  if (recipeCard && missingItem) {
+    const shoppingBtn =
+      recipeCard.querySelector(".add-shopping-btn");
+
+    if (shoppingBtn) {
+      try {
+        const missingIngredients =
+          JSON.parse(
+            decodeURIComponent(
+              shoppingBtn.dataset.shoppingItems || "[]"
+            )
+          );
+
+        const originalItem =
+          missingIngredients.find(
+            (item) =>
+              normalizeIngredient(item.name) ===
+              normalizeIngredient(originalIngredient)
+          );
+
+        if (originalItem) {
+          missingItem.outerHTML =
+            missingIngredientText(
+              originalItem,
+              recipeId
+            );
+        }
+      } catch (error) {
+        console.error(
+          "Unable to restore substitution display:",
+          error
         );
-
-      delete selectedSubstitutions[key];
-
-      saveSelectedSubstitutions(
-        selectedSubstitutions
-      );
-
-      showToast(
-  `${originalIngredient} restored.`,
-  "↩"
-);
-
-// Re-render without performing a new search.
-
+      }
     }
-  });
+  }
+
+  showToast(
+    `${originalIngredient} restored.`,
+    "↩"
+  );
+
+  return;
 }
 
 // ---------- Open Recipe of the Day ----------
