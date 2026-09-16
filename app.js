@@ -3543,21 +3543,41 @@ if (resultsEl) {
           addShoppingBtn.dataset
             .shoppingItems || "";
 
-        const missingItems =
-          JSON.parse(
-            decodeURIComponent(
-              encodedItems
-            )
-          );
+       const missingItems =
+  JSON.parse(
+    decodeURIComponent(
+      encodedItems
+    )
+  );
 
-        const recipeName =
+const recipeName =
   addShoppingBtn.dataset.recipeName || "Recipe";
 
 const recipeId =
   Number(addShoppingBtn.dataset.recipeId) || 0;
 
+
+// Get the substitutions the user selected
+const selectedSubstitutions =
+  loadSelectedSubstitutions();
+
+
+// Remove missing ingredients that were already replaced
+const shoppingItems =
+  missingItems.filter((item) => {
+
+    const key =
+      substitutionKey(
+        recipeId,
+        item.name
+      );
+
+    return !selectedSubstitutions[key];
+  });
+
+
 addIngredientsToShoppingList(
-  missingItems,
+  shoppingItems,
   recipeName,
   recipeId
 );
