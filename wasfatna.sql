@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2026 at 08:59 PM
+-- Generation Time: Sep 16, 2026 at 09:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -68,7 +68,8 @@ CREATE TABLE `favorites` (
 INSERT INTO `favorites` (`favorite_id`, `user_id`, `recipe_id`, `created_at`) VALUES
 (28, 2, 1, '2026-08-06 22:48:20'),
 (29, 5, 7, '2026-08-09 06:37:43'),
-(30, 5, 9, '2026-08-09 06:38:04');
+(30, 5, 9, '2026-08-09 06:38:04'),
+(32, 2, 8, '2026-08-18 20:58:35');
 
 -- --------------------------------------------------------
 
@@ -200,6 +201,50 @@ INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`) VALUES
 (76, 'Whole Wheat Flour'),
 (60, 'Yeast'),
 (28, 'Yogurt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ingredient_substitutions`
+--
+
+CREATE TABLE `ingredient_substitutions` (
+  `substitution_id` int(11) NOT NULL,
+  `ingredient_id` int(11) NOT NULL,
+  `substitute_ingredient_id` int(11) NOT NULL,
+  `note` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ingredient_substitutions`
+--
+
+INSERT INTO `ingredient_substitutions` (`substitution_id`, `ingredient_id`, `substitute_ingredient_id`, `note`) VALUES
+(1, 19, 11, 'Oil can be used instead of butter in some cooking methods.'),
+(2, 19, 66, 'Olive oil can replace butter in some savory recipes.'),
+(3, 28, 61, 'Milk may be used as an alternative in recipes where a thinner consistency is acceptable.'),
+(4, 47, 46, 'Flour can be used as a thickening alternative, but a larger quantity may be required.'),
+(5, 6, 34, 'Tomato paste can provide tomato flavor when fresh tomato is unavailable.'),
+(6, 34, 6, 'Fresh tomato can replace tomato paste, but the flavor may be less concentrated.'),
+(7, 94, 24, 'Lemon juice can replace fresh lemon when mainly the juice or acidity is needed.'),
+(8, 24, 94, 'Fresh lemon can be used when lemon juice is required.'),
+(9, 61, 28, 'Yogurt can replace milk in some recipes, but it may make the dish thicker and slightly tangier.'),
+(10, 61, 80, 'Cream can replace milk in some recipes and will produce a richer result.'),
+(11, 80, 61, 'Milk can replace cream in some recipes, although the result will be less rich and creamy.'),
+(12, 46, 47, 'Cornstarch can replace flour when it is mainly being used as a thickening ingredient.'),
+(13, 46, 76, 'Whole wheat flour can replace regular flour in some recipes, but the texture and flavor may change.'),
+(14, 76, 46, 'Regular flour can replace whole wheat flour, although the texture and nutritional profile may differ.'),
+(15, 54, 58, 'Fish stock can replace chicken stock in suitable seafood-based dishes, but it will change the flavor.'),
+(16, 58, 54, 'Chicken stock can replace fish stock in some savory dishes, but the flavor profile will change.'),
+(17, 84, 109, 'Cheese blend can replace mozzarella when a similar melted cheese texture is suitable.'),
+(18, 109, 84, 'Mozzarella can replace cheese blend when a mild melting cheese is suitable.'),
+(19, 110, 109, 'Cheese blend can replace Parmesan in some dishes, although the flavor may be milder.'),
+(20, 39, 52, 'Chili flakes can replace green chili when heat is needed, but the flavor and texture will differ.'),
+(21, 52, 39, 'Green chili can replace chili flakes to provide fresh chili heat and flavor.'),
+(22, 104, 22, 'Arabic bread can replace pita bread when a similar flatbread is suitable.'),
+(23, 22, 104, 'Pita bread can replace Arabic bread in recipes where a similar flatbread is suitable.'),
+(24, 11, 66, 'Olive oil can replace regular oil in many savory recipes, although it may add more flavor.'),
+(25, 66, 11, 'Regular oil can replace olive oil when a more neutral flavor is preferred.');
 
 -- --------------------------------------------------------
 
@@ -1859,6 +1904,14 @@ ALTER TABLE `ingredients`
   ADD UNIQUE KEY `ingredient_name` (`ingredient_name`);
 
 --
+-- Indexes for table `ingredient_substitutions`
+--
+ALTER TABLE `ingredient_substitutions`
+  ADD PRIMARY KEY (`substitution_id`),
+  ADD UNIQUE KEY `unique_substitution` (`ingredient_id`,`substitute_ingredient_id`),
+  ADD KEY `substitute_ingredient_id` (`substitute_ingredient_id`);
+
+--
 -- Indexes for table `recipes`
 --
 ALTER TABLE `recipes`
@@ -1925,13 +1978,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
   MODIFY `ingredient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+
+--
+-- AUTO_INCREMENT for table `ingredient_substitutions`
+--
+ALTER TABLE `ingredient_substitutions`
+  MODIFY `substitution_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `recipes`
@@ -1985,6 +2044,13 @@ ALTER TABLE `user_preferences`
 ALTER TABLE `favorites`
   ADD CONSTRAINT `fk_favorites_recipe` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_favorites_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `ingredient_substitutions`
+--
+ALTER TABLE `ingredient_substitutions`
+  ADD CONSTRAINT `ingredient_substitutions_ibfk_1` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`ingredient_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ingredient_substitutions_ibfk_2` FOREIGN KEY (`substitute_ingredient_id`) REFERENCES `ingredients` (`ingredient_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `recipes`
