@@ -1507,6 +1507,25 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   border-color:rgba(232,114,12,.35);
 }
 
+/* ---------- Light Mode Form Text Fix ---------- */
+
+[data-theme="light"] .label{
+  color:#1f2937;
+}
+
+[data-theme="light"] .textarea{
+  color:#111827;
+}
+
+[data-theme="light"] .textarea::placeholder{
+  color:#6b7280;
+  opacity:1;
+}
+
+[data-theme="light"] .select{
+  color:#111827;
+}
+
 /* Recipe Navigation */
 
 .recipe-navigation{
