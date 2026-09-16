@@ -2760,12 +2760,15 @@ if (undoSubstitutionBtn) {
     }
   }
 
-  showToast(
+ showToast(
     `${originalIngredient} restored.`,
     "↩"
   );
 
   return;
+}
+
+  });
 }
 
 // ---------- Open Recipe of the Day ----------
