@@ -163,8 +163,8 @@ function missingIngredientText(item) {
             </span>
 
             <span class="substitution-status">
-              You already have this
-            </span>
+              — Available in your ingredients
+                </span>
           </div>
         `;
       }
