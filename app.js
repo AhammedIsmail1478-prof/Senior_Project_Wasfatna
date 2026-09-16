@@ -135,47 +135,47 @@ function missingIngredientText(item) {
       ? item.substitutions
       : [];
 
+  // No substitutes available.
   if (substitutions.length === 0) {
     return `
       <div class="missing-ingredient-item">
-        <span>❌ ${ingredientName}</span>
+        <div class="missing-ingredient-name">
+          ❌ ${ingredientName}
+        </div>
       </div>
     `;
   }
 
+  // Display substitute names only.
+  // Keep the database notes, but do not show them on the recipe card.
   const substitutionsHtml = substitutions
     .map((substitute) => {
-
       const substituteName =
         escapeHtml(substitute.name || "");
-
-      const note =
-        substitute.note
-          ? `<span class="substitution-note">
-               ${escapeHtml(substitute.note)}
-             </span>`
-          : "";
 
       if (substitute.user_has) {
         return `
           <div class="substitution-option substitution-owned">
-            <span>
-              ✅ ${substituteName}
-              <strong>You already have this substitute</strong>
+            <span class="substitution-icon">✅</span>
+
+            <span class="substitution-name">
+              ${substituteName}
             </span>
 
-            ${note}
+            <span class="substitution-status">
+              You already have this
+            </span>
           </div>
         `;
       }
 
       return `
         <div class="substitution-option">
-          <span>
-            🔄 ${substituteName}
-          </span>
+          <span class="substitution-icon">🔄</span>
 
-          ${note}
+          <span class="substitution-name">
+            ${substituteName}
+          </span>
         </div>
       `;
     })
@@ -189,7 +189,9 @@ function missingIngredientText(item) {
       </div>
 
       <div class="ingredient-substitutions">
-        <strong>Possible substitute:</strong>
+        <div class="substitution-heading">
+          Possible substitutes:
+        </div>
 
         ${substitutionsHtml}
       </div>
