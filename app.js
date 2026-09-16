@@ -122,6 +122,82 @@ function ingredientText(item) {
   return `${name}${quantity}`;
 }
 
+// Display a missing ingredient together with possible substitutes.
+function missingIngredientText(item) {
+  if (!item) {
+    return "";
+  }
+
+  const ingredientName = ingredientText(item);
+
+  const substitutions =
+    Array.isArray(item.substitutions)
+      ? item.substitutions
+      : [];
+
+  if (substitutions.length === 0) {
+    return `
+      <div class="missing-ingredient-item">
+        <span>❌ ${ingredientName}</span>
+      </div>
+    `;
+  }
+
+  const substitutionsHtml = substitutions
+    .map((substitute) => {
+
+      const substituteName =
+        escapeHtml(substitute.name || "");
+
+      const note =
+        substitute.note
+          ? `<span class="substitution-note">
+               ${escapeHtml(substitute.note)}
+             </span>`
+          : "";
+
+      if (substitute.user_has) {
+        return `
+          <div class="substitution-option substitution-owned">
+            <span>
+              ✅ ${substituteName}
+              <strong>You already have this substitute</strong>
+            </span>
+
+            ${note}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="substitution-option">
+          <span>
+            🔄 ${substituteName}
+          </span>
+
+          ${note}
+        </div>
+      `;
+    })
+    .join("");
+
+  return `
+    <div class="missing-ingredient-item">
+
+      <div class="missing-ingredient-name">
+        ❌ ${ingredientName}
+      </div>
+
+      <div class="ingredient-substitutions">
+        <strong>Possible substitute:</strong>
+
+        ${substitutionsHtml}
+      </div>
+
+    </div>
+  `;
+}
+
 // ---------- DOM elements ----------
 
 function updateRecipeSuggestions(recipes) {
@@ -1881,11 +1957,15 @@ const hasAllCoreIngredients =
               : "None";
 
           const missingHtml =
-            missingIngredients.length
-              ? missingIngredients
-                  .map(ingredientText)
-                  .join(", ")
-              : "None — you have all ingredients ✅";
+  missingIngredients.length
+    ? `
+        <div class="missing-ingredients-list">
+          ${missingIngredients
+            .map(missingIngredientText)
+            .join("")}
+        </div>
+      `
+    : "None — you have all ingredients ✅";
 
           const encodedMissingIngredients =
   encodeURIComponent(
