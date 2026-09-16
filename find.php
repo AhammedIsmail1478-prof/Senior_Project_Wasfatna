@@ -686,7 +686,7 @@ require 'auth.php';
       : 0 ?>;
 </script>
 
-<script src="app.js?v=28"></script>
+<script src="app.js?v=29"></script>
 
 </body>
 </html>
