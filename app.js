@@ -1037,7 +1037,8 @@ if (downloadShoppingPdfBtn) {
 
 function addIngredientsToShoppingList(
   ingredients,
-  recipeName
+  recipeName,
+  recipeId
 ) {
   if (!Array.isArray(ingredients)) {
     return;
@@ -1083,11 +1084,12 @@ function addIngredientsToShoppingList(
     }
 
     items.push({
-      name: name,
-      quantity: quantity,
-      recipeName: recipeName || "Recipe",
-      checked: false
-    });
+  name: name,
+  quantity: quantity,
+  recipeName: recipeName || "Recipe",
+  recipe_id: Number(recipeId) || 0,
+  checked: false
+});
 
     existingItems.add(itemKey);
 
@@ -2405,6 +2407,7 @@ ${
     class="btn btn-outline add-shopping-btn"
     data-shopping-items="${encodedMissingIngredients}"
     data-recipe-name="${escapeHtml(recipeName)}"
+    data-recipe-id="${recipeId}"
     ${missingIngredients.length === 0 ? "disabled" : ""}
   >
     ${
@@ -2628,14 +2631,57 @@ if (resultsEl) {
       );
 
       showToast(
-        `${substituteName} will be used instead of ${originalIngredient}.`,
-        "🔄"
-      );
+  `${substituteName} will be used instead of ${originalIngredient}.`,
+  "🔄"
+);
 
-      // Refresh the current recipe results.
-      suggestBtn.click();
+// Remove the replaced ingredient from the shopping list.
+const shoppingList = loadShoppingList();
 
-      return;
+const updatedShoppingList = shoppingList.filter((item) => {
+  const sameRecipe =
+    Number(item.recipe_id) === Number(recipeId);
+
+  const sameIngredient =
+    normalizeIngredient(item.name) ===
+    normalizeIngredient(originalIngredient);
+
+  return !(sameRecipe && sameIngredient);
+});
+
+saveShoppingList(updatedShoppingList);
+
+// Update only the substitution display on the current recipe.
+// Do NOT run the search/filter again because we want to stay
+// on the same recipe number.
+const missingItem =
+  useSubstitutionBtn.closest(".missing-ingredient-item");
+
+if (missingItem) {
+  missingItem.outerHTML = `
+    <div class="missing-ingredient-item substitution-selected">
+
+      <div class="missing-ingredient-name">
+        🔄 ${escapeHtml(originalIngredient)}
+        replaced with
+        <strong>${escapeHtml(substituteName)}</strong>
+        ✅
+      </div>
+
+      <button
+        type="button"
+        class="undo-substitution-btn"
+        data-recipe-id="${recipeId}"
+        data-original-ingredient="${escapeHtml(originalIngredient)}"
+      >
+        ↩ Undo
+      </button>
+
+    </div>
+  `;
+}
+
+return;
     }
 
 
@@ -2670,12 +2716,12 @@ if (resultsEl) {
       );
 
       showToast(
-        `${originalIngredient} restored.`,
-        "↩"
-      );
+  `${originalIngredient} restored.`,
+  "↩"
+);
 
-      // Refresh the current recipe results.
-      suggestBtn.click();
+// Re-render without performing a new search.
+
     }
   });
 }
@@ -3507,9 +3553,13 @@ if (resultsEl) {
         const recipeName =
   addShoppingBtn.dataset.recipeName || "Recipe";
 
+const recipeId =
+  Number(addShoppingBtn.dataset.recipeId) || 0;
+
 addIngredientsToShoppingList(
   missingItems,
-  recipeName
+  recipeName,
+  recipeId
 );
       } catch (error) {
         console.error(
