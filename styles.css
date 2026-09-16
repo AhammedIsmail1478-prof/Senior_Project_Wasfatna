@@ -1100,6 +1100,75 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   background:rgba(34,197,94,.08);
 }
 
+/* ---------- Use Substitute Button ---------- */
+
+.use-substitution-btn{
+  margin-left:8px;
+  padding:5px 10px;
+
+  border:1px solid rgba(34,197,94,.45);
+  border-radius:8px;
+
+  background:rgba(34,197,94,.14);
+  color:#22c55e;
+
+  font-family:var(--font);
+  font-size:12px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+.use-substitution-btn:hover{
+  background:rgba(34,197,94,.24);
+  border-color:rgba(34,197,94,.70);
+  transform:translateY(-1px);
+}
+
+.use-substitution-btn:active{
+  transform:scale(.96);
+}
+
+
+/* ---------- Undo Substitute Button ---------- */
+
+.undo-substitution-btn{
+  margin-left:8px;
+  padding:5px 10px;
+
+  border:1px solid rgba(124,92,255,.45);
+  border-radius:8px;
+
+  background:rgba(124,92,255,.14);
+  color:#c4b8ff;
+
+  font-family:var(--font);
+  font-size:12px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+.undo-substitution-btn:hover{
+  background:rgba(124,92,255,.24);
+  border-color:rgba(124,92,255,.70);
+  transform:translateY(-1px);
+}
+
+.undo-substitution-btn:active{
+  transform:scale(.96);
+}
+
 /* Steps */
 .steps{
   margin-top:14px;
@@ -1406,6 +1475,26 @@ text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 [data-theme="light"] .substitution-owned{
   background:rgba(34,197,94,.08);
   border-color:rgba(34,197,94,.25);
+}
+
+[data-theme="light"] .use-substitution-btn{
+  background:rgba(34,197,94,.10);
+  color:#15803d;
+  border-color:rgba(34,197,94,.35);
+}
+
+[data-theme="light"] .use-substitution-btn:hover{
+  background:rgba(34,197,94,.18);
+}
+
+[data-theme="light"] .undo-substitution-btn{
+  background:rgba(124,92,255,.10);
+  color:#6d4aff;
+  border-color:rgba(124,92,255,.30);
+}
+
+[data-theme="light"] .undo-substitution-btn:hover{
+  background:rgba(124,92,255,.18);
 }
 
 [data-theme="light"] .recent-search-item{
