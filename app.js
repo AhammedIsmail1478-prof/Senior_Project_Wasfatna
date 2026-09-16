@@ -123,7 +123,7 @@ function ingredientText(item) {
 }
 
 // Display a missing ingredient together with possible substitutes.
-function missingIngredientText(item) {
+function missingIngredientText(item, recipeId) {
   if (!item) {
     return "";
   }
@@ -134,6 +134,45 @@ function missingIngredientText(item) {
     Array.isArray(item.substitutions)
       ? item.substitutions
       : [];
+
+  const selectedSubstitutions =
+  loadSelectedSubstitutions();
+
+const selectedKey =
+  substitutionKey(
+    recipeId,
+    item.name
+  );
+
+const selectedSubstitute =
+  selectedSubstitutions[selectedKey] || null;
+
+  // A substitute has already been selected.
+if (selectedSubstitute) {
+  return `
+    <div class="missing-ingredient-item substitution-selected">
+
+      <div class="missing-ingredient-name">
+        🔄 ${escapeHtml(item.name)}
+        replaced with
+        <strong>
+          ${escapeHtml(selectedSubstitute.name)}
+        </strong>
+        ✅
+      </div>
+
+      <button
+        type="button"
+        class="undo-substitution-btn"
+        data-recipe-id="${recipeId}"
+        data-original-ingredient="${escapeHtml(item.name)}"
+      >
+        ↩ Undo
+      </button>
+
+    </div>
+  `;
+}
 
   // No substitutes available.
   if (substitutions.length === 0) {
@@ -153,21 +192,35 @@ function missingIngredientText(item) {
       const substituteName =
         escapeHtml(substitute.name || "");
 
-      if (substitute.user_has) {
-        return `
-          <div class="substitution-option substitution-owned">
-            <span class="substitution-icon">✅</span>
+    if (substitute.user_has) {
+  return `
+    <div class="substitution-option substitution-owned">
 
-            <span class="substitution-name">
-              ${substituteName}
-            </span>
+      <span class="substitution-icon">
+        ✅
+      </span>
 
-            <span class="substitution-status">
-              — Available in your ingredients
-                </span>
-          </div>
-        `;
-      }
+      <span class="substitution-name">
+        ${substituteName}
+      </span>
+
+      <span class="substitution-status">
+        — Available in your ingredients
+      </span>
+
+      <button
+        type="button"
+        class="use-substitution-btn"
+        data-recipe-id="${recipeId}"
+        data-original-ingredient="${escapeHtml(item.name)}"
+        data-substitute-name="${substituteName}"
+      >
+        Use Instead
+      </button>
+
+    </div>
+  `;
+}
 
       return `
         <div class="substitution-option">
@@ -800,6 +853,58 @@ if (clearRecentSearchesBtn) {
 
 // Show saved searches when page opens.
 renderRecentSearches();
+
+// ---------- Selected Ingredient Substitutions ----------
+
+const SELECTED_SUBSTITUTIONS_KEY =
+  "wasfatna-selected-substitutions";
+
+function loadSelectedSubstitutions() {
+  try {
+    const saved =
+      localStorage.getItem(
+        SELECTED_SUBSTITUTIONS_KEY
+      );
+
+    if (!saved) {
+      return {};
+    }
+
+    const parsed = JSON.parse(saved);
+
+    return parsed &&
+      typeof parsed === "object"
+      ? parsed
+      : {};
+  } catch (error) {
+    console.error(
+      "Unable to load selected substitutions:",
+      error
+    );
+
+    return {};
+  }
+}
+
+function saveSelectedSubstitutions(substitutions) {
+  localStorage.setItem(
+    SELECTED_SUBSTITUTIONS_KEY,
+    JSON.stringify(substitutions)
+  );
+}
+
+function substitutionKey(
+  recipeId,
+  missingIngredientName
+) {
+  return (
+    String(recipeId) +
+    "|" +
+    normalizeIngredient(
+      missingIngredientName
+    )
+  );
+}
 
 // ---------- Shopping List ----------
 
@@ -1963,8 +2068,13 @@ const hasAllCoreIngredients =
     ? `
         <div class="missing-ingredients-list">
           ${missingIngredients
-            .map(missingIngredientText)
-            .join("")}
+  .map((item) =>
+    missingIngredientText(
+      item,
+      Number(recipe.recipe_id) || 0
+    )
+  )
+  .join("")}
         </div>
       `
     : "None — you have all ingredients ✅";
