@@ -2583,6 +2583,103 @@ if (statsIngredients) {
   });
 }
 
+// ---------- Ingredient Substitution Actions ----------
+
+if (resultsEl) {
+  resultsEl.addEventListener("click", (event) => {
+
+    // ---------- Use Substitute ----------
+    const useSubstitutionBtn =
+      event.target.closest(".use-substitution-btn");
+
+    if (useSubstitutionBtn) {
+      const recipeId =
+        Number(useSubstitutionBtn.dataset.recipeId) || 0;
+
+      const originalIngredient =
+        useSubstitutionBtn.dataset.originalIngredient || "";
+
+      const substituteName =
+        useSubstitutionBtn.dataset.substituteName || "";
+
+      if (
+        !recipeId ||
+        !originalIngredient ||
+        !substituteName
+      ) {
+        return;
+      }
+
+      const selectedSubstitutions =
+        loadSelectedSubstitutions();
+
+      const key =
+        substitutionKey(
+          recipeId,
+          originalIngredient
+        );
+
+      selectedSubstitutions[key] = {
+        name: substituteName
+      };
+
+      saveSelectedSubstitutions(
+        selectedSubstitutions
+      );
+
+      showToast(
+        `${substituteName} will be used instead of ${originalIngredient}.`,
+        "🔄"
+      );
+
+      // Refresh the current recipe results.
+      suggestBtn.click();
+
+      return;
+    }
+
+
+    // ---------- Undo Substitute ----------
+    const undoSubstitutionBtn =
+      event.target.closest(".undo-substitution-btn");
+
+    if (undoSubstitutionBtn) {
+      const recipeId =
+        Number(undoSubstitutionBtn.dataset.recipeId) || 0;
+
+      const originalIngredient =
+        undoSubstitutionBtn.dataset.originalIngredient || "";
+
+      if (!recipeId || !originalIngredient) {
+        return;
+      }
+
+      const selectedSubstitutions =
+        loadSelectedSubstitutions();
+
+      const key =
+        substitutionKey(
+          recipeId,
+          originalIngredient
+        );
+
+      delete selectedSubstitutions[key];
+
+      saveSelectedSubstitutions(
+        selectedSubstitutions
+      );
+
+      showToast(
+        `${originalIngredient} restored.`,
+        "↩"
+      );
+
+      // Refresh the current recipe results.
+      suggestBtn.click();
+    }
+  });
+}
+
 // ---------- Open Recipe of the Day ----------
 if (
   requestedRecipeId > 0 &&
