@@ -1305,7 +1305,6 @@ if (downloadShoppingPdfBtn) {
           "Shopping List is empty.",
           "⚠️"
         );
-
         return;
       }
 
@@ -1317,7 +1316,6 @@ if (downloadShoppingPdfBtn) {
           "PDF library could not be loaded.",
           "⚠️"
         );
-
         return;
       }
 
@@ -1336,145 +1334,470 @@ if (downloadShoppingPdfBtn) {
         pdf.internal.pageSize.getHeight();
 
       const margin = 18;
+      const contentWidth =
+        pageWidth - margin * 2;
 
-      let y = 22;
+      const accentColor = [232, 114, 12];
+      const darkColor = [31, 41, 55];
+      const mutedColor = [107, 114, 128];
+      const lightBackground = [249, 250, 251];
+      const borderColor = [229, 231, 235];
 
-     pdf.setFont("helvetica", "bold");
+      // Group items by recipe.
+      const groupedItems = {};
 
-pdf.setFontSize(24);
-pdf.text("Wasfatna", margin, y);
+      items.forEach((item) => {
+        const recipeName =
+          item.recipeName ||
+          "Other Ingredients";
 
-y += 10;
-
-pdf.setFontSize(18);
-pdf.text("Shopping List", margin, y);
-
-y += 8;
-
-pdf.setFont("helvetica", "normal");
-pdf.setFontSize(10);
-
-pdf.text(
-  `Generated on: ${new Date().toLocaleDateString()}`,
-  margin,
-  y
-);
-
-y += 6;
-
-pdf.setDrawColor(180);
-pdf.line(
-  margin,
-  y,
-  pageWidth - margin,
-  y
-);
-
-y += 8;
-
-      // Group items by recipe name.
-const groupedItems = {};
-
-items.forEach((item) => {
-  const recipeName =
-    item.recipeName || "Other Ingredients";
-
-  if (!groupedItems[recipeName]) {
-    groupedItems[recipeName] = [];
-  }
-
-  groupedItems[recipeName].push(item);
-});
-
-Object.entries(groupedItems).forEach(
-  ([recipeName, recipeItems]) => {
-
-    if (y > pageHeight - 35) {
-      pdf.addPage();
-      y = 22;
-    }
-
-    // Recipe name.
-    pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(15);
-
-    pdf.text(
-      recipeName,
-      margin,
-      y
-    );
-
-    y += 8;
-
-    // Missing ingredients.
-    pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(12);
-
-    recipeItems.forEach(
-      (item, index) => {
-
-        if (y > pageHeight - 20) {
-          pdf.addPage();
-          y = 22;
+        if (!groupedItems[recipeName]) {
+          groupedItems[recipeName] = [];
         }
 
-        const status =
-          item.checked ? "✓" : "-";
+        groupedItems[recipeName].push(item);
+      });
 
-        const quantity =
-          item.quantity
-            ? ` - ${item.quantity}`
-            : "";
+      const recipeCount =
+        Object.keys(groupedItems).length;
 
-        const line =
-          `${status} ${index + 1}. ` +
-          `${item.name}${quantity}`;
+      const ingredientCount =
+        items.length;
 
-        const wrappedLines =
-          pdf.splitTextToSize(
-            line,
-            pageWidth - margin * 2
+      let y = 18;
+
+      // ---------- Header ----------
+      pdf.setFillColor(...accentColor);
+
+      pdf.roundedRect(
+        margin,
+        y,
+        contentWidth,
+        38,
+        3,
+        3,
+        "F"
+      );
+
+      pdf.setTextColor(255, 255, 255);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(23);
+
+      pdf.text(
+        "WASFATNA",
+        pageWidth / 2,
+        y + 11,
+        {
+          align: "center"
+        }
+      );
+
+      pdf.setFontSize(16);
+
+      pdf.text(
+        "Shopping List",
+        pageWidth / 2,
+        y + 20,
+        {
+          align: "center"
+        }
+      );
+
+      pdf.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      pdf.setFontSize(9);
+
+      pdf.text(
+        "Smart Meal Suggestions",
+        pageWidth / 2,
+        y + 27,
+        {
+          align: "center"
+        }
+      );
+
+      pdf.text(
+        `Generated: ${new Date().toLocaleDateString()}`,
+        pageWidth / 2,
+        y + 33,
+        {
+          align: "center"
+        }
+      );
+
+      y += 45;
+
+      // ---------- Summary ----------
+      pdf.setFillColor(
+        ...lightBackground
+      );
+
+      pdf.setDrawColor(
+        ...borderColor
+      );
+
+      pdf.roundedRect(
+        margin,
+        y,
+        contentWidth,
+        17,
+        2,
+        2,
+        "FD"
+      );
+
+      pdf.setTextColor(
+        ...darkColor
+      );
+
+      pdf.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      pdf.setFontSize(11);
+
+      pdf.text(
+        `${recipeCount} ${
+          recipeCount === 1
+            ? "Recipe"
+            : "Recipes"
+        }`,
+        margin + 8,
+        y + 7
+      );
+
+      pdf.text(
+        `${ingredientCount} ${
+          ingredientCount === 1
+            ? "Ingredient"
+            : "Ingredients"
+        }`,
+        pageWidth - margin - 8,
+        y + 7,
+        {
+          align: "right"
+        }
+      );
+
+      pdf.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      pdf.setTextColor(
+        ...mutedColor
+      );
+
+      pdf.setFontSize(8);
+
+      pdf.text(
+        "Your personalized shopping list",
+        margin + 8,
+        y + 12
+      );
+
+      y += 25;
+
+      // ---------- Helper: new page ----------
+      function addNewPage() {
+        pdf.addPage();
+        y = 20;
+      }
+
+      // ---------- Recipe Sections ----------
+      Object.entries(groupedItems).forEach(
+        ([recipeName, recipeItems]) => {
+
+          const estimatedHeight =
+            17 +
+            recipeItems.length * 9;
+
+          if (
+            y + estimatedHeight >
+            pageHeight - 25
+          ) {
+            addNewPage();
+          }
+
+          // Recipe heading.
+          pdf.setFillColor(
+            255,
+            247,
+            237
           );
 
-        pdf.text(
-          wrappedLines,
-          margin,
-          y
+          pdf.setDrawColor(
+            ...borderColor
+          );
+
+          pdf.roundedRect(
+            margin,
+            y,
+            contentWidth,
+            12,
+            2,
+            2,
+            "FD"
+          );
+
+          pdf.setTextColor(
+            ...accentColor
+          );
+
+          pdf.setFont(
+            "helvetica",
+            "bold"
+          );
+
+          pdf.setFontSize(12);
+
+          pdf.text(
+            recipeName,
+            margin + 5,
+            y + 7.5
+          );
+
+          y += 17;
+
+          // Column labels.
+          pdf.setTextColor(
+            ...mutedColor
+          );
+
+          pdf.setFont(
+            "helvetica",
+            "bold"
+          );
+
+          pdf.setFontSize(8);
+
+          pdf.text(
+            "INGREDIENT",
+            margin + 10,
+            y
+          );
+
+          pdf.text(
+            "QUANTITY",
+            pageWidth - margin - 3,
+            y,
+            {
+              align: "right"
+            }
+          );
+
+          y += 4;
+
+          pdf.setDrawColor(
+            ...borderColor
+          );
+
+          pdf.line(
+            margin,
+            y,
+            pageWidth - margin,
+            y
+          );
+
+          y += 6;
+
+          // Ingredients.
+          recipeItems.forEach(
+            (item) => {
+
+              if (
+                y >
+                pageHeight - 25
+              ) {
+                addNewPage();
+
+                pdf.setTextColor(
+                  ...accentColor
+                );
+
+                pdf.setFont(
+                  "helvetica",
+                  "bold"
+                );
+
+                pdf.setFontSize(11);
+
+                pdf.text(
+                  `${recipeName} (continued)`,
+                  margin,
+                  y
+                );
+
+                y += 9;
+              }
+
+              // Checkbox.
+              pdf.setDrawColor(
+                ...mutedColor
+              );
+
+              pdf.rect(
+                margin + 1,
+                y - 3.5,
+                4,
+                4
+              );
+
+              // Show a check mark if already checked.
+              if (item.checked) {
+                pdf.setTextColor(
+                  ...accentColor
+                );
+
+                pdf.setFont(
+                  "helvetica",
+                  "bold"
+                );
+
+                pdf.setFontSize(9);
+
+                pdf.text(
+                  "X",
+                  margin + 2,
+                  y - 0.2
+                );
+              }
+
+              // Ingredient name.
+              pdf.setTextColor(
+                ...darkColor
+              );
+
+              pdf.setFont(
+                "helvetica",
+                item.checked
+                  ? "normal"
+                  : "bold"
+              );
+
+              pdf.setFontSize(10);
+
+              const ingredientName =
+                String(
+                  item.name || ""
+                );
+
+              const maxNameWidth =
+                contentWidth - 55;
+
+              const nameLines =
+                pdf.splitTextToSize(
+                  ingredientName,
+                  maxNameWidth
+                );
+
+              pdf.text(
+                nameLines,
+                margin + 10,
+                y
+              );
+
+              // Quantity.
+              pdf.setFont(
+                "helvetica",
+                "normal"
+              );
+
+              pdf.setTextColor(
+                ...mutedColor
+              );
+
+              pdf.text(
+                String(
+                  item.quantity || "—"
+                ),
+                pageWidth - margin - 3,
+                y,
+                {
+                  align: "right"
+                }
+              );
+
+              const rowHeight =
+                Math.max(
+                  8,
+                  nameLines.length * 5
+                );
+
+              y += rowHeight;
+
+              // Light row separator.
+              pdf.setDrawColor(
+                240,
+                240,
+                240
+              );
+
+              pdf.line(
+                margin + 10,
+                y - 3,
+                pageWidth - margin,
+                y - 3
+              );
+            }
+          );
+
+          y += 7;
+        }
+      );
+
+      // ---------- Footer on every page ----------
+      const totalPages =
+        pdf.getNumberOfPages();
+
+      for (
+        let pageNumber = 1;
+        pageNumber <= totalPages;
+        pageNumber++
+      ) {
+        pdf.setPage(pageNumber);
+
+        pdf.setDrawColor(
+          ...borderColor
         );
 
-        y += wrappedLines.length * 7;
+        pdf.line(
+          margin,
+          pageHeight - 15,
+          pageWidth - margin,
+          pageHeight - 15
+        );
+
+        pdf.setFont(
+          "helvetica",
+          "normal"
+        );
+
+        pdf.setFontSize(8);
+
+        pdf.setTextColor(
+          ...mutedColor
+        );
+
+        pdf.text(
+          "Wasfatna • University of Bahrain • Senior Project",
+          margin,
+          pageHeight - 9
+        );
+
+        pdf.text(
+          `Page ${pageNumber} of ${totalPages}`,
+          pageWidth - margin,
+          pageHeight - 9,
+          {
+            align: "right"
+          }
+        );
       }
-    );
-
-    y += 6;
-  }
-);
-
-      pdf.setDrawColor(180);
-
-pdf.line(
-  margin,
-  pageHeight - 15,
-  pageWidth - margin,
-  pageHeight - 15
-);
-
-pdf.setFontSize(9);
-
-pdf.text(
-  "Generated by Wasfatna",
-  margin,
-  pageHeight - 8
-);
-
-pdf.text(
-  "University of Bahrain - Senior Project",
-  pageWidth - margin,
-  pageHeight - 8,
-  {
-    align: "right"
-  }
-);
 
       pdf.save(
         "wasfatna-shopping-list.pdf"
@@ -1487,6 +1810,7 @@ pdf.text(
     }
   );
 }
+
 
 
 // Mark ingredients as purchased.
